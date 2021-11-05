@@ -22,7 +22,7 @@ export function handle(message: Message) {
     const args: string[] = [];
     content.split(" ").shift();
     for (const command of commands) {
-      if (command.name[0] === commandName) {
+      if (command.name === commandName) {
         command.execute(message, args);
       }
     }

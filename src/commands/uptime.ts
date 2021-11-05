@@ -4,7 +4,7 @@ import { client } from "..";
 module.exports = {
   name: "uptime",
   description: "sends the bots uptime",
-  execute(message: Message) {
+  execute(message: Message, _args: string) {
     if (client.uptime) {
       let totalSeconds = client.uptime / 1000;
       let days = Math.floor(totalSeconds / 86400);
