@@ -10,7 +10,7 @@ const cmd: Command = {
       return;
     }
     const num = args[0];
-    if (isNaN(Number(num))) {
+    if (Number.isInteger(Number(num) && isNaN(Number(num))  )) {
       msg.reply(`${num} is not a number`);
       return;
     }
