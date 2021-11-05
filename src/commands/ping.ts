@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 import { Command } from "../types";
-import { client } from "..";
+import { client } from "../client";
 
 const cmd: Command = {
   name: "ping",
