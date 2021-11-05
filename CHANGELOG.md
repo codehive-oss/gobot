@@ -2,6 +2,23 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com/SushiWaUmai/Bot/compare/v0.0.3...v0.0.4) (2021-11-05)
+
+
+### Features
+
+* **command:** :sparkles: add nsfw waifu command ([72e0bd9](https://github.com/SushiWaUmai/Bot/commit/72e0bd9b07c5c162eae6da9397851b2b70c21d73))
+* **command:** :sparkles: add waifu command ([5cd5122](https://github.com/SushiWaUmai/Bot/commit/5cd5122495493eae70a434d1097cb0674e3c51b4))
+* **command:** :sparkles: Added help and select commands ([99fc916](https://github.com/SushiWaUmai/Bot/commit/99fc9161c984bccf38a0ff073584e9a2e40575d4))
+* **db:** :sparkles: add upsert in go user ([7262948](https://github.com/SushiWaUmai/Bot/commit/726294817e49389a1f289baf5905047e031ce44c))
+* **db:** added user db methods ([ac6e4ea](https://github.com/SushiWaUmai/Bot/commit/ac6e4ea2db6c99440a990d4b503cfea9f16351ca))
+
+
+### Bug Fixes
+
+* **db:** :bug: add migrations ([5b743e6](https://github.com/SushiWaUmai/Bot/commit/5b743e6a2a59da92d0de84401f884dd2f7ef50ed))
+* **db:** :bug: fix upsert ([787a267](https://github.com/SushiWaUmai/Bot/commit/787a267704138066ec30109d440bcc72a5e2163d))
+
 ### [0.0.3](https://github.com/SushiWaUmai/Bot/compare/v0.0.2...v0.0.3) (2021-11-05)
 
 
