@@ -10,8 +10,11 @@ const cmd: Command = {
       return;
     }
     const num = args[0];
-    if (Number.isInteger(Number(num) && isNaN(Number(num))  )) {
-      msg.reply(`${num} is not a number`);
+
+    // Checks if string is not an integer
+    var er = /^-?[0-9]+$/;
+    if (!er.test(num)) {
+      msg.reply(`${num} is not an integer`);
       return;
     }
 
