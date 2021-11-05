@@ -32,6 +32,6 @@ export const upsert = async (user: User) => {
   if (goUser) {
     return goUser;
   } else {
-    return create(user);
+    return await create(user);
   }
 };
