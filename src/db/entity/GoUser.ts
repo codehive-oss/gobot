@@ -6,7 +6,7 @@ export class GoUser extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
-  @Column()
+  @Column("int", { array: true })
   item: number[];
 
   @Column()

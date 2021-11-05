@@ -11,7 +11,7 @@
     "dev": "yarn clean && nodemon --exec yarn start",
     "dev:ts-node": "yarn clean && nodemon --exec yarn start:ts-node",
     "release": "standard-version",
-    "migrate": "typeorm migration:create -n myMigration"
+    "migrate": "typeorm migration:create -n GobotMigration"
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
