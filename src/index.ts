@@ -5,14 +5,11 @@ import {TOKEN} from "./constants";
 import {typeormOrmConfig} from "./typeormConfig";
 
 async function main() {
-    await createConnection(typeormOrmConfig);
+    const conn = await createConnection(typeormOrmConfig);
+    await conn.runMigrations()
     await client.login(TOKEN);
-
 }
 
 main().catch(err => {
     console.error(err)
 })
-
-
-

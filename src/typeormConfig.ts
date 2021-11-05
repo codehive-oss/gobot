@@ -1,4 +1,4 @@
-import config from "./ormconfig.json";
+import config from "../ormconfig.json";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "./constants";
 

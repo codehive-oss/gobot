@@ -6,7 +6,7 @@
       "src/entity/**/*.ts"
    ],
    "migrations": [
-      "src/migration/**/*.ts"
+      "src/db/migrations/**/*.ts"
    ],
    "subscribers": [
       "src/subscriber/**/*.ts"

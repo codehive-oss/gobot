@@ -10,7 +10,8 @@
     "start:ts-node": "ts-node src/index.ts",
     "dev": "yarn clean && nodemon --exec yarn start",
     "dev:ts-node": "yarn clean && nodemon --exec yarn start:ts-node",
-    "release": "standard-version"
+    "release": "standard-version",
+    "migrate": "typeorm migration:create -n myMigration"
   },
   "devDependencies": {
     "@types/node": "^16.11.6",
