@@ -17,3 +17,5 @@ const cmd : Command = {
 
     }
 }
+
+module.exports = cmd
