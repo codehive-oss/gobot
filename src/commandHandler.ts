@@ -27,8 +27,6 @@ export const handle = async (message: Message) => {
         const commandName = content.split(" ")[0].substring(PREFIX.length);
         const args: string[] = content.split(" ");
         args.shift();
-        console.log(commandName)
-        console.log(args)
         for (const command of commands) {
             if (command.name === commandName || (command.aliases && command.aliases.includes(commandName))) {
                 command.execute(message, args);
