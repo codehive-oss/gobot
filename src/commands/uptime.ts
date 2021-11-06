@@ -3,8 +3,7 @@ import {client} from "../client";
 import {Command} from "../types";
 
 const cmd: Command = {
-    aliases: [],
-    async execute(msg: Message, args: string[]) {
+    async execute(msg: Message, _args: string[]) {
         if (client.uptime) {
             let totalSeconds = client.uptime / 1000;
             let days = Math.floor(totalSeconds / 86400);

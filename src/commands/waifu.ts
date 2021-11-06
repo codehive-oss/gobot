@@ -7,7 +7,6 @@ interface WaifuResponse {
 }
 
 const cmd: Command = {
-  aliases: [],
   name: "waifu",
   description: "Sends a random waifu image",
   execute: async (msg, _args) => {

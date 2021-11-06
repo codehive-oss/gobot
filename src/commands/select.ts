@@ -4,7 +4,6 @@ import {Command} from "../types";
 import {Message, MessageActionRow, MessageSelectMenu} from "discord.js";
 
 const cmd: Command = {
-    aliases: [],
     name: "select",
     description: "selectionmenu test",
     async execute(msg: Message, _args: string[]) {

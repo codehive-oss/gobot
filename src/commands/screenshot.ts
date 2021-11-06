@@ -3,7 +3,6 @@ import { MessageEmbed } from "discord.js";
 import { Command } from "src/types";
 
 const cmd: Command = {
-  aliases: [],
   name: "screenshot",
   description: "screenshots the given webpage",
   execute: async (msg, args) => {
