@@ -1,7 +1,8 @@
-import {Message, MessageEmbed} from "discord.js";
+import {Message, MessageEmbed, PartialDMChannel, TextChannel} from "discord.js";
 import fs from "fs";
 import {PREFIX} from "./constants";
 import {Command} from "./types";
+import {Embeds, FieldsEmbed} from "discord-paginationembed";
 import {client} from "./client";
 
 let commands: Command[] = [];
@@ -12,8 +13,10 @@ const commandFiles = fs
 for (const file of commandFiles) {
     const command = require(`./commands/${file}`) as Command;
 
-    commands.push(command);
-    console.log(`Registered ${command.name} command`);
+    if(command.name != undefined) {
+        commands.push(command);
+        console.log(`Registered ${command.name} command`);
+    }
 }
 
 export const handle = async (message: Message) => {
@@ -27,7 +30,7 @@ export const handle = async (message: Message) => {
         console.log(commandName)
         console.log(args)
         for (const command of commands) {
-            if (command.name === commandName) {
+            if (command.name === commandName || (command.aliases && command.aliases.includes(commandName))) {
                 command.execute(message, args);
             }
         }
@@ -46,4 +49,5 @@ async function sendHelp(msg: Message) {
         embed.addField(":ice_cube: " + command.name, command.description)
     }
     await msg.reply({embeds: [embed]})
+
 }
