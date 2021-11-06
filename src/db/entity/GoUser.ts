@@ -41,3 +41,20 @@ export const upsert = async (user: User) => {
     return await createUser(user);
   }
 };
+
+export const decrementBalance  = async (dcuser: User, amount: number) => {
+  const user = await upsert(dcuser)
+  let lost: number = 0
+  if(amount>user.balance) {   //to prevent balance from going below 0
+
+    lost = user.balance
+    user.balance = 0
+
+  } else {
+    lost = amount
+    user.balance = user.balance - amount
+  }
+
+  await user.save()
+  return lost
+}

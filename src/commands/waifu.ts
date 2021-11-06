@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MessageEmbed, TextChannel } from "discord.js";
+import { MessageEmbed } from "discord.js";
 import { Command } from "../types";
 
 interface WaifuResponse {
@@ -7,6 +7,7 @@ interface WaifuResponse {
 }
 
 const cmd: Command = {
+  aliases: [],
   name: "waifu",
   description: "Sends a random waifu image",
   execute: async (msg, _args) => {

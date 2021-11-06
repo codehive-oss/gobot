@@ -2,6 +2,7 @@ import { Command } from "../types";
 import { Message } from "discord.js";
 
 const cmd: Command = {
+  aliases: ["dong"],
   name: "dongsize",
   description: "magnum schlong",
   async execute(msg: Message, _args: string[]) {
@@ -12,7 +13,7 @@ const cmd: Command = {
       dong += "=";
     }
     await msg.reply((dong += "D " + random + "cm"));
-  },
+  }
 };
 
 module.exports = cmd;
