@@ -1,3 +1,4 @@
+import { GoUser } from "../db/entity/GoUser";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 import {
   DB_HOST,
@@ -7,7 +8,6 @@ import {
   DB_USER,
   __prod__,
 } from "./constants";
-import { GoUser } from "./db/entity/GoUser";
 
 export const typeormOrmConfig: PostgresConnectionOptions = {
   type: "postgres",

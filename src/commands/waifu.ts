@@ -1,12 +1,13 @@
 import axios from "axios";
-import {MessageEmbed, TextChannel} from "discord.js";
-import {Command} from "../types";
+import { MessageEmbed } from "discord.js";
+import { Command } from "../utils/types";
 
 interface WaifuResponse {
-    url: string;
+  url: string;
 }
 
 const cmd: Command = {
+<<<<<<< HEAD
     aliases: [],
     name: "waifu",
     description: "Sends a random waifu image",
@@ -25,6 +26,17 @@ const cmd: Command = {
             embeds: [new MessageEmbed().setImage(data.url).setColor("#ff00ff")],
         });
     }
+=======
+  name: "waifu",
+  description: "Sends a random waifu image",
+  execute: async (msg, _args) => {
+    const res = await axios.get(`https://api.waifu.pics/sfw/waifu`);
+    const data: WaifuResponse = res.data;
+    await msg.reply({
+      embeds: [new MessageEmbed().setImage(data.url).setColor("#ff00ff")],
+    });
+  },
+>>>>>>> 9bb01032b2f9e6081e7604ae4c019a13446743e0
 };
 
 module.exports = cmd;

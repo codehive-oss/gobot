@@ -5,6 +5,7 @@ export class Command {
 
   name: string;
   description: string;
+<<<<<<< HEAD:src/types.ts
   aliases: string[];
 
   execute = (msg: Message, args: string[]): void => {
@@ -31,4 +32,8 @@ export class cooldownCommand extends Command {
   activateCooldown(user: User) : void {
     this.cooldownMap.set(user.id, new Date().getTime())
   }
+=======
+  aliases?: string[];
+  execute(msg: Message, args: string[]): void;
+>>>>>>> 9bb01032b2f9e6081e7604ae4c019a13446743e0:src/utils/types.ts
 }

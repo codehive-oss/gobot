@@ -1,4 +1,4 @@
-import { Command } from "../types";
+import { Command } from "../utils/types";
 import { Message } from "discord.js";
 
 const cmd: Command = {
