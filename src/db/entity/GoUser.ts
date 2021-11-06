@@ -42,19 +42,30 @@ export const upsert = async (user: User) => {
   }
 };
 
-export const decrementBalance  = async (dcuser: User, amount: number) => {
-  const user = await upsert(dcuser)
-  let lost: number = 0
-  if(amount>user.balance) {   //to prevent balance from going below 0
-
-    lost = user.balance
-    user.balance = 0
-
+export const decrementBalance = async (dcuser: User, amount: number) => {
+  const user = await upsert(dcuser);
+  let lost: number = 0;
+  if (amount > user.balance) {
+    //to prevent balance from going below 0
+    lost = user.balance;
+    user.balance = 0;
   } else {
-    lost = amount
-    user.balance = user.balance - amount
+    lost = amount;
+    user.balance = user.balance - amount;
   }
 
-  await user.save()
-  return lost
+  await user.save();
+  return lost;
+};
+
+export const incrementBalance = async (dcuser: User, amount: number) => {
+  const user = await upsert(dcuser);
+  user.balance = user.balance + amount;
+  await user.save();
 }
+
+export const AddItem = async (dcuser: User, item: number) => {
+  const user = await upsert(dcuser);
+  user.item.push(item);
+  await user.save();
+};

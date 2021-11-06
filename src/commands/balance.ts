@@ -10,8 +10,8 @@ const cmd: Command = {
     if (!args[0]) {
       //own balance
 
-      await createUser(msg.author);
-      const balance = (await upsert(msg.author))?.balance;
+      const goUser = await upsert(msg.author);
+      const balance = goUser.balance;
       await msg.reply("Your balance: " + balance + "$");
     } else {
       // someone elses balance
