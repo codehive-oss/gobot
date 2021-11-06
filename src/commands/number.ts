@@ -2,6 +2,7 @@ import axios from "axios";
 import { Command } from "../types";
 
 const cmd: Command = {
+  aliases: ["numberfact"],
   name: "number",
   description: "Get a fact of a number",
   execute: async (msg, args) => {
@@ -20,7 +21,7 @@ const cmd: Command = {
 
     const res = await axios.get(`http://numbersapi.com/${num}`);
     msg.reply(res.data);
-  },
+  }
 };
 
 module.exports = cmd;
