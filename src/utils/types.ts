@@ -1,32 +1,44 @@
 import { Message, User } from "discord.js";
 
-export class Command {
+export type Command = {
   name: string;
   description: string;
   aliases?: string[];
 
   execute: (msg: Message, args: string[]) => void;
-}
-
-export class CooldownCommand extends Command {
-  execute: (msg: Message, args: string[]) => {};
-
-  cooldownMap: Map<string, number> = new Map();
+};
+export type CooldownCommand = Command & {
   cooldown: number;
+};
 
-  isOnCooldown = (user: User): boolean => {
-    const lastUsed = this.cooldownMap.get(user.id)
-      ? this.cooldownMap.get(user.id)
-      : 0;
-    const delay = new Date().getTime() - lastUsed!;
-    return delay < this.cooldown * 1000;
-  };
+const cooldownMap = new Map<string, Date>();
 
-  getCooldown(user: User): number {
-    const lastUsed = this.cooldownMap.get(user.id)
-      ? this.cooldownMap.get(user.id)
-      : 0;
-    const delay = new Date().getTime() - lastUsed!;
-    return this.cooldown - Math.floor(delay / 1000);
-  }
-}
+export const setCooldown = (
+  commandName: string,
+  userID: string,
+  cooldown: number
+): void => {
+  cooldownMap.set(commandName + userID, new Date());
+  setTimeout(() => cooldownMap.delete(commandName + userID), cooldown * 1000);
+};
+
+export const canExecute = (commandName: string, userID: string): boolean => {
+  return !cooldownMap.has(commandName + userID);
+};
+
+export const getCooldown = (
+  commandName: string,
+  userID: string,
+  cooldown: number
+): number => {
+  return Math.ceil(cooldown - getTimePassed(commandName, userID));
+};
+
+export const getTimePassed = (commandName: string, userID: string): number => {
+  var lastUsed = cooldownMap.get(commandName + userID);
+
+  if (!lastUsed) return -1;
+
+  const delay = new Date().getTime() - lastUsed.getTime();
+  return delay / 1000;
+};
