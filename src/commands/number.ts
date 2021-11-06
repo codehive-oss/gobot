@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Command } from "../types";
+import { Command } from "../utils/types";
 
 const cmd: Command = {
   aliases: ["numberfact"],

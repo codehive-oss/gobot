@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import { createConnection } from "typeorm";
-import { client } from "./client";
-import { TOKEN } from "./constants";
-import { typeormOrmConfig } from "./typeormConfig";
+import { client } from "./utils/client";
+import { TOKEN } from "./utils/constants";
+import { typeormOrmConfig } from "./utils/typeormConfig";
 
 async function main() {
   const conn = await createConnection(typeormOrmConfig);

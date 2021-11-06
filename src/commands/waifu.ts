@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MessageEmbed } from "discord.js";
-import { Command } from "../types";
+import { Command } from "../utils/types";
 
 interface WaifuResponse {
   url: string;

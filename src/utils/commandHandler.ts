@@ -9,12 +9,10 @@ const commandFiles = fs
   .readdirSync("./dist/commands")
   .filter((file) => file.endsWith(".js"));
 for (const file of commandFiles) {
-  const command = require(`./commands/${file}`) as Command;
+  const command = require(`../commands/${file}`) as Command;
 
-  if (command.name != undefined) {
-    commands.push(command);
-    console.log(`Registered ${command.name} command`);
-  }
+  commands.push(command);
+  console.log(`Registered ${command.name} command`);
 }
 
 export const handle = async (message: Message) => {

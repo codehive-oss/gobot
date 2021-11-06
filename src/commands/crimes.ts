@@ -1,10 +1,7 @@
-import { Command } from "../types";
+import { Command } from "../utils/types";
 import { Message } from "discord.js";
-import {
-  decrementBalance,
-  upsert,
-} from "../db/entity/GoUser";
-import { randint } from "../utils";
+import { decrementBalance, upsert } from "../db/entity/GoUser";
+import { randInt } from "../utils/randInt";
 
 const cooldown = new Map();
 
@@ -12,7 +9,7 @@ const cmd: Command = {
   name: "crime",
   description: "commit a crime",
   async execute(msg: Message, args: string[]) {
-    const rnd = randint(0, 100);
+    const rnd = randInt(0, 100);
     const user = await upsert(msg.author);
     console.log(cooldown.get(msg.author) ? cooldown.get(msg.author.id) : 0);
     const delay =
@@ -27,7 +24,7 @@ const cmd: Command = {
 
     if (rnd > 70) {
       //lose
-      const lose = randint(1000, 1200);
+      const lose = randInt(1000, 1200);
       await msg.reply(
         `You lost ${await decrementBalance(
           msg.author,
@@ -36,7 +33,7 @@ const cmd: Command = {
       );
     } else if (rnd < 70) {
       //win
-      const win = randint(400, 600);
+      const win = randInt(400, 600);
       user.balance = user.balance + win;
       await user.save();
       await msg.reply(`You won ${win}$ :moneybag:`);

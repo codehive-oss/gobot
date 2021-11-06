@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MessageEmbed } from "discord.js";
-import { Command } from "src/types";
+import { Command } from "../utils/types";
 
 const cmd: Command = {
   name: "screenshot",
@@ -20,7 +20,7 @@ const cmd: Command = {
         ),
       ],
     });
-  }
+  },
 };
 
 module.exports = cmd;

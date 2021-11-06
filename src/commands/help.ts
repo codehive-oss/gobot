@@ -1,7 +1,7 @@
 import { Message, MessageEmbed } from "discord.js";
-import { client } from "../client";
-import { commands } from "../commandHandler";
-import { Command } from "../types";
+import { client } from "../utils/client";
+import { commands } from "../utils/commandHandler";
+import { Command } from "../utils/types";
 
 const cmd: Command = {
   name: "help",
