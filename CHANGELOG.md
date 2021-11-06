@@ -2,6 +2,21 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.5](https://github.com/SushiWaUmai/Bot/compare/v0.0.4...v0.0.5) (2021-11-06)
+
+
+### Features
+
+* :sparkles: add cooldown commands ([98efc94](https://github.com/SushiWaUmai/Bot/commit/98efc9491add1b0cfe73592335a8e78198f500c0))
+* **command:** :fire: ([20082df](https://github.com/SushiWaUmai/Bot/commit/20082df3b46358902c7996d9d0090ea517d622cf))
+* **command:** :sparkles: add mine command and resolve merge confilcts ([01a6a5e](https://github.com/SushiWaUmai/Bot/commit/01a6a5e0ffbd9b18a39c28195650c06b2bc67d31))
+* **command:** :sparkles: added crime command ([f77d734](https://github.com/SushiWaUmai/Bot/commit/f77d73444ddf3d92976634f0547f3dcf299a9610))
+
+
+### Bug Fixes
+
+* **command:** :bug: resolve waifu command merge conflict ([2b1d6dd](https://github.com/SushiWaUmai/Bot/commit/2b1d6dd93a0b6a22ec2509fc83acf1765a05d3c2))
+
 ### [0.0.4](https://github.com/SushiWaUmai/Bot/compare/v0.0.3...v0.0.4) (2021-11-05)
 
 
