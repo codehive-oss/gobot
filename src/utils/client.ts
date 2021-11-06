@@ -1,6 +1,6 @@
 import { Client, Intents } from "discord.js";
 import { handle } from "./commandHandler";
-import { __prod__ } from "./constants";
+import {__prod__, PREFIX} from "./constants";
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -15,11 +15,8 @@ client.on("ready", () => {
   console.log("I am ready!");
 });
 
-client.on("messageCreate", (message) => {
-  handle(message);
-  if (message.content.startsWith("ping")) {
-    message.channel.send("pong!");
-  }
+client.on("messageCreate", async (message) => {
+  await handle(message);
 });
 
 client.on("interactionCreate", async interaction => {

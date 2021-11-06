@@ -1,6 +1,6 @@
 //for testing purposes
 
-import { Command } from "../types";
+import { Command } from "../utils/types";
 import { Message, MessageActionRow, MessageSelectMenu } from "discord.js";
 
 const cmd: Command = {

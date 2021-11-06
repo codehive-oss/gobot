@@ -1,10 +1,9 @@
 import { Message } from "discord.js";
-import { client } from "../client";
+import { client } from "../utils/client";
+import { Command } from "../utils/types";
 
-module.exports = {
-  name: "uptime",
-  description: "sends the bots uptime",
-  execute(message: Message, _args: string) {
+const cmd: Command = {
+  async execute(msg: Message, _args: string[]) {
     if (client.uptime) {
       let totalSeconds = client.uptime / 1000;
       let days = Math.floor(totalSeconds / 86400);
@@ -14,9 +13,13 @@ module.exports = {
       let minutes = Math.floor(totalSeconds / 60);
       let seconds = Math.floor(totalSeconds % 60);
 
-      message.reply(
+      await msg.reply(
         `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`
       );
     }
   },
+  name: "uptime",
+  description: "sends the bots uptime",
 };
+
+module.exports = cmd;
