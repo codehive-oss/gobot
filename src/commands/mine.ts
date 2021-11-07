@@ -58,7 +58,7 @@ const cmd: CooldownCommand = {
 
 
     } else {
-      msg.reply(`You can't mine for another ${getCooldown(this.name, dcUser.id, this.cooldown)} seconds!`);
+      await msg.reply(`You can't mine for another ${getCooldown(this.name, dcUser.id, this.cooldown)} seconds!`);
     }
   },
 };

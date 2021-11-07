@@ -23,7 +23,7 @@ const cmd: CooldownCommand = {
   execute: async function (msg, _args) {
     const dcUser = msg.author;
     if (canExecute(this.name, dcUser.id)) {
-      setCooldown(this.name, dcUser.id, this.cooldown);
+
       let dcTarget = msg.mentions.users.first();
 
       const err = checkRobTarget(dcTarget, dcUser);
@@ -39,6 +39,8 @@ const cmd: CooldownCommand = {
       const robAmount = Math.floor(target.handBalance * robRate);
 
       const chance = Math.random();
+
+      setCooldown(this.name, dcUser.id, this.cooldown);
 
       // Failure
       if (chance < failRate) {

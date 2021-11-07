@@ -23,13 +23,13 @@ const cmd: CooldownCommand = {
   execute: async function (msg, _args) {
     const dcUser = msg.author;
     if (canExecute(this.name, dcUser.id)) {
-      setCooldown(this.name, dcUser.id, this.cooldown);
+
       let dcTarget = msg.mentions.users.first();
 
       const err = checkRobTarget(dcTarget, dcUser);
 
       if (err) {
-        msg.reply(err);
+        await msg.reply(err);
         return;
       }
       dcTarget = dcTarget!;
@@ -40,10 +40,12 @@ const cmd: CooldownCommand = {
 
       const robAmount = Math.floor(target.bankBalance * robRate);
 
+      setCooldown(this.name, dcUser.id, this.cooldown);
+
       // Failure
       if (chance < failRate) {
         const loss = await payUser(user, target, robAmount);
-        msg.reply(
+        await msg.reply(
           `You got caught by ${dcTarget.username}! You had to pay them ${loss}$`
         );
         return;
@@ -52,12 +54,12 @@ const cmd: CooldownCommand = {
       // Success
       const gain = await decrementBankBalance(target, robAmount);
       await incrementBankBalance(user, gain);
-      msg.reply(
+      await msg.reply(
         `You robbed ${dcTarget.username}! They had to pay you ${gain}$`
       );
     } else {
       // Cooldown
-      msg.reply(
+      await msg.reply(
         `You can't rob someone for another ${getCooldown(
           this.name,
           dcUser.id,
