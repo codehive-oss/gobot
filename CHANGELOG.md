@@ -2,6 +2,22 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.8](https://github.com/SushiWaUmai/Bot/compare/v0.0.7...v0.0.8) (2021-11-07)
+
+
+### Features
+
+* **comamnd:** :sparkles: update anime command ([8e9351a](https://github.com/SushiWaUmai/Bot/commit/8e9351a9fee6ac65db2bee1e8ae977a05e96fe1e))
+* **command:** :sparkles: add all to give command ([2e147c7](https://github.com/SushiWaUmai/Bot/commit/2e147c76f97c36b47279316d067d27ff705b108c))
+* **command:** :sparkles: add usage attribute to command ([9db5a50](https://github.com/SushiWaUmai/Bot/commit/9db5a50ed037bb7619c31141ba648b70e636f46b))
+* **command:** :sparkles: update bankrob cooldown to 2 min ([4c84064](https://github.com/SushiWaUmai/Bot/commit/4c84064e79fc65a3d38cb512997fa9216a16bc8a))
+* **command:** :sparkles: update prefix ([73c7328](https://github.com/SushiWaUmai/Bot/commit/73c732845eabfb196c0e3d72bf8786e1a43d6bc5))
+* **command:** :sparkles: update rob to robrate ([8f6f341](https://github.com/SushiWaUmai/Bot/commit/8f6f34110148180deb9307429a45608f15156329))
+* **command:** added buy shop and you now need a pickaxe to mine ([99b6003](https://github.com/SushiWaUmai/Bot/commit/99b60030fe739267a8267a173a9abb96d2b3cab0))
+* **command:** added sell command ([3da83c2](https://github.com/SushiWaUmai/Bot/commit/3da83c277d3d03b756cb26089efb61dfb6ccc781))
+* **command:** inventory now accepts target argument ([5304a1c](https://github.com/SushiWaUmai/Bot/commit/5304a1c5c56d7f303ce6d925e263a5d8e8253006))
+* **other:** added presence ([f8a7213](https://github.com/SushiWaUmai/Bot/commit/f8a72132b253a66b6a555aa62b43bc7f621f506c))
+
 ### [0.0.7](https://github.com/SushiWaUmai/Bot/compare/v0.0.6...v0.0.7) (2021-11-07)
 
 
