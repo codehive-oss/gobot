@@ -32,17 +32,18 @@ const cmd: Command = {
         return;
       }
       embed.setTitle(`${command.name} Info`);
-      embed.addField(command.name, command.description,false);
+      embed.addField(command.name, command.description, false);
       if (command.usage) {
         embed.addField("Usage", command.usage);
       }
-      if(command.aliases) {
-        embed.addField("Aliases", command.aliases.join("\n"))
+      if (command.aliases) {
+        embed.addField("Aliases", command.aliases.join("\n"));
       }
     } else {
       embed.setTitle(":books: Command Info ");
+      const emoji = client.emojis.cache.find((e) => e.name === "gobot");
       for (const command of commands) {
-        embed.addField(":ice_cube: " + command.name, command.description);
+        embed.addField(`${emoji} ${command.name}`, command.description);
       }
     }
     await msg.reply({ embeds: [embed] });

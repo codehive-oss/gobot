@@ -9,6 +9,8 @@ async function main() {
   const conn = await createConnection(typeormOrmConfig);
   await conn.runMigrations();
 
+  // GoUser.delete({});
+
   await client.login(TOKEN);
 
 
