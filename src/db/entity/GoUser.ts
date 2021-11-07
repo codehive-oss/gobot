@@ -47,8 +47,7 @@ export const toGoUser = async (user: User) => {
   }
 };
 
-export const decrementHandBalance = async (dcuser: User, amount: number) => {
-  const user = await toGoUser(dcuser);
+export const decrementHandBalance = async (user: GoUser, amount: number) => {
   let lost: number = 0;
   if (amount > user.handBalance) {
     //to prevent balance from going below 0
@@ -63,14 +62,12 @@ export const decrementHandBalance = async (dcuser: User, amount: number) => {
   return lost;
 };
 
-export const incrementHandBalance = async (dcuser: User, amount: number) => {
-  const user = await toGoUser(dcuser);
+export const incrementHandBalance = async (user: GoUser, amount: number) => {
   user.handBalance = user.handBalance + amount;
   await user.save();
 };
 
-export const decrementBankBalance = async (dcuser: User, amount: number) => {
-  const user = await toGoUser(dcuser);
+export const decrementBankBalance = async (user: GoUser, amount: number) => {
   let lost: number = 0;
   if (amount > user.bankBalance) {
     // to prevent bank balance from going below 0
@@ -85,8 +82,7 @@ export const decrementBankBalance = async (dcuser: User, amount: number) => {
   return lost;
 };
 
-export const incrementBankBalance = async (dcuser: User, amount: number) => {
-  const user = await toGoUser(dcuser);
+export const incrementBankBalance = async (user: GoUser, amount: number) => {
   user.bankBalance = user.bankBalance + amount;
   await user.save();
 };
@@ -101,14 +97,13 @@ export const withdraw = async (user: GoUser, amount: number) => {
   await deposit(user, -amount);
 };
 
-export const addItem = async (dcuser: User, item: number) => {
-  const user = await toGoUser(dcuser);
+export const addItem = async (user: GoUser, item: number) => {
   user.items[item]++;
   console.log(user.items);
   await user.save();
 };
 
-export const payUser = async (user: User, target: User, amount: number) => {
+export const payUser = async (user: GoUser, target: GoUser, amount: number) => {
   let loss = 0;
   loss = await decrementHandBalance(user, amount);
   if (loss < amount) {

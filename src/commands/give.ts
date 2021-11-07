@@ -15,8 +15,8 @@ const cmd: Command = {
       return;
     }
 
-    const target = msg.mentions.users.first();
-    const user = msg.author;
+    const dcTarget = msg.mentions.users.first();
+    const dcUser = msg.author;
     const amount = Number(args[1]);
 
     if (isNaN(amount)) {
@@ -29,14 +29,15 @@ const cmd: Command = {
       return;
     }
 
-    if (!target) {
+    if (!dcTarget) {
       msg.reply("Please specify a user.");
       return;
     }
 
-    const goUser = await toGoUser(user);
+    const user = await toGoUser(dcUser);
+    const target = await toGoUser(dcTarget);
 
-    if(amount > goUser.handBalance) {
+    if(amount > user.handBalance) {
       msg.reply("You don't have enough money on hand.");
       return;
     }
@@ -44,7 +45,7 @@ const cmd: Command = {
     await decrementHandBalance(user, amount);
     await incrementHandBalance(target, amount);
 
-    msg.reply(`You gave ${amount}$ to ${target.username} `);
+    msg.reply(`You gave ${amount}$ to ${dcTarget.username} `);
   },
 };
 

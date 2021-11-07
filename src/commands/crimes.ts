@@ -22,12 +22,13 @@ const cmd: CooldownCommand = {
       setCooldown(this.name, user.id, this.cooldown);
       const rnd = randInt(0, 100);
 
+      
       if (rnd > 70) {
         //lose
         const lose = randInt(1000, 1200);
         await msg.reply(
           `You lost ${await decrementHandBalance(
-            msg.author,
+            user,
             lose
           )}$ :thermometer_face:`
         );

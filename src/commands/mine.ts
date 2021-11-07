@@ -1,7 +1,7 @@
 import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../utils/types";
 import { allItems, Item } from "../utils/item";
 import { MessageEmbed } from "discord.js";
-import { addItem, incrementHandBalance } from "../db/entity/GoUser";
+import { addItem, incrementHandBalance, toGoUser } from "../db/entity/GoUser";
 import { randInt } from "../utils/randInt";
 
 const pickOne = (arr: Item[]): Item | undefined => {
@@ -21,9 +21,10 @@ const cmd: CooldownCommand = {
   description: "Mine for items",
   cooldown: 30,
   execute: async function (msg, _args) {
-    const user = msg.author;
-    if (canExecute(this.name, user.id)) {
-      setCooldown(this.name, user.id, this.cooldown);
+    const dcUser = msg.author;
+    if (canExecute(this.name, dcUser.id)) {
+      setCooldown(this.name, dcUser.id, this.cooldown);
+      const user = await toGoUser(dcUser);
 
       const item = pickOne(allItems);
       if (!item) {
@@ -34,18 +35,18 @@ const cmd: CooldownCommand = {
       }
 
       const i = allItems.indexOf(item);
-      addItem(msg.author, i);
+      addItem(user, i);
 
       const embed = new MessageEmbed()
         .setTitle(item.name)
         .setDescription(item.description)
         .setColor(0x00ff00)
-        .setFooter(`${user.username} mined a ${item.name}`);
+        .setFooter(`${dcUser.username} mined a ${item.name}`);
 
       msg.reply({ embeds: [embed] });
 
     } else {
-      msg.reply(`You can't mine for another ${getCooldown(this.name, user.id, this.cooldown)} seconds!`);
+      msg.reply(`You can't mine for another ${getCooldown(this.name, dcUser.id, this.cooldown)} seconds!`);
     }
   },
 };
