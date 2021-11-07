@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.6](https://github.com/SushiWaUmai/Bot/compare/v0.0.5...v0.0.6) (2021-11-07)
+
+
+### Features
+
+* **command:** :sparkles: add deposit and withdraw commands ([94a7e0c](https://github.com/SushiWaUmai/Bot/commit/94a7e0c70ae8cf4b6ea8a6a99e44c8a739ab9ff5))
+* **command:** :sparkles: add inventory ([4ea9d8c](https://github.com/SushiWaUmai/Bot/commit/4ea9d8c9a977dfc2b40d6a3c12a885e3a15af6a1))
+
 ### [0.0.5](https://github.com/SushiWaUmai/Bot/compare/v0.0.4...v0.0.5) (2021-11-06)
 
 
