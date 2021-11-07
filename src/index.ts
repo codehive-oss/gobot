@@ -8,7 +8,7 @@ import { typeormOrmConfig } from "./utils/typeormConfig";
 async function main() {
   const conn = await createConnection(typeormOrmConfig);
   await conn.runMigrations();
-  
+
   await client.login(TOKEN);
 }
 
