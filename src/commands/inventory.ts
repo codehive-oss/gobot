@@ -7,14 +7,26 @@ const cmd: Command = {
   name: "inventory",
   description: "View your inventory.",
   aliases: ["inv"],
-  async execute(msg, _args) {
-    const user = await toGoUser(msg.author);
+  async execute(msg, args) {
+    let target
+    if(args.length === 0) {
+      target = msg.author
+    } else  {
+      target = msg.mentions.users.first()
+    }
+
+    if(target===undefined) {
+      await msg.reply("Invalid Target")
+      return
+    }
+
+    const user = await toGoUser(target);
 
     const embed = new MessageEmbed();
     embed.setColor("#528B8B");
-    embed.setTitle(`:school_satchel: Inventory of ${msg.author.username}`);
-    if (msg.author?.avatarURL()) {
-      embed.setThumbnail(msg.author.avatarURL()!);
+    embed.setTitle(`:school_satchel: Inventory of ${target.username}`);
+    if (target?.avatarURL()) {
+      embed.setThumbnail(target.avatarURL()!);
     }
     for (let i = 0; i < user.items.length; i++) {
       const item = allItems[i];
