@@ -18,6 +18,7 @@ const failRate = 0.5;
 const cmd: CooldownCommand = {
   name: "rob",
   description: "Rob a user (chance of getting caught)",
+  usage: "rob <@user>",
   cooldown: 30,
   execute: async function (msg, _args) {
     const dcUser = msg.author;

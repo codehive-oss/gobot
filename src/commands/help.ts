@@ -7,6 +7,7 @@ const cmd: Command = {
   name: "help",
   description: "Shows all commands",
   aliases: ["commands"],
+  usage: "help <command>",
   async execute(msg: Message, args: string[]) {
     const embed = new MessageEmbed();
     embed.setColor("#528B8B");
@@ -14,12 +15,23 @@ const cmd: Command = {
       embed.setThumbnail(client.user.avatarURL()!);
     }
     if (args[0]) {
-      embed.setTitle(`${args[0]} Info`);
-      const command = commands.find((c) => c.name === args[0]);
+      const commandName = args[0];
+      var command: Command | undefined;
+
+      for (const cmd of commands) {
+        if (
+          cmd.name === commandName ||
+          (cmd.aliases && cmd.aliases.includes(commandName))
+        ) {
+          command = cmd;
+        }
+      }
+
       if (!command) {
-        embed.setDescription(`Command ${args[0]} not found`);
+        msg.reply("Command not found");
         return;
       }
+      embed.setTitle(`${command.name} Info`);
       embed.addField(command.name, command.description);
       if (command.usage) {
         embed.addField("Usage", command.usage);

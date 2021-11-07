@@ -4,6 +4,7 @@ import { Command } from "../utils/types";
 const cmd: Command = {
   name: "withdraw",
   description: "Withdraws money from your bank account.",
+  usage: "withdraw <amount|all>",
   aliases: ["with", "wd"],
   async execute(msg, args) {
     const goUser = await toGoUser(msg.author);
