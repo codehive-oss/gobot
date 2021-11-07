@@ -10,7 +10,7 @@ const cmd: Command = {
     const goUser = await toGoUser(msg.author);
     if (args[0]) {
       // Check if argument is a number
-      var er = /^-?[0-9]+$/;
+      let er = /^-?[0-9]+$/;
       if (er.test(args[0])) {
         const amount = parseInt(args[0]);
 
@@ -18,27 +18,27 @@ const cmd: Command = {
         if (amount > 0) {
           // Check if the user has enough money to deposit
           if (goUser.handBalance < amount) {
-            msg.reply("You don't have that much money.");
+            await msg.reply("You don't have that much money.");
             return;
           }
-          deposit(goUser, amount);
-          msg.reply(`You've deposited ${amount} coins into your bank account.`);
+          await deposit(goUser, amount);
+          await msg.reply(`You've deposited ${amount} coins into your bank account.`);
         } else {
-          msg.reply(`You can't deposit negative coins.`);
+          await msg.reply(`You can't deposit negative coins.`);
         }
       } else {
         // Check if user wants to deposit all their money
-        if (args[0] === "all") {
-          deposit(goUser, goUser.handBalance);
-          msg.reply(
+        if (args[0] === "max") {
+          await deposit(goUser, goUser.handBalance);
+          await msg.reply(
             `You've deposited all of your coins into your bank account.`
           );
         } else {
-          msg.reply("Invalid argument");
+          await msg.reply("Invalid argument");
         }
       }
     } else {
-      msg.reply(`You need to specify an amount of coins to deposit.`);
+      await msg.reply(`You need to specify an amount of coins to deposit.`);
     }
   },
 };
