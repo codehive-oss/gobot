@@ -40,7 +40,7 @@ const cmd: CooldownCommand = {
       if (!item) { 
         const money = randInt(300, 500);
         await incrementHandBalance(user, money);
-        msg.channel.send(`You mined ${money} coin!`);
+        await msg.reply(`You mined ${money} coin!`);
         return;
       }
 
