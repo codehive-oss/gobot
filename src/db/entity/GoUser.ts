@@ -38,7 +38,7 @@ export const createUser = async (user: User) => {
   return goUser;
 };
 
-export const upsert = async (user: User) => {
+export const toGoUser = async (user: User) => {
   const goUser = await getUser(user);
   if (goUser) {
     return goUser;
@@ -48,7 +48,7 @@ export const upsert = async (user: User) => {
 };
 
 export const decrementHandBalance = async (dcuser: User, amount: number) => {
-  const user = await upsert(dcuser);
+  const user = await toGoUser(dcuser);
   let lost: number = 0;
   if (amount > user.handBalance) {
     //to prevent balance from going below 0
@@ -64,13 +64,13 @@ export const decrementHandBalance = async (dcuser: User, amount: number) => {
 };
 
 export const incrementHandBalance = async (dcuser: User, amount: number) => {
-  const user = await upsert(dcuser);
+  const user = await toGoUser(dcuser);
   user.handBalance = user.handBalance + amount;
   await user.save();
 };
 
 export const decrementBankBalance = async (dcuser: User, amount: number) => {
-  const user = await upsert(dcuser);
+  const user = await toGoUser(dcuser);
   let lost: number = 0;
   if (amount > user.bankBalance) {
     // to prevent bank balance from going below 0
@@ -86,7 +86,7 @@ export const decrementBankBalance = async (dcuser: User, amount: number) => {
 };
 
 export const incrementBankBalance = async (dcuser: User, amount: number) => {
-  const user = await upsert(dcuser);
+  const user = await toGoUser(dcuser);
   user.bankBalance = user.bankBalance + amount;
   await user.save();
 };
@@ -98,13 +98,11 @@ export const deposit = async (user: GoUser, amount: number) => {
 };
 
 export const withdraw = async (user: GoUser, amount: number) => {
-  user.bankBalance -= amount;
-  user.handBalance += amount;
-  await user.save();
+  await deposit(user, -amount);
 };
 
 export const addItem = async (dcuser: User, item: number) => {
-  const user = await upsert(dcuser);
+  const user = await toGoUser(dcuser);
   user.items[item]++;
   console.log(user.items);
   await user.save();

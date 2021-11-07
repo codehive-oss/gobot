@@ -1,4 +1,4 @@
-import { upsert, withdraw } from "../db/entity/GoUser";
+import { toGoUser, withdraw } from "../db/entity/GoUser";
 import { Command } from "../utils/types";
 
 const cmd: Command = {
@@ -6,7 +6,7 @@ const cmd: Command = {
   description: "Withdraws money from your bank account.",
   aliases: ["with", "wd"],
   async execute(msg, args) {
-    const goUser = await upsert(msg.author);
+    const goUser = await toGoUser(msg.author);
 
     if (args[0]) {
 

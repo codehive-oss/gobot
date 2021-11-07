@@ -1,6 +1,6 @@
 import { Command } from "../utils/types";
 import { Message, MessageEmbed, User } from "discord.js";
-import { GoUser, upsert } from "../db/entity/GoUser";
+import { GoUser, toGoUser } from "../db/entity/GoUser";
 
 const cmd: Command = {
   aliases: ["bal"],
@@ -20,7 +20,7 @@ const cmd: Command = {
       }
       dcUser = target;
     }
-    const goUser = await upsert(dcUser);
+    const goUser = await toGoUser(dcUser);
     const embed = new MessageEmbed();
     embed.setColor("#ffd700");
     embed.setTitle(`:moneybag: Balance of ${dcUser.username}`);

@@ -1,4 +1,4 @@
-import { deposit, upsert } from "../db/entity/GoUser";
+import { deposit, toGoUser } from "../db/entity/GoUser";
 import { Command } from "../utils/types";
 
 const cmd: Command = {
@@ -6,7 +6,7 @@ const cmd: Command = {
   description: "Deposit money into your bank account.",
   aliases: ["dep"],
   async execute(msg, args) {
-    const goUser = await upsert(msg.author);
+    const goUser = await toGoUser(msg.author);
     if (args[0]) {
       // Check if argument is a number
       var er = /^-?[0-9]+$/;

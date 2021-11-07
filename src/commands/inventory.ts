@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { upsert } from "../db/entity/GoUser";
+import { toGoUser } from "../db/entity/GoUser";
 import { allItems } from "../utils/item";
 import { Command } from "../utils/types";
 
@@ -8,7 +8,7 @@ const cmd: Command = {
   description: "View your inventory.",
   aliases: ["inv"],
   async execute(msg, _args) {
-    const user = await upsert(msg.author);
+    const user = await toGoUser(msg.author);
 
     const embed = new MessageEmbed();
     embed.setColor("#528B8B");
