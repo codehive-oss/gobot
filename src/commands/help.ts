@@ -32,9 +32,12 @@ const cmd: Command = {
         return;
       }
       embed.setTitle(`${command.name} Info`);
-      embed.addField(command.name, command.description);
+      embed.addField(command.name, command.description,false);
       if (command.usage) {
         embed.addField("Usage", command.usage);
+      }
+      if(command.aliases) {
+        embed.addField("Aliases", command.aliases.join("\n"))
       }
     } else {
       embed.setTitle(":books: Command Info ");

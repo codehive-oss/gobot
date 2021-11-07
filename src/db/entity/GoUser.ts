@@ -1,6 +1,7 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { User } from "discord.js";
 import { allItems } from "../../utils/item";
+import {tools} from "../../utils/tools";
 
 @Entity()
 export class GoUser extends BaseEntity {
@@ -9,6 +10,9 @@ export class GoUser extends BaseEntity {
 
   @Column("int", { array: true })
   items: number[];
+
+  @Column("int", {array: true})
+  tools: number[]
 
   @Column()
   handBalance: number;
@@ -32,6 +36,7 @@ export const createUser = async (user: User) => {
     handBalance: 0,
     bankBalance: 0,
     items: new Array(allItems.length).fill(0),
+    tools: new Array(tools.length).fill(0)
   });
 
   await goUser.save();
@@ -113,3 +118,12 @@ export const payUser = async (user: GoUser, target: GoUser, amount: number) => {
 
   return loss;
 };
+
+export const hasTool = async (user: GoUser,id: number) => {
+  return user.tools[id] === 1
+}
+
+export const giveTool = async (user: GoUser,id: number) => {
+  user.tools[id] = 1
+  await user.save()
+}

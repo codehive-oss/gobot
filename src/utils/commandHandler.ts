@@ -18,13 +18,11 @@ for (const file of commandFiles) {
 export const handle = async (message: Message) => {
   let content = message.content;
 
-  if (content.startsWith(PREFIX)) {
+  if (content.toLocaleLowerCase().startsWith(PREFIX)) {
     content = content.slice(PREFIX.length);
     const args = content.split(" ");
     const commandName = args[0];
     args.shift();
-    console.log(commandName);
-    console.log(args);
     for (const command of commands) {
       if (
         command.name === commandName ||

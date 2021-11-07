@@ -11,15 +11,20 @@ const cmd: Command = {
       return;
     }
     const url: string = args[0];
-    await msg.reply({
-      embeds: [
-        new MessageEmbed().setImage(
-          (
-            await axios.get(`https://api.screensoap.com/screenshot?url=${url}`)
-          ).data.file.url
-        ),
-      ],
-    });
+    try {
+      await msg.reply({
+        embeds: [
+          new MessageEmbed().setImage(
+              (
+                  await axios.get(`https://api.screensoap.com/screenshot?url=${url}`)
+              ).data.file.url
+          ),
+        ],
+      });
+    }catch(e) {
+      await msg.reply("Invalid URL")
+    }
+
   },
 };
 
