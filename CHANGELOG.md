@@ -2,6 +2,15 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.7](https://github.com/SushiWaUmai/Bot/compare/v0.0.6...v0.0.7) (2021-11-07)
+
+
+### Features
+
+* **command:** :sparkles: add functionality to see balance of others ([3997cea](https://github.com/SushiWaUmai/Bot/commit/3997cea0fc4653db00817291ff2cec1d35371df4))
+* **command:** :sparkles: add give command and rename upsert to toGoUser ([dd1b9c3](https://github.com/SushiWaUmai/Bot/commit/dd1b9c3302b0783e1cafc1d91a5303087f8b6bba))
+* **command:** :sparkles: add rob and bankrob commands ([740a05c](https://github.com/SushiWaUmai/Bot/commit/740a05c14cfbd399f8ea2dd7a0099955555c91bc))
+
 ### [0.0.6](https://github.com/SushiWaUmai/Bot/compare/v0.0.5...v0.0.6) (2021-11-07)
 
 
