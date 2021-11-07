@@ -16,7 +16,7 @@ const cmd: Command = {
     }
     if (args[0]) {
       const commandName = args[0];
-      var command: Command | undefined;
+      let command: Command | undefined;
 
       for (const cmd of commands) {
         if (
@@ -28,7 +28,7 @@ const cmd: Command = {
       }
 
       if (!command) {
-        msg.reply("Command not found");
+        await msg.reply("Command not found");
         return;
       }
       embed.setTitle(`${command.name} Info`);

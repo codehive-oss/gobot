@@ -53,7 +53,7 @@ export const toGoUser = async (user: User) => {
 };
 
 export const decrementHandBalance = async (user: GoUser, amount: number) => {
-  let lost: number = 0;
+  let lost: number;
   if (amount > user.handBalance) {
     //to prevent balance from going below 0
     lost = user.handBalance;
@@ -73,7 +73,7 @@ export const incrementHandBalance = async (user: GoUser, amount: number) => {
 };
 
 export const decrementBankBalance = async (user: GoUser, amount: number) => {
-  let lost: number = 0;
+  let lost: number;
   if (amount > user.bankBalance) {
     // to prevent bank balance from going below 0
     lost = user.bankBalance;
@@ -109,7 +109,7 @@ export const addItem = async (user: GoUser, item: number) => {
 };
 
 export const payUser = async (user: GoUser, target: GoUser, amount: number) => {
-  let loss = 0;
+  let loss
   loss = await decrementHandBalance(user, amount);
   if (loss < amount) {
     loss += await decrementBankBalance(user, amount - loss);
@@ -125,5 +125,10 @@ export const hasTool = async (user: GoUser, id: number) => {
 
 export const giveTool = async (user: GoUser, id: number) => {
   user.tools[id] = 1;
+  await user.save();
+};
+
+export const removeTool = async (user: GoUser, id: number) => {
+  user.tools[id] = 0;
   await user.save();
 };
