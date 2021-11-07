@@ -1,5 +1,6 @@
 import { deposit, toGoUser } from "../db/entity/GoUser";
 import { Command } from "../utils/types";
+import {maxwords} from "../utils/maxwords";
 
 const cmd: Command = {
   name: "deposit",
@@ -28,7 +29,7 @@ const cmd: Command = {
         }
       } else {
         // Check if user wants to deposit all their money
-        if (args[0] === "max") {
+        if (maxwords.includes(args[0])) {
           await deposit(goUser, goUser.handBalance);
           await msg.reply(
             `You've deposited all of your coins into your bank account.`

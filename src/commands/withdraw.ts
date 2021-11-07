@@ -1,5 +1,6 @@
 import { toGoUser, withdraw } from "../db/entity/GoUser";
 import { Command } from "../utils/types";
+import {maxwords} from "../utils/maxwords";
 
 const cmd: Command = {
   name: "withdraw",
@@ -31,7 +32,7 @@ const cmd: Command = {
         }
       } else {
         // Check all money should be withdrawn
-        if (args[0] === "max") {
+        if (maxwords.includes(args[0])) {
           await withdraw(goUser, goUser.bankBalance);
           await msg.reply(`You withdrew all your money.`);
         } else {

@@ -2,6 +2,7 @@ import {Command} from "../utils/types";
 import {Message} from "discord.js";
 import {toGoUser} from "../db/entity/GoUser";
 import {allItems} from "../utils/item";
+import {maxwords} from "../utils/maxwords";
 
 const cmd: Command = {
     description: "Sells the specified item",
@@ -32,7 +33,7 @@ const cmd: Command = {
         let amount
         if (args[1]) {
 
-            if (args[1] === "max") {
+            if (maxwords.includes(args[1].toLowerCase())) {
                 amount = gouser.items[oreIndex]
             }else {
                 amount = parseInt(args[1])
