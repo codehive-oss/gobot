@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { User } from "discord.js";
+import { allItems } from "../../utils/item";
 
 @Entity()
 export class GoUser extends BaseEntity {
@@ -7,7 +8,7 @@ export class GoUser extends BaseEntity {
   id: string;
 
   @Column("int", { array: true })
-  item: number[];
+  items: number[];
 
   @Column()
   balance: number;
@@ -26,7 +27,7 @@ export const createUser = async (user: User) => {
   goUser = GoUser.create({
     id: user.id,
     balance: 0,
-    item: [],
+    items: new Array(allItems.length).fill(0),
   });
 
   await goUser.save();
@@ -66,6 +67,7 @@ export const incrementBalance = async (dcuser: User, amount: number) => {
 
 export const AddItem = async (dcuser: User, item: number) => {
   const user = await upsert(dcuser);
-  user.item.push(item);
+  user.items[item]++;
+  console.log(user.items);
   await user.save();
 };
