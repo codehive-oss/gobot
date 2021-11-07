@@ -55,7 +55,7 @@ const obamium = {
   dropRate: 1 / 10000,
 };
 
-export const items: Item[] = [
+export const allItems: Item[] = [
   coal,
   iron,
   gold,

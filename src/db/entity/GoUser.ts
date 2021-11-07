@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { User } from "discord.js";
+import { allItems } from "../../utils/item";
 
 @Entity()
 export class GoUser extends BaseEntity {
@@ -7,10 +8,13 @@ export class GoUser extends BaseEntity {
   id: string;
 
   @Column("int", { array: true })
-  item: number[];
+  items: number[];
 
   @Column()
-  balance: number;
+  handBalance: number;
+
+  @Column()
+  bankBalance: number;
 }
 
 export const getUser = async (user: User): Promise<GoUser | undefined> => {
@@ -25,8 +29,9 @@ export const createUser = async (user: User) => {
 
   goUser = GoUser.create({
     id: user.id,
-    balance: 0,
-    item: [],
+    handBalance: 0,
+    bankBalance: 0,
+    items: new Array(allItems.length).fill(0),
   });
 
   await goUser.save();
@@ -42,30 +47,43 @@ export const upsert = async (user: User) => {
   }
 };
 
-export const decrementBalance = async (dcuser: User, amount: number) => {
+export const decrementHandBalance = async (dcuser: User, amount: number) => {
   const user = await upsert(dcuser);
   let lost: number = 0;
-  if (amount > user.balance) {
+  if (amount > user.handBalance) {
     //to prevent balance from going below 0
-    lost = user.balance;
-    user.balance = 0;
+    lost = user.handBalance;
+    user.handBalance = 0;
   } else {
     lost = amount;
-    user.balance = user.balance - amount;
+    user.handBalance = user.handBalance - amount;
   }
 
   await user.save();
   return lost;
 };
 
-export const incrementBalance = async (dcuser: User, amount: number) => {
+export const incrementHandBalance = async (dcuser: User, amount: number) => {
   const user = await upsert(dcuser);
-  user.balance = user.balance + amount;
+  user.handBalance = user.handBalance + amount;
   await user.save();
-}
+};
 
-export const AddItem = async (dcuser: User, item: number) => {
+export const deposit = async (user: GoUser, amount: number) => {
+  user.bankBalance += amount;
+  user.handBalance -= amount;
+  await user.save();
+};
+
+export const withdraw = async (user: GoUser, amount: number) => {
+  user.bankBalance -= amount;
+  user.handBalance += amount;
+  await user.save();
+};
+
+export const addItem = async (dcuser: User, item: number) => {
   const user = await upsert(dcuser);
-  user.item.push(item);
+  user.items[item]++;
+  console.log(user.items);
   await user.save();
 };

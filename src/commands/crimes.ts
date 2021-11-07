@@ -6,7 +6,7 @@ import {
   setCooldown,
 } from "../utils/types";
 import { Message, User } from "discord.js";
-import { decrementBalance, upsert } from "../db/entity/GoUser";
+import { decrementHandBalance, upsert } from "../db/entity/GoUser";
 import { randInt } from "../utils/randInt";
 
 const cmd: CooldownCommand = {
@@ -26,7 +26,7 @@ const cmd: CooldownCommand = {
         //lose
         const lose = randInt(1000, 1200);
         await msg.reply(
-          `You lost ${await decrementBalance(
+          `You lost ${await decrementHandBalance(
             msg.author,
             lose
           )}$ :thermometer_face:`
@@ -34,12 +34,12 @@ const cmd: CooldownCommand = {
       } else if (rnd < 70) {
         //win
         const win = randInt(400, 600);
-        user.balance = user.balance + win;
+        user.handBalance = user.handBalance + win;
         await user.save();
         await msg.reply(`You won ${win}$ :moneybag:`);
       } else {
         //jackpot
-        user.balance += 5000;
+        user.handBalance += 5000;
         await user.save();
         await msg.reply(
           "You won the Jackpot of 5000$! Congrats :money_with_wings: :money_with_wings: :money_with_wings: "

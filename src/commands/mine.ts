@@ -1,7 +1,7 @@
 import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../utils/types";
-import { items, Item } from "../utils/item";
+import { allItems, Item } from "../utils/item";
 import { MessageEmbed } from "discord.js";
-import { incrementBalance } from "../db/entity/GoUser";
+import { addItem, incrementHandBalance } from "../db/entity/GoUser";
 import { randInt } from "../utils/randInt";
 
 const pickOne = (arr: Item[]): Item | undefined => {
@@ -25,13 +25,16 @@ const cmd: CooldownCommand = {
     if (canExecute(this.name, user.id)) {
       setCooldown(this.name, user.id, this.cooldown);
 
-      const item = pickOne(items);
+      const item = pickOne(allItems);
       if (!item) {
         const money = randInt(300, 500);
-        incrementBalance(user, money);
+        incrementHandBalance(user, money);
         msg.channel.send(`You mined ${money} coin!`);
         return;
       }
+
+      const i = allItems.indexOf(item);
+      addItem(msg.author, i);
 
       const embed = new MessageEmbed()
         .setTitle(item.name)
