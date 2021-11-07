@@ -69,6 +69,28 @@ export const incrementHandBalance = async (dcuser: User, amount: number) => {
   await user.save();
 };
 
+export const decrementBankBalance = async (dcuser: User, amount: number) => {
+  const user = await upsert(dcuser);
+  let lost: number = 0;
+  if (amount > user.bankBalance) {
+    // to prevent bank balance from going below 0
+    lost = user.bankBalance;
+    user.bankBalance = 0;
+  } else {
+    lost = amount;
+    user.bankBalance = user.bankBalance - amount;
+  }
+
+  await user.save();
+  return lost;
+};
+
+export const incrementBankBalance = async (dcuser: User, amount: number) => {
+  const user = await upsert(dcuser);
+  user.bankBalance = user.bankBalance + amount;
+  await user.save();
+};
+
 export const deposit = async (user: GoUser, amount: number) => {
   user.bankBalance += amount;
   user.handBalance -= amount;
@@ -86,4 +108,15 @@ export const addItem = async (dcuser: User, item: number) => {
   user.items[item]++;
   console.log(user.items);
   await user.save();
+};
+
+export const payUser = async (user: User, target: User, amount: number) => {
+  let loss = 0;
+  loss = await decrementHandBalance(user, amount);
+  if (loss < amount) {
+    loss += await decrementBankBalance(user, amount - loss);
+  }
+  await incrementHandBalance(target, loss);
+
+  return loss;
 };
