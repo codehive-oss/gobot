@@ -4,7 +4,7 @@ dotenv.config();
 
 export const TOKEN = process.env.TOKEN!;
 export const __prod__ = process.env.NODE_ENV === "production";
-export const PREFIX = "-";
+export const PREFIX = "go ";
 
 export const DB_NAME = process.env.DB_NAME!;
 export const DB_USER = process.env.DB_USER!;
