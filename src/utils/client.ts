@@ -16,7 +16,7 @@ client.on("ready", () => {
     client.user?.setPresence({
         status: "online",
         activities: [{
-            name: "-help",
+            name: "go help",
             type: "LISTENING"
         },
             {
