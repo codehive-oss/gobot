@@ -6,7 +6,7 @@ import {
   setCooldown,
 } from "../utils/types";
 import { Message, User } from "discord.js";
-import { decrementHandBalance, upsert } from "../db/entity/GoUser";
+import { decrementHandBalance, toGoUser } from "../db/entity/GoUser";
 import { randInt } from "../utils/randInt";
 
 const cmd: CooldownCommand = {
@@ -16,7 +16,7 @@ const cmd: CooldownCommand = {
   cooldown: 30,
 
   execute: async function (msg: Message, _args: string[]) {
-    const user = await upsert(msg.author);
+    const user = await toGoUser(msg.author);
 
     if (canExecute(this.name, user.id)) {
       setCooldown(this.name, user.id, this.cooldown);
