@@ -23,7 +23,6 @@ const cmd: CooldownCommand = {
   execute: async function (msg, _args) {
     const dcUser = msg.author;
     if (canExecute(this.name, dcUser.id)) {
-
       let dcTarget = msg.mentions.users.first();
 
       const err = checkRobTarget(dcTarget, dcUser);

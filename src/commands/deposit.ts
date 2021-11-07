@@ -6,7 +6,7 @@ const cmd: Command = {
   name: "deposit",
   description: "Deposit money into your bank account.",
   aliases: ["dep"],
-  usage: "deposit <amount|all>",
+  usage: "deposit <amount|all|max>",
   async execute(msg, args) {
     const goUser = await toGoUser(msg.author);
     if (args[0]) {

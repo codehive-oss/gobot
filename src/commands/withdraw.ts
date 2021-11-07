@@ -1,6 +1,6 @@
 import { toGoUser, withdraw } from "../db/entity/GoUser";
 import { Command } from "../utils/types";
-import {maxwords} from "../utils/maxwords";
+import { maxwords } from "../utils/maxwords";
 
 const cmd: Command = {
   name: "withdraw",
@@ -11,7 +11,6 @@ const cmd: Command = {
     const goUser = await toGoUser(msg.author);
 
     if (args[0]) {
-
       // Check if argument is a number
       let er = /^-?[0-9]+$/;
       if (er.test(args[0])) {
