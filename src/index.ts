@@ -10,6 +10,8 @@ async function main() {
   await conn.runMigrations();
 
   await client.login(TOKEN);
+
+
 }
 
 main().catch((err) => {

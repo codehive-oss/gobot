@@ -7,15 +7,43 @@ const cmd: Command = {
   name: "help",
   description: "Shows all commands",
   aliases: ["commands"],
-  async execute(msg: Message, _args: string[]) {
+  usage: "help <command>",
+  async execute(msg: Message, args: string[]) {
     const embed = new MessageEmbed();
     embed.setColor("#528B8B");
-    embed.setTitle(":books: Command Info ");
     if (client.user?.avatarURL()) {
       embed.setThumbnail(client.user.avatarURL()!);
     }
-    for (const command of commands) {
-      embed.addField(":ice_cube: " + command.name, command.description);
+    if (args[0]) {
+      const commandName = args[0];
+      var command: Command | undefined;
+
+      for (const cmd of commands) {
+        if (
+          cmd.name === commandName ||
+          (cmd.aliases && cmd.aliases.includes(commandName))
+        ) {
+          command = cmd;
+        }
+      }
+
+      if (!command) {
+        msg.reply("Command not found");
+        return;
+      }
+      embed.setTitle(`${command.name} Info`);
+      embed.addField(command.name, command.description,false);
+      if (command.usage) {
+        embed.addField("Usage", command.usage);
+      }
+      if(command.aliases) {
+        embed.addField("Aliases", command.aliases.join("\n"))
+      }
+    } else {
+      embed.setTitle(":books: Command Info ");
+      for (const command of commands) {
+        embed.addField(":ice_cube: " + command.name, command.description);
+      }
     }
     await msg.reply({ embeds: [embed] });
   },

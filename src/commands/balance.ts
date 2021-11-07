@@ -1,13 +1,13 @@
 import { Command } from "../utils/types";
 import { Message, MessageEmbed, User } from "discord.js";
-import { GoUser, toGoUser } from "../db/entity/GoUser";
+import { toGoUser } from "../db/entity/GoUser";
 
 const cmd: Command = {
   aliases: ["bal"],
   name: "balance",
   description: "Shows your current balance",
   async execute(msg: Message, args: string[]) {
-    var dcUser: User;
+    let dcUser: User;
     if (!args[0]) {
       // own balance
       dcUser = msg.author;
@@ -15,7 +15,7 @@ const cmd: Command = {
       // target balance
       const target = msg.mentions.users.first();
       if (!target) {
-        msg.reply("Please mention a valid user.");
+        await msg.reply("Please mention a valid user.");
         return;
       }
       dcUser = target;
@@ -30,7 +30,7 @@ const cmd: Command = {
     embed.addField("Hand Balance", goUser.handBalance + "$");
     embed.addField("Bank Balance", goUser.bankBalance + "$");
 
-    msg.reply({ embeds: [embed] });
+    await msg.reply({ embeds: [embed] });
   },
 };
 

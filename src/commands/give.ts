@@ -1,9 +1,15 @@
-import { decrementHandBalance, incrementHandBalance, toGoUser } from "../db/entity/GoUser";
+import { maxwords } from "../utils/maxwords";
+import {
+  decrementHandBalance,
+  incrementHandBalance,
+  toGoUser,
+} from "../db/entity/GoUser";
 import { Command } from "../utils/types";
 
 const cmd: Command = {
   name: "give",
   description: "Give money to a user.",
+  usage: "give <@user> <amount|all>",
   execute: async function (msg, args) {
     if (!args[0]) {
       msg.reply("Please specify a user.");
@@ -15,13 +21,28 @@ const cmd: Command = {
       return;
     }
 
-    const target = msg.mentions.users.first();
-    const user = msg.author;
-    const amount = Number(args[1]);
+    const dcTarget = msg.mentions.users.first();
+    const dcUser = msg.author;
 
-    if (isNaN(amount)) {
-      msg.reply("Please specify a valid amount.");
+    if (!dcTarget) {
+      msg.reply("Please specify a user.");
       return;
+    }
+
+    const user = await toGoUser(dcUser);
+    const target = await toGoUser(dcTarget);
+
+    let amount: number;
+    let er = /^-?[0-9]+$/;
+    if (er.test(args[1])) {
+      amount = Number(args[1]);
+    } else {
+      if (maxwords.includes(args[1])) {
+        amount = user.handBalance;
+      } else {
+        msg.reply("Please specify a valid amount.");
+        return;
+      }
     }
 
     if (amount <= 0) {
@@ -29,14 +50,7 @@ const cmd: Command = {
       return;
     }
 
-    if (!target) {
-      msg.reply("Please specify a user.");
-      return;
-    }
-
-    const goUser = await toGoUser(user);
-
-    if(amount > goUser.handBalance) {
+    if (amount > user.handBalance) {
       msg.reply("You don't have enough money on hand.");
       return;
     }
@@ -44,7 +58,7 @@ const cmd: Command = {
     await decrementHandBalance(user, amount);
     await incrementHandBalance(target, amount);
 
-    msg.reply(`You gave ${amount}$ to ${target.username} `);
+    msg.reply(`You gave ${amount}$ to ${dcTarget.username} `);
   },
 };
 

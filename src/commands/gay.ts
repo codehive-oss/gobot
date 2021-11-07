@@ -2,7 +2,7 @@ import { Command } from "../utils/types";
 import { Message } from "discord.js";
 
 const cmd: Command = {
-  aliases: ["howgay"],
+  aliases: ["howgay, gaytest"],
   name: "gay",
   description: "tells you how gay you are",
   async execute(msg: Message, _args: string[]) {

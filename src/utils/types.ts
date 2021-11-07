@@ -4,6 +4,7 @@ export type Command = {
   name: string;
   description: string;
   aliases?: string[];
+  usage? :string;
 
   execute: (msg: Message, args: string[]) => void;
 };

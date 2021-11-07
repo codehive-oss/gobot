@@ -2,38 +2,51 @@ import {
   incrementHandBalance,
   decrementHandBalance,
   payUser,
+  toGoUser,
 } from "../db/entity/GoUser";
-import { canExecute, getCooldown, CooldownCommand, setCooldown } from "../utils/types";
+import {
+  canExecute,
+  getCooldown,
+  CooldownCommand,
+  setCooldown,
+} from "../utils/types";
 import { checkRobTarget } from "../utils/checkRobTarget";
 
-const robAmount = 500;
+const robRate = 0.4;
 const failRate = 0.5;
 
 const cmd: CooldownCommand = {
   name: "rob",
   description: "Rob a user (chance of getting caught)",
+  usage: "rob <@user>",
   cooldown: 30,
   execute: async function (msg, _args) {
-    const user = msg.author;
-    if (canExecute(this.name, user.id)) {
-      setCooldown(this.name, user.id, this.cooldown);
-      let target = msg.mentions.users.first();
+    const dcUser = msg.author;
+    if (canExecute(this.name, dcUser.id)) {
 
-      const err = checkRobTarget(target, user);
+      let dcTarget = msg.mentions.users.first();
+
+      const err = checkRobTarget(dcTarget, dcUser);
 
       if (err) {
         msg.reply(err);
         return;
       }
-      target = target!;
+      dcTarget = dcTarget!;
+
+      const user = await toGoUser(dcUser);
+      const target = await toGoUser(dcTarget);
+      const robAmount = Math.floor(target.handBalance * robRate);
 
       const chance = Math.random();
+
+      setCooldown(this.name, dcUser.id, this.cooldown);
 
       // Failure
       if (chance < failRate) {
         const loss = await payUser(user, target, robAmount);
         msg.reply(
-          `You got caught by ${target.username}! You had to pay them ${loss}$`
+          `You got caught by ${dcTarget.username}! You had to pay them ${loss}$`
         );
         return;
       }
@@ -41,13 +54,15 @@ const cmd: CooldownCommand = {
       // Success
       const gain = await decrementHandBalance(target, robAmount);
       await incrementHandBalance(user, gain);
-      msg.reply(`You robbed ${target.username}! They had to pay you ${gain}$`);
+      msg.reply(
+        `You robbed ${dcTarget.username}! They had to pay you ${gain}$`
+      );
     } else {
       // Cooldown
       msg.reply(
         `You can't rob someone for another ${getCooldown(
           this.name,
-          user.id,
+          dcUser.id,
           this.cooldown
         )} seconds`
       );
