@@ -8,7 +8,7 @@ const cmd: Command = {
     async execute(msg: Message, _args: string[]) {
         const rate = Math.round(Math.random() * 100);
 
-        await msg.reply("You are " + rate + "% gey");
+        await msg.reply("You are " + rate + "% gay");
     }
 };
 
