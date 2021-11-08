@@ -4,6 +4,7 @@ import { maxwords } from "../utils/maxwords";
 
 const cmd: Command = {
   name: "withdraw",
+  category: "economy",
   description: "Withdraws money from your bank account.",
   usage: "withdraw <amount|all>",
   aliases: ["with", "wd"],

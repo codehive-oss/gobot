@@ -5,10 +5,11 @@ import { tools } from "../utils/tools";
 
 const cmd: Command = {
   name: "shop",
+  category: "economy",
   description: "buy items",
   aliases: ["store"],
   usage: "shop",
-  async execute(msg: Message, args: string[]) {
+  async execute(msg: Message, _args: string[]) {
     const embed = new MessageEmbed()
       .setColor("#329ea8")
       .setTitle(":shopping_cart: Shop")

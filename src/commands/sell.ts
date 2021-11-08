@@ -6,6 +6,7 @@ import { maxwords } from "../utils/maxwords";
 
 const cmd: Command = {
   description: "Sells the specified item",
+  category: "economy",
   async execute(msg: Message, args: string[]) {
     if (args.length < 1) {
       await msg.reply("Please provide an Item to Sell!");

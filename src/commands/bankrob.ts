@@ -18,6 +18,7 @@ const failRate = 0.75;
 const cmd: CooldownCommand = {
   name: "bankrob",
   description: "Bankrob someone",
+  category: "economy",
   usage: "bankrob <@user>",
   cooldown: 120,
   execute: async function (msg, _args) {

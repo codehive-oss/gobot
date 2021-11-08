@@ -6,6 +6,7 @@ import { Command } from "../utils/types";
 const cmd: Command = {
   name: "inventory",
   description: "View your inventory.",
+  category: "economy",
   aliases: ["inv"],
   async execute(msg, args) {
     let target

@@ -5,6 +5,7 @@ import { toGoUser } from "../db/entity/GoUser";
 const cmd: Command = {
   aliases: ["bal"],
   name: "balance",
+  category: "economy",
   description: "Shows your current balance",
   async execute(msg: Message, args: string[]) {
     let dcUser: User;

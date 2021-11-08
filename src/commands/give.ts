@@ -9,6 +9,7 @@ import { Command } from "../utils/types";
 const cmd: Command = {
   name: "give",
   description: "Give money to a user.",
+  category: "economy",
   usage: "give <@user> <amount|all>",
   execute: async function (msg, args) {
     if (!args[0]) {

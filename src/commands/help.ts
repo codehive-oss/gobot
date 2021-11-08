@@ -1,4 +1,4 @@
-import { Message, MessageEmbed } from "discord.js";
+import {Message, MessageActionRow, MessageEmbed, MessageSelectMenu} from "discord.js";
 import { client } from "../utils/client";
 import { commands } from "../utils/commandHandler";
 import { Command } from "../utils/types";
@@ -9,11 +9,36 @@ const cmd: Command = {
   aliases: ["commands"],
   usage: "help <command>",
   async execute(msg: Message, args: string[]) {
+
+    if (args.length===0) {
+      const row = new MessageActionRow()
+          .addComponents(
+              new MessageSelectMenu()
+                  .setCustomId("help")
+                  .setPlaceholder("Category")
+                  .addOptions([
+                    {
+                      label: "econonmy",
+                      description: "Economy based Commands",
+                      value: "economy"
+                    },
+                    {
+                      label: "other",
+                      description: "Miscellanious Commands",
+                      value: "misc"
+                    }
+                  ])
+          )
+      await msg.reply({content: "Select a Category to see help for", components: [row]})
+      return
+    }
+
     const embed = new MessageEmbed();
     embed.setColor("#528B8B");
     if (client.user?.avatarURL()) {
       embed.setThumbnail(client.user.avatarURL()!);
     }
+
     if (args[0]) {
       const commandName = args[0];
       let command: Command | undefined;
@@ -49,5 +74,7 @@ const cmd: Command = {
     await msg.reply({ embeds: [embed] });
   },
 };
+
+
 
 module.exports = cmd;

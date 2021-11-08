@@ -5,6 +5,7 @@ import {maxwords} from "../utils/maxwords";
 const cmd: Command = {
   name: "deposit",
   description: "Deposit money into your bank account.",
+  category: "economy",
   aliases: ["dep"],
   usage: "deposit <amount|all|max>",
   async execute(msg, args) {

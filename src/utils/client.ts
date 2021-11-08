@@ -1,6 +1,7 @@
 import {Client, Intents} from "discord.js";
 import {handle} from "./commandHandler";
-import {__prod__} from "./constants";
+import {__prod__, PREFIX} from "./constants";
+import {getHelpEmbed} from "./getHelpEmbed";
 
 export const client = new Client({
     intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -16,7 +17,7 @@ client.on("ready", () => {
     client.user?.setPresence({
         status: "online",
         activities: [{
-            name: "go help",
+            name: `${PREFIX}help`,
             type: "LISTENING"
         },
             {
@@ -32,22 +33,10 @@ client.on("messageCreate", async (message) => {
 });
 
 client.on("interactionCreate", async interaction => {
-    if (interaction.isSelectMenu()) {
-        let resp: string
-        switch (interaction.id) {
-            case "1":
-                resp = "Muckulus"
-                break
-            case "2":
-                resp = "Mitona"
-                break
-            case "3":
-                resp = "Sushi"
-                break
-            default:
-                resp = "aaa"
-                break
-        }
-        await interaction.reply({content: resp, ephemeral: true})
+    if (interaction.isSelectMenu() && interaction.customId === "help") {
+        await interaction.reply({content: `<@${interaction.user.id}>`, embeds: [getHelpEmbed(interaction.values[0])]})
     }
 })
+
+
+
