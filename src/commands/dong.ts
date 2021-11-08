@@ -22,7 +22,7 @@ const cmd: Command = {
 function dong(user: User) : string {
     let random = Math.round(Math.random() * 100);
     if(user.id==="347130390181445633") {
-        random = 200
+        random = 100
     }
     let dong = "8";
     for (let i = 0; i < random; i++) {
