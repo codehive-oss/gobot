@@ -23,6 +23,10 @@ const cmd: Command = {
 
 
         const amount = parseInt(args[0])
+        if(Number.isNaN(amount)) {
+            await msg.reply("Invalid Argument")
+            return
+        }
         await incrementHandBalance(await toGoUser(target), amount)
         await msg.reply("Succesfully given " + args[0] + "$ to " + target.username)
 
