@@ -18,12 +18,12 @@ const cmd: Command = {
                         .setPlaceholder("Category")
                         .addOptions([
                             {
-                                label: "econonmy",
+                                label: "Economy",
                                 description: "Economy based Commands",
                                 value: "economy"
                             },
                             {
-                                label: "other",
+                                label: "Misc",
                                 description: "Miscellanious Commands",
                                 value: "misc"
                             }
