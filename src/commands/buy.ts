@@ -2,6 +2,8 @@ import {Command} from "../utils/types";
 import {Message} from "discord.js";
 import {tools} from "../utils/tools";
 import {decrementHandBalance, giveTool, hasTool, toGoUser,} from "../db/entity/GoUser";
+import {allItems} from "../utils/item";
+import {type} from "os";
 
 const cmd: Command = {
     description: "Buys the specified item",
@@ -12,32 +14,34 @@ const cmd: Command = {
             return;
         }
         const itemname = args[0];
-        let tool;
+        let item;
 
-        for (const item of tools) {
-            if (item.name.toLocaleLowerCase() === itemname.toLocaleLowerCase()) {
-                tool = item;
+        for (const tool of tools) {
+            if (tool.name.toLocaleLowerCase() === itemname.toLocaleLowerCase()) {
+                item = tool;
                 break;
             }
         }
-        if (tool === undefined) {
+
+        if (item === undefined) {
             await msg.reply("Tool not found");
             return;
         }
 
+
         const gouser = await toGoUser(msg.author);
-        if (gouser.handBalance < tool.price) {
+        if (gouser.handBalance < item.price) {
             await msg.reply("You dont have enough money on your hand to buy this!");
             return;
         }
 
-        if (await hasTool(gouser, tool.id)) {
+        if (await hasTool(gouser, item.id)) {
             await msg.reply("You already have that tool");
             return;
         }
         await giveTool(gouser, 0);
-        await decrementHandBalance(gouser, tool.price);
-        await msg.reply(`Succesfully bought ${tool.name} for ${tool.price}`);
+        await decrementHandBalance(gouser, item.price);
+        await msg.reply(`Succesfully bought ${item.name} for ${item.price}`);
     },
     name: "buy",
     usage: "buy [item]",

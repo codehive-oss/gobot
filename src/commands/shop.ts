@@ -2,6 +2,7 @@ import {Command} from "../utils/types";
 import {Message, MessageEmbed} from "discord.js";
 import {PREFIX} from "../utils/constants";
 import {tools} from "../utils/tools";
+import {allItems} from "../utils/item";
 
 const cmd: Command = {
     name: "shop",
@@ -18,6 +19,7 @@ const cmd: Command = {
         for (const tool of tools) {
             embed.addField(tool.name, tool.description + " | " + tool.price + "$");
         }
+
         await msg.reply({embeds: [embed]});
     },
 };

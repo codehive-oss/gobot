@@ -28,7 +28,7 @@ const cmd: CooldownCommand = {
 
             const chance = Math.random();
 
-            const robAmount = Math.floor(target.bankBalance * robRate);
+            const robAmount = Math.floor(target.handBalance * robRate);
 
             setCooldown(this.name, dcUser.id, this.cooldown);
 

@@ -7,6 +7,7 @@ const failRate = 0.5;
 
 const cmd: CooldownCommand = {
     name: "rob",
+    category: "economy",
     description: "Rob a user (chance of getting caught)",
     usage: "rob <@user>",
     cooldown: 30,
@@ -19,7 +20,7 @@ const cmd: CooldownCommand = {
             const err = checkRobTarget(dcTarget, dcUser);
 
             if (err) {
-                msg.reply(err);
+                await msg.reply(err);
                 return;
             }
             dcTarget = dcTarget!;
