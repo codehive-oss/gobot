@@ -20,7 +20,7 @@ const pickOne = (arr: Item[]): Item | undefined => {
 const cmd: CooldownCommand = {
     name: "mine",
     description: "Mine for items",
-    cooldown: 5,
+    cooldown: 30,
     execute: async function (msg, _args) {
 
         if (!await hasTool(await toGoUser(msg.author), 0)) {
