@@ -19,6 +19,7 @@ const pickOne = (arr: Item[]): Item | undefined => {
 
 const cmd: CooldownCommand = {
     name: "mine",
+    category: "economy",
     description: "Mine for items",
     cooldown: 30,
     execute: async function (msg, _args) {
