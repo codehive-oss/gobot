@@ -12,5 +12,5 @@ const pickaxe = {
     price: 2000
 }
 
-export const tools : Tool[] = [pickaxe]
+export const tools: Tool[] = [pickaxe]
 

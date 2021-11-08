@@ -54,12 +54,10 @@ const cmd: CooldownCommand = {
                 await msg.reply({embeds: [embed]});
             }
 
-            if(randInt(0,50)==1) {
+            if (randInt(0, 50) == 1) {
                 await removeTool(user, 0)
                 await msg.reply(`Too bad! Your Pickaxe broke. Visit ${PREFIX}shop to buy a new one!`)
             }
-
-
 
 
         } else {

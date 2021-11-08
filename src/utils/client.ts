@@ -34,7 +34,11 @@ client.on("messageCreate", async (message) => {
 
 client.on("interactionCreate", async interaction => {
     if (interaction.isSelectMenu() && interaction.customId === "help") {
-        await interaction.reply({ephemeral: true, content: `<@${interaction.user.id}>`, embeds: [getHelpEmbed(interaction.values[0])]})
+        await interaction.reply({
+            ephemeral: true,
+            content: `<@${interaction.user.id}>`,
+            embeds: [getHelpEmbed(interaction.values[0])]
+        })
     }
 })
 

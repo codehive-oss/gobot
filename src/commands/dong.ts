@@ -1,19 +1,19 @@
-import { Command } from "../utils/types";
-import { Message } from "discord.js";
+import {Command} from "../utils/types";
+import {Message} from "discord.js";
 
 const cmd: Command = {
-  aliases: ["dong"],
-  name: "dongsize",
-  description: "magnum schlong",
-  async execute(msg: Message, _args: string[]) {
-    const random = Math.round(Math.random() * 100);
-    let dong = "8";
+    aliases: ["dong"],
+    name: "dongsize",
+    description: "magnum schlong",
+    async execute(msg: Message, _args: string[]) {
+        const random = Math.round(Math.random() * 100);
+        let dong = "8";
 
-    for (let i = 0; i < random; i++) {
-      dong += "=";
+        for (let i = 0; i < random; i++) {
+            dong += "=";
+        }
+        await msg.reply((dong += "D " + random + "cm"));
     }
-    await msg.reply((dong += "D " + random + "cm"));
-  }
 };
 
 module.exports = cmd;
