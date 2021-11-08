@@ -45,7 +45,18 @@ const cmd: CooldownCommand = {
     aliases: ["awnime"],
     description: "Sends a random anime picture",
     cooldown: 200,
+    usage: "anime <category \| \"categories\">",
     execute: async (msg, args) => {
+        if (args[0] && args[0] === "categories") {
+            const embed = new MessageEmbed()
+                .setColor("#528B8B")
+                .setTitle("List of Categories")
+            for (const category of AnimeCategories) {
+                embed.description += category + "\n"
+            }
+            await msg.reply({embeds: [embed]})
+            return
+        }
         let category = "waifu";
         if (args[0]) {
             if (AnimeCategories.includes(args[0].toLowerCase())) {
