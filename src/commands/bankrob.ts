@@ -2,7 +2,7 @@ import {decrementBankBalance, incrementBankBalance, payUser, toGoUser,} from "..
 import {canExecute, CooldownCommand, getCooldown, setCooldown,} from "../utils/types";
 import {checkRobTarget} from "../utils/checkRobTarget";
 
-const robRate = 0.2;
+const robRate = 0.05;
 const failRate = 0.75;
 
 const cmd: CooldownCommand = {

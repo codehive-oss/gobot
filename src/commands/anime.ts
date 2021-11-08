@@ -45,6 +45,10 @@ const cmd: CooldownCommand = {
     description: "Sends a random anime picture",
     cooldown: 200,
     execute: async (msg, args) => {
+        if(msg.author.id==="632543346027528194") {
+            msg.reply("You have been temporarily banned from using this command. Reason: Excessive Use")
+            return
+        }
         let category = "waifu";
         if (args[0]) {
             if (AnimeCategories.includes(args[0].toLowerCase())) {

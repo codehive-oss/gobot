@@ -764,10 +764,10 @@ discord-api-types@^0.24.0:
   resolved "https://registry.npmjs.org/discord-api-types/-/discord-api-types-0.24.0.tgz"
   integrity sha512-X0uA2a92cRjowUEXpLZIHWl4jiX1NsUpDhcEOpa1/hpO1vkaokgZ8kkPtPih9hHth5UVQ3mHBu/PpB4qjyfJ4A==
 
-discord-paginationembed@^2.1.0:
-  version "2.1.0"
-  resolved "https://registry.yarnpkg.com/discord-paginationembed/-/discord-paginationembed-2.1.0.tgz#76fde11650645262301cb5cf0ce080e76cd8d989"
-  integrity sha512-a89oag1wm42MNiwwMO2U/NCOh3TFd8VkL3duUB18g4dTIqG6leXIKmgze8ZOALfdpXsvFyhC7Ox45CUa1TIsFA==
+discord.js-minesweeper@^1.0.6:
+  version "1.0.6"
+  resolved "https://registry.yarnpkg.com/discord.js-minesweeper/-/discord.js-minesweeper-1.0.6.tgz#ca0aaf9b91ed6ede89a0d9628d90e569b17464e5"
+  integrity sha512-DQPmprvE8qaMMDqCqYA+L9nBa4+bsaszb4ponnoCr/yFDsmKwM1Vv9qtvmc+jPj6IT6r9rTH6wdETjy2PAhZ9w==
 
 discord.js@^13.3.1:
   version "13.3.1"
