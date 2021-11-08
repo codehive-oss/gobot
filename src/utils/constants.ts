@@ -1,5 +1,5 @@
 import dotenv from "dotenv";
-import {prefix} from "config.json"
+import {prefix} from "../config.json"
 
 dotenv.config();
 
