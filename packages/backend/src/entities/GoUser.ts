@@ -7,12 +7,10 @@ export class GoUser extends BaseEntity {
   @Field()
   @PrimaryColumn()
   id: string;
-
-  @Field()
+  
   @Column("int", { array: true })
   items: number[];
 
-  @Field()
   @Column("int", { array: true })
   tools: number[];
 
