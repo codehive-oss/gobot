@@ -1,4 +1,4 @@
-import { GoUser } from "../db/entity/GoUser";
+import { GoUser } from "../entities/GoUser";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
 import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "./constants";
 import { __prod__ } from "@gobot/common";

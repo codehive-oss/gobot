@@ -48,7 +48,7 @@ export class GoUserResolver {
     return lost;
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async incrementHandBalance(
     @Arg("userID") userID: string,
     @Arg("amount") amount: number
@@ -56,6 +56,7 @@ export class GoUserResolver {
     const user = await this.getUser(userID);
     user.handBalance = user.handBalance + amount;
     await user.save();
+    return user;
   }
 
   @Mutation(() => Number)
@@ -79,40 +80,43 @@ export class GoUserResolver {
     return lost;
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async incrementBankBalance(
     @Arg("userID") userID: string,
     @Arg("amount") amount: number
-  ) {
+  ) : Promise<GoUser>{
     const user = await this.getUser(userID);
     user.bankBalance = user.bankBalance + amount;
     await user.save();
+    return user;
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async deposit(@Arg("userID") userID: string, @Arg("amount") amount: number) {
     const user = await this.getUser(userID);
 
     user.bankBalance += amount;
     user.handBalance -= amount;
     await user.save();
+    return user;
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async withdraw(@Arg("userID") userID: string, @Arg("amount") amount: number) {
-    await this.deposit(userID, -amount);
+    return await this.deposit(userID, -amount);
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async addItem(@Arg("userID") userID: string, @Arg("item") item: number) {
     const user = await this.getUser(userID);
 
     user.items[item]++;
     console.log(user.items);
     await user.save();
+    return user;
   }
 
-  @Mutation()
+  @Mutation(() => Number)
   async payUser(
     @Arg("userID") userID: string,
     @Arg("targetID") targetID: string,
@@ -129,23 +133,25 @@ export class GoUserResolver {
     return loss;
   }
 
-  @Query()
+  @Query(() => Boolean)
   async hasTool(@Arg("userID") userID: string, @Arg("item") item: number) {
     const user = await this.getUser(userID);
     return user.tools[item] === 1;
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async giveTool(@Arg("userID") userID: string, @Arg("item") item: number) {
     const user = await this.getUser(userID);
     user.tools[item] = 1;
     await user.save();
+    return user;
   }
 
-  @Mutation()
+  @Mutation(() => GoUser)
   async removeTool(userID: string, id: number) {
     const user = await this.getUser(userID);
     user.tools[id] = 0;
     await user.save();
+    return user
   }
 }
