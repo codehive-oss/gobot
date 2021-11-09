@@ -1,12 +1,13 @@
-import express from "express";
 import { PORT } from "./utils/constants";
+import { createApp } from "./utils/createApp";
 
-const app = express();
 
-app.get("/", (_req, res) => {
-  res.send("Hello World!");
-});
+const main = async () => {
+  const app = await createApp();
 
-app.listen(PORT, () => {
-  console.log(`Server listening on http://localhost:${PORT}`);
-});
+  app.listen(PORT, () => {
+    console.log(`Server listening on http://localhost:${PORT}`);
+  });
+};
+
+main();

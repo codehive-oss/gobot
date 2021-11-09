@@ -1,9 +1,8 @@
 {
-  "entities": "src/entity/**/*.{ts,js}",
-  "migrations": "src/migration/**/*.{ts,js}",
-  "cli": {
-    "entitiesDir": "src/entity",
-    "migrationsDir": "src/migration",
-    "subscribersDir": "src/subscriber"
-  }
+  "entities": ["src/entities/*.ts"],
+  "migrations": ["src/migrations/*.ts"],
+   "cli": {
+      "entitiesDir": "src/entities",
+      "migrationsDir": "src/migrations"
+   }
 }
