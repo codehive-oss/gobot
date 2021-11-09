@@ -1,13 +1,13 @@
 import type { NextPage } from "next";
-import NavbarComponent from "../components/NavbarComponent";
+import NavbarProvider from "../components/NavbarProvider";
 
 const Home: NextPage = () => {
   return (
     <div>
-      <NavbarComponent />
+      <NavbarProvider />
       <div className="py-5 flex justify-center">
-        <p className="text-3xl">
-          Hello World
+        <p className="text-6xl">
+          GoBot
         </p>
       </div>
     </div>

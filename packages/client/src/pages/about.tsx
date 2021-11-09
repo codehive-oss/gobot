@@ -1,12 +1,12 @@
 import { NextPage } from "next";
-import NavbarComponent from "../components/NavbarComponent";
+import NavbarProvider from "../components/NavbarProvider";
 
 interface AboutProps {}
 
 const About: NextPage<AboutProps> = () => {
   return (
     <div>
-      <NavbarComponent />
+      <NavbarProvider />
       <div className="flex justify-center">
         <p>About</p>
       </div>
