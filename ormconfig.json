@@ -1,9 +1,0 @@
-{
-  "entities": "src/db/entity/**/*.{ts,js}",
-  "migrations": "src/db/migration/**/*.{ts,js}",
-  "cli": {
-    "entitiesDir": "src/db/entity",
-    "migrationsDir": "src/db/migration",
-    "subscribersDir": "src/db/subscriber"
-  }
-}

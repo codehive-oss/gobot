@@ -1,0 +1,30 @@
+{
+  "name": "@gobot/discord",
+  "version": "0.1.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "scripts": {
+    "build": "tsc",
+    "clean": "rimraf dist",
+    "start": "yarn build && node dist/index.js",
+    "start:ts-node": "ts-node src/index.ts",
+    "dev": "yarn clean && nodemon --exec yarn start",
+    "dev:ts-node": "yarn clean && nodemon --exec yarn start:ts-node"
+  },
+  "dependencies": {
+    "@gobot/common": "*",
+    "axios": "^0.24.0",
+    "discord.js": "^13.3.1",
+    "discord.js-minesweeper": "^1.0.6",
+    "dotenv": "^10.0.0",
+    "pg": "^8.7.1",
+    "typeorm": "^0.2.38"
+  },
+  "devDependencies": {
+    "@types/node": "^16.11.6",
+    "nodemon": "^2.0.14",
+    "rimraf": "^3.0.2",
+    "ts-node": "^10.4.0",
+    "typescript": "^4.4.4"
+  }
+}

@@ -1,10 +1,9 @@
 import dotenv from "dotenv";
-import {prefix} from "../config.json"
+import { prefix } from "../config.json";
 
 dotenv.config();
 
 export const TOKEN = process.env.TOKEN!;
-export const __prod__ = process.env.NODE_ENV === "production";
 export const PREFIX = prefix;
 
 export const DB_NAME = process.env.DB_NAME!;

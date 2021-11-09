@@ -1,32 +1,19 @@
 {
   "name": "gobot",
-  "version": "0.0.8",
-  "main": "dist/index.js",
+  "version": "0.1.0",
+  "repository": "https://github.com/SushiWaUmai/GoBot.git",
   "license": "MIT",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
   "scripts": {
-    "build": "tsc",
-    "clean": "rimraf dist",
-    "start": "yarn build && node dist/index.js",
-    "start:ts-node": "ts-node src/index.ts",
-    "dev": "yarn clean && nodemon --exec yarn start",
-    "dev:ts-node": "yarn clean && nodemon --exec yarn start:ts-node",
-    "release": "standard-version",
-    "migrate": "typeorm migration:create -n GobotMigration"
+    "common": "yarn workspace @gobot/common",
+    "backend": "yarn workspace @gobot/backend",
+    "client": "yarn workspace @gobot/client",
+    "discord": "yarn workspace @gobot/discord"
   },
   "devDependencies": {
-    "@types/node": "^16.11.6",
-    "nodemon": "^2.0.14",
-    "rimraf": "^3.0.2",
-    "standard-version": "^9.3.2",
-    "ts-node": "^10.4.0",
-    "typescript": "^4.4.4"
-  },
-  "dependencies": {
-    "axios": "^0.24.0",
-    "discord.js": "^13.3.1",
-    "discord.js-minesweeper": "^1.0.6",
-    "dotenv": "^10.0.0",
-    "pg": "^8.7.1",
-    "typeorm": "^0.2.38"
+    "lerna": "^4.0.0"
   }
 }
