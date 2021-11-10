@@ -9,13 +9,14 @@ import graphqlPlayground from "graphql-playground-middleware-express";
 import { MyContext } from "./types";
 import { typeormOrmConfig } from "./typeormConfig";
 import { HelloResolver } from "../db/resolvers/hello";
+import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
 
 export const createAPI = async () => {
   const conn = await createConnection(typeormOrmConfig);
   conn.runMigrations();
 
   const schema = await buildSchema({
-    resolvers: [HelloResolver],
+    resolvers: [HelloResolver, DiscordServerResolver],
     validate: false,
   });
 
