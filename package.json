@@ -1,6 +1,6 @@
 {
   "name": "gobot",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "repository": "https://github.com/SushiWaUmai/GoBot.git",
   "license": "MIT",
   "private": true,
@@ -11,9 +11,11 @@
     "common": "yarn workspace @gobot/common",
     "backend": "yarn workspace @gobot/backend",
     "client": "yarn workspace @gobot/client",
-    "discord": "yarn workspace @gobot/discord"
+    "discord": "yarn workspace @gobot/discord",
+    "release": "standard-version"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "standard-version": "^9.3.2"
   }
 }
