@@ -1,6 +1,6 @@
 import {Message} from "discord.js";
 
-type categories = "economy" |"other"
+type categories = "economy" |"other" | "level"
 
 export type Command = {
     name: string;

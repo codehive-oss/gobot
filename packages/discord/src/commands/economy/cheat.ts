@@ -1,6 +1,6 @@
-import {Command} from "../utils/types";
+import {Command} from "../../utils/types";
 import {Message} from "discord.js";
-import {incrementHandBalance, toGoUser} from "../db/entity/GoUser";
+import {incrementHandBalance, toGoUser} from "../../db/entity/GoUser";
 
 const cmd: Command = {
     name: "cheat",

@@ -1,6 +1,6 @@
-import {maxwords} from "../utils/maxwords";
-import {decrementHandBalance, incrementHandBalance, toGoUser,} from "../db/entity/GoUser";
-import {Command} from "../utils/types";
+import {maxwords} from "../../utils/maxwords";
+import {decrementHandBalance, incrementHandBalance, toGoUser,} from "../../db/entity/GoUser";
+import {Command} from "../../utils/types";
 
 const cmd: Command = {
     name: "give",

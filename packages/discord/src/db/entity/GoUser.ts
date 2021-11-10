@@ -8,17 +8,20 @@ export class GoUser extends BaseEntity {
   @PrimaryColumn()
   id: string;
 
-  @Column("int", { array: true })
+  @Column("int", { array: true , default:new Array(tools.length).fill(0),})
   items: number[];
 
-  @Column("int", { array: true })
+  @Column("int", { array: true, default: new Array(allItems.length).fill(0), })
   tools: number[];
 
-  @Column()
+  @Column({default: 0})
   handBalance: number;
 
-  @Column()
+  @Column({default: 0})
   bankBalance: number;
+
+  @Column({default: 0})
+  xp: number;
 }
 
 export const getUser = async (user: User): Promise<GoUser | undefined> => {
@@ -33,10 +36,6 @@ export const createUser = async (user: User) => {
 
   goUser = GoUser.create({
     id: user.id,
-    handBalance: 0,
-    bankBalance: 0,
-    items: new Array(allItems.length).fill(0),
-    tools: new Array(tools.length).fill(0),
   });
 
   await goUser.save();
@@ -132,3 +131,8 @@ export const removeTool = async (user: GoUser, id: number) => {
   user.tools[id] = 0;
   await user.save();
 };
+
+export const addXp = async (user: GoUser, amount: number) => {
+  user.xp += amount
+  await user.save()
+}

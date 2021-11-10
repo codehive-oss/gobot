@@ -1,6 +1,6 @@
-import {deposit, toGoUser} from "../db/entity/GoUser";
-import {Command} from "../utils/types";
-import {maxwords} from "../utils/maxwords";
+import {deposit, toGoUser} from "../../db/entity/GoUser";
+import {Command} from "../../utils/types";
+import {maxwords} from "../../utils/maxwords";
 
 const cmd: Command = {
     name: "deposit",

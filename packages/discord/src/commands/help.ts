@@ -26,6 +26,10 @@ const cmd: Command = {
                                 label: "Misc",
                                 description: "Miscellanious Commands",
                                 value: "misc"
+                            }, {
+                                label: "Level",
+                                description: "Level Commands",
+                                value: "level"
                             }
                         ])
                 )

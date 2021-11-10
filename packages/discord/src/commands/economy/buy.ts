@@ -1,9 +1,7 @@
-import {Command} from "../utils/types";
+import {Command} from "../../utils/types";
 import {Message} from "discord.js";
-import {tools} from "../utils/tools";
-import {decrementHandBalance, giveTool, hasTool, toGoUser,} from "../db/entity/GoUser";
-import {allItems} from "../utils/item";
-import {type} from "os";
+import {tools} from "../../utils/tools";
+import {decrementHandBalance, giveTool, hasTool, toGoUser,} from "../../db/entity/GoUser";
 
 const cmd: Command = {
     description: "Buys the specified item",

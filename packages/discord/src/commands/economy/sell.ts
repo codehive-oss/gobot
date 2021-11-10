@@ -1,8 +1,8 @@
-import {Command} from "../utils/types";
+import {Command} from "../../utils/types";
 import {Message} from "discord.js";
-import {toGoUser} from "../db/entity/GoUser";
-import {allItems} from "../utils/item";
-import {maxwords} from "../utils/maxwords";
+import {toGoUser} from "../../db/entity/GoUser";
+import {allItems} from "../../utils/item";
+import {maxwords} from "../../utils/maxwords";
 
 const cmd: Command = {
     description: "Sells the specified item",

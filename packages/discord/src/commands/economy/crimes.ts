@@ -1,7 +1,7 @@
-import {canExecute, CooldownCommand, getCooldown, setCooldown,} from "../utils/types";
+import {canExecute, CooldownCommand, getCooldown, setCooldown,} from "../../utils/types";
 import {Message} from "discord.js";
-import {decrementHandBalance, incrementHandBalance, toGoUser} from "../db/entity/GoUser";
-import {randInt} from "../utils/randInt";
+import {addXp, decrementHandBalance, incrementHandBalance, toGoUser} from "../../db/entity/GoUser";
+import {randInt} from "../../utils/randInt";
 
 const cmd: CooldownCommand = {
     aliases: [],
@@ -30,11 +30,13 @@ const cmd: CooldownCommand = {
             } else if (rnd < 70) {
                 //win
                 const win = randInt(400, 600);
-                incrementHandBalance(user, win);
-                await msg.reply(`You won ${win}$ :moneybag:`);
+                await incrementHandBalance(user, win);
+                const rand = randInt(20, 80)
+                await addXp(user, rand)
+                await msg.reply(`You won ${win}$ and you earned ${rand}xp :moneybag:`);
             } else {
                 //jackpot
-                incrementHandBalance(user, 5000);
+                await incrementHandBalance(user, 5000);
                 await msg.reply(
                     "You won the Jackpot of 5000$! Congrats :money_with_wings: :money_with_wings: :money_with_wings: "
                 );

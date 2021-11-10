@@ -1,9 +1,9 @@
-import {canExecute, CooldownCommand, getCooldown, setCooldown} from "../utils/types";
-import {allItems, Item} from "../utils/item";
+import {canExecute, CooldownCommand, getCooldown, setCooldown} from "../../utils/types";
+import {allItems, Item} from "../../utils/item";
 import {MessageEmbed} from "discord.js";
-import {addItem, hasTool, incrementHandBalance, removeTool, toGoUser} from "../db/entity/GoUser";
-import {randInt} from "../utils/randInt";
-import {PREFIX} from "../utils/constants";
+import {addItem, addXp, hasTool, incrementHandBalance, removeTool, toGoUser} from "../../db/entity/GoUser";
+import {randInt} from "../../utils/randInt";
+import {PREFIX} from "../../utils/constants";
 
 const pickOne = (arr: Item[]): Item | undefined => {
     const rand = Math.random();
@@ -37,10 +37,14 @@ const cmd: CooldownCommand = {
             const user = await toGoUser(dcUser);
 
             const item = pickOne(allItems);
+
+            const rand = randInt(20, 80)
+            await addXp(user, rand)
+
             if (!item) {
                 const money = randInt(300, 500);
                 await incrementHandBalance(user, money);
-                await msg.reply(`You mined ${money} coin!`);
+                await msg.reply(`You mined ${money} coins and earned ${rand}xp!`);
             } else {
                 const i = allItems.indexOf(item);
                 await addItem(user, i);

@@ -1,8 +1,7 @@
-import {Command} from "../utils/types";
+import {Command} from "../../utils/types";
 import {Message, MessageEmbed} from "discord.js";
-import {PREFIX} from "../utils/constants";
-import {tools} from "../utils/tools";
-import {allItems} from "../utils/item";
+import {PREFIX} from "../../utils/constants";
+import {tools} from "../../utils/tools";
 
 const cmd: Command = {
     name: "shop",
