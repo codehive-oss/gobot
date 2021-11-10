@@ -1,4 +1,4 @@
-import {Command} from "../utils/types";
+import {Command} from "../../utils/types";
 import {Message} from "discord.js";
 import Minesweeper from "discord.js-minesweeper";
 

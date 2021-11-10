@@ -1,7 +1,7 @@
 import {Message, MessageActionRow, MessageEmbed, MessageSelectMenu} from "discord.js";
-import {client} from "../utils/client";
-import {commands} from "../utils/commandHandler";
-import {Command} from "../utils/types";
+import {client} from "../../utils/client";
+import {commands} from "../../utils/commandHandler";
+import {Command} from "../../utils/types";
 
 const cmd: Command = {
     name: "help",

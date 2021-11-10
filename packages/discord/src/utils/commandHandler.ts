@@ -10,7 +10,7 @@ function addCommandsRecursive(dir: string, folder: string) {
     //recursion to scan directories inside "commands" too for better structure
     const commandFiles = fs
         .readdirSync(dir)
-        .filter((file) => file.endsWith(".js") || fs.lstatSync(dir + "/" + file).isDirectory());
+        .filter((file) => file.endsWith(".js") || fs.lstatSync(dir + "/" + file).isDirectory()); // only files that end with .js or folders
     for (const file of commandFiles) {
         if(fs.lstatSync(dir + "/" + file.toString()).isDirectory()) {
             console.log(file)
