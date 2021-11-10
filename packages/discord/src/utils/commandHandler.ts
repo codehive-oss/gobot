@@ -5,15 +5,30 @@ import {Command} from "./types";
 
 export const commands: Command[] = [];
 
-const commandFiles = fs
-    .readdirSync("./dist/commands")
-    .filter((file) => file.endsWith(".js"));
-for (const file of commandFiles) {
-    const command = require(`../commands/${file}`) as Command;
 
-    commands.push(command);
-    console.log(`Registered ${command.name} command`);
+function addCommandsRecursive(dir: string, folder: string) {
+    //recursion to scan directories inside "commands" too for better structure
+    const commandFiles = fs
+        .readdirSync(dir)
+        .filter((file) => file.endsWith(".js") || fs.lstatSync(dir + "/" + file).isDirectory());
+    for (const file of commandFiles) {
+        if(fs.lstatSync(dir + "/" + file.toString()).isDirectory()) {
+            console.log(file)
+            addCommandsRecursive(dir + "/" +file.toString(), file)
+        }
+        if(file.endsWith(".js")) {
+            const command = require(`../commands/${folder}/${file}`) as Command;
+            commands.push(command);
+            console.log(`Registered ${command.name} command ${dir}`);
+        }
+
+
+
+    }
 }
+
+addCommandsRecursive("./dist/commands", "")
+
 
 export const handle = async (message: Message) => {
     let content = message.content;
