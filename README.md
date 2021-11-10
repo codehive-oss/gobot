@@ -1,5 +1,4 @@
-# Unnamed Discord Bot
-
 # GoBot
 A multipurpose discord bot
 
+[![discord](https://img.shields.io/discord/905149101195288636?style=flat-square)]()
