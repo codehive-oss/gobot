@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+## [0.1.2](https://github.com/SushiWaUmai/GoBot/compare/v0.1.1...v0.1.2) (2021-11-10)
+
+
+### Bug Fixes
+
+* **command:** :bug: Fixed typo in gay command ([137c7dd](https://github.com/SushiWaUmai/GoBot/commit/137c7dd2245fadfce1a31f57bf07ceeac1c75b77))
+
+
+### Features
+
+* :sparkles: add discord js ([f105ff2](https://github.com/SushiWaUmai/GoBot/commit/f105ff29b089561df25a6422a6c0ebed60e3e7c8))
+* :sparkles: commandhandler ([22311cd](https://github.com/SushiWaUmai/GoBot/commit/22311cdcb893b4ca0597471d4888a1cc053d869e))
+* :tada: add project ([bf4d77b](https://github.com/SushiWaUmai/GoBot/commit/bf4d77b19123ccf0aa9cf9deb8705cf1cc2248e6))
+
+
+
+
+
 
 
 **Note:** Version bump only for package gobot
