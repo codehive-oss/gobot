@@ -3,6 +3,7 @@
   "version": "0.1.1",
   "main": "dist/index.js",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist",
