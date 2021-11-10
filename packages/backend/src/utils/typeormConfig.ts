@@ -11,5 +11,5 @@ export const typeormOrmConfig: PostgresConnectionOptions = {
   database: DB_NAME,
   synchronize: true,
   logging: !__prod__,
-  entities: [GoUser],
+  entities: [GoUser]
 };
