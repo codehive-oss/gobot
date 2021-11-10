@@ -1,13 +1,15 @@
-import { PORT } from "./utils/constants";
-import { createApp } from "./utils/createApp";
+import "reflect-metadata";
+import { client } from "./utils/client";
+import { API_PORT, TOKEN } from "./utils/constants";
+import { createAPI } from "./utils/createAPI";
 
+async function main() {
+  const api = await createAPI();
 
-const main = async () => {
-  const app = await createApp();
+  client.login(TOKEN);
+  api.listen(API_PORT, () => console.log(`API listening on port ${API_PORT}`));
+}
 
-  app.listen(PORT, () => {
-    console.log(`Server listening on http://localhost:${PORT}`);
-  });
-};
-
-main();
+main().catch((err) => {
+  console.error(err);
+});

@@ -8,14 +8,12 @@
     "packages/*"
   ],
   "scripts": {
-    "common": "yarn workspace @gobot/common",
+    "new-version": "lerna version --conventional-commits -y",
+    "diff": "lerna diff",
     "backend": "yarn workspace @gobot/backend",
-    "client": "yarn workspace @gobot/client",
-    "discord": "yarn workspace @gobot/discord",
-    "release": "standard-version"
+    "client": "yarn workspace @gobot/client"
   },
   "devDependencies": {
-    "lerna": "^4.0.0",
-    "standard-version": "^9.3.2"
+    "lerna": "^4.0.0"
   }
 }

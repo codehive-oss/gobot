@@ -1,7 +1,6 @@
-import { GoUser } from "../entities/GoUser";
+import { GoUser } from "../db/entities/GoUser";
 import { PostgresConnectionOptions } from "typeorm/driver/postgres/PostgresConnectionOptions";
-import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER } from "./constants";
-import { __prod__ } from "@gobot/common";
+import { DB_HOST, DB_NAME, DB_PASSWORD, DB_PORT, DB_USER, __prod__ } from "./constants";
 
 export const typeormOrmConfig: PostgresConnectionOptions = {
   type: "postgres",

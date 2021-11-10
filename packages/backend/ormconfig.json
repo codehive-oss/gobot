@@ -1,8 +1,8 @@
 {
-  "entities": ["src/entities/*.ts"],
-  "migrations": ["src/migrations/*.ts"],
+  "entities": ["src/db/entities/*.ts"],
+  "migrations": ["src/db/migrations/*.ts"],
    "cli": {
-      "entitiesDir": "src/entities",
-      "migrationsDir": "src/migrations"
+      "entitiesDir": "src/db/entities",
+      "migrationsDir": "src/db/migrations"
    }
 }
