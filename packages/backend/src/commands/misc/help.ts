@@ -30,6 +30,10 @@ const cmd: Command = {
                                 label: "Level",
                                 description: "Level Commands",
                                 value: "level"
+                            }, {
+                                label: "Image",
+                                description: "Image Manupulation Commands",
+                                value: "image"
                             }
                         ])
                 )

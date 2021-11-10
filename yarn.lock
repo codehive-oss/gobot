@@ -1491,6 +1491,13 @@ ajv@^8.0.1:
     require-from-string "^2.0.2"
     uri-js "^4.2.2"
 
+alexflipnote.js@^2.5.0:
+  version "2.5.0"
+  resolved "https://registry.yarnpkg.com/alexflipnote.js/-/alexflipnote.js-2.5.0.tgz#5dcecea62714d5ab8251f11a0b3798f88100f7bf"
+  integrity sha512-X2ChEoGB9PSktkBgKh3lugos764+zoxNKfESdQRXT6vyvTIBozzxPE67qtQTAUZR0ZBvjY2FdyqL3T24KSDhaA==
+  dependencies:
+    node-fetch "^2.6.1"
+
 anser@1.4.9:
   version "1.4.9"
   resolved "https://registry.yarnpkg.com/anser/-/anser-1.4.9.tgz#1f85423a5dcf8da4631a341665ff675b96845760"

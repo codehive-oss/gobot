@@ -6,7 +6,7 @@ import { createAPI } from "./utils/createAPI";
 async function main() {
   const api = await createAPI();
 
-  client.login(TOKEN);
+  await client.login(TOKEN);
   api.listen(API_PORT, () => console.log(`API listening on port ${API_PORT}`));
 }
 
