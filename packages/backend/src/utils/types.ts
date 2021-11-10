@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import { IncomingMessage, ServerResponse } from "http";
 
-type categories = "economy" | "other" | "level";
+type categories = "economy" | "other" | "level" | "image";
 
 export type MyContext = {
   req: Partial<Express.Request> & IncomingMessage & { url: string };

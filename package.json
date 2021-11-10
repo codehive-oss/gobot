@@ -15,5 +15,8 @@
   },
   "devDependencies": {
     "lerna": "^4.0.0"
+  },
+  "dependencies": {
+    "alexflipnote.js": "^2.5.0"
   }
 }
