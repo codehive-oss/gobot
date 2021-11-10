@@ -8,7 +8,7 @@
     "packages/*"
   ],
   "scripts": {
-    "new-version": "lerna version --conventional-commits -y",
+    "release": "lerna version --conventional-commits -y",
     "diff": "lerna diff",
     "backend": "yarn workspace @gobot/backend",
     "client": "yarn workspace @gobot/client"
