@@ -23,6 +23,12 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
                 <LinkComponent className="md:text-3xl" href="/commands">
                   Commands
                 </LinkComponent>
+                <LinkComponent className="md:text-3xl" href="/donate">
+                  Donate
+                </LinkComponent>
+                <LinkComponent className="md:text-3xl" href="/vote">
+                  Vote
+                </LinkComponent>
                 <LinkComponent className="md:text-3xl" href="/team">
                   Team
                 </LinkComponent>
@@ -30,7 +36,7 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
             </div>
           </div>
         </div>
-        <div className="flex-grow">{children}</div>
+        <div className="flex-grow px-5 md:px-16 py-3">{children}</div>
       </div>
     </div>
   );
