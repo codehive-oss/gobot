@@ -1,5 +1,6 @@
 import React from "react";
 import LinkComponent from "./LinkComponent";
+import { MenuIcon } from "@heroicons/react/solid";
 
 interface NavbarComponentProps {}
 
@@ -14,14 +15,19 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
                 Home
               </LinkComponent>
             </span>
-            <span className="flex justify-center flex-col align-middle items-center">
-              <LinkComponent className="md:text-3xl" href="/commands">
-                Commands
-              </LinkComponent>
-              <LinkComponent className="md:text-3xl" href="/team">
-                Team
-              </LinkComponent>
-            </span>
+            <div className="md:hidden">
+              <MenuIcon className="h-6 w-6 text-white" />
+            </div>
+            <div className="hidden md:block">
+              <span className="flex justify-center flex-col align-middle items-center">
+                <LinkComponent className="md:text-3xl" href="/commands">
+                  Commands
+                </LinkComponent>
+                <LinkComponent className="md:text-3xl" href="/team">
+                  Team
+                </LinkComponent>
+              </span>
+            </div>
           </div>
         </div>
         <div className="flex-grow">{children}</div>
