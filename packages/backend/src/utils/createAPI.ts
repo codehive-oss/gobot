@@ -1,4 +1,3 @@
-
 import "reflect-metadata";
 import express from "express";
 import cors from "cors";
@@ -10,19 +9,25 @@ import { MyContext } from "./types";
 import { typeormOrmConfig } from "./typeormConfig";
 import { HelloResolver } from "../db/resolvers/hello";
 import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
+import pino from "pino-http";
+import logger from "./logger";
 
 export const createAPI = async () => {
+  logger.info("Creating SQL connection...");
   const conn = await createConnection(typeormOrmConfig);
-  conn.runMigrations();
+  await conn.runMigrations();
 
+  logger.info("Building graphql schema...");
   const schema = await buildSchema({
     resolvers: [HelloResolver, DiscordServerResolver],
     validate: false,
   });
 
+  logger.info("Initializing express app...");
   const app = express();
   app.set("trust proxy", 1);
 
+  app.use(pino());
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
