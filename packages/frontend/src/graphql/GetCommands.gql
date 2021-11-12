@@ -1,0 +1,9 @@
+query GetCommands {
+  getCommands{
+    name
+    description
+    aliases
+    usage
+    category
+  }
+}
