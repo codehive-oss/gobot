@@ -1,7 +1,6 @@
 import { Command } from "../../utils/commandTypes";
 import jimp from "jimp";
 import logger from "../../utils/logger";
-// import { MessageAttachment, MessageEmbed } from "discord.js";
 
 // start pixel 450 250
 // end pixel 600 400
@@ -30,11 +29,6 @@ const cmd: Command = {
         logger.error(err);
       }
 
-      // const attachmend = new MessageAttachment(buffer, "hornyjail.png");
-      // const embed = new MessageEmbed().setImage(attachmend.url);
-      // console.log(attachmend.url);
-
-      // await msg.reply({ embeds: [embed] });
       await msg.reply({
         files: [{ attachment: buffer, name: "hornyjail.png" }],
       });
