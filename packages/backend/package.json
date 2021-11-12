@@ -24,6 +24,7 @@
     "express-session": "^1.17.2",
     "graphql": "15.3.0",
     "graphql-playground-middleware-express": "^1.7.23",
+    "jimp": "^0.16.1",
     "passport": "^0.5.0",
     "pg": "^8.7.1",
     "pino": "^7.2.0",
