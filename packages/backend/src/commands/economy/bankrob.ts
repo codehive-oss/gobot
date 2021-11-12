@@ -9,8 +9,8 @@ import {
   canExecute,
   CooldownCommand,
   getCooldown,
-  setCooldown,
-} from "../../utils/types";
+  setCooldown
+} from "../../utils/commandTypes";
 import { checkRobTarget } from "../../utils/checkRobTarget";
 import { randInt } from "../../utils/randInt";
 

@@ -1,6 +1,6 @@
 import {Message} from "discord.js";
 import {client} from "../../utils/client";
-import {Command} from "../../utils/types";
+import { Command } from "../../utils/commandTypes";
 
 const cmd: Command = {
     async execute(msg: Message, _args: string[]) {

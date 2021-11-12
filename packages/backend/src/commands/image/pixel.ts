@@ -1,29 +1,30 @@
-import {Command} from "../../utils/types";
-import {Message} from "discord.js";
-import {alexapi} from "../../utils/alexapi";
-
+import { Command } from "../../utils/commandTypes";
+import { Message } from "discord.js";
+import { alexapi } from "../../utils/alexapi";
 
 const cmd: Command = {
-    name: "pixel",
-    description: "Pixelifies the given User",
-    usage: "pixel <@user>",
-    category: "image",
-    async execute(msg: Message, _args: string[]) {
-        let target
-        if(msg.mentions.users.first()) {
-            target = msg.mentions.users.first()
-        } else {
-            target = msg.author
-        }
-
-        if(!target!.avatarURL()) {
-            await msg.reply("That User does not have a Profile Picture")
-            return
-        }
-
-        const link = await alexapi.image.pixelate({image: target!.avatarURL({size: 1024})!})
-        await msg.reply({files: [{attachment: link}]})
+  name: "pixel",
+  description: "Pixelifies the given User",
+  usage: "pixel <@user>",
+  category: "image",
+  async execute(msg: Message, _args: string[]) {
+    let target;
+    if (msg.mentions.users.first()) {
+      target = msg.mentions.users.first();
+    } else {
+      target = msg.author;
     }
-}
 
-module.exports = cmd
+    if (!target!.avatarURL()) {
+      await msg.reply("That User does not have a Profile Picture");
+      return;
+    }
+
+    const buffer = await alexapi.image.pixelate({
+      image: target!.avatarURL({ size: 1024 })!,
+    });
+    await msg.reply({ files: [{ attachment: buffer, name: "pixelated.png" }] });
+  },
+};
+
+module.exports = cmd;

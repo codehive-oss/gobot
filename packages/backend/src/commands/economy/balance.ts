@@ -1,4 +1,4 @@
-import { Command } from "../../utils/types";
+import { Command } from "../../utils/commandTypes";
 import { Message, MessageEmbed, User } from "discord.js";
 import { toGoUser } from "../../db/entities/GoUser";
 

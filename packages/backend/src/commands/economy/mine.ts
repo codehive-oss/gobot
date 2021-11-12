@@ -1,4 +1,4 @@
-import {canExecute, CooldownCommand, getCooldown, setCooldown} from "../../utils/types";
+import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {allItems, Item} from "../../utils/item";
 import {MessageEmbed} from "discord.js";
 import {addItem, addXp, hasTool, incrementHandBalance, removeTool, toGoUser} from "../../db/entities/GoUser";
@@ -19,6 +19,7 @@ const pickOne = (arr: Item[]): Item | undefined => {
 
 const cmd: CooldownCommand = {
     name: "mine",
+    aliases: ["dig"],
     category: "economy",
     description: "Mine for items",
     cooldown: 30,

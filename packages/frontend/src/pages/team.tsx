@@ -7,8 +7,9 @@ const About: NextPage<AboutProps> = () => {
   return (
     <div>
       <NavbarProvider>
-        <div className="flex justify-center">
-          <p>About</p>
+        <div className="text-center">
+          <h1 className="text-5xl">Team</h1>
+          <br />
         </div>
       </NavbarProvider>
     </div>

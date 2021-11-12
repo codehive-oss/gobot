@@ -1,5 +1,5 @@
 import {addXp, decrementHandBalance, incrementHandBalance, payUser, toGoUser,} from "../../db/entities/GoUser";
-import {canExecute, CooldownCommand, getCooldown, setCooldown,} from "../../utils/types";
+import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {checkRobTarget} from "../../utils/checkRobTarget";
 import {randInt} from "../../utils/randInt";
 
@@ -51,7 +51,7 @@ const cmd: CooldownCommand = {
             await addXp(user, rand)
 
             await msg.reply(
-                `You robbed ${dcTarget.username}! They had to pay you ${gain} and you earned ${rand}xp$`
+                `You robbed ${dcTarget.username}! They had to pay you ${gain}$ and you earned ${rand}xp`
             );
         } else {
             // Cooldown

@@ -6,8 +6,9 @@ interface DonatePageProps {}
 const DonatePage: NextPage<DonatePageProps> = () => {
   return (
     <NavbarProvider>
-      <div>
-        <h1>Donate</h1>
+      <div className="text-center">
+        <h1 className="text-5xl">Donate</h1>
+        <br />
       </div>
     </NavbarProvider>
   );
