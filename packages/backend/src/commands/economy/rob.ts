@@ -51,7 +51,7 @@ const cmd: CooldownCommand = {
             await addXp(user, rand)
 
             await msg.reply(
-                `You robbed ${dcTarget.username}! They had to pay you ${gain} and you earned ${rand}xp$`
+                `You robbed ${dcTarget.username}! They had to pay you ${gain}$ and you earned ${rand}xp`
             );
         } else {
             // Cooldown

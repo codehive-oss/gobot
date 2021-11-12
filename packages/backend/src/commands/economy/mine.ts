@@ -19,6 +19,7 @@ const pickOne = (arr: Item[]): Item | undefined => {
 
 const cmd: CooldownCommand = {
     name: "mine",
+    aliases: ["dig"],
     category: "economy",
     description: "Mine for items",
     cooldown: 30,
