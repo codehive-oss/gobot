@@ -7,10 +7,10 @@ import { createConnection } from "typeorm";
 import graphqlPlayground from "graphql-playground-middleware-express";
 import { MyContext } from "./types";
 import { typeormOrmConfig } from "./typeormConfig";
-import { HelloResolver } from "../db/resolvers/hello";
 import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
-import pino from "pino-http";
+import { CommandResolver } from "../db/resolvers/CommandResolver";
 import logger from "./logger";
+import morgan from "morgan";
 
 export const createAPI = async () => {
   logger.info("Creating SQL connection...");
@@ -19,7 +19,7 @@ export const createAPI = async () => {
 
   logger.info("Building graphql schema...");
   const schema = await buildSchema({
-    resolvers: [HelloResolver, DiscordServerResolver],
+    resolvers: [CommandResolver, DiscordServerResolver],
     validate: false,
   });
 
@@ -27,7 +27,7 @@ export const createAPI = async () => {
   const app = express();
   app.set("trust proxy", 1);
 
-  app.use(pino());
+  app.use(morgan("tiny"));
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());

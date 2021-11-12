@@ -1,4 +1,4 @@
-import {canExecute, CooldownCommand, getCooldown, setCooldown,} from "../../utils/types";
+import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {Message} from "discord.js";
 import {addXp, decrementHandBalance, incrementHandBalance, toGoUser} from "../../db/entities/GoUser";
 import {randInt} from "../../utils/randInt";

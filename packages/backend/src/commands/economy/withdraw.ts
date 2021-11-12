@@ -1,5 +1,5 @@
 import {toGoUser, withdraw} from "../../db/entities/GoUser";
-import {Command} from "../../utils/types";
+import { Command } from "../../utils/commandTypes";
 import {maxwords} from "../../utils/maxwords";
 
 const cmd: Command = {

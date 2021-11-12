@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Command } from "../../utils/types";
+import { Command } from "../../utils/commandTypes";
 
 const cmd: Command = {
   name: "randomuselessfact",

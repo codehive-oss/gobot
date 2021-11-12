@@ -1,4 +1,4 @@
-import { Command } from "../../utils/types";
+import { Command } from "../../utils/commandTypes";
 import jimp from "jimp";
 import logger from "../../utils/logger";
 // import { MessageAttachment, MessageEmbed } from "discord.js";

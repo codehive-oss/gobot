@@ -1,4 +1,4 @@
-import {Command} from "../../utils/types";
+import { Command } from "../../utils/commandTypes";
 import {Message} from "discord.js";
 import {alexapi} from "../../utils/alexapi";
 

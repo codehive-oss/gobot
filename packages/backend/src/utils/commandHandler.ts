@@ -1,7 +1,7 @@
 import { Message } from "discord.js";
 import fs from "fs";
 import logger from "./logger";
-import { Command } from "./types";
+import { Command } from "./commandTypes";
 
 export const commands: Command[] = [];
 
