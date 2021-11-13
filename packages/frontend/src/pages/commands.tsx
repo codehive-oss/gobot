@@ -4,6 +4,7 @@ import { useState } from "react";
 import CommnadsListComponent from "../components/CommandsList";
 import NavbarProvider from "../components/NavbarProvider";
 import { useGetCategoriesQuery } from "../generated/graphql";
+import Head from "next/head";
 
 interface CommandsPageProps {}
 
@@ -13,6 +14,11 @@ const CommandsPage: NextPage<CommandsPageProps> = () => {
 
   return (
     <NavbarProvider>
+      <Head>
+        <title>
+          {(selectedCategory ? selectedCategory : "Commands") + " | GoBot"}
+        </title>
+      </Head>
       <div className="text-center">
         <h1 className="text-5xl">Commands</h1>
         <br />
