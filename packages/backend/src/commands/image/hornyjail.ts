@@ -12,13 +12,19 @@ const cmd: Command = {
   aliases: ["bonk"],
   usage: "hornyjail <@user>",
   async execute(msg, _args) {
-    const user = msg.mentions.users.first();
-    if (!user) {
-      msg.channel.send("Please mention a user");
+    let target;
+    if (msg.mentions.users.first()) {
+      target = msg.mentions.users.first();
+    } else {
+      target = msg.author;
+    }
+
+    if (!target!.avatarURL()) {
+      await msg.reply("That User does not have a Profile Picture");
       return;
     }
 
-    const avatar = await jimp.read(user.displayAvatarURL({ format: "png" }));
+    const avatar = await jimp.read(target!.displayAvatarURL({ format: "png" }));
     const hornyJail = await jimp.read("assets/HornyJail.jpg");
 
     avatar.resize(150, 150);
