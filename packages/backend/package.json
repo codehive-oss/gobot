@@ -14,7 +14,6 @@
     "migrate": "typeorm migration:create -n GobotMigration"
   },
   "dependencies": {
-    "@types/morgan": "^1.9.3",
     "axios": "^0.24.0",
     "cors": "^2.8.5",
     "discord.js": "^13.3.1",
@@ -38,6 +37,7 @@
   "devDependencies": {
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
+    "@types/morgan": "^1.9.3",
     "@types/node": "^16.11.7",
     "@types/passport": "^1.0.7",
     "@types/pino-http": "^5.8.0",
