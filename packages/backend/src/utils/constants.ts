@@ -14,5 +14,3 @@ export const DB_PASSWORD = process.env.DB_PASSWORD || "postgres";
 export const DB_HOST = process.env.DB_HOST!;
 
 export const API_PORT = process.env.API_PORT ? +process.env.API_PORT : 4000;
-
-export const ALEX_API_KEY = process.env.ALEX_API_KEY!;
