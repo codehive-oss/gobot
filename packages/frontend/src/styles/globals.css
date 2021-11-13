@@ -5,6 +5,12 @@
 @tailwind utilities;
 @tailwind screens;
 
+@layer base {
+  html {
+    @apply h-full w-full bg-black text-white;  
+  }
+}
+
 @layer components {
   .btn {
     @apply cursor-pointer transform hover:scale-105 transition-all duration-200 ease-out;

@@ -37,7 +37,7 @@ export const handle = async (message: Message, prefix: string) => {
   if (content.toLocaleLowerCase().startsWith(prefix)) {
     content = content.slice(prefix.length);
     const args = content.split(" ");
-    const commandName = args[0];
+    const commandName = args[0].toLocaleLowerCase();
     args.shift();
     for (const command of commands) {
       if (

@@ -12,11 +12,9 @@ const LinkComponent: React.FC<LinkComponentProps> = ({
 }) => {
   return (
     <div className={className}>
-      <div className="btn btn-effect">
-        <Link href={href}>
-          <a>{children}</a>
-        </Link>
-      </div>
+      <Link href={href}>
+        <a>{children}</a>
+      </Link>
     </div>
   );
 };
