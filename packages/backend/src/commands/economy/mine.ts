@@ -2,7 +2,7 @@ import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../uti
 import {allItems, Item} from "../../utils/item";
 import {MessageEmbed} from "discord.js";
 import {addItem, addXp, hasTool, incrementHandBalance, removeTool, toGoUser} from "../../db/entities/GoUser";
-import {randInt} from "../../utils/randInt";
+import {randInt} from "../../utils/random";
 import {PREFIX} from "../../utils/constants";
 
 const pickOne = (arr: Item[]): Item | undefined => {

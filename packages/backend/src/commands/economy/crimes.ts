@@ -1,7 +1,7 @@
 import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {Message} from "discord.js";
 import {addXp, decrementHandBalance, incrementHandBalance, toGoUser} from "../../db/entities/GoUser";
-import {randInt} from "../../utils/randInt";
+import {randInt} from "../../utils/random";
 
 const cmd: CooldownCommand = {
     aliases: [],

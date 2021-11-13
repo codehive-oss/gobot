@@ -1,7 +1,7 @@
 import {addXp, decrementHandBalance, incrementHandBalance, payUser, toGoUser,} from "../../db/entities/GoUser";
 import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {checkRobTarget} from "../../utils/checkRobTarget";
-import {randInt} from "../../utils/randInt";
+import {randInt} from "../../utils/random";
 
 const robRate = 0.05;
 const failRate = 0.5;
