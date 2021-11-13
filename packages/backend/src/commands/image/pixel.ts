@@ -18,8 +18,8 @@ const cmd: Command = {
             return;
         }
 
-        const image = await Jimp.read(target!.displayAvatarURL({format: "png", size:128}))
-        image.pixelate(5)
+        const image = await Jimp.read(target!.displayAvatarURL({format: "png", size:256}))
+        image.pixelate(20)
 
         image.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
             if (err) {
