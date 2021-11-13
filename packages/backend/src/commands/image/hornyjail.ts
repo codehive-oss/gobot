@@ -1,6 +1,7 @@
 import { Command } from "../../utils/commandTypes";
 import jimp from "jimp";
 import logger from "../../utils/logger";
+import {getTarget} from "../../utils/getTarget";
 
 // start pixel 450 250
 // end pixel 600 400
@@ -12,12 +13,7 @@ const cmd: Command = {
   aliases: ["bonk"],
   usage: "hornyjail <@user>",
   async execute(msg, _args) {
-    let target;
-    if (msg.mentions.users.first()) {
-      target = msg.mentions.users.first();
-    } else {
-      target = msg.author;
-    }
+    const target = getTarget(msg)
 
     if (!target!.avatarURL()) {
       await msg.reply("That User does not have a Profile Picture");

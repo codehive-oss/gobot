@@ -3,6 +3,7 @@ import {Message} from "discord.js";
 import Jimp from "jimp";
 import jimp from "jimp";
 import logger from "../../utils/logger";
+import {getTarget} from "../../utils/getTarget";
 
 const cmd: Command = {
     name: "pixel",
@@ -10,12 +11,7 @@ const cmd: Command = {
     usage: "pixel <@user>",
     category: "image",
     async execute(msg: Message, _args: string[]) {
-        let target;
-        if (msg.mentions.users.first()) {
-            target = msg.mentions.users.first();
-        } else {
-            target = msg.author;
-        }
+        const target = getTarget(msg)
 
         if (!target!.avatarURL()) {
             await msg.reply("That User does not have a Profile Picture");
