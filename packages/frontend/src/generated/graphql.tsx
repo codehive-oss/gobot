@@ -58,8 +58,27 @@ export type MutationSetPrefixArgs = {
 
 export type Query = {
   __typename?: 'Query';
+  getCategories: Array<Scalars['String']>;
+  getCategoryCommands: Array<Command>;
   getCommands: Array<Command>;
 };
+
+
+export type QueryGetCategoryCommandsArgs = {
+  category: Scalars['String'];
+};
+
+export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetCategoriesQuery = { __typename?: 'Query', getCategories: Array<string> };
+
+export type GetCategoryCommandsQueryVariables = Exact<{
+  category: Scalars['String'];
+}>;
+
+
+export type GetCategoryCommandsQuery = { __typename?: 'Query', getCategoryCommands: Array<{ __typename?: 'Command', name: string, description: string, aliases?: Array<string> | null | undefined, usage?: string | null | undefined, category?: string | null | undefined }> };
 
 export type GetCommandsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -67,6 +86,30 @@ export type GetCommandsQueryVariables = Exact<{ [key: string]: never; }>;
 export type GetCommandsQuery = { __typename?: 'Query', getCommands: Array<{ __typename?: 'Command', name: string, description: string, aliases?: Array<string> | null | undefined, usage?: string | null | undefined, category?: string | null | undefined }> };
 
 
+export const GetCategoriesDocument = gql`
+    query GetCategories {
+  getCategories
+}
+    `;
+
+export function useGetCategoriesQuery(options: Omit<Urql.UseQueryArgs<GetCategoriesQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCategoriesQuery>({ query: GetCategoriesDocument, ...options });
+};
+export const GetCategoryCommandsDocument = gql`
+    query GetCategoryCommands($category: String!) {
+  getCategoryCommands(category: $category) {
+    name
+    description
+    aliases
+    usage
+    category
+  }
+}
+    `;
+
+export function useGetCategoryCommandsQuery(options: Omit<Urql.UseQueryArgs<GetCategoryCommandsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCategoryCommandsQuery>({ query: GetCategoryCommandsDocument, ...options });
+};
 export const GetCommandsDocument = gql`
     query GetCommands {
   getCommands {

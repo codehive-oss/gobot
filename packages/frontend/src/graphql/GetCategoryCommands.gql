@@ -1,0 +1,9 @@
+query GetCategoryCommands($category: String!) {
+  getCategoryCommands(category: $category) {
+    name
+    description
+    aliases
+    usage
+    category
+  }
+}

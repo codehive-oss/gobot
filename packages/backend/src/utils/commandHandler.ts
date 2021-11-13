@@ -29,8 +29,8 @@ function addCommandsRecursive(dir: string, folder: string) {
 addCommandsRecursive("./dist/commands", "");
 
 export const handle = async (message: Message, prefix: string) => {
-  if(message.webhookId) {
-    return
+  if (message.webhookId) {
+    return;
   }
   let content = message.content;
 
@@ -44,6 +44,7 @@ export const handle = async (message: Message, prefix: string) => {
         command.name === commandName ||
         (command.aliases && command.aliases.includes(commandName))
       ) {
+        logger.trace(`Executing Command ${command.name} with args [${args}]`);
         command.execute(message, args);
       }
     }

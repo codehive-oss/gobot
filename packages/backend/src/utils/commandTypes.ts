@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 import { Field, ObjectType } from "type-graphql";
-import { categories } from "./types";
+import { Categories } from "./types";
 
 @ObjectType({ isAbstract: true })
 export class Command {
@@ -17,7 +17,7 @@ export class Command {
   usage?: string;
 
   @Field({ nullable: true })
-  category?: categories;
+  category?: Categories;
 
   execute: (msg: Message, args: string[]) => void;
 }

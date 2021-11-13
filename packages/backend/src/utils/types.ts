@@ -1,6 +1,9 @@
 import { IncomingMessage, ServerResponse } from "http";
 
-export type categories = "economy" | "other" | "level" | "image";
+export const allCategories = ["economy" ,"other" , "level",  "image"] as const;
+
+// create string union type from allCategories
+export type Categories = typeof allCategories[number];
 
 export type MyContext = {
   req: Partial<Express.Request> & IncomingMessage & { url: string };
