@@ -37,10 +37,10 @@ const CommandsPage: NextPage<CommandsPageProps> = () => {
                 <div
                   key={i}
                   className="w-1/3 p-2 cursor-pointer"
-                  onClick={() => setSelectedCategory(category)}
+                  onClick={() => setSelectedCategory(category.name)}
                 >
                   <div className="bg-gray-800 rounded-lg shadow-md p-2">
-                    <h3 className="text-xl">{category}</h3>
+                    <h3 className="text-xl">{category.name}</h3>
                   </div>
                 </div>
               ))}

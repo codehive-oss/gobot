@@ -5,7 +5,7 @@ const cmd: Command = {
   name: "randomuselessfact",
   description: "Get a random useless fact",
   aliases: ["ruf"],
-  category: "other",
+  category: "misc",
   execute: async (msg, _args) => {
     const res = await axios.get(
       "https://uselessfacts.jsph.pl/random.json?language=en"

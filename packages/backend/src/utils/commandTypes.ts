@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 import { Field, ObjectType } from "type-graphql";
-import { Categories } from "./types";
+import { Categories } from "./categoryTypes";
 
 @ObjectType({ isAbstract: true })
 export class Command {

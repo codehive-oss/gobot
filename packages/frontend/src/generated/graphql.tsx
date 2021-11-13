@@ -14,6 +14,12 @@ export type Scalars = {
   Float: number;
 };
 
+export type Category = {
+  __typename?: 'Category';
+  description: Scalars['String'];
+  name: Scalars['String'];
+};
+
 export type Command = {
   __typename?: 'Command';
   aliases?: Maybe<Array<Scalars['String']>>;
@@ -58,7 +64,7 @@ export type MutationSetPrefixArgs = {
 
 export type Query = {
   __typename?: 'Query';
-  getCategories: Array<Scalars['String']>;
+  getCategories: Array<Category>;
   getCategoryCommands: Array<Command>;
   getCommands: Array<Command>;
 };
@@ -71,7 +77,7 @@ export type QueryGetCategoryCommandsArgs = {
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetCategoriesQuery = { __typename?: 'Query', getCategories: Array<string> };
+export type GetCategoriesQuery = { __typename?: 'Query', getCategories: Array<{ __typename?: 'Category', name: string, description: string }> };
 
 export type GetCategoryCommandsQueryVariables = Exact<{
   category: Scalars['String'];
@@ -88,7 +94,10 @@ export type GetCommandsQuery = { __typename?: 'Query', getCommands: Array<{ __ty
 
 export const GetCategoriesDocument = gql`
     query GetCategories {
-  getCategories
+  getCategories {
+    name
+    description
+  }
 }
     `;
 
