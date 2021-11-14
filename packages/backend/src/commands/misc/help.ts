@@ -9,7 +9,7 @@ import { client } from "../../utils/client";
 import { commands } from "../../utils/commandHandler";
 import { Command } from "../../utils/commandTypes";
 import { allCategoryData } from "../../utils/categoryTypes";
-import { capitalizeFirstLetter } from "./capitalize";
+import { capitalizeFirstLetter } from "../../utils/capitalize";
 
 const cmd: Command = {
   name: "help",

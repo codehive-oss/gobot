@@ -7,6 +7,7 @@ import { Category, getAllCategories } from "../../utils/categoryTypes";
 export class CommandResolver {
   @Query(() => [Command])
   async getCommands() {
+    console.log(commands);
     return commands;
   }
 

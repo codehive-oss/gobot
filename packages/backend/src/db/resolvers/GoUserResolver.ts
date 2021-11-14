@@ -1,8 +1,16 @@
 import logger from "../../utils/logger";
 import { MyContext } from "../../utils/types";
-import { Ctx, Field, ObjectType, Query, Resolver } from "type-graphql";
+import {
+  Ctx,
+  Field,
+  ObjectType,
+  Query,
+  Resolver,
+  UseMiddleware,
+} from "type-graphql";
 import axios from "axios";
 import { GoUser } from "../entities/GoUser";
+import { isAuth } from "../middleware/isAuth";
 
 @ObjectType()
 export class Guild {
@@ -16,18 +24,25 @@ export class Guild {
   permissions: number;
 }
 
+@ObjectType()
+export class UserData {
+  @Field()
+  id: string;
+  @Field()
+  username: string;
+  @Field()
+  avatar: string;
+}
+
 @Resolver()
 export class GoUserResolver {
   @Query(() => [Guild])
+  @UseMiddleware(isAuth)
   async getUserGuilds(@Ctx() { req }: MyContext) {
-    if (!req.user) {
-      return new Error("User is not authenticated");
-    }
-
     const goUser = req.user as GoUser;
 
     if (!goUser.accessToken) {
-      throw new Error("User is not authenticated");
+      return new Error("User is not authenticated");
     }
 
     // Get user guilds from discord given a user id
@@ -39,9 +54,18 @@ export class GoUserResolver {
     );
 
     const guilds = profile.data as Guild[];
-    console.log(guilds);
-
     return guilds;
+  }
+
+  @Query(() => UserData)
+  @UseMiddleware(isAuth)
+  async getUserData(@Ctx() { req }: MyContext) {
+    const goUser = req.user as GoUser;
+    const profile = await axios.get("https://discordapp.com/api/users/@me", {
+      headers: { Authorization: `Bearer ${goUser.accessToken}` },
+    });
+
+    return profile.data as UserData;
   }
 
   @Query(() => Boolean)
