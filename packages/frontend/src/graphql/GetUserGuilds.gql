@@ -1,0 +1,8 @@
+query GetUserGuilds {
+ 	getUserGuilds {
+    id
+    name
+    owner
+    permissions
+  }
+}

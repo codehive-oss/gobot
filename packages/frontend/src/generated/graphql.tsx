@@ -37,6 +37,14 @@ export type GoServer = {
   prefix: Scalars['String'];
 };
 
+export type Guild = {
+  __typename?: 'Guild';
+  id: Scalars['String'];
+  name: Scalars['String'];
+  owner: Scalars['Boolean'];
+  permissions: Scalars['Float'];
+};
+
 export type Mutation = {
   __typename?: 'Mutation';
   setAnime: GoServer;
@@ -67,11 +75,21 @@ export type Query = {
   getCategories: Array<Category>;
   getCategoryCommands: Array<Command>;
   getCommands: Array<Command>;
+  getUserData: UserData;
+  getUserGuilds: Array<Guild>;
+  logoutUser: Scalars['Boolean'];
 };
 
 
 export type QueryGetCategoryCommandsArgs = {
   category: Scalars['String'];
+};
+
+export type UserData = {
+  __typename?: 'UserData';
+  avatar: Scalars['String'];
+  id: Scalars['String'];
+  username: Scalars['String'];
 };
 
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
@@ -90,6 +108,21 @@ export type GetCommandsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type GetCommandsQuery = { __typename?: 'Query', getCommands: Array<{ __typename?: 'Command', name: string, description: string, aliases?: Array<string> | null | undefined, usage?: string | null | undefined, category?: string | null | undefined }> };
+
+export type GetUserDataQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserDataQuery = { __typename?: 'Query', getUserData: { __typename?: 'UserData', id: string, username: string, avatar: string } };
+
+export type GetUserGuildsQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type GetUserGuildsQuery = { __typename?: 'Query', getUserGuilds: Array<{ __typename?: 'Guild', id: string, name: string, owner: boolean, permissions: number }> };
+
+export type LogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutUserQuery = { __typename?: 'Query', logoutUser: boolean };
 
 
 export const GetCategoriesDocument = gql`
@@ -133,4 +166,40 @@ export const GetCommandsDocument = gql`
 
 export function useGetCommandsQuery(options: Omit<Urql.UseQueryArgs<GetCommandsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetCommandsQuery>({ query: GetCommandsDocument, ...options });
+};
+export const GetUserDataDocument = gql`
+    query GetUserData {
+  getUserData {
+    id
+    username
+    avatar
+  }
+}
+    `;
+
+export function useGetUserDataQuery(options: Omit<Urql.UseQueryArgs<GetUserDataQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserDataQuery>({ query: GetUserDataDocument, ...options });
+};
+export const GetUserGuildsDocument = gql`
+    query GetUserGuilds {
+  getUserGuilds {
+    id
+    name
+    owner
+    permissions
+  }
+}
+    `;
+
+export function useGetUserGuildsQuery(options: Omit<Urql.UseQueryArgs<GetUserGuildsQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetUserGuildsQuery>({ query: GetUserGuildsDocument, ...options });
+};
+export const LogoutUserDocument = gql`
+    query LogoutUser {
+  logoutUser
+}
+    `;
+
+export function useLogoutUserQuery(options: Omit<Urql.UseQueryArgs<LogoutUserQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<LogoutUserQuery>({ query: LogoutUserDocument, ...options });
 };
