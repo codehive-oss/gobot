@@ -39,6 +39,7 @@ export type GoServer = {
 
 export type Guild = {
   __typename?: 'Guild';
+  icon?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name: Scalars['String'];
   owner: Scalars['Boolean'];
@@ -117,7 +118,7 @@ export type GetUserDataQuery = { __typename?: 'Query', getUserData: { __typename
 export type GetUserGuildsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserGuildsQuery = { __typename?: 'Query', getUserGuilds: Array<{ __typename?: 'Guild', id: string, name: string, owner: boolean, permissions: number }> };
+export type GetUserGuildsQuery = { __typename?: 'Query', getUserGuilds: Array<{ __typename?: 'Guild', id: string, icon?: string | null | undefined, name: string, owner: boolean, permissions: number }> };
 
 export type LogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -184,6 +185,7 @@ export const GetUserGuildsDocument = gql`
     query GetUserGuilds {
   getUserGuilds {
     id
+    icon
     name
     owner
     permissions

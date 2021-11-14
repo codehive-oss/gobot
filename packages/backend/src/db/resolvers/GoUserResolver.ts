@@ -16,6 +16,8 @@ import { isAuth } from "../middleware/isAuth";
 export class Guild {
   @Field()
   id: string;
+  @Field({ nullable: true })
+  icon?: string;
   @Field()
   name: string;
   @Field()
@@ -36,6 +38,7 @@ export class UserData {
 
 @Resolver()
 export class GoUserResolver {
+  // Get all guilds where the user has permission to manage bots
   @Query(() => [Guild])
   @UseMiddleware(isAuth)
   async getUserGuilds(@Ctx() { req }: MyContext) {
@@ -53,7 +56,9 @@ export class GoUserResolver {
       }
     );
 
-    const guilds = profile.data as Guild[];
+    // Filters all guilds where the user has the manage_guild permission and returns them
+    const guilds = profile.data.filter((guild: Guild) => guild.permissions & 8);
+    console.log(guilds);
     return guilds;
   }
 

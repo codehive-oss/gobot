@@ -4,7 +4,10 @@ import LayoutComponent from "../components/LayoutComponent";
 import Head from "next/head";
 import { createClient, Provider } from "urql";
 
-const client = createClient({ url: "http://localhost:4000/graphql" });
+const client = createClient({
+  url: "http://localhost:4000/graphql",
+  fetchOptions: { credentials: "include" },
+});
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (

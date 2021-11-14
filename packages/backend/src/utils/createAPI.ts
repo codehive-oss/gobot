@@ -33,7 +33,12 @@ export const createAPI = async () => {
   app.set("trust proxy", 1);
 
   app.use(morgan("tiny"));
-  app.use(cors());
+  app.use(
+    cors({
+      origin: ["http://localhost:3000", "https://go-bot.xyz"],
+      credentials: true,
+    })
+  );
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
   app.use(

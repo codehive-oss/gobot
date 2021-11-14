@@ -8,6 +8,9 @@ const NavbarButtons: React.FC<NavbarButtonsProps> = ({ className }) => {
       <LinkComponent className={className} href="/commands">
         Commands
       </LinkComponent>
+      <LinkComponent className={className} href="/dashboard">
+        Dashboard
+      </LinkComponent>
       <LinkComponent className={className} href="/donate">
         Donate
       </LinkComponent>
