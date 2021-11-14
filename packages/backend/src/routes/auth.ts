@@ -1,16 +1,15 @@
 import { Router } from "express";
 import passport from "passport";
 import { Strategy as DiscordStrategy } from "passport-discord";
-import { GoUser, toGoUser } from "../db/entities/GoUser";
+import { toGoUser } from "../db/entities/GoUser";
 import { CLIENT_ID, CLIENT_SECRET } from "../utils/constants";
 
-passport.serializeUser((user, done) => {
-  const id = (user as GoUser).id;
+passport.serializeUser((id, done) => {
   done(null, id);
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = toGoUser(id as string);
+  const user = await toGoUser(id as string);
   done(null, user);
 });
 
@@ -24,8 +23,13 @@ passport.use(
       scope: ["identify", "guilds"],
       callbackURL: "/auth/callback",
     },
-    (_accessToken, _refreshToken, profile, done) => {
-      console.log(profile);
+    async (accessToken, _refreshToken, profile, done) => {
+      const goUser = await toGoUser(profile.id);
+      if (goUser.accessToken !== accessToken) {
+        goUser.accessToken = accessToken;
+        goUser.save();
+      }
+
       done(null, profile.id);
     }
   )

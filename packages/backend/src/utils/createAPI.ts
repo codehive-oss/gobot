@@ -9,6 +9,7 @@ import { MyContext } from "./types";
 import { typeormOrmConfig } from "./typeormConfig";
 import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
 import { CommandResolver } from "../db/resolvers/CommandResolver";
+import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import logger from "./logger";
 import morgan from "morgan";
 import { router } from "../routes/auth";
@@ -23,7 +24,7 @@ export const createAPI = async () => {
 
   logger.info("Building graphql schema...");
   const schema = await buildSchema({
-    resolvers: [CommandResolver, DiscordServerResolver],
+    resolvers: [CommandResolver, DiscordServerResolver, GoUserResolver],
     validate: false,
   });
 

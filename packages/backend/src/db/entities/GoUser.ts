@@ -21,6 +21,9 @@ export class GoUser extends BaseEntity {
 
   @Column({ default: 0 })
   xp: number;
+
+  @Column({ nullable: true })
+  accessToken?: string;
 }
 
 export const getUser = async (userID: string): Promise<GoUser | undefined> => {
