@@ -3,7 +3,7 @@ import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../uti
 import {checkRobTarget} from "../../utils/checkRobTarget";
 import {randInt} from "../../utils/random";
 
-const robRate = 0.05;
+const robRate = 0.1;
 const failRate = 0.5;
 
 const cmd: CooldownCommand = {
