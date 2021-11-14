@@ -1,7 +1,7 @@
 <div align="center">
   <br />
   <p>
-    <a href="https://gobot.org/"><img src="https://imgur.com/8udyujp" width="546" alt="gobot" /></a>
+    <a href="https://gobot.org/"><img src="https://i.imgur.com/8udyujp.png" width="546" alt="gobot" /></a>
   </p>
   <br />
   <p>
