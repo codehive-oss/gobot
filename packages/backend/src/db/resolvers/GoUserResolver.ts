@@ -58,7 +58,6 @@ export class GoUserResolver {
 
     // Filters all guilds where the user has the manage_guild permission and returns them
     const guilds = profile.data.filter((guild: Guild) => guild.permissions & 8);
-    console.log(guilds);
     return guilds;
   }
 
