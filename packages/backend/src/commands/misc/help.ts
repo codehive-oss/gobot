@@ -16,6 +16,7 @@ const cmd: Command = {
   description: "Shows all commands",
   aliases: ["commands"],
   usage: "help <command>",
+  category: "misc",
   async execute(msg: Message, args: string[]) {
     if (args.length === 0) {
       const options: MessageSelectOptionData[] = [];

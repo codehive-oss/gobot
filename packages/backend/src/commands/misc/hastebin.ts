@@ -7,6 +7,7 @@ const cmd: Command = {
     description: "Uploads the provided text to hastebin",
     aliases: ["haste"],
     usage: "hastebin [text]",
+    category: "misc",
     async execute(msg: Message, args: string[]) {
         if(args.length<1) {
             await msg.reply("Please Provide a text")
