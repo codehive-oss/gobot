@@ -4,7 +4,7 @@ services:
     image: gobot-database 
     build:
       context: ./packages/backend
-    envirnoment:
+    environment:
       - GO_ENV=production
       - DB_PORT=5432
       - DB_USER=${DB_USER}
