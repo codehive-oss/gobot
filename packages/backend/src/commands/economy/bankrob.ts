@@ -35,8 +35,8 @@ const cmd: CooldownCommand = {
         return;
       }
       dcTarget = dcTarget!;
-      const user = await toGoUser(dcUser);
-      const target = await toGoUser(dcTarget);
+      const user = await toGoUser(dcUser.id);
+      const target = await toGoUser(dcTarget.id);
 
       const chance = Math.random();
 

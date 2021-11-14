@@ -11,7 +11,7 @@ const cmd: CooldownCommand = {
     cooldown: 30,
 
     execute: async function (msg: Message, _args: string[]) {
-        const user = await toGoUser(msg.author);
+        const user = await toGoUser(msg.author.id);
 
         if (canExecute(this.name, user.id)) {
             setCooldown(this.name, user.id, this.cooldown);

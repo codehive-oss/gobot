@@ -31,7 +31,7 @@ const cmd: Command = {
       return;
     }
 
-    const gouser = await toGoUser(msg.author);
+    const gouser = await toGoUser(msg.author.id);
     if (gouser.handBalance < item.price) {
       await msg.reply("You dont have enough money on your hand to buy this!");
       return;

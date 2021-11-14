@@ -27,7 +27,7 @@ const cmd: Command = {
             await msg.reply("Invalid Argument")
             return
         }
-        await incrementHandBalance(await toGoUser(target), amount)
+        await incrementHandBalance(await toGoUser(target.id), amount)
         await msg.reply("Succesfully given " + args[0] + "$ to " + target.username)
 
     }

@@ -21,7 +21,7 @@ const cmd: Command = {
     if (target.avatarURL()) {
       embed.setThumbnail(target.avatarURL()!);
     }
-    const user = await toGoUser(target);
+    const user = await toGoUser(target.id);
     embed.addField("Expierence", user.xp + "xp");
 
     await msg.reply({ embeds: [embed] });

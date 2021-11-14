@@ -25,7 +25,7 @@ const cmd: CooldownCommand = {
     cooldown: 30,
     execute: async function (msg, _args) {
 
-        if (!await hasTool(await toGoUser(msg.author), 0)) {
+        if (!await hasTool(await toGoUser(msg.author.id), 0)) {
             await msg.reply(`You dont have a Pickaxe. Visit ${PREFIX}shop to buy one`)
             return
         }
@@ -35,7 +35,7 @@ const cmd: CooldownCommand = {
 
         if (canExecute(this.name, dcUser.id)) {
             setCooldown(this.name, dcUser.id, this.cooldown);
-            const user = await toGoUser(dcUser);
+            const user = await toGoUser(dcUser.id);
 
             const item = pickOne(allItems);
 

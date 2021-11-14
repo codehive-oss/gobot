@@ -21,7 +21,7 @@ const cmd: Command = {
       }
       dcUser = target;
     }
-    const goUser = await toGoUser(dcUser);
+    const goUser = await toGoUser(dcUser.id);
     const embed = new MessageEmbed();
     embed.setColor("#ffd700");
     embed.setTitle(`:moneybag: Balance of ${dcUser.username}`);

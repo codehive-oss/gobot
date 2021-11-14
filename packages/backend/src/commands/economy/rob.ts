@@ -26,8 +26,8 @@ const cmd: CooldownCommand = {
             }
             dcTarget = dcTarget!;
 
-            const user = await toGoUser(dcUser);
-            const target = await toGoUser(dcTarget);
+            const user = await toGoUser(dcUser.id);
+            const target = await toGoUser(dcTarget.id);
             const robAmount = Math.floor(target.handBalance * robRate);
 
             const chance = Math.random();
