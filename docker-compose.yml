@@ -1,27 +1,25 @@
 version: "3"
 services:
-  db:
+  database:
     image: gobot-database 
-    build:
-      context: ./packages/backend
     environment:
-      - GO_ENV=production
+      # - DB_PORT=${DB_PORT}
       - DB_PORT=5432
       - DB_USER=${DB_USER}
       - DB_PASSWORD=${DB_PASSWORD}
       - DB_NAME=${DB_NAME}
     volumes:
-      - ./db:/var/lib/gobotdb/data
+      - ./database:/var/lib/gobotdb/data
     ports:
-      - "5432:5432"
+      - 5432:5432
   backend:
     image: gobot-backend
     build:
       context: ./packages/backend
     depends_on:
-      - db 
+      - database
     ports:
-      - "8080:8080"
+      - "4000:4000"
   frontend:
     image: gobot-frontend
     build:

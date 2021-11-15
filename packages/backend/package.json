@@ -7,9 +7,10 @@
   "scripts": {
     "build": "tsc",
     "clean": "rimraf dist",
-    "start": "yarn build && node dist/index.js",
+    "start": "node dist/index.js",
     "start:ts-node": "ts-node src/index.ts",
-    "dev": "yarn clean && nodemon --exec yarn start",
+    "build:start": "yarn build && yarn start",
+    "dev": "yarn clean && nodemon --exec yarn build:start",
     "dev:ts-node": "yarn clean && nodemon --exec yarn start:ts-node",
     "migrate": "typeorm migration:create -n GobotMigration"
   },
