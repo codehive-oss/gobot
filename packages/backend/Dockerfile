@@ -1,19 +1,20 @@
 FROM node:16 as builder
 
-WORKDIR /backend
-COPY package.json ./
-COPY tsconfig.json ./
+WORKDIR /usr/app
+COPY package*.json .
 RUN yarn install
 COPY . .
-RUN yarn global add typescript
-RUN tsc
-
+RUN yarn build
 
 FROM node:16 as runner
 
-WORKDIR /backend
+WORKDIR /usr/app
 COPY package.json ./
 RUN yarn install --production
-COPY --from=builder dist .
+COPY --from=builder ./usr/app/dist ./dist
+
+COPY ormconfig.json .
+COPY .env .
+
 EXPOSE 4000
 CMD yarn start

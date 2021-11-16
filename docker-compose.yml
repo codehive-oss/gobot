@@ -1,19 +1,18 @@
 version: "3"
 services:
   database:
-    image: gobot-database 
+    image: postgres:latest
+    # TODO: Change password
     environment:
-      # - DB_PORT=${DB_PORT}
-      - DB_PORT=5432
-      - DB_USER=${DB_USER}
-      - DB_PASSWORD=${DB_PASSWORD}
-      - DB_NAME=${DB_NAME}
+      POSTGRES_PASSWORD: postgres
+      POSTGRES_USER: postgres
+      POSTGRES_DB: GoBot
     volumes:
-      - ./database:/var/lib/gobotdb/data
+      - ./pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
   backend:
-    image: gobot-backend
+    image: gobot/backend
     build:
       context: ./packages/backend
     depends_on:
@@ -21,7 +20,7 @@ services:
     ports:
       - "4000:4000"
   frontend:
-    image: gobot-frontend
+    image: gobot/frontend
     build:
       context: ./packages/frontend
     depends_on:

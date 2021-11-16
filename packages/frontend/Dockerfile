@@ -1,13 +1,18 @@
-FROM node:16
+FROM node:16 as builder
 
-WORKDIR /frontend
-
+WORKDIR /usr/app
 COPY package*.json ./
-
-RUN yarn install --production
-
+RUN yarn install
 COPY . .
+RUN yarn build
+
+
+FROM node:16 as runner
+
+WORKDIR /usr/app
+COPY package.json ./
+RUN yarn install --production
+COPY --from=builder ./usr/app/.next ./.next
 
 EXPOSE 3000 
-
 CMD yarn start
