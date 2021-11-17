@@ -6,7 +6,7 @@ import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
 import graphqlPlayground from "graphql-playground-middleware-express";
 import { MyContext } from "./types";
-import { typeormOrmConfig } from "./typeormConfig";
+import { typeormOrmConfig } from "./ormconfig";
 import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
 import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
