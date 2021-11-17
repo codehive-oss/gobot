@@ -19,6 +19,7 @@ const cmd: Command = {
         }
     },
     name: "uptime",
+    category: "misc",
     description: "sends the bots uptime",
 };
 

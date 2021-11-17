@@ -1,7 +1,7 @@
 import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {Message} from "discord.js";
 import {addXp, decrementHandBalance, incrementHandBalance, toGoUser} from "../../db/entities/GoUser";
-import {randInt} from "../../utils/randInt";
+import {randInt} from "../../utils/random";
 
 const cmd: CooldownCommand = {
     aliases: [],
@@ -11,7 +11,7 @@ const cmd: CooldownCommand = {
     cooldown: 30,
 
     execute: async function (msg: Message, _args: string[]) {
-        const user = await toGoUser(msg.author);
+        const user = await toGoUser(msg.author.id);
 
         if (canExecute(this.name, user.id)) {
             setCooldown(this.name, user.id, this.cooldown);

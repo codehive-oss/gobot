@@ -5,6 +5,7 @@ import { Command } from "../../utils/commandTypes";
 const cmd: Command = {
     name: "screenshot",
     description: "screenshots the given webpage",
+    category: "misc",
     execute: async (msg, args) => {
         if (!args[0]) {
             await msg.reply("Please provide a website!");

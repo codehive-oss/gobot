@@ -29,18 +29,22 @@ function addCommandsRecursive(dir: string, folder: string) {
 addCommandsRecursive("./dist/commands", "");
 
 export const handle = async (message: Message, prefix: string) => {
+  if (message.webhookId) {
+    return;
+  }
   let content = message.content;
 
   if (content.toLocaleLowerCase().startsWith(prefix)) {
     content = content.slice(prefix.length);
     const args = content.split(" ");
-    const commandName = args[0];
+    const commandName = args[0].toLocaleLowerCase();
     args.shift();
     for (const command of commands) {
       if (
         command.name === commandName ||
         (command.aliases && command.aliases.includes(commandName))
       ) {
+        logger.trace(`Executing Command ${command.name} with args [${args}]`);
         command.execute(message, args);
       }
     }

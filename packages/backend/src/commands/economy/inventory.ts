@@ -21,7 +21,7 @@ const cmd: Command = {
             return
         }
 
-        const user = await toGoUser(target);
+        const user = await toGoUser(target.id);
 
         const embed = new MessageEmbed();
         embed.setColor("#528B8B");

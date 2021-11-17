@@ -1,30 +1,41 @@
-import { Command } from "../../utils/commandTypes";
-import { Message } from "discord.js";
-import { alexapi } from "../../utils/alexapi";
+import {Command} from "../../utils/commandTypes";
+import {Message} from "discord.js";
+import jimp from "jimp";
+import logger from "../../utils/logger";
+import {getTarget} from "../../utils/getTarget";
 
 const cmd: Command = {
-  name: "gay",
-  description: "gayifies the given user",
-  usage: "gay <@user>",
-  category: "image",
-  async execute(msg: Message, _args: string[]) {
-    let target;
-    if (msg.mentions.users.first()) {
-      target = msg.mentions.users.first();
-    } else {
-      target = msg.author;
-    }
+    name: "gay",
+    description: "gayifies the given user",
+    usage: "gay <@user>",
+    category: "image",
+    async execute(msg: Message, _args: string[]) {
+        const target = getTarget(msg)
 
-    if (!target!.avatarURL()) {
-      await msg.reply("That User does not have a Profile Picture");
-      return;
-    }
+        if (!target!.avatarURL()) {
+            await msg.reply("That User does not have a Profile Picture");
+            return;
+        }
 
-    const link = await alexapi.image.gay({
-      image: target!.avatarURL({ size: 1024 })!,
-    });
-    await msg.reply({ files: [{ attachment: link }] });
-  },
+        const avatar = await jimp.read(target!.displayAvatarURL({format: "png", size:256}));
+        const gay = await jimp.read("assets/gay.jpg");
+
+        gay.resize(256, 256)
+        gay.opacity(0.3)
+
+        avatar.composite(gay, 0, 0)
+
+        avatar.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
+            if (err) {
+                logger.error(err)
+            }
+
+            await msg.reply({
+                files: [{attachment: buffer, name: "gay.png"}],
+            });
+        })
+
+    },
 };
 
 module.exports = cmd;

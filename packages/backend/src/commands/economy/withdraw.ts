@@ -9,7 +9,7 @@ const cmd: Command = {
     usage: "withdraw <amount|all>",
     aliases: ["with", "wd"],
     async execute(msg, args) {
-        const goUser = await toGoUser(msg.author);
+        const goUser = await toGoUser(msg.author.id);
 
         if (args[0]) {
             // Check if argument is a number

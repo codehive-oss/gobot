@@ -4,6 +4,7 @@ import { __prod__, PREFIX } from "./constants";
 import { getHelpEmbed } from "./getHelpEmbed";
 import { createServer, toGoServer } from "../db/entities/GoServer";
 import logger from "./logger";
+import { Categories } from "./categoryTypes";
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -51,7 +52,7 @@ client.on("interactionCreate", async (interaction) => {
     await interaction.reply({
       ephemeral: true,
       content: `<@${interaction.user.id}>`,
-      embeds: [getHelpEmbed(interaction.values[0])],
+      embeds: [getHelpEmbed(interaction.values[0] as Categories)],
     });
   }
 });

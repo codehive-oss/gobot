@@ -11,12 +11,13 @@
     "release": "lerna version --conventional-commits -y",
     "diff": "lerna diff",
     "backend": "yarn workspace @gobot/backend",
-    "frontend": "yarn workspace @gobot/frontend"
+    "frontend": "yarn workspace @gobot/frontend",
+    "docker:build": "docker-compose build",
+    "docker:up": "docker-compose up -d",
+    "docker:down": "docker-compose down"
   },
   "devDependencies": {
     "lerna": "^4.0.0"
   },
-  "dependencies": {
-    "alexflipnote.js": "^2.5.0"
-  }
+  "dependencies": {}
 }

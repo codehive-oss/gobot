@@ -5,6 +5,7 @@ const cmd: Command = {
     aliases: ["numberfact"],
     name: "number",
     description: "Get a fact of a number",
+    category: "misc",
     execute: async (msg, args) => {
         if (!args[0]) {
             msg.channel.send("Please provide a number");

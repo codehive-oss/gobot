@@ -28,7 +28,7 @@ const cmd: Command = {
             return;
         }
 
-        const gouser = await toGoUser(msg.author);
+        const gouser = await toGoUser(msg.author.id);
 
         let amount;
         if (args[1]) {

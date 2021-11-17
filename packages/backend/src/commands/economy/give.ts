@@ -26,8 +26,8 @@ const cmd: Command = {
             return;
         }
 
-        const user = await toGoUser(dcUser);
-        const target = await toGoUser(dcTarget);
+        const user = await toGoUser(dcUser.id);
+        const target = await toGoUser(dcTarget.id);
 
         let amount: number;
         let er = /^-?[0-9]+$/;

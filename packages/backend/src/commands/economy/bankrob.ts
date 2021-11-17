@@ -12,7 +12,7 @@ import {
   setCooldown
 } from "../../utils/commandTypes";
 import { checkRobTarget } from "../../utils/checkRobTarget";
-import { randInt } from "../../utils/randInt";
+import { randInt } from "../../utils/random";
 
 const robRate = 0.05;
 const failRate = 0.75;
@@ -35,8 +35,8 @@ const cmd: CooldownCommand = {
         return;
       }
       dcTarget = dcTarget!;
-      const user = await toGoUser(dcUser);
-      const target = await toGoUser(dcTarget);
+      const user = await toGoUser(dcUser.id);
+      const target = await toGoUser(dcTarget.id);
 
       const chance = Math.random();
 

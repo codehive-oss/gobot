@@ -7,6 +7,7 @@ const cmd: Command = {
     name: "minesweeper",
     description: "Play a game of minesweeper",
     usage: "minesweeper <size>",
+    category: "misc",
     async execute(msg: Message, args: string[]) {
         let argsize
         if (args[0] && !Number.isNaN(parseInt(args[0]))) {

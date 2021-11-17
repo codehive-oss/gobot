@@ -1,9 +1,9 @@
 import {addXp, decrementHandBalance, incrementHandBalance, payUser, toGoUser,} from "../../db/entities/GoUser";
 import { canExecute, CooldownCommand, getCooldown, setCooldown } from "../../utils/commandTypes";
 import {checkRobTarget} from "../../utils/checkRobTarget";
-import {randInt} from "../../utils/randInt";
+import {randInt} from "../../utils/random";
 
-const robRate = 0.05;
+const robRate = 0.1;
 const failRate = 0.5;
 
 const cmd: CooldownCommand = {
@@ -26,8 +26,8 @@ const cmd: CooldownCommand = {
             }
             dcTarget = dcTarget!;
 
-            const user = await toGoUser(dcUser);
-            const target = await toGoUser(dcTarget);
+            const user = await toGoUser(dcUser.id);
+            const target = await toGoUser(dcTarget.id);
             const robAmount = Math.floor(target.handBalance * robRate);
 
             const chance = Math.random();

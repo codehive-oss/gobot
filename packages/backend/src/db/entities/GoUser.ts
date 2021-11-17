@@ -1,5 +1,4 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
-import { User } from "discord.js";
 import { allItems } from "../../utils/item";
 import { tools } from "../../utils/tools";
 
@@ -22,32 +21,35 @@ export class GoUser extends BaseEntity {
 
   @Column({ default: 0 })
   xp: number;
+
+  @Column({ nullable: true })
+  accessToken?: string;
 }
 
-export const getUser = async (user: User): Promise<GoUser | undefined> => {
-  return await GoUser.findOne({ where: { id: user.id } });
+export const getUser = async (userID: string): Promise<GoUser | undefined> => {
+  return await GoUser.findOne({ where: { id: userID } });
 };
 
-export const createUser = async (user: User) => {
-  let goUser = await getUser(user);
+export const createUser = async (userID: string) => {
+  let goUser = await getUser(userID);
   if (goUser) {
     return goUser;
   }
 
   goUser = GoUser.create({
-    id: user.id,
+    id: userID,
   });
 
   await goUser.save();
   return goUser;
 };
 
-export const toGoUser = async (user: User) => {
-  const goUser = await getUser(user);
+export const toGoUser = async (userID: string) => {
+  const goUser = await getUser(userID);
   if (goUser) {
     return goUser;
   } else {
-    return await createUser(user);
+    return await createUser(userID);
   }
 };
 
