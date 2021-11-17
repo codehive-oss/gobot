@@ -14,5 +14,7 @@ COPY package.json ./
 RUN yarn install --production
 COPY --from=builder ./usr/app/.next ./.next
 
+ENV NODE_ENV production
+
 EXPOSE 3000 
 CMD yarn start
