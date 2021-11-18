@@ -1,8 +1,13 @@
 import dotenv from "dotenv";
 
-dotenv.config();
+export const buildMode = (process.env.NODE_ENV || "development") as
+  | "development"
+  | "production";
 
-export const __prod__ = process.env.NODE_ENV === "production";
+dotenv.config({ path: `.env.${buildMode}` });
+
+export const __prod__ = buildMode === "production";
+
 export const TOKEN = process.env.TOKEN!;
 export const PREFIX = "go ";
 

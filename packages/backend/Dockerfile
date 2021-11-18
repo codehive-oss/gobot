@@ -4,19 +4,25 @@ WORKDIR /usr/app
 COPY package*.json .
 RUN yarn install
 COPY . .
-RUN yarn build
+RUN if [ "$BuildMode" = "production" ]; then yarn build; else yarn clean; fi
 
 FROM node:16 as runner
 
-WORKDIR /usr/app
+ARG BuildMode
+
+WORKDIR /usr/app/
 COPY package.json ./
-RUN yarn install --production
-COPY --from=builder ./usr/app/dist ./dist
+RUN if [ "$BuildMode" = "production" ]; then yarn install --production; else yarn install; fi
 
-COPY ormconfig.json .
-COPY .env .
+# TODO: Optmize for production
+# COPY --from=builder ./usr/app/dist ./dist
+# COPY ./usr/app/assets ./assets
 
-ENV NODE_ENV production
+COPY . .
+
+COPY .env."$BuildMode" .env
+
+ENV NODE_ENV "$BuildMode"
 
 EXPOSE 4000
 CMD yarn start

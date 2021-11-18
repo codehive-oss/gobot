@@ -1,0 +1,16 @@
+version: "3"
+services:
+  backend:
+    build:
+      args:
+        - BuildMode=development
+    env_file:
+      - ./packages/backend/.env.development
+  frontend:
+    build:
+      args:
+        - BuildMode=development
+    volumes:
+      - ./packages/frontend:/usr/app
+      - /usr/app/node_modules
+      - /usr/app/.next

@@ -16,10 +16,11 @@ if (!__prod__) {
 }
 
 client.on("ready", async () => {
-  //save all servers the bot is on
+  // save all servers the bot is on
+  // TODO: optmize this to one query
   for (let guild of client.guilds.cache.values()) {
-    console.log(guild.name);
     await createServer(guild.id);
+    logger.trace(`Server ${guild.name} added.`);
   }
 
   logger.info(`Logged in as ${client.user?.username}`);

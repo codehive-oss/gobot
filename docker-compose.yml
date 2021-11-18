@@ -4,11 +4,11 @@ services:
     image: postgres:latest
     restart: always
     environment:
-      POSTGRES_DB: GoBot
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
-      - ./pgdata:/var/lib/postgresql/data
+      - ./packages/pgdata:/var/lib/postgresql/data
     ports:
       - 5432:5432
     healthcheck:
@@ -20,6 +20,7 @@ services:
     image: gobot/backend
     build:
       context: ./packages/backend 
+      dockerfile: ./Dockerfile
     depends_on: 
       database:
         condition: service_healthy
@@ -29,6 +30,7 @@ services:
     image: gobot/frontend
     build:
       context: ./packages/frontend
+      dockerfile: ./Dockerfile
     depends_on:
       - backend
     ports:
