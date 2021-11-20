@@ -7,14 +7,14 @@ interface ServerDetailsPageProps {}
 
 const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
   const router = useRouter();
-  const { serverName } = router.query;
+  const { serverID } = router.query;
 
   return (
     <NavbarProvider>
       <Head>
-        <title>{serverName} | GoBot</title>
+        {/* <title>{serverID} | GoBot</title> */}
       </Head>
-      <h1>{serverName}</h1>
+      <h1>{serverID}</h1>
     </NavbarProvider>
   );
 };

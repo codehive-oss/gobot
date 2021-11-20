@@ -6,3 +6,12 @@
 </div>
 
 A multipurpose discord bot
+
+### Setup
+Under the [`packages/backend`](packages/backend) directory create a `.env.development` and a `.env.production` to fill out the fields shown in the [`.env.sample`](packages/backend/.env.sample) file.
+
+Run
+```
+yarn docker:start
+```
+to start up docker-compose.

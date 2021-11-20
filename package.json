@@ -13,8 +13,8 @@
     "backend": "yarn workspace @gobot/backend",
     "frontend": "yarn workspace @gobot/frontend",
     "docker:build": "docker-compose build",
-    "docker:dev": "docker-compose --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml up",
-    "docker:start": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up -d",
+    "docker:dev": "docker-compose --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "docker:start": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up -d --build",
     "docker:stop" : "docker-compose down"
   },
   "devDependencies": {
