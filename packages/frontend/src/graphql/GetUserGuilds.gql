@@ -1,9 +1,7 @@
 query GetUserGuilds {
- 	getUserGuilds {
+  getUserGuilds {
     id
     icon
     name
-    owner
-    permissions
   }
 }

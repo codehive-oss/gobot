@@ -37,13 +37,17 @@ export type GoServer = {
   prefix: Scalars['String'];
 };
 
-export type Guild = {
-  __typename?: 'Guild';
+export type GuildData = {
+  __typename?: 'GuildData';
   icon?: Maybe<Scalars['String']>;
   id: Scalars['String'];
   name: Scalars['String'];
-  owner: Scalars['Boolean'];
-  permissions: Scalars['Float'];
+};
+
+export type GuildDataPayload = {
+  __typename?: 'GuildDataPayload';
+  goServer: GoServer;
+  guildData: GuildData;
 };
 
 export type Mutation = {
@@ -76,14 +80,20 @@ export type Query = {
   getCategories: Array<Category>;
   getCategoryCommands: Array<Command>;
   getCommands: Array<Command>;
+  getGuildDataPayloadFromID: GuildDataPayload;
   getUserData: UserData;
-  getUserGuilds: Array<Guild>;
+  getUserGuilds: Array<GuildData>;
   logoutUser: Scalars['Boolean'];
 };
 
 
 export type QueryGetCategoryCommandsArgs = {
   category: Scalars['String'];
+};
+
+
+export type QueryGetGuildDataPayloadFromIdArgs = {
+  serverID: Scalars['String'];
 };
 
 export type UserData = {
@@ -110,6 +120,13 @@ export type GetCommandsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetCommandsQuery = { __typename?: 'Query', getCommands: Array<{ __typename?: 'Command', name: string, description: string, aliases?: Array<string> | null | undefined, usage?: string | null | undefined, category?: string | null | undefined }> };
 
+export type GetGuildDataPaylaodFromIdQueryVariables = Exact<{
+  serverID: Scalars['String'];
+}>;
+
+
+export type GetGuildDataPaylaodFromIdQuery = { __typename?: 'Query', getGuildDataPayloadFromID: { __typename?: 'GuildDataPayload', guildData: { __typename?: 'GuildData', icon?: string | null | undefined, name: string }, goServer: { __typename?: 'GoServer', prefix: string, nsfw: boolean, anime: boolean } } };
+
 export type GetUserDataQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -118,7 +135,7 @@ export type GetUserDataQuery = { __typename?: 'Query', getUserData: { __typename
 export type GetUserGuildsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type GetUserGuildsQuery = { __typename?: 'Query', getUserGuilds: Array<{ __typename?: 'Guild', id: string, icon?: string | null | undefined, name: string, owner: boolean, permissions: number }> };
+export type GetUserGuildsQuery = { __typename?: 'Query', getUserGuilds: Array<{ __typename?: 'GuildData', id: string, icon?: string | null | undefined, name: string }> };
 
 export type LogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -168,6 +185,25 @@ export const GetCommandsDocument = gql`
 export function useGetCommandsQuery(options: Omit<Urql.UseQueryArgs<GetCommandsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetCommandsQuery>({ query: GetCommandsDocument, ...options });
 };
+export const GetGuildDataPaylaodFromIdDocument = gql`
+    query GetGuildDataPaylaodFromID($serverID: String!) {
+  getGuildDataPayloadFromID(serverID: $serverID) {
+    guildData {
+      icon
+      name
+    }
+    goServer {
+      prefix
+      nsfw
+      anime
+    }
+  }
+}
+    `;
+
+export function useGetGuildDataPaylaodFromIdQuery(options: Omit<Urql.UseQueryArgs<GetGuildDataPaylaodFromIdQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetGuildDataPaylaodFromIdQuery>({ query: GetGuildDataPaylaodFromIdDocument, ...options });
+};
 export const GetUserDataDocument = gql`
     query GetUserData {
   getUserData {
@@ -187,8 +223,6 @@ export const GetUserGuildsDocument = gql`
     id
     icon
     name
-    owner
-    permissions
   }
 }
     `;

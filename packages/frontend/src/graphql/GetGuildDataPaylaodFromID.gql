@@ -1,0 +1,13 @@
+query GetGuildDataPaylaodFromID($serverID: String!) {
+  getGuildDataPayloadFromID(serverID: $serverID) {
+    guildData {
+      icon
+      name
+    }
+    goServer {
+      prefix
+      nsfw
+      anime
+    }
+  }
+}

@@ -37,7 +37,7 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
             </div>
           )}
         </div>
-        <div className="flex-grow px-5 md:px-16 py-3">{children}</div>
+        <div className="flex-grow px-5 md:px-16 py-8">{children}</div>
       </div>
     </div>
   );

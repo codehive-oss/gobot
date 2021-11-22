@@ -48,7 +48,7 @@ export const createServers = async (serverids: string[]) => {
   );
   const serversToSave = GoServer.create(serversToCreate.map((id) => ({ id })));
   await GoServer.save(serversToSave);
-  
+
   return serversToSave.length;
 };
 

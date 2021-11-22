@@ -1,46 +1,51 @@
-import axios from "axios";
 import { MyContext } from "../../utils/types";
 import {
   Arg,
   Ctx,
+  Field,
   Mutation,
+  ObjectType,
   Query,
   Resolver,
   UseMiddleware,
 } from "type-graphql";
 import { GoServer, toGoServer } from "../entities/GoServer";
-import { isAuth } from "../middleware/isAuth";
+import { isAdmin, isAuth } from "../middleware/isAuth";
 import { GoUser } from "../entities/GoUser";
-import { DISCORD_API_ENDPOINT } from "../../utils/constants";
+import { getUserAdminGuild } from "../../utils/apiGuildUtils";
+import { GuildData } from "../../utils/graphqlPayload";
+
+@ObjectType()
+class GuildDataPayload {
+  @Field(() => GuildData)
+  guildData: GuildData;
+  @Field(() => GoServer)
+  goServer: GoServer;
+}
 
 // TODO: Check if user is allowed to look at this server
 @Resolver()
 export class DiscordServerResolver {
-  @Query(() => GoServer)
+  @Query(() => GuildDataPayload)
   @UseMiddleware(isAuth)
-  async getGuildFromID(
+  async getGuildDataPayloadFromID(
     @Ctx() { req }: MyContext,
     @Arg("serverID") serverID: string
-  ): Promise<GoServer> {
+  ): Promise<GuildDataPayload> {
     const goUser = req.user as GoUser;
-
-    // TODO: Optimize this to only get one guild from user
-    const res = await axios.get(`${DISCORD_API_ENDPOINT}/users/@me/guilds/`, {
-      headers: { Authorization: `Bearer ${goUser.accessToken}` },
-    });
-
-    const servers = res.data as GoServer[];
-    const server = servers.find((s) => s.id === serverID);
-
-    if (!server) {
-      throw new Error("Server not found");
+    const guildData = await getUserAdminGuild(serverID, goUser);
+    if (!guildData) {
+      throw new Error("You are not an admin of this server");
     }
 
-    return server;
+    return {
+      goServer: await toGoServer(serverID),
+      guildData: guildData as GuildData,
+    };
   }
 
   @Mutation(() => GoServer)
-  @UseMiddleware(isAuth)
+  @UseMiddleware(isAuth, isAdmin)
   async setPrefix(
     @Arg("serverID") serverID: string,
     @Arg("prefix") prefix: string
@@ -52,7 +57,7 @@ export class DiscordServerResolver {
   }
 
   @Mutation(() => GoServer)
-  @UseMiddleware(isAuth)
+  @UseMiddleware(isAuth, isAdmin)
   async setAnime(
     @Arg("serverID") serverID: string,
     @Arg("anime") anime: boolean
@@ -64,7 +69,7 @@ export class DiscordServerResolver {
   }
 
   @Mutation(() => GoServer)
-  @UseMiddleware(isAuth)
+  @UseMiddleware(isAuth, isAdmin)
   async setNSFW(
     @Arg("serverID") serverID: string,
     @Arg("nsfw") nsfw: boolean

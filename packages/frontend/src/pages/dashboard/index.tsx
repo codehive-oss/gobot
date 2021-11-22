@@ -9,7 +9,6 @@ interface DashboardPageProps {}
 
 const DashboardPage: NextPage<DashboardPageProps> = () => {
   const guildQuery = useGetUserGuildsQuery()[0];
-  console.log(guildQuery.error);
 
   return (
     <NavbarProvider>

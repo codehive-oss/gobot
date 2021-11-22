@@ -10,7 +10,7 @@ const Home: NextPage = () => {
         <title>Home | GoBot</title>
       </Head>
 
-      <div className="py-5 flex justify-center">
+      <div className="flex justify-center">
         <Image src="/GoBotTransparent.png" width={64} height={64} alt="GoBot" />
         <p className="text-6xl">GoBot</p>
       </div>
