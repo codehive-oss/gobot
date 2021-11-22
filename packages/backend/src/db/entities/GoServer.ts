@@ -1,5 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 import { Field, ObjectType } from "type-graphql";
+
 @ObjectType()
 @Entity()
 export class GoServer extends BaseEntity {
@@ -20,22 +21,13 @@ export class GoServer extends BaseEntity {
   anime: boolean;
 }
 
-export const toGoServer = async (serverid: string) => {
-  const goServer = await getServer(serverid);
-  if (goServer) {
-    return goServer;
-  } else {
-    return await createServer(serverid);
-  }
-};
-
 export const getServer = async (
   serverid: string
 ): Promise<GoServer | undefined> => {
   return await GoServer.findOne({ where: { id: serverid } });
 };
 
-export const createServer = async (serverid: string) => {
+export const toGoServer = async (serverid: string) => {
   let goServer = await getServer(serverid);
   if (goServer) {
     return goServer;
@@ -47,6 +39,17 @@ export const createServer = async (serverid: string) => {
 
   await goServer.save();
   return goServer;
+};
+
+export const createServers = async (serverids: string[]) => {
+  const servers = await GoServer.find({ where: { id: serverids } });
+  const serversToCreate = serverids.filter(
+    (id) => !servers.some((s) => s.id === id)
+  );
+  const serversToSave = GoServer.create(serversToCreate.map((id) => ({ id })));
+  await GoServer.save(serversToSave);
+  
+  return serversToSave.length;
 };
 
 export const setPrefix = async (server: GoServer, prefix: string) => {

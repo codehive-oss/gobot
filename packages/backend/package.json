@@ -10,8 +10,8 @@
     "start": "node dist/index.js",
     "start:ts-node": "ts-node src/index.ts",
     "build:start": "yarn build && yarn start",
-    "dev": "nodemon -L --exec yarn build:start",
-    "dev:ts-node": "nodemon -L --exec yarn start:ts-node",
+    "dev": "nodemon --exec yarn build:start",
+    "dev:ts-node": "nodemon --exec yarn start:ts-node",
     "migrate": "typeorm migration:create -n GobotMigration"
   },
   "dependencies": {

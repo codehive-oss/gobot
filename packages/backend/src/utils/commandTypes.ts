@@ -22,9 +22,11 @@ export class Command {
   execute: (msg: Message, args: string[]) => void;
 }
 
-export type CooldownCommand = Command & {
+export interface Cooldown {
   cooldown: number;
-};
+}
+
+export type CooldownCommand = Command & Cooldown;
 
 const cooldownMap = new Map<string, Date>();
 

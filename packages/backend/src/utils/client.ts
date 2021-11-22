@@ -2,7 +2,7 @@ import { Client, Intents } from "discord.js";
 import { handle } from "./commandHandler";
 import { __prod__, PREFIX } from "./constants";
 import { getHelpEmbed } from "./getHelpEmbed";
-import { createServer, toGoServer } from "../db/entities/GoServer";
+import { createServers, toGoServer } from "../db/entities/GoServer";
 import logger from "./logger";
 import { Categories } from "./categoryTypes";
 
@@ -17,11 +17,10 @@ if (!__prod__) {
 
 client.on("ready", async () => {
   // save all servers the bot is on
-  // TODO: optmize this to one query
-  for (let guild of client.guilds.cache.values()) {
-    await createServer(guild.id);
-    logger.trace(`Server ${guild.name} added.`);
-  }
+  const serversCreated = await createServers(
+    client.guilds.cache.map((g) => g.id)
+  );
+  logger.info(`${serversCreated} servers added.`);
 
   logger.info(`Logged in as ${client.user?.username}`);
 
@@ -59,7 +58,7 @@ client.on("interactionCreate", async (interaction) => {
 });
 
 client.on("guildCreate", async (guild) => {
-  await createServer(guild.id);
+  await toGoServer(guild.id);
 
   const owner = await guild.fetchOwner();
   await owner.user.send("test");
