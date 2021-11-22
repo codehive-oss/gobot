@@ -1,7 +1,7 @@
 import { CacheType, Interaction, Message } from "discord.js";
 import fs from "fs";
 import logger from "./logger";
-import { Command, isSelectMenu } from "./commandTypes";
+import { Command, isInteractable } from "./commandTypes";
 
 export const commands: Command[] = [];
 
@@ -54,10 +54,9 @@ export const handleMessage = async (message: Message, prefix: string) => {
 export const handleInteraction = async (
   interaction: Interaction<CacheType>
 ) => {
-  // Check if the interaction is a select menu interaction
-  if (interaction.isSelectMenu()) {
+  if (interaction.isMessageComponent()) {
     for (const command of commands) {
-      if (isSelectMenu(command)) {
+      if (isInteractable(command)) {
         if (command.name === interaction.customId) {
           command.handleInteraction(interaction);
         }

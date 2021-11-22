@@ -1,7 +1,8 @@
 import {
+  ButtonInteraction,
   CacheType,
-  Interaction,
   Message,
+  MessageComponentInteraction,
   SelectMenuInteraction,
 } from "discord.js";
 import { Field, ObjectType } from "type-graphql";
@@ -31,14 +32,26 @@ export interface Cooldown {
   cooldown: number;
 }
 
-export interface SelectMenu {
+export interface CommandSelectMenuInteraction {
   handleInteraction: (interaction: SelectMenuInteraction<CacheType>) => void;
 }
 
-export const isSelectMenu = (
+export interface CommandButtonInteraction {
+  handleInteraction: (interaction: ButtonInteraction<CacheType>) => void;
+}
+
+export interface MessageInteraction {
+  handleInteraction: (
+    interaction: MessageComponentInteraction<CacheType>
+  ) => void;
+}
+
+export const isInteractable = (
   command: Command
-): command is Command & SelectMenu => {
-  return (command as Command & SelectMenu).handleInteraction !== undefined;
+): command is Command & MessageInteraction => {
+  return (
+    (command as Command & MessageInteraction).handleInteraction !== undefined
+  );
 };
 
 // TODO: move this to redis

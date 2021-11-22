@@ -7,11 +7,14 @@ import {
 } from "discord.js";
 import { client } from "../../utils/client";
 import { commands } from "../../utils/commandHandler";
-import { Command, SelectMenu } from "../../utils/commandTypes";
+import {
+  Command,
+  CommandSelectMenuInteraction,
+} from "../../utils/commandTypes";
 import { allCategoryData, Categories } from "../../utils/categoryTypes";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
 
-const cmd: Command & SelectMenu = {
+const cmd: Command & CommandSelectMenuInteraction = {
   name: "help",
   description: "Shows all commands",
   aliases: ["commands"],
