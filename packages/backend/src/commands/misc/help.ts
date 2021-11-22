@@ -7,11 +7,11 @@ import {
 } from "discord.js";
 import { client } from "../../utils/client";
 import { commands } from "../../utils/commandHandler";
-import { Command } from "../../utils/commandTypes";
-import { allCategoryData } from "../../utils/categoryTypes";
+import { Command, SelectMenu } from "../../utils/commandTypes";
+import { allCategoryData, Categories } from "../../utils/categoryTypes";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
 
-const cmd: Command = {
+const cmd: Command & SelectMenu = {
   name: "help",
   description: "Shows all commands",
   aliases: ["commands"],
@@ -31,7 +31,7 @@ const cmd: Command = {
 
       const row = new MessageActionRow().addComponents(
         new MessageSelectMenu()
-          .setCustomId("help")
+          .setCustomId(this.name)
           .setPlaceholder("Category")
           .addOptions(options)
       );
@@ -81,6 +81,30 @@ const cmd: Command = {
       }
     }
     await msg.reply({ embeds: [embed] });
+  },
+  handleInteraction: async (interaction) => {
+    const category = interaction.values[0] as Categories;
+
+    const embed = new MessageEmbed();
+    embed.setColor("#528B8B");
+    embed.setTitle(":books: Category Info [" + category + "]");
+    if (client.user?.avatarURL()) {
+      embed.setThumbnail(client.user.avatarURL()!);
+    }
+
+    const emoji = client.emojis.cache.find((e) => e.name === "gobot");
+
+    for (const command of commands) {
+      if (command.category === category) {
+        embed.addField(`${emoji} ${command.name}`, command.description);
+      }
+    }
+
+    await interaction.reply({
+      ephemeral: true,
+      content: `<@${interaction.user.id}>`,
+      embeds: [embed],
+    });
   },
 };
 

@@ -1,10 +1,8 @@
 import { Client, Intents } from "discord.js";
-import { handle } from "./commandHandler";
+import { handleInteraction, handleMessage } from "./commandHandler";
 import { __prod__, PREFIX } from "./constants";
-import { getHelpEmbed } from "./getHelpEmbed";
 import { createServers, toGoServer } from "../db/entities/GoServer";
 import logger from "./logger";
-import { Categories } from "./categoryTypes";
 
 export const client = new Client({
   intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
@@ -44,17 +42,11 @@ client.on("messageCreate", async (message) => {
     return;
   }
   const server = await toGoServer(message.guild.id);
-  await handle(message, server.prefix);
+  await handleMessage(message, server.prefix);
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.isSelectMenu() && interaction.customId === "help") {
-    await interaction.reply({
-      ephemeral: true,
-      content: `<@${interaction.user.id}>`,
-      embeds: [getHelpEmbed(interaction.values[0] as Categories)],
-    });
-  }
+  handleInteraction(interaction);
 });
 
 client.on("guildCreate", async (guild) => {

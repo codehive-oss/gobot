@@ -1,41 +1,42 @@
-import {Command} from "../../utils/commandTypes";
-import {Message} from "discord.js";
+import { Command } from "../../utils/commandTypes";
+import { Message } from "discord.js";
 import jimp from "jimp";
 import logger from "../../utils/logger";
-import {getTarget} from "../../utils/getTarget";
+import { getTarget } from "../../utils/getTarget";
 
 const cmd: Command = {
-    name: "gay",
-    description: "gayifies the given user",
-    usage: "gay <@user>",
-    category: "image",
-    async execute(msg: Message, _args: string[]) {
-        const target = getTarget(msg)
+  name: "gay",
+  description: "gayifies the given user",
+  usage: "gay <@user>",
+  category: "image",
+  async execute(msg: Message, _args: string[]) {
+    const target = getTarget(msg);
 
-        if (!target!.avatarURL()) {
-            await msg.reply("That User does not have a Profile Picture");
-            return;
-        }
+    if (!target!.avatarURL()) {
+      await msg.reply("That User does not have a Profile Picture");
+      return;
+    }
 
-        const avatar = await jimp.read(target!.displayAvatarURL({format: "png", size:256}));
-        const gay = await jimp.read("assets/gay.jpg");
+    const avatar = await jimp.read(
+      target!.displayAvatarURL({ format: "png", size: 256 })
+    );
+    const gay = await jimp.read("assets/gay.jpg");
 
-        gay.resize(256, 256)
-        gay.opacity(0.3)
+    gay.resize(256, 256);
+    gay.opacity(0.3);
 
-        avatar.composite(gay, 0, 0)
+    avatar.composite(gay, 0, 0);
 
-        avatar.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
-            if (err) {
-                logger.error(err)
-            }
+    avatar.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
+      if (err) {
+        logger.error(err);
+      }
 
-            await msg.reply({
-                files: [{attachment: buffer, name: "gay.png"}],
-            });
-        })
-
-    },
+      await msg.reply({
+        files: [{ attachment: buffer, name: "gay.png" }],
+      });
+    });
+  },
 };
 
 module.exports = cmd;

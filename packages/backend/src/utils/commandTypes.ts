@@ -1,4 +1,9 @@
-import { Message } from "discord.js";
+import {
+  CacheType,
+  Interaction,
+  Message,
+  SelectMenuInteraction,
+} from "discord.js";
 import { Field, ObjectType } from "type-graphql";
 import { Categories } from "./categoryTypes";
 
@@ -26,8 +31,17 @@ export interface Cooldown {
   cooldown: number;
 }
 
-export type CooldownCommand = Command & Cooldown;
+export interface SelectMenu {
+  handleInteraction: (interaction: SelectMenuInteraction<CacheType>) => void;
+}
 
+export const isSelectMenu = (
+  command: Command
+): command is Command & SelectMenu => {
+  return (command as Command & SelectMenu).handleInteraction !== undefined;
+};
+
+// TODO: move this to redis
 const cooldownMap = new Map<string, Date>();
 
 export const setCooldown = (

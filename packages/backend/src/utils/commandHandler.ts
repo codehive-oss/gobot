@@ -1,7 +1,7 @@
-import { Message } from "discord.js";
+import { CacheType, Interaction, Message } from "discord.js";
 import fs from "fs";
 import logger from "./logger";
-import { Command } from "./commandTypes";
+import { Command, isSelectMenu } from "./commandTypes";
 
 export const commands: Command[] = [];
 
@@ -28,7 +28,7 @@ function addCommandsRecursive(dir: string, folder: string) {
 
 addCommandsRecursive("./dist/commands", "");
 
-export const handle = async (message: Message, prefix: string) => {
+export const handleMessage = async (message: Message, prefix: string) => {
   if (message.webhookId) {
     return;
   }
@@ -46,6 +46,21 @@ export const handle = async (message: Message, prefix: string) => {
       ) {
         logger.trace(`Executing Command ${command.name} with args [${args}]`);
         command.execute(message, args);
+      }
+    }
+  }
+};
+
+export const handleInteraction = async (
+  interaction: Interaction<CacheType>
+) => {
+  // Check if the interaction is a select menu interaction
+  if (interaction.isSelectMenu()) {
+    for (const command of commands) {
+      if (isSelectMenu(command)) {
+        if (command.name === interaction.customId) {
+          command.handleInteraction(interaction);
+        }
       }
     }
   }
