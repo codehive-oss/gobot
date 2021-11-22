@@ -11,7 +11,7 @@ const GuildListComponent: React.FC<GuildListComponentProps> = ({ guilds }) => {
     <div>
       <ul className="grid grid-cols-3 gap-3">
         {guilds.map((guild) => (
-          <Link passHref href={`dashboard/${guild.name}`} key={guild.id}>
+          <Link passHref href={`dashboard/${guild.id}`} key={guild.id}>
             <li className="btn bg-gray-900 rounded p-8">
               <div className="flex justify-between">
                 <p className="text-2xl">{guild.name}</p>

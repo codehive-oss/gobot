@@ -1,19 +1,41 @@
 import axios from "axios";
-import { Arg, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
+import { MyContext } from "../../utils/types";
+import {
+  Arg,
+  Ctx,
+  Mutation,
+  Query,
+  Resolver,
+  UseMiddleware,
+} from "type-graphql";
 import { GoServer, toGoServer } from "../entities/GoServer";
 import { isAuth } from "../middleware/isAuth";
+import { GoUser } from "../entities/GoUser";
+import { DISCORD_API_ENDPOINT } from "../../utils/constants";
 
 // TODO: Check if user is allowed to look at this server
 @Resolver()
 export class DiscordServerResolver {
   @Query(() => GoServer)
   @UseMiddleware(isAuth)
-  async getGuildFromID(@Arg("serverID") serverID: string): Promise<GoServer> {
-    const res = await axios.get(
-      `https://discordapp.com/api/guilds/${serverID}`
-    );
-    const server = res.data as GoServer;
-    console.log("TEst");
+  async getGuildFromID(
+    @Ctx() { req }: MyContext,
+    @Arg("serverID") serverID: string
+  ): Promise<GoServer> {
+    const goUser = req.user as GoUser;
+
+    // TODO: Optimize this to only get one guild from user
+    const res = await axios.get(`${DISCORD_API_ENDPOINT}/users/@me/guilds/`, {
+      headers: { Authorization: `Bearer ${goUser.accessToken}` },
+    });
+
+    const servers = res.data as GoServer[];
+    const server = servers.find((s) => s.id === serverID);
+
+    if (!server) {
+      throw new Error("Server not found");
+    }
+
     return server;
   }
 

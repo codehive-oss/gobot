@@ -11,6 +11,7 @@ import {
 import axios from "axios";
 import { GoUser } from "../entities/GoUser";
 import { isAuth } from "../middleware/isAuth";
+import { DISCORD_API_ENDPOINT } from "../../utils/constants";
 
 @ObjectType()
 export class Guild {
@@ -50,7 +51,7 @@ export class GoUserResolver {
 
     // Get user guilds from discord given a user id
     const profile = await axios.get(
-      `https://discordapp.com/api/users/@me/guilds`,
+      `${DISCORD_API_ENDPOINT}/users/@me/guilds`,
       {
         headers: { Authorization: `Bearer ${goUser.accessToken}` },
       }
@@ -65,7 +66,7 @@ export class GoUserResolver {
   @UseMiddleware(isAuth)
   async getUserData(@Ctx() { req }: MyContext) {
     const goUser = req.user as GoUser;
-    const profile = await axios.get("https://discordapp.com/api/users/@me", {
+    const profile = await axios.get(`${DISCORD_API_ENDPOINT}/users/@me`, {
       headers: { Authorization: `Bearer ${goUser.accessToken}` },
     });
 

@@ -24,3 +24,5 @@ export const CLIENT_SECRET = process.env.CLIENT_SECRET!;
 
 export const SESSION_SECRET = process.env.SESSION_SECRET || "verySecretSession";
 export const COOKIE_NAME = process.env.COOKIE_NAME || "GoBot";
+
+export const DISCORD_API_ENDPOINT = "https://discord.com/api/v9";
