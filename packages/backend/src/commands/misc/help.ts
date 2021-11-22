@@ -13,6 +13,7 @@ import {
 } from "../../utils/commandTypes";
 import { allCategoryData, Categories } from "../../utils/categoryTypes";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
+import { mention } from "../../utils/mention";
 
 const cmd: Command & CommandSelectMenuInteraction = {
   name: "help",
@@ -105,7 +106,7 @@ const cmd: Command & CommandSelectMenuInteraction = {
 
     await interaction.reply({
       ephemeral: true,
-      content: `<@${interaction.user.id}>`,
+      content: mention(interaction.user.id),
       embeds: [embed],
     });
   },
