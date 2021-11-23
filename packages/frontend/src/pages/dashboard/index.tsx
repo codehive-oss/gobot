@@ -15,7 +15,7 @@ const DashboardPage: NextPage<DashboardPageProps> = () => {
       <Head>
         <title>Dashboard | GoBot</title>
       </Head>
-      <div className="py-5 flex justify-center">
+      <div className="flex justify-center">
         <h1 className="text-5xl">Dashboard</h1>
       </div>
       <br />
@@ -31,7 +31,6 @@ const DashboardPage: NextPage<DashboardPageProps> = () => {
         </div>
       ) : (
         <>
-          <h2 className="text-xl">Your guilds</h2>
           {guildQuery.data && (
             <GuildListComponent guilds={guildQuery.data.getUserGuilds} />
           )}

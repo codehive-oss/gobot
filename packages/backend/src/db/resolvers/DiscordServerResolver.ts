@@ -23,7 +23,6 @@ class GuildDataPayload {
   goServer: GoServer;
 }
 
-// TODO: Check if user is allowed to look at this server
 @Resolver()
 export class DiscordServerResolver {
   @Query(() => GuildDataPayload)

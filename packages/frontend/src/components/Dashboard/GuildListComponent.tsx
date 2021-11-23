@@ -1,9 +1,9 @@
-import { Guild } from "../../generated/graphql";
+import { GuildData } from "../../generated/graphql";
 import Image from "next/image";
 import Link from "next/link";
 
 interface GuildListComponentProps {
-  guilds: Guild[];
+  guilds: GuildData[];
 }
 
 const GuildListComponent: React.FC<GuildListComponentProps> = ({ guilds }) => {
