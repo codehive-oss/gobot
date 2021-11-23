@@ -12,7 +12,7 @@ import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import logger from "./logger";
 import morgan from "morgan";
-import { router } from "../routes/auth";
+//import { router } from "../routes/auth";
 import passport from "passport";
 import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
 import cookieSession from "cookie-session";
@@ -73,7 +73,7 @@ export const createAPI = async () => {
     res.send("Hello world!");
   });
 
-  app.use("/auth", router);
+  //app.use("/auth", router);
 
   return app;
 };

@@ -33,6 +33,7 @@
     "pg": "^8.7.1",
     "pino": "^7.2.0",
     "pino-pretty": "^7.2.0",
+    "simply-djs": "^2.2.0",
     "sleep-promise": "^9.1.0",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.38"
