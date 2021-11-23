@@ -4,16 +4,16 @@ const cmd: Command = {
   name: "pyramid",
   description: "Creates a Pyramid",
   usage: "pyramid <height>",
-  execute: (msg, args) => {
+  execute: async (msg, args) => {
     const height = args[0] ? parseInt(args[0]) : 5;
     // Check if height is number
     if (isNaN(height)) {
-      msg.reply("Please enter a number");
+      await msg.reply("Please enter a number");
       return;
     }
     // Check if height is positive and under 15
-    if (height < 1 || height > 15) {
-      msg.reply("Please enter a number between 1 and 15");
+    if (height < 1) {
+      await msg.reply("Please enter a number between 1 and 15");
       return;
     }
 
@@ -42,7 +42,12 @@ const cmd: Command = {
       s += "\n";
     }
     s += "```";
-    msg.reply(s);
+    try {
+      await msg.reply(s);
+    } catch (e) {
+      await msg.reply("Invalid Argument")
+    }
+
   },
 };
 
