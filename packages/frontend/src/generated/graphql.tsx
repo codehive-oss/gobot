@@ -55,6 +55,7 @@ export type Mutation = {
   setAnime: GoServer;
   setNSFW: GoServer;
   setPrefix: GoServer;
+  updateServer: Scalars['Boolean'];
 };
 
 
@@ -73,6 +74,12 @@ export type MutationSetNsfwArgs = {
 export type MutationSetPrefixArgs = {
   prefix: Scalars['String'];
   serverID: Scalars['String'];
+};
+
+
+export type MutationUpdateServerArgs = {
+  serverID: Scalars['String'];
+  updateServerInput: UpdateServerInput;
 };
 
 export type Query = {
@@ -94,6 +101,12 @@ export type QueryGetCategoryCommandsArgs = {
 
 export type QueryGetGuildDataPayloadFromIdArgs = {
   serverID: Scalars['String'];
+};
+
+export type UpdateServerInput = {
+  anime: Scalars['Boolean'];
+  nsfw: Scalars['Boolean'];
+  prefix: Scalars['String'];
 };
 
 export type UserData = {
@@ -141,6 +154,14 @@ export type LogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 
 export type LogoutUserQuery = { __typename?: 'Query', logoutUser: boolean };
+
+export type UpdateServerMutationVariables = Exact<{
+  serverID: Scalars['String'];
+  serverInput: UpdateServerInput;
+}>;
+
+
+export type UpdateServerMutation = { __typename?: 'Mutation', updateServer: boolean };
 
 
 export const GetCategoriesDocument = gql`
@@ -238,4 +259,13 @@ export const LogoutUserDocument = gql`
 
 export function useLogoutUserQuery(options: Omit<Urql.UseQueryArgs<LogoutUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<LogoutUserQuery>({ query: LogoutUserDocument, ...options });
+};
+export const UpdateServerDocument = gql`
+    mutation UpdateServer($serverID: String!, $serverInput: UpdateServerInput!) {
+  updateServer(serverID: $serverID, updateServerInput: $serverInput)
+}
+    `;
+
+export function useUpdateServerMutation() {
+  return Urql.useMutation<UpdateServerMutation, UpdateServerMutationVariables>(UpdateServerDocument);
 };

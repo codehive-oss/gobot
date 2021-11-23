@@ -41,6 +41,6 @@ router.get(
   "/callback",
   passport.authenticate("discord", { failureRedirect: "/" }),
   (_req, res) => {
-    res.redirect("http://localhost:3000");
+    res.redirect("http://localhost:3000/dashboard");
   }
 );

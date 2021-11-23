@@ -9,7 +9,7 @@ import Head from "next/head";
 interface CommandsPageProps {}
 
 const CommandsPage: NextPage<CommandsPageProps> = () => {
-  const categories = useGetCategoriesQuery()[0];
+  const [categories] = useGetCategoriesQuery();
   const [selectedCategory, setSelectedCategory] = useState<string>();
 
   return (

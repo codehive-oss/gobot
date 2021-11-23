@@ -3,6 +3,7 @@ import {
   Arg,
   Ctx,
   Field,
+  InputType,
   Mutation,
   ObjectType,
   Query,
@@ -14,6 +15,7 @@ import { isAdmin, isAuth } from "../middleware/isAuth";
 import { GoUser } from "../entities/GoUser";
 import { getUserAdminGuild } from "../../utils/apiGuildUtils";
 import { GuildData } from "../../utils/graphqlPayload";
+import logger from "../../utils/logger";
 
 @ObjectType()
 class GuildDataPayload {
@@ -21,6 +23,16 @@ class GuildDataPayload {
   guildData: GuildData;
   @Field(() => GoServer)
   goServer: GoServer;
+}
+
+@InputType()
+class UpdateServerInput {
+  @Field()
+  prefix: string;
+  @Field()
+  nsfw: boolean;
+  @Field()
+  anime: boolean;
 }
 
 @Resolver()
@@ -43,39 +55,19 @@ export class DiscordServerResolver {
     };
   }
 
-  @Mutation(() => GoServer)
+  @Mutation(() => Boolean)
   @UseMiddleware(isAuth, isAdmin)
-  async setPrefix(
+  async updateServer(
     @Arg("serverID") serverID: string,
-    @Arg("prefix") prefix: string
-  ): Promise<GoServer> {
-    const server = await toGoServer(serverID);
-    server.prefix = prefix;
-    await server.save();
-    return server;
-  }
-
-  @Mutation(() => GoServer)
-  @UseMiddleware(isAuth, isAdmin)
-  async setAnime(
-    @Arg("serverID") serverID: string,
-    @Arg("anime") anime: boolean
-  ): Promise<GoServer> {
-    const server = await toGoServer(serverID);
-    server.anime = anime;
-    await server.save();
-    return server;
-  }
-
-  @Mutation(() => GoServer)
-  @UseMiddleware(isAuth, isAdmin)
-  async setNSFW(
-    @Arg("serverID") serverID: string,
-    @Arg("nsfw") nsfw: boolean
-  ): Promise<GoServer> {
-    const server = await toGoServer(serverID);
-    server.nsfw = nsfw;
-    await server.save();
-    return server;
+    @Arg("updateServerInput") updateServerInput: UpdateServerInput
+  ): Promise<Boolean> {
+    try {
+      console.log(updateServerInput);
+      await GoServer.update(serverID, updateServerInput);
+      return true;
+    } catch (err) {
+      logger.error(err);
+      return false;
+    }
   }
 }

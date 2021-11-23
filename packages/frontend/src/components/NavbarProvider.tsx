@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import LinkComponent from "./LinkComponent";
 import { MenuIcon } from "@heroicons/react/solid";
 import NavbarButtons from "./Navbar/NavbarButtons";
+import LoginButton from "./LoginButton";
 
 interface NavbarComponentProps {}
 
@@ -16,6 +17,7 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
               <LinkComponent className="md:text-xl btn btn-effect" href="/">
                 Home
               </LinkComponent>
+              <LoginButton className="md:text-xl btn btn-effect" />
             </span>
             <div className="md:hidden">
               <button className="btn" onClick={() => setShowMenu(!showMenu)}>
