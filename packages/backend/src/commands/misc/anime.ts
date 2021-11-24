@@ -1,5 +1,5 @@
 import axios from "axios";
-import { MessageEmbed } from "discord.js";
+import { MessageEmbed, TextChannel } from "discord.js";
 import { Command } from "../../utils/commandTypes";
 
 interface AnimeResponse {
@@ -40,18 +40,49 @@ const AnimeCategories = [
   "cringe",
 ];
 
+const nsfwAnimeCategories = ["waifu", "neko", "trap", "blowjob"];
+
 // TODO: Add check for anime category
 const cmd: Command = {
   name: "anime",
   description: "Sends a random anime picture",
-  execute: async (msg, args) => {
+  tags: ["anime"],
+  execute: async (msg, args, server) => {
+    if (!server.anime) {
+      msg.reply("The Server Owner has disabled anime commands");
+      return;
+    }
     let category = "waifu";
-    if (args[0]) {
-      if (AnimeCategories.includes(args[0].toLowerCase())) {
-        category = args[0].toLowerCase();
+    let imageType: "sfw" | "nsfw" = "sfw";
+    if (args[1]) {
+      if (args[1].toLowerCase() === "nsfw") {
+        if (!(msg.channel as TextChannel).nsfw) {
+          msg.reply("This channel is not nsfw!");
+          return;
+        }
+        if (!server.nsfw) {
+          msg.reply("The Server Owner has disabled nsfw commands");
+          return;
+        }
+        imageType = "nsfw";
       }
     }
-    const res = await axios.get(`https://api.waifu.pics/sfw/${category}`);
+
+    if (args[0]) {
+      if (imageType == "sfw") {
+        if (AnimeCategories.includes(args[0].toLowerCase())) {
+          category = args[0].toLowerCase();
+        }
+      } else if (imageType == "nsfw") {
+        if (nsfwAnimeCategories.includes(args[0].toLowerCase())) {
+          category = args[0].toLowerCase();
+        }
+      }
+    }
+
+    const res = await axios.get(
+      `https://api.waifu.pics/${imageType}/${category}`
+    );
     const data: AnimeResponse = res.data;
     await msg.reply({
       embeds: [new MessageEmbed().setImage(data.url).setColor("#ff00ff")],
