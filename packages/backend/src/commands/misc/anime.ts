@@ -49,7 +49,7 @@ const cmd: Command = {
   tags: ["anime"],
   execute: async (msg, args, server) => {
     if (!server.anime) {
-      msg.reply("The Server Owner has disabled anime commands");
+      msg.reply("You cannot use anime commands on this server!");
       return;
     }
     let category = "waifu";
@@ -61,7 +61,7 @@ const cmd: Command = {
           return;
         }
         if (!server.nsfw) {
-          msg.reply("The Server Owner has disabled nsfw commands");
+          msg.reply("You cannot use nsfw commands on this server!");
           return;
         }
         imageType = "nsfw";
