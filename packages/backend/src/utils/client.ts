@@ -5,7 +5,7 @@ import { createServers, toGoServer } from "../db/entities/GoServer";
 import logger from "./logger";
 
 export const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS],
 });
 
 if (!__prod__) {

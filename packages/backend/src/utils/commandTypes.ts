@@ -7,6 +7,7 @@ import {
 } from "discord.js";
 import { Field, ObjectType } from "type-graphql";
 import { Categories } from "./categoryTypes";
+import {GuildPermissions} from "./GuildPermissions";
 
 @ObjectType({ isAbstract: true })
 export class Command {
@@ -24,6 +25,8 @@ export class Command {
 
   @Field({ nullable: true })
   category?: Categories;
+
+  permissions?: GuildPermissions
 
   execute: (msg: Message, args: string[]) => void;
 }

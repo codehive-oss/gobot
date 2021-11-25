@@ -1,6 +1,6 @@
 import { Field, ObjectType } from "type-graphql";
 
-export const allCategories = ["economy", "misc", "level", "image"] as const;
+export const allCategories = ["economy", "misc", "level", "image", "moderation"] as const;
 export type Categories = typeof allCategories[number];
 
 export interface CategoryData {
@@ -12,6 +12,7 @@ export const allCategoryData: Record<Categories, CategoryData> = {
   misc: { description: "Miscellanious Commands" },
   level: { description: "Level Commands" },
   image: { description: "Image Manupulation Commands" },
+  moderation: {description: "Moderation Commands"},
 };
 
 @ObjectType()
