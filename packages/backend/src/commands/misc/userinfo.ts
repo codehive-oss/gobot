@@ -14,7 +14,7 @@ const cmd: Command = {
 
         embed.setColor("BLUE")
         embed.setAuthor(msg.author.username, msg.author.displayAvatarURL({dynamic: true}))
-        embed.setThumbnail(target.displayAvatarURL())
+        embed.setThumbnail(target.displayAvatarURL({dynamic: true}))
         embed.setTitle("Userinfo: " + target.tag)
         embed.addField("id", target.id)
         embed.addField("Bot", String(target.bot))
