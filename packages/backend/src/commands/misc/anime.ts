@@ -47,6 +47,7 @@ const cmd: Command = {
   name: "anime",
   description: "Sends a random anime picture",
   tags: ["anime"],
+  category: "misc",
   execute: async (msg, args, server) => {
     if (!server.anime) {
       msg.reply("You cannot use anime commands on this server!");

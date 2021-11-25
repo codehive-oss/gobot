@@ -23,6 +23,7 @@ type AnimeRating = "G" | "PG" | "PG-13" | "R" | "R+" | "Rx";
 
 const cmd: Command = {
   name: "animeinfo",
+  category: "misc",
   description: "Get information about an anime",
   execute: async (msg, args, server) => {
     if (!server.anime) {

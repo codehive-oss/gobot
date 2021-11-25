@@ -4,6 +4,7 @@ const cmd: Command = {
   name: "pyramid",
   description: "Creates a Pyramid",
   usage: "pyramid <height>",
+  category: "misc",
   execute: async (msg, args) => {
     const height = args[0] ? parseInt(args[0]) : 5;
     // Check if height is number
