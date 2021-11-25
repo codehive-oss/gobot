@@ -5,6 +5,7 @@ import {
   MessageComponentInteraction,
   SelectMenuInteraction,
 } from "discord.js";
+import { GoServer } from "../db/entities/GoServer";
 import { Field, ObjectType } from "type-graphql";
 import { Categories } from "./categoryTypes";
 import {GuildPermissions} from "./GuildPermissions";
@@ -26,9 +27,13 @@ export class Command {
   @Field({ nullable: true })
   category?: Categories;
 
+
   permissions?: GuildPermissions
 
-  execute: (msg: Message, args: string[]) => void;
+  @Field(() => [String], { nullable: true })
+  tags?: string[];
+
+  execute: (msg: Message, args: string[], server: GoServer) => void;
 }
 
 export interface Cooldown {
@@ -45,7 +50,8 @@ export interface CommandButtonInteraction {
 
 export interface MessageInteraction {
   handleInteraction: (
-    interaction: MessageComponentInteraction<CacheType>
+    interaction: MessageComponentInteraction<CacheType>,
+    server: GoServer
   ) => void;
 }
 

@@ -3,6 +3,7 @@ import fs from "fs";
 import logger from "./logger";
 import { Command, isInteractable } from "./commandTypes";
 import {hasPermission, messageperms} from "./GuildPermissions";
+import { GoServer } from "src/db/entities/GoServer";
 
 export const commands: Command[] = [];
 
@@ -29,14 +30,14 @@ function addCommandsRecursive(dir: string, folder: string) {
 
 addCommandsRecursive("./dist/commands", "");
 
-export const handleMessage = async (message: Message, prefix: string) => {
+export const handleMessage = async (message: Message, server: GoServer) => {
   if (message.webhookId) {
     return;
   }
   let content = message.content;
 
-  if (content.toLocaleLowerCase().startsWith(prefix)) {
-    content = content.slice(prefix.length);
+  if (content.toLocaleLowerCase().startsWith(server.prefix)) {
+    content = content.slice(server.prefix.length);
     const args = content.split(" ");
     const commandName = args[0].toLocaleLowerCase();
     args.shift();
@@ -55,20 +56,21 @@ export const handleMessage = async (message: Message, prefix: string) => {
         }
 
         logger.trace(`Executing Command ${command.name} with args [${args}]`);
-        command.execute(message, args);
+        command.execute(message, args, server);
       }
     }
   }
 };
 
 export const handleInteraction = async (
-  interaction: Interaction<CacheType>
+  interaction: Interaction<CacheType>,
+  server: GoServer
 ) => {
   if (interaction.isMessageComponent()) {
     for (const command of commands) {
       if (isInteractable(command)) {
         if (command.name === interaction.customId) {
-          command.handleInteraction(interaction);
+          command.handleInteraction(interaction, server);
         }
       }
     }

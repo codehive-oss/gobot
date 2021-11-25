@@ -16,7 +16,6 @@ export const isAdmin: MiddlewareFn<MyContext> = async (
   next
 ) => {
   const goUser = req.user as GoUser;
-  console.log(serverID);
   const isAdmin = await checkUserAdminGuild(serverID, goUser);
   if (!isAdmin) {
     throw new Error("User not authenticated");

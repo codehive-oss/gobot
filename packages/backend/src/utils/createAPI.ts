@@ -12,7 +12,7 @@ import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import logger from "./logger";
 import morgan from "morgan";
-//import { router } from "../routes/auth";
+import { router } from "../routes/auth";
 import passport from "passport";
 import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
 import cookieSession from "cookie-session";
@@ -21,6 +21,9 @@ export const createAPI = async () => {
   logger.info("Creating SQL connection...");
   const conn = await createConnection(typeormOrmConfig);
   await conn.runMigrations();
+  logger.info(
+    `SQL connection on ${typeormOrmConfig.host}:${typeormOrmConfig.port} connected`
+  );
 
   logger.info("Building graphql schema...");
   const schema = await buildSchema({
@@ -70,7 +73,7 @@ export const createAPI = async () => {
     res.send("Hello world!");
   });
 
-  //app.use("/auth", router);
+  app.use("/auth", router);
 
   return app;
 };

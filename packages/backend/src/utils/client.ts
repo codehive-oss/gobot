@@ -42,11 +42,15 @@ client.on("messageCreate", async (message) => {
     return;
   }
   const server = await toGoServer(message.guild.id);
-  await handleMessage(message, server.prefix);
+  await handleMessage(message, server);
 });
 
 client.on("interactionCreate", async (interaction) => {
-  handleInteraction(interaction);
+  if (!interaction.guild) {
+    return;
+  }
+  const server = await toGoServer(interaction.guild.id);
+  handleInteraction(interaction, server);
 });
 
 client.on("guildCreate", async (guild) => {
