@@ -8,12 +8,23 @@ jobs:
     name: Build
     runs-on: ubuntu-latest
     steps:
-    - name: Install SSH Key
-      uses: shimataro/ssh-key-action@v2
-      with:
-        key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }} 
-        known_hosts: 'just-a-placeholder-so-we-dont-get-errors'
-    - name: Adding Known Hosts
-      run: ssh-keyscan -H ${{ secrets.GOBOT_SSH_HOST }} >> ~/.ssh/known_hosts
-    - name: Deploy with rsync
-      run: rsync -avz . ${{ secrets.GOBOT_SSH_USER }}@${{ secrets.GOBOT_SSH_HOST }}:/home/gobot/dist
+      - name: Install SSH Key
+        uses: shimataro/ssh-key-action@v2
+        with:
+          key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
+          known_hosts: "just-a-placeholder-so-we-dont-get-errors"
+      - name: Add Known Hosts
+        run: ssh-keyscan -H ${{ secrets.GOBOT_SSH_HOST }} >> ~/.ssh/known_hosts
+      - name: Copy Files
+        run: rsync -avz . ${{ secrets.GOBOT_SSH_USER }}@${{ secrets.GOBOT_SSH_HOST }}:/home/gobot/
+      - name: Start Application
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.GOBOT_SSH_HOST }}
+          username: ${{ secrets.GOBOT_SSH_USER }}
+          key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.GOBOT_SSH_PORT }}
+          script: |
+            whoami
+            ls -al
+            yarn docker:start -d
