@@ -16,7 +16,7 @@ jobs:
       - name: Add Known Hosts
         run: ssh-keyscan -H ${{ secrets.GOBOT_SSH_HOST }} >> ~/.ssh/known_hosts
       - name: Copy Files
-        run: rsync -avz . ${{ secrets.GOBOT_SSH_USER }}@${{ secrets.GOBOT_SSH_HOST }}:/home/gobot/
+        run: rsync -avz . ${{ secrets.GOBOT_SSH_USER }}@${{ secrets.GOBOT_SSH_HOST }}:/root/app/gobot
       - name: Start Application
         uses: appleboy/ssh-action@master
         with:
@@ -26,5 +26,6 @@ jobs:
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
             whoami
+            cd /root/app/gobot/
             ls -al
             yarn docker:start -d
