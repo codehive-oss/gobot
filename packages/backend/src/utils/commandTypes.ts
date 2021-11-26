@@ -8,6 +8,7 @@ import {
 import { GoServer } from "../db/entities/GoServer";
 import { Field, ObjectType } from "type-graphql";
 import { Categories } from "./categoryTypes";
+import {GuildPermissions} from "./GuildPermissions";
 
 @ObjectType({ isAbstract: true })
 export class Command {
@@ -25,6 +26,9 @@ export class Command {
 
   @Field({ nullable: true })
   category?: Categories;
+
+
+  permissions?: GuildPermissions
 
   @Field(() => [String], { nullable: true })
   tags?: string[];

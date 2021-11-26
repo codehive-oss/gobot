@@ -2,7 +2,8 @@ import { CacheType, Interaction, Message } from "discord.js";
 import fs from "fs";
 import logger from "./logger";
 import { Command, isInteractable } from "./commandTypes";
-import { GoServer } from "../db/entities/GoServer";
+import {hasPermission, messageperms} from "./GuildPermissions";
+import { GoServer } from "src/db/entities/GoServer";
 
 export const commands: Command[] = [];
 
@@ -40,11 +41,20 @@ export const handleMessage = async (message: Message, server: GoServer) => {
     const args = content.split(" ");
     const commandName = args[0].toLocaleLowerCase();
     args.shift();
+
+
     for (const command of commands) {
       if (
         command.name === commandName ||
         (command.aliases && command.aliases.includes(commandName))
       ) {
+        if(command.permissions) {
+          if(!hasPermission(message.member!, command.permissions)) {
+            await message.reply("Insufficient Permissions");
+            return
+          }
+        }
+
         logger.trace(`Executing Command ${command.name} with args [${args}]`);
         command.execute(message, args, server);
       }
