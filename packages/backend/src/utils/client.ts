@@ -1,13 +1,12 @@
 import { Client, Intents } from "discord.js";
-import { handle } from "./commandHandler";
+import { handleInteraction, handleMessage } from "./commandHandler";
 import { __prod__, PREFIX } from "./constants";
-import { getHelpEmbed } from "./getHelpEmbed";
-import { createServer, toGoServer } from "../db/entities/GoServer";
+import { createServers, toGoServer } from "../db/entities/GoServer";
 import logger from "./logger";
-import { Categories } from "./categoryTypes";
+import {Int} from "type-graphql";
 
 export const client = new Client({
-  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES],
+  intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_PRESENCES],
 });
 
 if (!__prod__) {
@@ -16,11 +15,11 @@ if (!__prod__) {
 }
 
 client.on("ready", async () => {
-  //save all servers the bot is on
-  for (let guild of client.guilds.cache.values()) {
-    console.log(guild.name);
-    await createServer(guild.id);
-  }
+  // save all servers the bot is on
+  const serversCreated = await createServers(
+    client.guilds.cache.map((g) => g.id)
+  );
+  logger.info(`${serversCreated} servers added.`);
 
   logger.info(`Logged in as ${client.user?.username}`);
 
@@ -44,21 +43,19 @@ client.on("messageCreate", async (message) => {
     return;
   }
   const server = await toGoServer(message.guild.id);
-  await handle(message, server.prefix);
+  await handleMessage(message, server);
 });
 
 client.on("interactionCreate", async (interaction) => {
-  if (interaction.isSelectMenu() && interaction.customId === "help") {
-    await interaction.reply({
-      ephemeral: true,
-      content: `<@${interaction.user.id}>`,
-      embeds: [getHelpEmbed(interaction.values[0] as Categories)],
-    });
+  if (!interaction.guild) {
+    return;
   }
+  const server = await toGoServer(interaction.guild.id);
+  handleInteraction(interaction, server);
 });
 
 client.on("guildCreate", async (guild) => {
-  await createServer(guild.id);
+  await toGoServer(guild.id);
 
   const owner = await guild.fetchOwner();
   await owner.user.send("test");

@@ -1,7 +1,9 @@
-import { Message } from "discord.js";
+import { CacheType, Interaction, Message } from "discord.js";
 import fs from "fs";
 import logger from "./logger";
-import { Command } from "./commandTypes";
+import { Command, isInteractable } from "./commandTypes";
+import {hasPermission, messageperms} from "./GuildPermissions";
+import { GoServer } from "src/db/entities/GoServer";
 
 export const commands: Command[] = [];
 
@@ -28,24 +30,48 @@ function addCommandsRecursive(dir: string, folder: string) {
 
 addCommandsRecursive("./dist/commands", "");
 
-export const handle = async (message: Message, prefix: string) => {
+export const handleMessage = async (message: Message, server: GoServer) => {
   if (message.webhookId) {
     return;
   }
   let content = message.content;
 
-  if (content.toLocaleLowerCase().startsWith(prefix)) {
-    content = content.slice(prefix.length);
+  if (content.toLocaleLowerCase().startsWith(server.prefix)) {
+    content = content.slice(server.prefix.length);
     const args = content.split(" ");
     const commandName = args[0].toLocaleLowerCase();
     args.shift();
+
+
     for (const command of commands) {
       if (
         command.name === commandName ||
         (command.aliases && command.aliases.includes(commandName))
       ) {
+        if(command.permissions) {
+          if(!hasPermission(message.member!, command.permissions)) {
+            await message.reply("Insufficient Permissions");
+            return
+          }
+        }
+
         logger.trace(`Executing Command ${command.name} with args [${args}]`);
-        command.execute(message, args);
+        command.execute(message, args, server);
+      }
+    }
+  }
+};
+
+export const handleInteraction = async (
+  interaction: Interaction<CacheType>,
+  server: GoServer
+) => {
+  if (interaction.isMessageComponent()) {
+    for (const command of commands) {
+      if (isInteractable(command)) {
+        if (command.name === interaction.customId) {
+          command.handleInteraction(interaction, server);
+        }
       }
     }
   }

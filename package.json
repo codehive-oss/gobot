@@ -1,7 +1,6 @@
 {
   "name": "gobot",
   "version": "0.1.1",
-  "repository": "https://github.com/SushiWaUmai/GoBot.git",
   "license": "MIT",
   "private": true,
   "workspaces": [
@@ -12,12 +11,13 @@
     "diff": "lerna diff",
     "backend": "yarn workspace @gobot/backend",
     "frontend": "yarn workspace @gobot/frontend",
-    "docker:build": "docker-compose build",
-    "docker:up": "docker-compose up -d",
-    "docker:down": "docker-compose down"
+    "docker:build:dev": "docker-compose --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml build",
+    "docker:build:prod": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml build",
+    "docker:dev": "docker-compose --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml up --build",
+    "docker:start": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up --build",
+    "docker:stop": "docker-compose down"
   },
   "devDependencies": {
     "lerna": "^4.0.0"
-  },
-  "dependencies": {}
+  }
 }

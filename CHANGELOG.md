@@ -3,6 +3,53 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/SushiWaUmai/GoBot/compare/v0.3.0...v0.4.0) (2021-11-26)
+
+
+### Bug Fixes
+
+* **command:** :bug: fix bug by sorting string based of similarity ([95a58d7](https://github.com/SushiWaUmai/GoBot/commit/95a58d77dfa9c38e142c8479effb3127f58afbef))
+* **docker:** :bug: update docker compose for production ([ace33d9](https://github.com/SushiWaUmai/GoBot/commit/ace33d918bac1d2d1ebf2abea0e011205a1e759f))
+* **docker:** :hammer: nodemon on docker ([40e92a2](https://github.com/SushiWaUmai/GoBot/commit/40e92a20e162a2c82ce87977beba03d9813cddf5))
+
+
+### Features
+
+* :boom: dashboard update ([3a513fa](https://github.com/SushiWaUmai/GoBot/commit/3a513faf0e4305fb92392892995a395a981aca16))
+* :rocket: deploy gobot ([16ac3c1](https://github.com/SushiWaUmai/GoBot/commit/16ac3c16b3a7641b72ab551e61fd184273bdd484))
+* **backend:** :lock: admin check and more queries ([0a5aa19](https://github.com/SushiWaUmai/GoBot/commit/0a5aa19d8a056bbb3bee86f8fe2b1ce7ae19b778))
+* **backend:** :sparkles: add animeinfo command ([24e3b2c](https://github.com/SushiWaUmai/GoBot/commit/24e3b2c4f4e9473c7d9047bf3caec6a758cf46e3))
+* **backend:** :sparkles: add button interaction type to messages ([6d8db75](https://github.com/SushiWaUmai/GoBot/commit/6d8db7572bdd18e0076286de939f1d996e25134b))
+* **backend:** :sparkles: add get guild from Id on the server resolve ([d839910](https://github.com/SushiWaUmai/GoBot/commit/d8399100ecff30bcb8db1b4fb9110543f2a94c8c))
+* **backend:** :sparkles: send server to commands ([6771ed8](https://github.com/SushiWaUmai/GoBot/commit/6771ed8bae0033d6f2cc92eadcda88d82e960080))
+* **command:** :sparkles: add animeinfo command ([2995c2d](https://github.com/SushiWaUmai/GoBot/commit/2995c2d5bc916742063955fe82fd7f728daa8e87))
+* **command:** added avatar command ([781b454](https://github.com/SushiWaUmai/GoBot/commit/781b454a115e2f253525335a70fd2ee4688f702a))
+* **command:** added level and progressbar to xp system ([dca72ca](https://github.com/SushiWaUmai/GoBot/commit/dca72ca780407ceac12c3bf281db3cb2d8652b29))
+* **command:** added missing intents ([96f6761](https://github.com/SushiWaUmai/GoBot/commit/96f6761366d187b7f63e43461a5e718e759a1021))
+* **command:** Added Moderation Commands ([25b01d9](https://github.com/SushiWaUmai/GoBot/commit/25b01d9855c68808e538fc9762a62b52fb6cf455))
+* **command:** Added Permission System to Commands ([afe2787](https://github.com/SushiWaUmai/GoBot/commit/afe278795411541a29dbff7153eba4331e84382c))
+* **command:** Added Snake Minigame ([ef68ba9](https://github.com/SushiWaUmai/GoBot/commit/ef68ba94cb9eb662c4a9998d0b58f71bfecfc271))
+* **command:** added userinfo command ([7db38c3](https://github.com/SushiWaUmai/GoBot/commit/7db38c3138d6508d1ecccd8bad6c6116e339ba6b))
+* **command:** fixed tictactoe ([e8a27c1](https://github.com/SushiWaUmai/GoBot/commit/e8a27c193718b340e638b0e03e262850040482f8))
+* **command:** longjoke command ([b8c5a56](https://github.com/SushiWaUmai/GoBot/commit/b8c5a5638c24c0c5b89b73ecc06488ad9872da4d))
+* **docker:** :hammer: update docker for development ([d5887a2](https://github.com/SushiWaUmai/GoBot/commit/d5887a29558b33c5f5c049e5d800262a3f49ac0b))
+* **frontend:** :lipstick: update dashboard with toogles ([dce0fb2](https://github.com/SushiWaUmai/GoBot/commit/dce0fb2fd833fe62b831979e151ad5229f020135))
+
+
+### Performance Improvements
+
+* :zap: optimzed queries ([3c71f36](https://github.com/SushiWaUmai/GoBot/commit/3c71f3692aef9f8a79eb863786955df812d9fe8e))
+
+
+### Reverts
+
+* **command:** :rewind: reverted anime command ([c63d410](https://github.com/SushiWaUmai/GoBot/commit/c63d410e5cfda842333ed7da5fb9b53113b12d64))
+
+
+
+
+
+
 # [0.3.0](https://github.com/SushiWaUmai/GoBot/compare/v0.2.0...v0.3.0) (2021-11-17)
 
 

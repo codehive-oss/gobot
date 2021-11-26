@@ -1,45 +1,17 @@
 import logger from "../../utils/logger";
 import { MyContext } from "../../utils/types";
-import {
-  Ctx,
-  Field,
-  ObjectType,
-  Query,
-  Resolver,
-  UseMiddleware,
-} from "type-graphql";
+import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import axios from "axios";
 import { GoUser } from "../entities/GoUser";
 import { isAuth } from "../middleware/isAuth";
-
-@ObjectType()
-export class Guild {
-  @Field()
-  id: string;
-  @Field({ nullable: true })
-  icon?: string;
-  @Field()
-  name: string;
-  @Field()
-  owner: boolean;
-  @Field()
-  permissions: number;
-}
-
-@ObjectType()
-export class UserData {
-  @Field()
-  id: string;
-  @Field()
-  username: string;
-  @Field()
-  avatar: string;
-}
+import { DISCORD_API_ENDPOINT } from "../../utils/constants";
+import { GuildData, UserData } from "../../utils/graphqlPayload";
+import { isGuildAdmin } from "../../utils/apiGuildUtils";
 
 @Resolver()
 export class GoUserResolver {
   // Get all guilds where the user has permission to manage bots
-  @Query(() => [Guild])
+  @Query(() => [GuildData])
   @UseMiddleware(isAuth)
   async getUserGuilds(@Ctx() { req }: MyContext) {
     const goUser = req.user as GoUser;
@@ -50,14 +22,14 @@ export class GoUserResolver {
 
     // Get user guilds from discord given a user id
     const profile = await axios.get(
-      `https://discordapp.com/api/users/@me/guilds`,
+      `${DISCORD_API_ENDPOINT}/users/@me/guilds`,
       {
         headers: { Authorization: `Bearer ${goUser.accessToken}` },
       }
     );
 
-    // Filters all guilds where the user has the manage_guild permission and returns them
-    const guilds = profile.data.filter((guild: Guild) => guild.permissions & 8);
+    // Filters all guilds where the user has the administrator permission and returns them
+    const guilds: GuildData[] = profile.data.filter(isGuildAdmin);
     return guilds;
   }
 
@@ -65,7 +37,7 @@ export class GoUserResolver {
   @UseMiddleware(isAuth)
   async getUserData(@Ctx() { req }: MyContext) {
     const goUser = req.user as GoUser;
-    const profile = await axios.get("https://discordapp.com/api/users/@me", {
+    const profile = await axios.get(`${DISCORD_API_ENDPOINT}/users/@me`, {
       headers: { Authorization: `Bearer ${goUser.accessToken}` },
     });
 

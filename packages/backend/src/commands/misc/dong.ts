@@ -5,6 +5,7 @@ const cmd: Command = {
   aliases: ["dong"],
   name: "dongsize",
   description: "magnum schlong",
+  category: "misc",
   async execute(msg: Message, _args: string[]) {
     const target = msg.mentions.users.first();
     if (!target) {

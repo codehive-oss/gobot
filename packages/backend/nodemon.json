@@ -1,6 +1,5 @@
 {
-  "watch": [
-    "src/"
-  ],
-  "ext": "js, ts, jsx, tsx"
+  "ignore": ["./dist"],
+  "ext": "js, ts, jsx, tsx",
+  "legacyWatch": true
 }

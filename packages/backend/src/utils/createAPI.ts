@@ -21,6 +21,9 @@ export const createAPI = async () => {
   logger.info("Creating SQL connection...");
   const conn = await createConnection(typeormOrmConfig);
   await conn.runMigrations();
+  logger.info(
+    `SQL connection on ${typeormOrmConfig.host}:${typeormOrmConfig.port} connected`
+  );
 
   logger.info("Building graphql schema...");
   const schema = await buildSchema({

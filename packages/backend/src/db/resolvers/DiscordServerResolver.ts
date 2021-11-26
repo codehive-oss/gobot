@@ -1,42 +1,73 @@
-import {Arg, Mutation, Resolver} from "type-graphql";
-import {GoServer, toGoServer} from "../entities/GoServer";
+import { MyContext } from "../../utils/types";
+import {
+  Arg,
+  Ctx,
+  Field,
+  InputType,
+  Mutation,
+  ObjectType,
+  Query,
+  Resolver,
+  UseMiddleware,
+} from "type-graphql";
+import { GoServer, toGoServer } from "../entities/GoServer";
+import { isAdmin, isAuth } from "../middleware/isAuth";
+import { GoUser } from "../entities/GoUser";
+import { getUserAdminGuild } from "../../utils/apiGuildUtils";
+import { GuildData } from "../../utils/graphqlPayload";
+import logger from "../../utils/logger";
 
+@ObjectType()
+class GuildDataPayload {
+  @Field(() => GuildData)
+  guildData: GuildData;
+  @Field(() => GoServer)
+  goServer: GoServer;
+}
+
+@InputType()
+class UpdateServerInput {
+  @Field()
+  prefix: string;
+  @Field()
+  nsfw: boolean;
+  @Field()
+  anime: boolean;
+}
 
 @Resolver()
 export class DiscordServerResolver {
-
-    @Mutation(() => GoServer)
-    async setPrefix(
-        @Arg("serverID") serverID: string,
-        @Arg("prefix") prefix: string
-    ): Promise<GoServer> {
-        const server = await toGoServer(serverID)
-        server.prefix = prefix
-        await server.save({})
-        return server
+  @Query(() => GuildDataPayload)
+  @UseMiddleware(isAuth)
+  async getGuildDataPayloadFromID(
+    @Ctx() { req }: MyContext,
+    @Arg("serverID") serverID: string
+  ): Promise<GuildDataPayload> {
+    const goUser = req.user as GoUser;
+    const guildData = await getUserAdminGuild(serverID, goUser);
+    if (!guildData) {
+      throw new Error("You are not an admin of this server");
     }
 
-    @Mutation(() => GoServer)
-    async setAnime(
-        @Arg("serverID") serverID: string,
-        @Arg("anime") anime: boolean
-    ): Promise<GoServer> {
-        const server = await toGoServer(serverID)
-        server.anime = anime
-        await server.save({})
-        return server
-    }
+    return {
+      goServer: await toGoServer(serverID),
+      guildData: guildData as GuildData,
+    };
+  }
 
-    @Mutation(() => GoServer)
-    async setNSFW(
-        @Arg("serverID") serverID: string,
-        @Arg("nsfw") nsfw: boolean
-    ): Promise<GoServer> {
-        const server = await toGoServer(serverID)
-        server.nsfw = nsfw
-        await server.save({})
-        return server
+  @Mutation(() => Boolean)
+  @UseMiddleware(isAuth, isAdmin)
+  async updateServer(
+    @Arg("serverID") serverID: string,
+    @Arg("updateServerInput") updateServerInput: UpdateServerInput
+  ): Promise<Boolean> {
+    try {
+      console.log(updateServerInput);
+      await GoServer.update(serverID, updateServerInput);
+      return true;
+    } catch (err) {
+      logger.error(err);
+      return false;
     }
-
+  }
 }
-

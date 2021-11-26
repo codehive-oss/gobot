@@ -1,0 +1,12 @@
+version: "3"
+services:
+  backend:
+    build:
+      args:
+        - BuildMode=production
+    env_file:
+      - ./packages/backend/.env.production
+  frontend:
+    build:
+      args:
+        - BuildMode=production

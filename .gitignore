@@ -74,6 +74,9 @@ web_modules/
 # dotenv environment variables file
 .env
 .env.test
+.env.prod
+.env.dev
+.env.development
 .env.production
 
 # parcel-bundler cache (https://parceljs.org/)
@@ -124,4 +127,4 @@ dist
 .pnp.*
 
 # Database files
-/pgdata/
+pgdata/

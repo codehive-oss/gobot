@@ -1,0 +1,3 @@
+  mutation UpdateServer($serverID: String!, $serverInput: UpdateServerInput!) {
+    updateServer(serverID: $serverID, updateServerInput: $serverInput) 
+  }

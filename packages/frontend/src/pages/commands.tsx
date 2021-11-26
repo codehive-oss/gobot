@@ -9,7 +9,7 @@ import Head from "next/head";
 interface CommandsPageProps {}
 
 const CommandsPage: NextPage<CommandsPageProps> = () => {
-  const categories = useGetCategoriesQuery()[0];
+  const [categories] = useGetCategoriesQuery();
   const [selectedCategory, setSelectedCategory] = useState<string>();
 
   return (
@@ -26,13 +26,13 @@ const CommandsPage: NextPage<CommandsPageProps> = () => {
           <>
             <CommnadsListComponent category={selectedCategory} />
             {/* Create a button that resets the selected category */}
-
+            <br />
             <button
               className="bg-gray-800 py-2 px-4 rounded"
               type="button"
               onClick={() => setSelectedCategory(undefined)}
             >
-              All
+              Back to all commands
             </button>
           </>
         ) : (

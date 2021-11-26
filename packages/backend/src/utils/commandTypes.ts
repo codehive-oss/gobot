@@ -1,6 +1,14 @@
-import { Message } from "discord.js";
+import {
+  ButtonInteraction,
+  CacheType,
+  Message,
+  MessageComponentInteraction,
+  SelectMenuInteraction,
+} from "discord.js";
+import { GoServer } from "../db/entities/GoServer";
 import { Field, ObjectType } from "type-graphql";
 import { Categories } from "./categoryTypes";
+import {GuildPermissions} from "./GuildPermissions";
 
 @ObjectType({ isAbstract: true })
 export class Command {
@@ -19,13 +27,43 @@ export class Command {
   @Field({ nullable: true })
   category?: Categories;
 
-  execute: (msg: Message, args: string[]) => void;
+
+  permissions?: GuildPermissions
+
+  @Field(() => [String], { nullable: true })
+  tags?: string[];
+
+  execute: (msg: Message, args: string[], server: GoServer) => void;
 }
 
-export type CooldownCommand = Command & {
+export interface Cooldown {
   cooldown: number;
+}
+
+export interface CommandSelectMenuInteraction {
+  handleInteraction: (interaction: SelectMenuInteraction<CacheType>) => void;
+}
+
+export interface CommandButtonInteraction {
+  handleInteraction: (interaction: ButtonInteraction<CacheType>) => void;
+}
+
+export interface MessageInteraction {
+  handleInteraction: (
+    interaction: MessageComponentInteraction<CacheType>,
+    server: GoServer
+  ) => void;
+}
+
+export const isInteractable = (
+  command: Command
+): command is Command & MessageInteraction => {
+  return (
+    (command as Command & MessageInteraction).handleInteraction !== undefined
+  );
 };
 
+// TODO: move this to redis
 const cooldownMap = new Map<string, Date>();
 
 export const setCooldown = (
