@@ -26,4 +26,5 @@ ENV NODE_ENV "$BuildMode"
 
 EXPOSE 4000
 
-CMD if [ "$BuildMode" = "production" ]; then yarn start; else yarn dev; fi
+# CMD if [ "$BuildMode" = "production" ]; then yarn start; else yarn dev; fi
+CMD yarn start

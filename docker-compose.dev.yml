@@ -10,6 +10,7 @@ services:
       - ./packages/backend:/usr/app
       - /usr/app/node_modules
       - /usr/app/dist
+    command: yarn dev
   frontend:
     build:
       args:
@@ -18,3 +19,4 @@ services:
       - ./packages/frontend:/usr/app
       - /usr/app/node_modules
       - /usr/app/.next
+    command: yarn dev
