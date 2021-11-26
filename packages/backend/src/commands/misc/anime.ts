@@ -42,7 +42,6 @@ const AnimeCategories = [
 
 const nsfwAnimeCategories = ["waifu", "neko", "trap", "blowjob"];
 
-// TODO: Add check for anime category
 const cmd: Command = {
   name: "anime",
   description: "Sends a random anime picture",

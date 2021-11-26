@@ -1,6 +1,7 @@
 import axios from "axios";
 import { MessageEmbed } from "discord.js";
 import { Command } from "../../utils/commandTypes";
+import stringSimilarity from "string-similarity";
 
 // Jikan api payload type
 interface JikanPayload {
@@ -31,18 +32,28 @@ const cmd: Command = {
       return;
     }
 
+    const animeName = args.join(" ");
+
     // serach for anime with jikan api
     const { data } = await axios.get(
-      `https://api.jikan.moe/v3/search/anime?q=${args.join(" ")}`
+      `https://api.jikan.moe/v3/search/anime?q=${animeName}`
     );
 
     const animesFound: JikanPayload[] = data.results;
 
-    // get the best matching result based of name
-    const anime = animesFound.find(
-      (result: JikanPayload) =>
-        result.title.toLowerCase() === args.join(" ").toLowerCase()
-    );
+    // Sort the animes found by similarity to the search query
+    const anime = animesFound.sort((a, b) => {
+      return (
+        stringSimilarity.compareTwoStrings(
+          b.title.toLowerCase(),
+          animeName.toLowerCase()
+        ) -
+        stringSimilarity.compareTwoStrings(
+          a.title.toLowerCase(),
+          animeName.toLowerCase()
+        )
+      );
+    })[0];
 
     // if no anime found, return
     if (!anime) {

@@ -1,5 +1,4 @@
 import "reflect-metadata";
-import { GoServer } from "./db/entities/GoServer";
 import { client } from "./utils/client";
 import { API_PORT, TOKEN } from "./utils/constants";
 import { createAPI } from "./utils/createAPI";
