@@ -15,8 +15,15 @@ jobs:
           known_hosts: "just-a-placeholder-so-we-dont-get-errors"
       - name: Add Known Hosts
         run: ssh-keyscan -H ${{ secrets.GOBOT_SSH_HOST }} >> ~/.ssh/known_hosts
-      - name: Copy Files
-        run: rsync -avz . ${{ secrets.GOBOT_SSH_USER }}@${{ secrets.GOBOT_SSH_HOST }}:/root/app/gobot
+      - name: Deploy with rsync
+        uses: burnett01/rsync-deployments@5.1
+        with:
+          switches: -avzr --delete
+          path: /
+          remote_path: /root/app/gobot
+          remote_host: ${{ secrets.GOBOT_SSH_HOST }}
+          remote_user: ${{ secrets.GOBOT_SSH_USER }}
+          remote_key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
       - name: Start Application
         uses: appleboy/ssh-action@master
         with:
