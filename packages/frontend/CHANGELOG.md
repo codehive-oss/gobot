@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.4.0](https://github.com/SushiWaUmai/GoBot/compare/v0.3.0...v0.4.0) (2021-11-26)
+
+
+### Bug Fixes
+
+* **docker:** :bug: update docker compose for production ([ace33d9](https://github.com/SushiWaUmai/GoBot/commit/ace33d918bac1d2d1ebf2abea0e011205a1e759f))
+
+
+### Features
+
+* :boom: dashboard update ([3a513fa](https://github.com/SushiWaUmai/GoBot/commit/3a513faf0e4305fb92392892995a395a981aca16))
+* **backend:** :lock: admin check and more queries ([0a5aa19](https://github.com/SushiWaUmai/GoBot/commit/0a5aa19d8a056bbb3bee86f8fe2b1ce7ae19b778))
+* **backend:** :sparkles: add get guild from Id on the server resolve ([d839910](https://github.com/SushiWaUmai/GoBot/commit/d8399100ecff30bcb8db1b4fb9110543f2a94c8c))
+* **docker:** :hammer: update docker for development ([d5887a2](https://github.com/SushiWaUmai/GoBot/commit/d5887a29558b33c5f5c049e5d800262a3f49ac0b))
+* **frontend:** :lipstick: update dashboard with toogles ([dce0fb2](https://github.com/SushiWaUmai/GoBot/commit/dce0fb2fd833fe62b831979e151ad5229f020135))
+
+
+
+
+
+
 # [0.3.0](https://github.com/SushiWaUmai/GoBot/compare/v0.2.0...v0.3.0) (2021-11-17)
 
 
