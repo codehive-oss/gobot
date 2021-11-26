@@ -27,7 +27,5 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
-            whoami
             cd /root/app/gobot/
-            ls -al
-            yarn docker:start -d
+            sudo yarn docker:start -d
