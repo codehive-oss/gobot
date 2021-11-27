@@ -16,7 +16,7 @@ export const typeormOrmConfig: PostgresConnectionOptions = {
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
-  synchronize: !__prod__,
+  synchronize: true,
   logging: !__prod__,
   entities: [join(__dirname, "..", "db", "entities", "**", "*.{ts,js}")],
   migrations: [join(__dirname, "..", "db", "migrations", "**", "*.{ts,js}")],
