@@ -16,7 +16,7 @@ COPY package.json ./
 RUN if [ "$BuildMode" = "production" ]; then yarn install --production; else yarn install; fi
 
 # TODO: Optimize copy to reduce image size
-COPY . .
+COPY --from=builder ./usr/app/.next ./.next
 
 ENV NODE_ENV "$BuildMode"
 

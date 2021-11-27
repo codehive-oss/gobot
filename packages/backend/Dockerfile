@@ -4,7 +4,8 @@ WORKDIR /usr/app
 COPY package*.json .
 RUN yarn install
 COPY . .
-RUN if [ "$BuildMode" = "production" ]; then yarn build; else yarn clean; fi
+RUN if [ "$BuildMode" = "production" ]; then yarn build; fi
+
 
 FROM node:16 as runner
 
@@ -19,6 +20,8 @@ RUN if [ "$BuildMode" = "production" ]; then yarn install --production; else yar
 # COPY ./usr/app/assets ./assets
 
 COPY . .
+# sleep for a minute
+COPY --from=builder ./usr/app/dist ./dist
 
 COPY .env."$BuildMode" .env
 
