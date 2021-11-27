@@ -1,22 +1,14 @@
-FROM node:16 as builder
-ARG BuildMode
-
-WORKDIR /usr/app
-COPY package*.json ./
-RUN yarn install
-COPY . .
-
-RUN yarn build
-
-FROM node:16 as runner
+FROM node:16
 ARG BuildMode
 
 WORKDIR /usr/app
 COPY package.json ./
-RUN if [ "$BuildMode" = "production" ]; then yarn install --production; else yarn install; fi
+# RUN if [ "$BuildMode" = "production" ]; then yarn install --production; else yarn install; fi
+RUN yarn install
 
 # TODO: Optimize copy to reduce image size
 COPY . .
+RUN yarn build
 
 ENV NODE_ENV "$BuildMode"
 
