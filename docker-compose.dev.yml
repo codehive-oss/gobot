@@ -20,3 +20,5 @@ services:
       - /usr/app/node_modules
       - /usr/app/.next
     command: yarn dev
+    ports:
+      - 3000:3000

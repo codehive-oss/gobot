@@ -1,12 +1,33 @@
 version: "3"
 services:
+  database:
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   backend:
     build:
       args:
         - BuildMode=production
     env_file:
       - ./packages/backend/.env.production
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   frontend:
     build:
       args:
-        - BuildMode=production
+        - BuildMode=production  
+    ports:
+      - 3000:80
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s

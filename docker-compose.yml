@@ -9,8 +9,8 @@ services:
       POSTGRES_PASSWORD: ${DB_PASSWORD}
     volumes:
       - ./packages/pgdata:/var/lib/postgresql/data
-    ports:
-      - 5432:5432
+    expose:
+      - 5432
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
       interval: 5s
@@ -19,19 +19,15 @@ services:
   backend:
     image: gobot/backend
     build:
-      context: ./packages/backend 
+      context: ./packages/backend
       dockerfile: ./Dockerfile
-    depends_on: 
+    depends_on:
       database:
         condition: service_healthy
     ports:
-      - 4000:4000
+      - ${API_PORT}:${API_PORT}
   frontend:
     image: gobot/frontend
     build:
       context: ./packages/frontend
       dockerfile: ./Dockerfile
-    depends_on:
-      - backend
-    ports:
-      - 3000:3000
