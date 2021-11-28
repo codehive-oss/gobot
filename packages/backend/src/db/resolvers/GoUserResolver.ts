@@ -1,4 +1,4 @@
-import logger from "../../utils/logger";
+import { logger } from "../../utils/logger";
 import { MyContext } from "../../utils/types";
 import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
 import axios from "axios";

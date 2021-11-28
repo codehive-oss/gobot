@@ -2,7 +2,7 @@ import { Command } from "../../utils/commandTypes";
 import { Message } from "discord.js";
 import Jimp from "jimp";
 import jimp from "jimp";
-import logger from "../../utils/logger";
+import { logger } from "../../utils/logger";
 import { getTarget } from "../../utils/getTarget";
 
 const cmd: Command = {

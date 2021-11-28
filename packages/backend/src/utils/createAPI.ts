@@ -10,8 +10,7 @@ import { typeormOrmConfig } from "./ormconfig";
 import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
 import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
-import logger from "./logger";
-import morgan from "morgan";
+import { expressLogger, logger } from "./logger";
 import { router } from "../routes/auth";
 import passport from "passport";
 import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
@@ -35,7 +34,7 @@ export const createAPI = async () => {
   const app = express();
   app.set("trust proxy", 1);
 
-  app.use(morgan("tiny"));
+  app.use(expressLogger);
   app.use(
     cors({
       origin: ["http://localhost:3000", "https://go-bot.xyz"],
