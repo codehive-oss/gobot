@@ -14,6 +14,10 @@ const cmd : Command = {
         if(!amount || Number.isNaN(amount)) {
             amount = 1
         }
+        if(amount>100) {
+            await msg.reply("Please provide an amount smaller than 100")
+            return
+        }
         await (msg.channel as TextChannel).bulkDelete(amount)
         await msg.channel.send(`Cleared ${amount} messages`)
 

@@ -10,7 +10,7 @@ const cmd: Command = {
     category: "misc",
     execute: async (msg, args) => {
         let start = 1
-        if (args[0] && !Number.isInteger(args[0])) {
+        if (args[0] && !Number.isNaN(parseInt(args[0]))) {
             start = parseInt(args[0])
         }
 
