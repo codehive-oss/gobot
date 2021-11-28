@@ -2,7 +2,7 @@ import { CacheType, Interaction, Message } from "discord.js";
 import fs from "fs";
 import { logger } from "./logger";
 import { Command, isInteractable } from "./commandTypes";
-import {hasPermission, messageperms} from "./GuildPermissions";
+import {hasPermission, messagePerms} from "./GuildPermissions";
 import { GoServer } from "src/db/entities/GoServer";
 
 export const commands: Command[] = [];
