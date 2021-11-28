@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/SushiWaUmai/GoBot/compare/v0.4.0...v0.5.0) (2021-11-28)
+
+
+### Bug Fixes
+
+* **deploy:** :bug: update ormconfig to syncronise ([b71a4d8](https://github.com/SushiWaUmai/GoBot/commit/b71a4d871f677aab11346cd97308e4287d9a0f8a))
+* **deploy:** :rocket: update docker files ([073e8ff](https://github.com/SushiWaUmai/GoBot/commit/073e8ff9118e25c79671f61dfe480880b9e09629))
+* **docker:** :bug: add restart policy on crash ([0556b6a](https://github.com/SushiWaUmai/GoBot/commit/0556b6ab1b891193e9e90fa11ebd71c5db81417e))
+
+
+### Features
+
+* **backend:** :loud_sound: update log format ([b99d302](https://github.com/SushiWaUmai/GoBot/commit/b99d302ecd756149d392ec336d9af04dc5b15a4d))
+* **backend:** :loud_sound: update logging libraries ([f8b44d7](https://github.com/SushiWaUmai/GoBot/commit/f8b44d78058d847ff6c195e24277a4b3795f0873))
+* **command:** added mute and unmute commands ([64484fe](https://github.com/SushiWaUmai/GoBot/commit/64484fe9b9b6f32e8f84b6ac3acc2cfbbab031b4))
+
+
+
+
+
+
 # [0.4.0](https://github.com/SushiWaUmai/GoBot/compare/v0.3.0...v0.4.0) (2021-11-26)
 
 
