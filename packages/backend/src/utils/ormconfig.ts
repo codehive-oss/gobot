@@ -8,6 +8,8 @@ import {
   __prod__,
 } from "./constants";
 import { join } from "path";
+import { PinoTypeormLogger } from "./PinoLogger";
+import { logger } from "./logger";
 
 export const typeormOrmConfig: PostgresConnectionOptions = {
   type: "postgres",
@@ -18,6 +20,7 @@ export const typeormOrmConfig: PostgresConnectionOptions = {
   database: DB_NAME,
   synchronize: true,
   logging: !__prod__,
+  logger: new PinoTypeormLogger(logger),
   entities: [join(__dirname, "..", "db", "entities", "**", "*.{ts,js}")],
   migrations: [join(__dirname, "..", "db", "migrations", "**", "*.{ts,js}")],
   subscribers: [join(__dirname, "..", "db", "subscribers", "**", "*.{ts,js}")],

@@ -2,7 +2,7 @@ import { Client, Intents } from "discord.js";
 import { handleInteraction, handleMessage } from "./commandHandler";
 import { __prod__, PREFIX } from "./constants";
 import { createServers, toGoServer } from "../db/entities/GoServer";
-import logger from "./logger";
+import { logger } from "./logger";
 import {Int} from "type-graphql";
 
 export const client = new Client({
