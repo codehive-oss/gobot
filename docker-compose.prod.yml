@@ -1,12 +1,5 @@
 version: "3.9"
 services:
-  cloudflare-ddns:
-    image: oznu/cloudflare-ddns:latest
-    restart: always
-    environment:
-      - API_KEY=${CLOUDFLARE_API_TOKEN}
-      - ZONE=go-bot.xyz
-      - PROXIED=true
   database:
     deploy:
       restart_policy:
@@ -31,7 +24,7 @@ services:
       args:
         - BuildMode=production  
     ports:
-      - 3000:3000
+      - 80:3000
     deploy:
       restart_policy:
         condition: on-failure
