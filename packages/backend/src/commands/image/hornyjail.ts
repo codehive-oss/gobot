@@ -1,6 +1,6 @@
 import { Command } from "../../utils/commandTypes";
 import jimp from "jimp";
-import logger from "../../utils/logger";
+import { logger } from "../../utils/logger";
 import { getTarget } from "../../utils/getTarget";
 
 // start pixel 450 250

@@ -15,7 +15,7 @@ import { isAdmin, isAuth } from "../middleware/isAuth";
 import { GoUser } from "../entities/GoUser";
 import { getUserAdminGuild } from "../../utils/apiGuildUtils";
 import { GuildData } from "../../utils/graphqlPayload";
-import logger from "../../utils/logger";
+import { logger } from "../../utils/logger";
 
 @ObjectType()
 class GuildDataPayload {
