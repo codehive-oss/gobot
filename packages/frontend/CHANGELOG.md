@@ -3,6 +3,19 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.5.0](https://github.com/SushiWaUmai/GoBot/compare/v0.4.0...v0.5.0) (2021-11-28)
+
+
+### Bug Fixes
+
+* **deploy:** :rocket: update docker files ([073e8ff](https://github.com/SushiWaUmai/GoBot/commit/073e8ff9118e25c79671f61dfe480880b9e09629))
+* **docker:** :bug: add restart policy on crash ([0556b6a](https://github.com/SushiWaUmai/GoBot/commit/0556b6ab1b891193e9e90fa11ebd71c5db81417e))
+
+
+
+
+
+
 # [0.4.0](https://github.com/SushiWaUmai/GoBot/compare/v0.3.0...v0.4.0) (2021-11-26)
 
 
