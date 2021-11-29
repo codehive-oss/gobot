@@ -11,6 +11,9 @@ services:
     build:
       args:
         - BuildMode=production
+    ports:
+      - 8080:4000
+      - 8443:4000
     env_file:
       - ./packages/backend/.env.production
     deploy:
