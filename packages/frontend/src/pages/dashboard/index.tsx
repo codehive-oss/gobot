@@ -24,8 +24,6 @@ const DashboardPage: NextPage<DashboardPageProps> = () => {
         <p>Loading...</p>
       ) : guildQuery.error ? (
         <div className="flex flex-col items-center gap-y-2">
-          <p>User is not autheticated</p>
-          <p>Login to manage your servers</p>
           <p>{guildQuery.error.message}</p>
           <LoginButton className="bg-gray-800 py-2 px-5 rounded" />
         </div>

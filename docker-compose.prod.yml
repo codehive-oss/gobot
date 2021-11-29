@@ -24,6 +24,7 @@ services:
       args:
         - BuildMode=production  
     ports:
+      - 80:3000
       - 443:3000
     deploy:
       restart_policy:
