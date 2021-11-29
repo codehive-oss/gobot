@@ -6,7 +6,7 @@ import { createClient, Provider } from "urql";
 import { __prod__ } from "../utils/constants";
 
 const client = createClient({
-  url: __prod__ ? "https://www.go-bot.xyz:2053/graphql" : "http://localhost:4000/graphql",
+  url: __prod__ ? "https://www.go-bot.xyz:8443/graphql" : "http://localhost:4000/graphql",
   fetchOptions: { credentials: "include" },
 });
 
