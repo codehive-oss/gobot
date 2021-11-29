@@ -1,7 +1,5 @@
 import {Command} from "../../utils/commandTypes";
-import * as https from "https";
 import {MessageEmbed} from "discord.js";
-import {randInt} from "../../utils/random";
 import axios from "axios";
 
 const cmd: Command = {
@@ -15,16 +13,18 @@ const cmd: Command = {
 
         const resp = await axios.get(url)
 
-        await msg.reply({embeds: [new MessageEmbed()
+        await msg.reply({
+            embeds: [new MessageEmbed()
                 .setAuthor(resp.data.subreddit,
                     "https://blog.lastpass.com/wp-content/uploads/sites/20/2020/04/reddit-logo-2.jpg",
                     `https://www.reddit.com/r/${resp.data.subreddit}/`)
                 .setColor("GREEN")
-                .setTitle("Meme")
+                .setTitle(resp.data.title)
                 .setURL(resp.data.postLink)
                 .setDescription("A Meme for you")
                 .setImage(resp.data.url)
-            ]})
+            ]
+        })
 
     }
 
