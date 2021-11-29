@@ -28,4 +28,5 @@ jobs:
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
             cd /root/app/gobot/
+            sudo yarn docker:stop
             sudo yarn docker:start -d
