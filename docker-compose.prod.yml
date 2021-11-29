@@ -13,9 +13,6 @@ services:
         - BuildMode=production
     env_file:
       - ./packages/backend/.env.production
-    dns:
-      - 1.1.1.1
-      - 1.0.0.1
     deploy:
       restart_policy:
         condition: on-failure
@@ -26,10 +23,8 @@ services:
     build:
       args:
         - BuildMode=production  
-    dns:
-      - 1.1.1.1
-      - 1.0.0.1
     ports:
+      - 80:3000
       - 443:3000
     deploy:
       restart_policy:
