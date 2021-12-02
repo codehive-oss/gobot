@@ -3,7 +3,9 @@ import {handleInteraction, handleMessage} from "./commandHandler";
 import {__prod__, PREFIX} from "./constants";
 import {createServers, toGoServer} from "../db/entities/GoServer";
 import {logger} from "./logger";
+
 import {getReactionRoleMessage} from "../db/entities/ReactionRoleMessage";
+
 
 
 export const client = new Client({
@@ -63,6 +65,7 @@ client.on("guildCreate", async (guild) => {
 });
 
 
+
 client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.message.partial) await reaction.fetch();
     if (reaction.partial) await reaction.fetch();
@@ -77,6 +80,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
         await reaction.message.guild.members.cache.get(user.id)!.roles.add(rmsg.roleid)
     }
 
+
 })
 
 client.on("messageReactionRemove", async (reaction, user) => {
@@ -90,5 +94,6 @@ client.on("messageReactionRemove", async (reaction, user) => {
     if (reaction.message.id == rmsg.messageid && reaction.emoji.name == rmsg.emoji) {
         await reaction.message.guild.members.cache.get(user.id)!.roles.remove(rmsg.roleid)
     }
+
 
 })

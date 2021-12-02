@@ -1,7 +1,9 @@
+
 import {Command} from "../../utils/commandTypes";
 import {messagePerms} from "../../utils/GuildPermissions";
 import {MessageEmbed} from "discord.js";
 import {createReactionRoleMessage} from "../../db/entities/ReactionRoleMessage";
+
 
 const cmd: Command = {
     name: "reactionrole",
@@ -31,6 +33,7 @@ const cmd: Command = {
             await rmsg.save()
         }
     }
+
 };
 
 module.exports = cmd;
