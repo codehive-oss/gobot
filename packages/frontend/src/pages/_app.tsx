@@ -3,10 +3,10 @@ import type { AppProps } from "next/app";
 import LayoutComponent from "../components/LayoutComponent";
 import Head from "next/head";
 import { createClient, Provider } from "urql";
-import { __prod__ } from "../utils/constants";
+import { backendUrl, __prod__ } from "../utils/constants";
 
 const client = createClient({
-  url: __prod__ ? "https://www.go-bot.xyz:8443/graphql" : "http://localhost:4000/graphql",
+  url: `${backendUrl}/graphql`,
   fetchOptions: { credentials: "include" },
 });
 

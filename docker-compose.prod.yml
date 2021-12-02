@@ -1,5 +1,17 @@
 version: "3.9"
 services:
+  nginx:
+    ports:
+      - "443:443"
+      - "80:443"
+      - "8443:8443"
+      - "8080:8443"
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   database:
     deploy:
       restart_policy:
@@ -11,9 +23,6 @@ services:
     build:
       args:
         - BuildMode=production
-    ports:
-      - 8080:4000
-      - 8443:4000
     env_file:
       - ./packages/backend/.env.production
     deploy:
@@ -25,10 +34,7 @@ services:
   frontend:
     build:
       args:
-        - BuildMode=production  
-    ports:
-      - 80:3000
-      - 443:3000
+        - BuildMode=production
     deploy:
       restart_policy:
         condition: on-failure

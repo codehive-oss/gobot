@@ -37,7 +37,7 @@ export const createAPI = async () => {
   app.use(expressLogger);
   app.use(
     cors({
-      origin: ["http://localhost:3000", "https://go-bot.xyz"],
+      origin: ["https://localhost:3000", "https://go-bot.xyz"],
       credentials: true,
     })
   );
