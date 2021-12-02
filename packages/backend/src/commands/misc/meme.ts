@@ -21,8 +21,9 @@ const cmd: Command = {
                 .setColor("GREEN")
                 .setTitle(resp.data.title)
                 .setURL(resp.data.postLink)
-                .setDescription("A Meme for you")
+                .setDescription("Posted by " + resp.data.author)
                 .setImage(resp.data.url)
+                .setFooter(resp.data.ups + " 👍")
             ]
         })
 
