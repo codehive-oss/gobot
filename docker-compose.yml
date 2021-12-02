@@ -24,9 +24,6 @@ services:
     depends_on:
       database:
         condition: service_healthy
-    ports:
-      - 8080:4000
-      - 8443:4000
   frontend:
     image: gobot/frontend
     build:
