@@ -43,6 +43,8 @@ export const createAPI = async () => {
   );
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
+
+  // TODO: Use express session with redis
   app.use(
     cookieSession({
       secret: SESSION_SECRET,
