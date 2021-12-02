@@ -3,7 +3,9 @@ import {handleInteraction, handleMessage} from "./commandHandler";
 import {__prod__, PREFIX} from "./constants";
 import {createServers, toGoServer} from "../db/entities/GoServer";
 import {logger} from "./logger";
-import fs from "fs";
+
+import {getReactionRoleMessage} from "../db/entities/ReactionRoleMessage";
+
 
 
 export const client = new Client({
@@ -62,19 +64,6 @@ client.on("guildCreate", async (guild) => {
     await owner.user.send("test");
 });
 
-if (!fs.existsSync("reactionroles.json")) {
-    fs.open("reactionroles.json", "w", (err => {
-        if (err) {
-            throw err
-        }
-
-        logger.info("Created Rection Role config file")
-    }))
-}
-export let reactionRolesConfig: any
-
-
-reactionRolesConfig = JSON.parse(fs.readFileSync('reactionroles.json', 'utf8')) || {}
 
 
 client.on("messageReactionAdd", async (reaction, user) => {
@@ -82,13 +71,16 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.partial) await reaction.fetch();
     if (user.bot || !reaction.message.guild) return;
 
-    for (let index = 0; index < reactionRolesConfig.reactions.length; index++) {
-        let reactionrole = reactionRolesConfig.reactions[index];
+    const rmsg = await getReactionRoleMessage(reaction.message.id)
+    if (!rmsg) return
+    logger.info(reaction.emoji.name)
+    logger.info(rmsg.emoji)
+    if (reaction.message.id == rmsg.messageid && reaction.emoji.name == rmsg.emoji) {
 
-        if (reaction.message.id == reactionrole.message && reaction.emoji.name == reactionrole.emoji) {
-            await reaction.message.guild.members.cache.get(user.id)!.roles.add(reactionrole.role)
-        }
+        await reaction.message.guild.members.cache.get(user.id)!.roles.add(rmsg.roleid)
     }
+
+
 })
 
 client.on("messageReactionRemove", async (reaction, user) => {
@@ -96,11 +88,12 @@ client.on("messageReactionRemove", async (reaction, user) => {
     if (reaction.partial) await reaction.fetch();
     if (user.bot || !reaction.message.guild) return;
 
-    for (let index = 0; index < reactionRolesConfig.reactions.length; index++) {
-        let reactionrole = reactionRolesConfig.reactions[index];
+    const rmsg = await getReactionRoleMessage(reaction.message.id)
+    if (!rmsg) return
 
-        if (reaction.message.id == reactionrole.message && reaction.emoji.name == reactionrole.emoji && reaction.message.guild.members.cache.get(user.id)!.roles.cache.has(reactionrole.role)) {
-            await reaction.message.guild.members.cache.get(user.id)!.roles.remove(reactionrole.role)
-        }
+    if (reaction.message.id == rmsg.messageid && reaction.emoji.name == rmsg.emoji) {
+        await reaction.message.guild.members.cache.get(user.id)!.roles.remove(rmsg.roleid)
     }
+
+
 })
