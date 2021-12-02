@@ -1,15 +1,15 @@
-import {Client, Intents} from "discord.js";
+import {Client, Intents, TextChannel} from "discord.js";
 import {handleInteraction, handleMessage} from "./commandHandler";
 import {__prod__, PREFIX} from "./constants";
-import {createServers, toGoServer} from "../db/entities/GoServer";
+import {createServers, getWelcomeChannel, toGoServer} from "../db/entities/GoServer";
 import {logger} from "./logger";
 
 import {getReactionRoleMessage} from "../db/entities/ReactionRoleMessage";
-
+import {mention} from "./mention";
 
 
 export const client = new Client({
-    intents: [Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_PRESENCES],
+    intents: [Intents.FLAGS.GUILD_MEMBERS, Intents.FLAGS.GUILDS, Intents.FLAGS.GUILD_MESSAGES, Intents.FLAGS.GUILD_MESSAGE_REACTIONS, Intents.FLAGS.GUILD_PRESENCES],
 });
 
 if (!__prod__) {
@@ -65,7 +65,6 @@ client.on("guildCreate", async (guild) => {
 });
 
 
-
 client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.message.partial) await reaction.fetch();
     if (reaction.partial) await reaction.fetch();
@@ -97,3 +96,12 @@ client.on("messageReactionRemove", async (reaction, user) => {
 
 
 })
+
+client.on("guildMemberAdd", async member => {
+    const channelid = await getWelcomeChannel(member.guild.id)
+    const channel = member.guild.channels.cache.find(value => value.id == channelid) as TextChannel
+    if (channel) {
+        await channel.send(`${mention(member.id)} joined the Server!`)
+    }
+})
+

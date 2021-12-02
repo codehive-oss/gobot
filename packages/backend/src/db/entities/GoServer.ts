@@ -19,6 +19,10 @@ export class GoServer extends BaseEntity {
   @Field()
   @Column({ default: false })
   anime: boolean;
+
+  @Field({nullable: true})
+  @Column({nullable: true})
+  welcomechannel: string
 }
 
 export const getServer = async (
@@ -65,4 +69,20 @@ export const setAnime = async (server: GoServer, anime: boolean) => {
 export const setNSFW = async (server: GoServer, nsfw: boolean) => {
   server.nsfw = nsfw;
   await server.save();
+};
+
+export const getWelcomeChannel = async (serverid: string) => {
+  const server = await GoServer.findOne({where: {id: serverid}})
+
+  return server ? server.welcomechannel : null
+};
+
+export const setWelcomeChannel  = async (serverid: string, channelid: string) => {
+  const server = await GoServer.findOne({where: {id: serverid}})
+  if(!server) return
+
+  server.welcomechannel = channelid
+  await server.save()
+  return server ? server.welcomechannel : null
+
 };
