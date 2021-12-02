@@ -1,5 +1,11 @@
 version: "3.9"
 services:
+  nginx:
+    ports:
+      - "3000:443"
+      - "4000:8443"
+    volumes:
+      - "./nginx/logs:/var/log/nginx"
   backend:
     build:
       args:
@@ -11,8 +17,6 @@ services:
       - /usr/app/node_modules
       - /usr/app/dist
     command: yarn dev
-    ports:
-      - 4000:4000
   frontend:
     build:
       args:
@@ -22,5 +26,4 @@ services:
       - /usr/app/node_modules
       - /usr/app/.next
     command: yarn dev
-    ports:
-      - 3000:3000
+    
