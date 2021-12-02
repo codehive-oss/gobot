@@ -11,6 +11,8 @@ services:
       - /usr/app/node_modules
       - /usr/app/dist
     command: yarn dev
+    ports:
+      - 4000:4000
   frontend:
     build:
       args:
