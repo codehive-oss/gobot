@@ -1,20 +1,17 @@
 import "reflect-metadata";
 import express from "express";
 import cors from "cors";
-import { graphqlHTTP } from "express-graphql";
 import { buildSchema } from "type-graphql";
 import { createConnection } from "typeorm";
-import graphqlPlayground from "graphql-playground-middleware-express";
-import { MyContext } from "./types";
 import { typeormOrmConfig } from "./ormconfig";
 import { DiscordServerResolver } from "../db/resolvers/DiscordServerResolver";
 import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import { expressLogger, logger } from "./logger";
-import { router } from "../routes/auth";
 import passport from "passport";
-import { COOKIE_NAME, FRONTEND_URL, SESSION_SECRET, __prod__ } from "./constants";
+import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
 import expressSession from "express-session";
+import { createRouter } from "../routes";
 
 export const createAPI = async () => {
   logger.info("Creating SQL connection...");
@@ -32,12 +29,10 @@ export const createAPI = async () => {
 
   logger.info("Initializing express app...");
   const app = express();
-  app.set("trust proxy", 1);
 
   app.use(expressLogger);
   app.use(
     cors({
-      origin: [FRONTEND_URL],
       credentials: true,
     })
   );
@@ -62,23 +57,8 @@ export const createAPI = async () => {
   app.use(passport.initialize());
   app.use(passport.session());
 
-  app.use("/playground", graphqlPlayground({ endpoint: "/graphql" }));
-  app.use(
-    "/graphql",
-    graphqlHTTP((req, res, _graphQLParams) => {
-      const context: MyContext = { req, res };
-      return {
-        schema,
-        context,
-      };
-    })
-  );
-
-  app.get("/", (_req, res) => {
-    res.send("Hello world!");
-  });
-
-  app.use("/auth", router);
+  const router = createRouter(schema);
+  app.use("/api", router);
 
   return app;
 };
