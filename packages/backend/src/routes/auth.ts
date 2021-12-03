@@ -13,7 +13,7 @@ passport.deserializeUser(async (id, done) => {
   done(null, user);
 });
 
-export const router = Router();
+export const authRouter = Router();
 
 passport.use(
   new DiscordStrategy(
@@ -34,9 +34,9 @@ passport.use(
   )
 );
 
-router.get("/", passport.authenticate("discord"));
+authRouter.get("/", passport.authenticate("discord"));
 
-router.get(
+authRouter.get(
   "/callback",
   passport.authenticate("discord", {
     failureRedirect: `${FRONTEND_URL}/dashboard`,
