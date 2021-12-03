@@ -13,8 +13,8 @@ import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import { expressLogger, logger } from "./logger";
 import { router } from "../routes/auth";
 import passport from "passport";
-import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
-import cookieSession from "cookie-session";
+import { COOKIE_NAME, FRONTEND_URL, SESSION_SECRET, __prod__ } from "./constants";
+import expressSession from "express-session";
 
 export const createAPI = async () => {
   logger.info("Creating SQL connection...");
@@ -37,21 +37,25 @@ export const createAPI = async () => {
   app.use(expressLogger);
   app.use(
     cors({
-      origin: ["https://localhost:3000", "https://go-bot.xyz"],
+      origin: [FRONTEND_URL],
       credentials: true,
     })
   );
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  // TODO: Use express session with redis
+  // TODO: use redis
   app.use(
-    cookieSession({
-      secret: SESSION_SECRET,
+    expressSession({
       name: COOKIE_NAME,
-      secure: __prod__,
-      sameSite: "lax",
-      // expires and maxAge are set in the cookie-session package
+      secret: SESSION_SECRET,
+      resave: false,
+      saveUninitialized: false,
+      cookie: {
+        httpOnly: true,
+        secure: __prod__,
+        sameSite: "lax",
+      },
     })
   );
 
