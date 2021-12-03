@@ -31,11 +31,7 @@ export const createAPI = async () => {
   const app = express();
 
   app.use(expressLogger);
-  app.use(
-    cors({
-      credentials: true,
-    })
-  );
+  app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 

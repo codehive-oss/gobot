@@ -7,7 +7,6 @@ import { backendUrl, __prod__ } from "../utils/constants";
 
 const client = createClient({
   url: `${backendUrl}/graphql`,
-  fetchOptions: { credentials: "include" },
 });
 
 const App = ({ Component, pageProps }: AppProps) => {
