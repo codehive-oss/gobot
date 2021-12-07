@@ -44,9 +44,10 @@ export const createAPI = async () => {
       secret: SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
+      proxy: true,
       cookie: {
         httpOnly: true,
-        secure: __prod__,
+        secure: true,
         sameSite: "lax",
       },
     })
