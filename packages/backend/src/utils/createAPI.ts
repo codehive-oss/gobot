@@ -29,6 +29,8 @@ export const createAPI = async () => {
 
   logger.info("Initializing express app...");
   const app = express();
+  
+  if (__prod__) app.set("trust proxy", 1);
 
   app.use(expressLogger);
   app.use(cors());
@@ -42,9 +44,10 @@ export const createAPI = async () => {
       secret: SESSION_SECRET,
       resave: false,
       saveUninitialized: false,
+      proxy: true,
       cookie: {
         httpOnly: true,
-        secure: __prod__,
+        secure: true,
         sameSite: "lax",
       },
     })
