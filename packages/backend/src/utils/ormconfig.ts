@@ -19,7 +19,7 @@ export const typeormOrmConfig: PostgresConnectionOptions = {
   password: DB_PASSWORD,
   database: DB_NAME,
   synchronize: true,
-  logging: !__prod__,
+  logging: true,
   logger: new PinoTypeormLogger(logger),
   entities: [join(__dirname, "..", "db", "entities", "**", "*.{ts,js}")],
   migrations: [join(__dirname, "..", "db", "migrations", "**", "*.{ts,js}")],
