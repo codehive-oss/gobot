@@ -3,7 +3,6 @@ services:
   nginx:
     ports:
       - "443:443"
-      - "8443:8443"
     deploy:
       restart_policy:
         condition: on-failure
