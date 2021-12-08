@@ -22,6 +22,9 @@ export class GoUser extends BaseEntity {
   @Column({ default: 0 })
   xp: number;
 
+  @Column({default: 0})
+  messages: number
+
   @Column({ nullable: true })
   accessToken?: string;
 }
@@ -138,3 +141,13 @@ export const addXp = async (user: GoUser, amount: number) => {
   user.xp += amount;
   await user.save();
 };
+
+export const increaseMessages = async (userid: string) => {
+  const user = await getUser(userid)
+  if(user) {
+    user.messages+=1
+    await user.save()
+  }
+
+
+}
