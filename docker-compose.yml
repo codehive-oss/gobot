@@ -30,8 +30,6 @@ services:
     build:
       context: ./packages/backend
       dockerfile: ./Dockerfile
-    volumes:
-      - ./packages/backend/logs:/usr/app/packages/backend/logs
     expose:
       - 4000
     depends_on:
