@@ -10,8 +10,8 @@ import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import { expressLogger, logger } from "./logger";
 import passport from "passport";
 import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
-import expressSession from "express-session";
 import { createRouter } from "../routes";
+import expressSession from "express-session";
 
 export const createAPI = async () => {
   logger.info("Creating SQL connection...");
