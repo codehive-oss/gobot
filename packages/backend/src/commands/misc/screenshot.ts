@@ -6,7 +6,11 @@ const cmd: Command = {
     name: "screenshot",
     description: "screenshots the given webpage",
     category: "misc",
-    execute: async (msg, args) => {
+    execute: async (msg, args,server) => {
+        if(!server.nsfw) {
+            await msg.reply("You can't use this command because NSFW is disabled on this server.")
+            return
+        }
         if (!args[0]) {
             await msg.reply("Please provide a website!");
             return;

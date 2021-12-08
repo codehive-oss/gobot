@@ -10,6 +10,9 @@ const cmd: Command = {
   usage: "leaderboard",
   description: "Shows the Users with the Most Experience",
   async execute(msg: Message, _args: string[]) {
+
+
+
     const embed = new MessageEmbed()
       .setTitle("Leaderboard")
       .setColor("BLURPLE");
