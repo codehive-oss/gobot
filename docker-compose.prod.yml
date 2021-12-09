@@ -9,7 +9,7 @@ services:
         delay: 5s
         max_attempts: 10
         window: 10s
-  database:
+  postgres:
     deploy:
       restart_policy:
         condition: on-failure
