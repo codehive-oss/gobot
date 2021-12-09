@@ -55,7 +55,7 @@ export const createAPI = async () => {
       cookie: {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24 * 14, // 2 weeks
       },
     })
