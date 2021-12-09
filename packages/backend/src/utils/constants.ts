@@ -17,6 +17,8 @@ export const DB_PORT = process.env.DB_PORT ? +process.env.DB_PORT : 5432;
 export const DB_PASSWORD = process.env.DB_PASSWORD || "postgres";
 export const DB_HOST = process.env.DB_HOST!;
 
+export const REDIS_HOST = process.env.REDIS_HOST!;
+
 export const API_PORT = process.env.API_PORT ? +process.env.API_PORT : 4000;
 
 export const CLIENT_ID = process.env.CLIENT_ID!;

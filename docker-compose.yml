@@ -9,7 +9,7 @@ services:
     depends_on:
       - backend
       - frontend
-  database:
+  postgres:
     image: postgres:latest
     restart: always
     environment:
@@ -25,6 +25,16 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+  redis:
+    image: redis:latest
+    restart: always
+    volumes:
+      - ./packages/redisdata:/var/lib/redis/data
+    expose:
+      - 6379
+    healthcheck:
+      test: ["CMD-SHELL", "redis-cli -h redis ping"]
+      interval: 5s
   backend:
     image: gobot/backend
     build:
@@ -33,7 +43,9 @@ services:
     expose:
       - 4000
     depends_on:
-      database:
+      postgres:
+        condition: service_healthy
+      redis:
         condition: service_healthy
   frontend:
     image: gobot/frontend

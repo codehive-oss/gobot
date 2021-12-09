@@ -3,6 +3,47 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/SushiWaUmai/GoBot/compare/v0.5.0...v0.6.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* :bug: merged front and backend to one origin ([b493642](https://github.com/SushiWaUmai/GoBot/commit/b493642a3202db2dd40e9a348de27fce4de30f89))
+* :bug: remove credentials ([08680a3](https://github.com/SushiWaUmai/GoBot/commit/08680a3002f61cad1ce085444ff8f35efcb52bc3))
+* :bug: update ports ([4775597](https://github.com/SushiWaUmai/GoBot/commit/4775597f3b440479206919a423f2b9881a546210))
+* **backend:** :bug: fix nginx proxy sessions and cookies ([fe290cd](https://github.com/SushiWaUmai/GoBot/commit/fe290cdf7f273784620916cf29504cec55f81e78))
+* **backend:** :bug: resolve merge confict ([94db1fa](https://github.com/SushiWaUmai/GoBot/commit/94db1fa4a4b1466fc4d26f037aaeb44b286d5c08))
+* **backend:** :bug: trust proxy on production ([7dec9b3](https://github.com/SushiWaUmai/GoBot/commit/7dec9b3f4d78cd58d7841ae9fc6550b5e0a15a3b))
+* **backend:** :bug: update nginx headers ([effddec](https://github.com/SushiWaUmai/GoBot/commit/effddec1a9febbf4f828cec6470c7632364a8fe9))
+* **docker:** :bug: change container names to be unique ([2cfd1d3](https://github.com/SushiWaUmai/GoBot/commit/2cfd1d35c56f3de61722243ab25f7c9b0f489792))
+* **docker:** :bug: update docker compose files for dev ([6b0f27f](https://github.com/SushiWaUmai/GoBot/commit/6b0f27f6d09f76311b0be8168eca39324b05989e))
+* **docker:** :bug: update nginx ports ([e40302e](https://github.com/SushiWaUmai/GoBot/commit/e40302e90f6ea57b262964e7fb985d557af2d17d))
+* **docker:** :bug: update ports ([69e39fb](https://github.com/SushiWaUmai/GoBot/commit/69e39fb2b14082cf50561a93993e9f2bf804f2f6))
+* **docker:** :rocket: update docker files ([3bdd6db](https://github.com/SushiWaUmai/GoBot/commit/3bdd6db39df3b74ebea9a63361e88d7387bc03bd))
+* **docker:** :rocket: update ports ([786d57f](https://github.com/SushiWaUmai/GoBot/commit/786d57f26c6b38762f01bdad80f9a58d2a0efa37))
+* **frontend:** :bug: update frontend page ([4209737](https://github.com/SushiWaUmai/GoBot/commit/4209737cbb0802670f78b4933825e07db8397b9c))
+* **frontend:** :bug: update to client to HTTPS ([d84275c](https://github.com/SushiWaUmai/GoBot/commit/d84275cab6a3aa2281072fc626b22ce0a78284a0))
+
+
+### Features
+
+* **backend:** :loud_sound: add backend logs in production ([9547ef7](https://github.com/SushiWaUmai/GoBot/commit/9547ef70689125025da1cf51f80ab4ed31b7692e))
+* **backend:** :sparkles: add redis ([f9c3ede](https://github.com/SushiWaUmai/GoBot/commit/f9c3ede3e8a6e61bcff36b64f1f8d17161d71884))
+* **backend:** :sparkles: add redis to docker compose ([1e267cc](https://github.com/SushiWaUmai/GoBot/commit/1e267cc20cebe3e8409a01b019b324503ae96716))
+* **backend:** :sparkles: update to express-session ([5049362](https://github.com/SushiWaUmai/GoBot/commit/50493629a425e93f2c392305ff60af1c7cb1fdd1))
+* **backend:** added reaction roles ([c5fd86d](https://github.com/SushiWaUmai/GoBot/commit/c5fd86d4e1142f01bf6b237519c9ed52cc784ea9))
+* **command:** added meme command ([64af19d](https://github.com/SushiWaUmai/GoBot/commit/64af19db814909e66b0368f4488def8ab1b5c26c))
+* **deploy:** :rocket: add copy-dev on github workflows ([267bb36](https://github.com/SushiWaUmai/GoBot/commit/267bb3657567c0edd4741c767f9ad0b5e2319fd6))
+* **docker:** :loud_sound: add logs for production ([0d31185](https://github.com/SushiWaUmai/GoBot/commit/0d3118507a01e7cc9ce132a298c01ca45436ebd9))
+* **docker:** :rocket: update docker port on production ([4934875](https://github.com/SushiWaUmai/GoBot/commit/4934875cdcba31783c837c96ffd21c7c32c95043))
+* **frontend:** :sparkles: add sharp ([0af1cd3](https://github.com/SushiWaUmai/GoBot/commit/0af1cd3ab30b88401df2d094b2df7bce56711a2f))
+* **nginx:** :boom: add nginx and ssl ([91145ad](https://github.com/SushiWaUmai/GoBot/commit/91145ad5e7d42f4a99c66c07907f37c4f53a92ab))
+
+
+
+
+
+
 # [0.5.0](https://github.com/SushiWaUmai/GoBot/compare/v0.4.0...v0.5.0) (2021-11-28)
 
 

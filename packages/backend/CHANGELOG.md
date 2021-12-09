@@ -3,6 +3,34 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/SushiWaUmai/GoBot/compare/v0.5.0...v0.6.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* :bug: merged front and backend to one origin ([b493642](https://github.com/SushiWaUmai/GoBot/commit/b493642a3202db2dd40e9a348de27fce4de30f89))
+* :bug: remove credentials ([08680a3](https://github.com/SushiWaUmai/GoBot/commit/08680a3002f61cad1ce085444ff8f35efcb52bc3))
+* :bug: update ports ([4775597](https://github.com/SushiWaUmai/GoBot/commit/4775597f3b440479206919a423f2b9881a546210))
+* **backend:** :bug: fix nginx proxy sessions and cookies ([fe290cd](https://github.com/SushiWaUmai/GoBot/commit/fe290cdf7f273784620916cf29504cec55f81e78))
+* **backend:** :bug: resolve merge confict ([94db1fa](https://github.com/SushiWaUmai/GoBot/commit/94db1fa4a4b1466fc4d26f037aaeb44b286d5c08))
+* **backend:** :bug: trust proxy on production ([7dec9b3](https://github.com/SushiWaUmai/GoBot/commit/7dec9b3f4d78cd58d7841ae9fc6550b5e0a15a3b))
+
+
+### Features
+
+* **backend:** :loud_sound: add backend logs in production ([9547ef7](https://github.com/SushiWaUmai/GoBot/commit/9547ef70689125025da1cf51f80ab4ed31b7692e))
+* **backend:** :sparkles: add redis ([f9c3ede](https://github.com/SushiWaUmai/GoBot/commit/f9c3ede3e8a6e61bcff36b64f1f8d17161d71884))
+* **backend:** :sparkles: add redis to docker compose ([1e267cc](https://github.com/SushiWaUmai/GoBot/commit/1e267cc20cebe3e8409a01b019b324503ae96716))
+* **backend:** :sparkles: update to express-session ([5049362](https://github.com/SushiWaUmai/GoBot/commit/50493629a425e93f2c392305ff60af1c7cb1fdd1))
+* **backend:** added reaction roles ([c5fd86d](https://github.com/SushiWaUmai/GoBot/commit/c5fd86d4e1142f01bf6b237519c9ed52cc784ea9))
+* **command:** added meme command ([64af19d](https://github.com/SushiWaUmai/GoBot/commit/64af19db814909e66b0368f4488def8ab1b5c26c))
+* **nginx:** :boom: add nginx and ssl ([91145ad](https://github.com/SushiWaUmai/GoBot/commit/91145ad5e7d42f4a99c66c07907f37c4f53a92ab))
+
+
+
+
+
+
 # [0.5.0](https://github.com/SushiWaUmai/GoBot/compare/v0.4.0...v0.5.0) (2021-11-28)
 
 
