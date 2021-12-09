@@ -29,7 +29,7 @@ export const createAPI = async () => {
 
   logger.info("Initializing express app...");
   const app = express();
-  
+
   if (__prod__) app.set("trust proxy", 1);
 
   app.use(expressLogger);
@@ -48,7 +48,8 @@ export const createAPI = async () => {
       cookie: {
         httpOnly: true,
         secure: true,
-        sameSite: "lax",
+        sameSite: "strict",
+        maxAge: 1000 * 60 * 60 * 24 * 14, // 2 weeks
       },
     })
   );
