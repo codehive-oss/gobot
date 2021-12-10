@@ -1,13 +1,16 @@
-import {Client, Intents, TextChannel} from "discord.js";
-import {handleInteraction, handleMessage} from "./commandHandler";
-import {__prod__, PREFIX} from "./constants";
-import {createServers, getWelcomeChannel, toGoServer} from "../db/entities/GoServer";
-import {logger} from "./logger";
+import { Client, Intents, TextChannel } from "discord.js";
+import { handleInteraction, handleMessage } from "./commandHandler";
+import { PREFIX } from "./constants";
+import {
+  createServers,
+  getWelcomeChannel,
+  toGoServer,
+} from "../db/entities/GoServer";
+import { logger } from "./logger";
 
-import {getReactionRoleMessage} from "../db/entities/ReactionRoleMessage";
-import {mention} from "./mention";
-import {increaseMessages} from "../db/entities/GoUser";
-
+import { getReactionRoleMessage } from "../db/entities/ReactionRoleMessage";
+import { mention } from "./mention";
+import { increaseMessages } from "../db/entities/GoUser";
 
 export const client = new Client({
   intents: [
@@ -47,17 +50,15 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
+  if (message.member && !message.content.startsWith(PREFIX))
+    //messages should not increment if they are commands
+    await increaseMessages(message.member.user.id);
 
-
-    if(message.member && !message.content.startsWith(PREFIX)) //messages should not increment if they are commands
-        await increaseMessages(message.member.user.id)
-
-    if (!message.guild) {
-        return;
-    }
-    const server = await toGoServer(message.guild.id);
-    await handleMessage(message, server);
-
+  if (!message.guild) {
+    return;
+  }
+  const server = await toGoServer(message.guild.id);
+  await handleMessage(message, server);
 });
 
 client.on("interactionCreate", async (interaction) => {

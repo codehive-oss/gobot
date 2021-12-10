@@ -5,7 +5,6 @@ import {
   DB_PASSWORD,
   DB_PORT,
   DB_USER,
-  __prod__,
 } from "./constants";
 import { join } from "path";
 import { PinoTypeormLogger } from "./PinoLogger";
