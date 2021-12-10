@@ -9,7 +9,7 @@ import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import { expressLogger, logger } from "./logger";
 import passport from "passport";
-import { COOKIE_NAME, REDIS_HOST, SESSION_SECRET, __prod__ } from "./constants";
+import { COOKIE_NAME, REDIS_HOST, SESSION_SECRET } from "./constants";
 import { createRouter } from "../routes";
 import expressSession from "express-session";
 import connectRedis from "connect-redis";
@@ -34,7 +34,7 @@ export const createAPI = async () => {
   const RedisStore = connectRedis(expressSession);
   const redis = new Redis(REDIS_HOST);
 
-  if (__prod__) app.set("trust proxy", 1);
+  app.enable("trust proxy");
 
   app.use(expressLogger);
   app.use(cors());
@@ -55,7 +55,7 @@ export const createAPI = async () => {
       cookie: {
         httpOnly: true,
         secure: true,
-        sameSite: "strict",
+        sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24 * 14, // 2 weeks
       },
     })

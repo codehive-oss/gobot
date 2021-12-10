@@ -1,7 +1,6 @@
 import pino from "pino";
 import expressPinoLogger from "express-pino-logger";
 import pinoPretty from "pino-pretty";
-import { __prod__ } from "./constants";
 
 const prettifier = pinoPretty({
   colorize: true,
