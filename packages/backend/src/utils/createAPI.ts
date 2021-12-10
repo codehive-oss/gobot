@@ -34,7 +34,7 @@ export const createAPI = async () => {
   const RedisStore = connectRedis(expressSession);
   const redis = new Redis(REDIS_HOST);
 
-  if (__prod__) app.set("trust proxy", 1);
+  app.enable("trust proxy");
 
   app.use(expressLogger);
   app.use(cors());
