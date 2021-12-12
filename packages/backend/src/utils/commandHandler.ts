@@ -2,8 +2,9 @@ import { CacheType, Interaction, Message } from "discord.js";
 import fs from "fs";
 import { logger } from "./logger";
 import { Command, isInteractable } from "./commandTypes";
-import {hasPermission, messagePerms} from "./GuildPermissions";
+import { hasPermission, messagePerms } from "./GuildPermissions";
 import { GoServer } from "src/db/entities/GoServer";
+import { increaseMessages } from "../db/entities/GoUser";
 
 export const commands: Command[] = [];
 
@@ -36,22 +37,26 @@ export const handleMessage = async (message: Message, server: GoServer) => {
   }
   let content = message.content;
 
+  // messages should not increment if they are commands
+  if (message.member && !message.content.startsWith(server.prefix)) {
+    await increaseMessages(message.member.user.id);
+  }
+
   if (content.toLocaleLowerCase().startsWith(server.prefix)) {
     content = content.slice(server.prefix.length);
     const args = content.split(" ");
     const commandName = args[0].toLocaleLowerCase();
     args.shift();
 
-
     for (const command of commands) {
       if (
         command.name === commandName ||
         (command.aliases && command.aliases.includes(commandName))
       ) {
-        if(command.permissions) {
-          if(!hasPermission(message.member!, command.permissions)) {
+        if (command.permissions) {
+          if (!hasPermission(message.member!, command.permissions)) {
             await message.reply("Insufficient Permissions");
-            return
+            return;
           }
         }
 
