@@ -3,6 +3,27 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/SushiWaUmai/GoBot/compare/v0.6.0...v0.7.0) (2021-12-12)
+
+
+### Bug Fixes
+
+* **backend:** :bug: minor prefix bug fixes ([651b9a2](https://github.com/SushiWaUmai/GoBot/commit/651b9a23e60e98808dffdadd166efa2740a00450))
+* **backend:** :bug: update cookie settings ([41994a2](https://github.com/SushiWaUmai/GoBot/commit/41994a218a241c37fa70f8ca1ae060c884d321c8))
+* **backend:** :bug: update nginx config and trust proxy ([37dea36](https://github.com/SushiWaUmai/GoBot/commit/37dea36e09dffc8a3b70b23db1f82c1496c0483e))
+* **command:** :bug: remove command when it is not defined ([0e6920c](https://github.com/SushiWaUmai/GoBot/commit/0e6920c2801d660aa6201c431c5ef990349e0beb))
+
+
+### Features
+
+* :sparkles: Added message leaderboard ([d0dce46](https://github.com/SushiWaUmai/GoBot/commit/d0dce468a003922188e1a4e7130450b7a5047b56))
+* **backend:** :sparkles: renamed getUserData to me and updated graphql codge accordingly ([9c221ec](https://github.com/SushiWaUmai/GoBot/commit/9c221ecbbc53d43f717f0484eebfa862cfca1fdd))
+
+
+
+
+
+
 # [0.6.0](https://github.com/SushiWaUmai/GoBot/compare/v0.5.0...v0.6.0) (2021-12-09)
 
 
