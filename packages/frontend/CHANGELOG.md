@@ -3,6 +3,29 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.7.0](https://github.com/SushiWaUmai/GoBot/compare/v0.6.0...v0.7.0) (2021-12-12)
+
+
+### Features
+
+* :sparkles: Added message leaderboard ([d0dce46](https://github.com/SushiWaUmai/GoBot/commit/d0dce468a003922188e1a4e7130450b7a5047b56))
+* **backend:** :sparkles: renamed getUserData to me and updated graphql codge accordingly ([9c221ec](https://github.com/SushiWaUmai/GoBot/commit/9c221ecbbc53d43f717f0484eebfa862cfca1fdd))
+* **frontend:** :mag: add meta tags on all sites for seo ([683b995](https://github.com/SushiWaUmai/GoBot/commit/683b995f49201ba25fbd4aa45de1d26984bc6f06))
+* **frontend:** :mag: made the commands page ssr ([ebe44c1](https://github.com/SushiWaUmai/GoBot/commit/ebe44c161e9ebb8bef44c330608d4df66c612a95))
+* **frontend:** :sparkles: setup cache and ssr ([2b864c8](https://github.com/SushiWaUmai/GoBot/commit/2b864c8d84ef94abec6255dc1c231445bd1b1e8b))
+* **frontend:** :sparkles: update tailwind css to v3 ([2673d83](https://github.com/SushiWaUmai/GoBot/commit/2673d8343fc366abaf5fe501c79452e6def4b14c))
+* **frontend:** :wrench: update tailwind configuration to v3 ([a8f8376](https://github.com/SushiWaUmai/GoBot/commit/a8f8376185d14c9835114c0b8a7999d9aaefba06))
+
+
+### Performance Improvements
+
+* **frontend:** :zap: update urql structure ([9195417](https://github.com/SushiWaUmai/GoBot/commit/919541795be5e04e0079053e43d59f86a6ee166a))
+
+
+
+
+
+
 # [0.6.0](https://github.com/SushiWaUmai/GoBot/compare/v0.5.0...v0.6.0) (2021-12-09)
 
 

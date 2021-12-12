@@ -1,6 +1,7 @@
 import gql from 'graphql-tag';
 import * as Urql from 'urql';
 export type Maybe<T> = T | null;
+export type InputMaybe<T> = Maybe<T>;
 export type Exact<T extends { [key: string]: unknown }> = { [K in keyof T]: T[K] };
 export type MakeOptional<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]?: Maybe<T[SubKey]> };
 export type MakeMaybe<T, K extends keyof T> = Omit<T, K> & { [SubKey in K]: Maybe<T[SubKey]> };
@@ -26,6 +27,7 @@ export type Command = {
   category?: Maybe<Scalars['String']>;
   description: Scalars['String'];
   name: Scalars['String'];
+  tags?: Maybe<Array<Scalars['String']>>;
   usage?: Maybe<Scalars['String']>;
 };
 
@@ -35,6 +37,7 @@ export type GoServer = {
   id: Scalars['String'];
   nsfw: Scalars['Boolean'];
   prefix: Scalars['String'];
+  welcomechannel?: Maybe<Scalars['String']>;
 };
 
 export type GuildData = {
@@ -52,28 +55,7 @@ export type GuildDataPayload = {
 
 export type Mutation = {
   __typename?: 'Mutation';
-  setAnime: GoServer;
-  setNSFW: GoServer;
-  setPrefix: GoServer;
   updateServer: Scalars['Boolean'];
-};
-
-
-export type MutationSetAnimeArgs = {
-  anime: Scalars['Boolean'];
-  serverID: Scalars['String'];
-};
-
-
-export type MutationSetNsfwArgs = {
-  nsfw: Scalars['Boolean'];
-  serverID: Scalars['String'];
-};
-
-
-export type MutationSetPrefixArgs = {
-  prefix: Scalars['String'];
-  serverID: Scalars['String'];
 };
 
 
@@ -88,9 +70,9 @@ export type Query = {
   getCategoryCommands: Array<Command>;
   getCommands: Array<Command>;
   getGuildDataPayloadFromID: GuildDataPayload;
-  getUserData: UserData;
   getUserGuilds: Array<GuildData>;
   logoutUser: Scalars['Boolean'];
+  me: UserData;
 };
 
 
@@ -116,6 +98,14 @@ export type UserData = {
   username: Scalars['String'];
 };
 
+export type UpdateServerMutationVariables = Exact<{
+  serverID: Scalars['String'];
+  serverInput: UpdateServerInput;
+}>;
+
+
+export type UpdateServerMutation = { __typename?: 'Mutation', updateServer: boolean };
+
 export type GetCategoriesQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -140,11 +130,6 @@ export type GetGuildDataPaylaodFromIdQueryVariables = Exact<{
 
 export type GetGuildDataPaylaodFromIdQuery = { __typename?: 'Query', getGuildDataPayloadFromID: { __typename?: 'GuildDataPayload', guildData: { __typename?: 'GuildData', icon?: string | null | undefined, name: string }, goServer: { __typename?: 'GoServer', prefix: string, nsfw: boolean, anime: boolean } } };
 
-export type GetUserDataQueryVariables = Exact<{ [key: string]: never; }>;
-
-
-export type GetUserDataQuery = { __typename?: 'Query', getUserData: { __typename?: 'UserData', id: string, username: string, avatar: string } };
-
 export type GetUserGuildsQueryVariables = Exact<{ [key: string]: never; }>;
 
 
@@ -155,15 +140,21 @@ export type LogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type LogoutUserQuery = { __typename?: 'Query', logoutUser: boolean };
 
-export type UpdateServerMutationVariables = Exact<{
-  serverID: Scalars['String'];
-  serverInput: UpdateServerInput;
-}>;
+export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type UpdateServerMutation = { __typename?: 'Mutation', updateServer: boolean };
+export type Unnamed_1_Query = { __typename?: 'Query', me: { __typename?: 'UserData', id: string, username: string, avatar: string } };
 
 
+export const UpdateServerDocument = gql`
+    mutation UpdateServer($serverID: String!, $serverInput: UpdateServerInput!) {
+  updateServer(serverID: $serverID, updateServerInput: $serverInput)
+}
+    `;
+
+export function useUpdateServerMutation() {
+  return Urql.useMutation<UpdateServerMutation, UpdateServerMutationVariables>(UpdateServerDocument);
+};
 export const GetCategoriesDocument = gql`
     query GetCategories {
   getCategories {
@@ -225,19 +216,6 @@ export const GetGuildDataPaylaodFromIdDocument = gql`
 export function useGetGuildDataPaylaodFromIdQuery(options: Omit<Urql.UseQueryArgs<GetGuildDataPaylaodFromIdQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetGuildDataPaylaodFromIdQuery>({ query: GetGuildDataPaylaodFromIdDocument, ...options });
 };
-export const GetUserDataDocument = gql`
-    query GetUserData {
-  getUserData {
-    id
-    username
-    avatar
-  }
-}
-    `;
-
-export function useGetUserDataQuery(options: Omit<Urql.UseQueryArgs<GetUserDataQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<GetUserDataQuery>({ query: GetUserDataDocument, ...options });
-};
 export const GetUserGuildsDocument = gql`
     query GetUserGuilds {
   getUserGuilds {
@@ -260,12 +238,16 @@ export const LogoutUserDocument = gql`
 export function useLogoutUserQuery(options: Omit<Urql.UseQueryArgs<LogoutUserQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<LogoutUserQuery>({ query: LogoutUserDocument, ...options });
 };
-export const UpdateServerDocument = gql`
-    mutation UpdateServer($serverID: String!, $serverInput: UpdateServerInput!) {
-  updateServer(serverID: $serverID, updateServerInput: $serverInput)
+export const Document = gql`
+    {
+  me {
+    id
+    username
+    avatar
+  }
 }
     `;
 
-export function useUpdateServerMutation() {
-  return Urql.useMutation<UpdateServerMutation, UpdateServerMutationVariables>(UpdateServerDocument);
+export function useQuery(options: Omit<Urql.UseQueryArgs<QueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<Query>({ query: Document, ...options });
 };

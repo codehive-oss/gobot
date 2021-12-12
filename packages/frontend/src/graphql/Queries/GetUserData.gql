@@ -1,7 +1,0 @@
-query GetUserData {
-  getUserData {
-    id
-    username
-    avatar
-  }
-}

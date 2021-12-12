@@ -16,7 +16,7 @@ import {
   toGoUser,
 } from "../../db/entities/GoUser";
 import { randInt } from "../../utils/random";
-import { PREFIX } from "../../utils/constants";
+
 
 const pickOne = (arr: Item[]): Item | undefined => {
   const rand = Math.random();
@@ -36,10 +36,10 @@ const cmd: Command & Cooldown = {
   category: "economy",
   description: "Mine for items",
   cooldown: 30,
-  execute: async function (msg, _args) {
+  execute: async function (msg, _args, server) {
     if (!(await hasTool(await toGoUser(msg.author.id), 0))) {
       await msg.reply(
-        `You dont have a Pickaxe. Visit ${PREFIX}shop to buy one`
+        `You dont have a Pickaxe. Visit ${server.prefix}shop to buy one`
       );
       return;
     }
@@ -75,7 +75,7 @@ const cmd: Command & Cooldown = {
       if (randInt(0, 50) == 1) {
         await removeTool(user, 0);
         await msg.reply(
-          `Too bad! Your Pickaxe broke. Visit ${PREFIX}shop to buy a new one!`
+          `Too bad! Your Pickaxe broke. Visit ${server.prefix}shop to buy a new one!`
         );
       }
     } else {

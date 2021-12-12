@@ -2,24 +2,40 @@ import "../styles/globals.css";
 import type { AppProps } from "next/app";
 import LayoutComponent from "../components/LayoutComponent";
 import Head from "next/head";
-import { createClient, Provider } from "urql";
-import { backendUrl, __prod__ } from "../utils/constants";
-
-const client = createClient({
-  url: `${backendUrl}/graphql`,
-});
 
 const App = ({ Component, pageProps }: AppProps) => {
   return (
     <>
       <Head>
         <link rel="icon" type="image/png" href="GoBot.png" />
+        <meta
+          name="description"
+          content="GoBot is a multipurpose bot for your discord server"
+        />
+        <meta
+          name="keywords"
+          content="discord, bot, go-bot, gobot, gobot.xyz"
+        />
+        <meta property="og:title" content="GoBot" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content="https://www.go-bot.xyz" />
+        <meta property="og:image" content="/GobotBanner.png" />
+        <meta
+          property="og:description"
+          content="GoBot is a multipurpose bot for your discord server"
+        />
+        <meta property="og:site_name" content="GoBot" />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="GoBot" />
+        <meta
+          name="twitter:description"
+          content="GoBot is a multipurpose bot for your discord server"
+        />
+        <meta name="twitter:image" content="/GobotBanner.png" />
       </Head>
-      <Provider value={client}>
-        <LayoutComponent>
-          <Component {...pageProps} />
-        </LayoutComponent>
-      </Provider>
+      <LayoutComponent>
+        <Component {...pageProps} />
+      </LayoutComponent>
     </>
   );
 };

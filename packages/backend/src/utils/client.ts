@@ -1,6 +1,6 @@
 import { Client, Intents, TextChannel } from "discord.js";
 import { handleInteraction, handleMessage } from "./commandHandler";
-import { PREFIX } from "./constants";
+import { DEFAULT_PREFIX } from "./constants";
 import {
   createServers,
   getWelcomeChannel,
@@ -10,7 +10,6 @@ import { logger } from "./logger";
 
 import { getReactionRoleMessage } from "../db/entities/ReactionRoleMessage";
 import { mention } from "./mention";
-import { increaseMessages } from "../db/entities/GoUser";
 
 export const client = new Client({
   intents: [
@@ -38,7 +37,7 @@ client.on("ready", async () => {
     status: "online",
     activities: [
       {
-        name: `${PREFIX}help`,
+        name: `${DEFAULT_PREFIX}help`,
         type: "LISTENING",
       },
       {
@@ -50,10 +49,6 @@ client.on("ready", async () => {
 });
 
 client.on("messageCreate", async (message) => {
-  if (message.member && !message.content.startsWith(PREFIX))
-    //messages should not increment if they are commands
-    await increaseMessages(message.member.user.id);
-
   if (!message.guild) {
     return;
   }

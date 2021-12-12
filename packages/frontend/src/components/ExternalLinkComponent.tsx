@@ -1,7 +1,7 @@
 import React from "react";
 
 type ExternalLinkComponentProps = React.HTMLAttributes<HTMLDivElement> & {
-    href: string;
+  href: string;
 };
 
 const ExtenalLinkComponent: React.FC<ExternalLinkComponentProps> = ({
@@ -12,7 +12,7 @@ const ExtenalLinkComponent: React.FC<ExternalLinkComponentProps> = ({
     return (
         <div className={className}>
 
-            <a href={href}>{children}</a>
+            <a href={href} target="_blank" rel="noreferrer">{children}</a>
         </div>
     );
 };
