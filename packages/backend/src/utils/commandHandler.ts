@@ -22,9 +22,15 @@ function addCommandsRecursive(dir: string, folder: string) {
       addCommandsRecursive(dir + "/" + file.toString(), file);
     }
     if (file.endsWith(".js")) {
-      const command = require(`../commands/${folder}/${file}`) as Command;
-      commands.push(command);
-      logger.trace(`Registered ${command.name} command ${dir}`);
+      const command = require(`../commands/${folder}/${file}`) as
+        | Command
+        | undefined;
+      if (command?.name) {
+        commands.push(command);
+        logger.trace(`Registered ${command.name} command ${dir}/${file}`);
+      } else {
+        logger.warn(`Command in ${dir}/${file} is not a valid command`);
+      }
     }
   }
 }
