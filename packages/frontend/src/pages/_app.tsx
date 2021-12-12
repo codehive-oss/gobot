@@ -19,7 +19,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         <meta property="og:title" content="GoBot" />
         <meta property="og:type" content="website" />
         <meta property="og:url" content="https://www.go-bot.xyz" />
-        <meta property="og:image" content="/GobotBanner.png" />
+        <meta property="og:image" content="https://www.go-bot.xyz/GobotBanner.png" />
         <meta
           property="og:description"
           content="GoBot is a multipurpose bot for your discord server"
@@ -31,7 +31,7 @@ const App = ({ Component, pageProps }: AppProps) => {
           name="twitter:description"
           content="GoBot is a multipurpose bot for your discord server"
         />
-        <meta name="twitter:image" content="/GobotBanner.png" />
+        <meta name="twitter:image" content="https://www.go-bot.xyz/GobotBanner.png" />
       </Head>
       <LayoutComponent>
         <Component {...pageProps} />
