@@ -14,6 +14,7 @@ import {
   useGetGuildDataPaylaodFromIdQuery,
   useUpdateServerMutation,
 } from "../../generated/graphql";
+import { withUrql } from "../../utils/withUrql";
 
 interface ServerDetailsPageProps {}
 
@@ -138,4 +139,4 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
   );
 };
 
-export default ServerDetailsPage;
+export default withUrql(ServerDetailsPage);
