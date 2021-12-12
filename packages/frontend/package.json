@@ -24,9 +24,10 @@
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
-    "@graphql-codegen/cli": "^2.2.2",
-    "@graphql-codegen/typescript-operations": "^2.2.0",
-    "@graphql-codegen/typescript-urql": "^3.4.0",
+    "@graphql-codegen/cli": "^2.3.0",
+    "@graphql-codegen/typescript": "^2.4.1",
+    "@graphql-codegen/typescript-operations": "^2.2.1",
+    "@graphql-codegen/typescript-urql": "^3.4.1",
     "@types/node": "16.11.7",
     "@types/react": "17.0.34",
     "autoprefixer": "^10.4.0",

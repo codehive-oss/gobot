@@ -11,7 +11,7 @@ import { UserData } from "../../utils/graphqlPayload";
 export class GoUserResolver {
   @Query(() => UserData)
   @UseMiddleware(isAuth)
-  async getUserData(@Ctx() { req }: MyContext) {
+  async me(@Ctx() { req }: MyContext) {
     const goUser = req.user as GoUser;
     const profile = await axios.get(`${DISCORD_API_ENDPOINT}/users/@me`, {
       headers: { Authorization: `Bearer ${goUser.accessToken}` },
