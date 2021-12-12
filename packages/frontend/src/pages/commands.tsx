@@ -1,4 +1,3 @@
-// import { useState } from "react";
 import { NextPage } from "next";
 import { useState } from "react";
 import CommnadsListComponent from "../components/CommandsList";
@@ -59,4 +58,4 @@ const CommandsPage: NextPage<CommandsPageProps> = () => {
   );
 };
 
-export default withUrql(CommandsPage);
+export default withUrql(CommandsPage, { ssr: true });
