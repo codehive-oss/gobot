@@ -14,6 +14,7 @@ const About: NextPage<AboutProps> = () => {
       <div className="text-center">
         <h1 className="text-5xl">Team</h1>
         <br />
+        <p>This Page is under construction!</p>
       </div>
     </NavbarProvider>
   );
