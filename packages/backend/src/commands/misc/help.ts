@@ -4,6 +4,7 @@ import {
   MessageEmbed,
   MessageSelectMenu,
   MessageSelectOptionData,
+  TextChannel,
 } from "discord.js";
 import { client } from "../../utils/client";
 import { commands } from "../../utils/commandHandler";
@@ -13,6 +14,7 @@ import {
 } from "../../utils/commandTypes";
 import { allCategoryData, Categories } from "../../utils/categoryTypes";
 import { capitalizeFirstLetter } from "../../utils/capitalize";
+import Pagination from "../../utils/Pagination";
 import { mention } from "../../utils/mention";
 
 const cmd: Command & CommandSelectMenuInteraction = {
@@ -87,28 +89,42 @@ const cmd: Command & CommandSelectMenuInteraction = {
     await msg.reply({ embeds: [embed] });
   },
   handleInteraction: async (interaction) => {
+    const commandsPerPage = 10;
     const category = interaction.values[0] as Categories;
-
-    const embed = new MessageEmbed();
-    embed.setColor("#528B8B");
-    embed.setTitle(":books: Category Info [" + category + "]");
-    if (client.user?.avatarURL()) {
-      embed.setThumbnail(client.user.avatarURL()!);
-    }
-
+    const categoryCommands = commands.filter((c) => c.category == category);
+    const pages: MessageEmbed[] = [];
+    const amount = Math.ceil(categoryCommands.length / commandsPerPage);
+    console.log(amount);
     const emoji = client.emojis.cache.find((e) => e.name === "gobot");
 
-    for (const command of commands) {
-      if (command.category === category) {
-        embed.addField(`${emoji} ${command.name}`, command.description);
+    for (let i = 0; i < amount; i++) {
+      const embed = new MessageEmbed();
+      embed.setTitle(":books: Category Info [" + category + "]");
+      embed.setColor("#528B8B");
+      if (client.user?.avatarURL()) {
+        embed.setThumbnail(client.user.avatarURL()!);
       }
+      for (
+        let j = i * commandsPerPage;
+        j < i * commandsPerPage + commandsPerPage;
+        j++
+      ) {
+        if (categoryCommands[i * commandsPerPage + (j - commandsPerPage * i)])
+          embed.addField(
+            emoji +
+              " " +
+              categoryCommands[i * commandsPerPage + (j - commandsPerPage * i)]
+                .name,
+            categoryCommands[i * commandsPerPage + (j - commandsPerPage * i)]
+              .description
+          );
+      }
+      if (embed.fields.length) pages.push(embed);
     }
-
     await interaction.reply({
-      ephemeral: true,
       content: mention(interaction.user.id),
-      embeds: [embed],
     });
+    new Pagination(interaction.channel as TextChannel, pages).paginate();
   },
 };
 
