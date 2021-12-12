@@ -1,6 +1,6 @@
 import { logger } from "../../utils/logger";
 import { MyContext } from "../../utils/types";
-import { Ctx, Query, Resolver, UseMiddleware } from "type-graphql";
+import { Ctx, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import axios from "axios";
 import { GoUser } from "../entities/GoUser";
 import { isAuth } from "../middleware/isAuth";
@@ -20,7 +20,7 @@ export class GoUserResolver {
     return profile.data as UserData;
   }
 
-  @Query(() => Boolean)
+  @Mutation(() => Boolean)
   logoutUser(@Ctx() { req }: MyContext) {
     try {
       req.logOut!();
