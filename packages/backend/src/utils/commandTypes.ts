@@ -40,11 +40,17 @@ export interface Cooldown {
 }
 
 export interface CommandSelectMenuInteraction {
-  handleInteraction: (interaction: SelectMenuInteraction<CacheType>) => void;
+  handleInteraction: (
+    interaction: SelectMenuInteraction<CacheType>,
+    server: GoServer
+  ) => void;
 }
 
 export interface CommandButtonInteraction {
-  handleInteraction: (interaction: ButtonInteraction<CacheType>) => void;
+  handleInteraction: (
+    interaction: ButtonInteraction<CacheType>,
+    server: GoServer
+  ) => void;
 }
 
 export interface MessageInteraction {
