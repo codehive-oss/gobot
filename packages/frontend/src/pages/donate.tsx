@@ -14,6 +14,7 @@ const DonatePage: NextPage<DonatePageProps> = () => {
       <div className="text-center">
         <h1 className="text-5xl">Donate</h1>
         <br />
+        <p>This Page is under construction!</p>
       </div>
     </NavbarProvider>
   );

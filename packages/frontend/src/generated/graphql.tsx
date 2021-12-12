@@ -55,6 +55,7 @@ export type GuildDataPayload = {
 
 export type Mutation = {
   __typename?: 'Mutation';
+  logoutUser: Scalars['Boolean'];
   updateServer: Scalars['Boolean'];
 };
 
@@ -71,7 +72,6 @@ export type Query = {
   getCommands: Array<Command>;
   getGuildDataPayloadFromID: GuildDataPayload;
   getUserGuilds: Array<GuildData>;
-  logoutUser: Scalars['Boolean'];
   me: UserData;
 };
 
@@ -97,6 +97,11 @@ export type UserData = {
   id: Scalars['String'];
   username: Scalars['String'];
 };
+
+export type LogoutUserMutationVariables = Exact<{ [key: string]: never; }>;
+
+
+export type LogoutUserMutation = { __typename?: 'Mutation', logoutUser: boolean };
 
 export type UpdateServerMutationVariables = Exact<{
   serverID: Scalars['String'];
@@ -135,17 +140,21 @@ export type GetUserGuildsQueryVariables = Exact<{ [key: string]: never; }>;
 
 export type GetUserGuildsQuery = { __typename?: 'Query', getUserGuilds: Array<{ __typename?: 'GuildData', id: string, icon?: string | null | undefined, name: string }> };
 
-export type LogoutUserQueryVariables = Exact<{ [key: string]: never; }>;
+export type MeQueryVariables = Exact<{ [key: string]: never; }>;
 
 
-export type LogoutUserQuery = { __typename?: 'Query', logoutUser: boolean };
-
-export type Unnamed_1_QueryVariables = Exact<{ [key: string]: never; }>;
+export type MeQuery = { __typename?: 'Query', me: { __typename?: 'UserData', id: string, username: string, avatar: string } };
 
 
-export type Unnamed_1_Query = { __typename?: 'Query', me: { __typename?: 'UserData', id: string, username: string, avatar: string } };
+export const LogoutUserDocument = gql`
+    mutation LogoutUser {
+  logoutUser
+}
+    `;
 
-
+export function useLogoutUserMutation() {
+  return Urql.useMutation<LogoutUserMutation, LogoutUserMutationVariables>(LogoutUserDocument);
+};
 export const UpdateServerDocument = gql`
     mutation UpdateServer($serverID: String!, $serverInput: UpdateServerInput!) {
   updateServer(serverID: $serverID, updateServerInput: $serverInput)
@@ -229,17 +238,8 @@ export const GetUserGuildsDocument = gql`
 export function useGetUserGuildsQuery(options: Omit<Urql.UseQueryArgs<GetUserGuildsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetUserGuildsQuery>({ query: GetUserGuildsDocument, ...options });
 };
-export const LogoutUserDocument = gql`
-    query LogoutUser {
-  logoutUser
-}
-    `;
-
-export function useLogoutUserQuery(options: Omit<Urql.UseQueryArgs<LogoutUserQueryVariables>, 'query'> = {}) {
-  return Urql.useQuery<LogoutUserQuery>({ query: LogoutUserDocument, ...options });
-};
-export const Document = gql`
-    {
+export const MeDocument = gql`
+    query Me {
   me {
     id
     username
@@ -247,3 +247,7 @@ export const Document = gql`
   }
 }
     `;
+
+export function useMeQuery(options: Omit<Urql.UseQueryArgs<MeQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
+};

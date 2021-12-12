@@ -88,14 +88,14 @@ const cmd: Command & CommandSelectMenuInteraction = {
     }
     await msg.reply({ embeds: [embed] });
   },
-  handleInteraction: async (interaction) => {
+  handleInteraction: async (interaction, server) => {
     const commandsPerPage = 10;
     const category = interaction.values[0] as Categories;
     const categoryCommands = commands.filter((c) => c.category == category);
     const pages: MessageEmbed[] = [];
     const amount = Math.ceil(categoryCommands.length / commandsPerPage);
     console.log(amount);
-    const emoji = client.emojis.cache.find((e) => e.name === "gobot");
+    const prefix = server.prefix;
 
     for (let i = 0; i < amount; i++) {
       const embed = new MessageEmbed();
@@ -111,8 +111,7 @@ const cmd: Command & CommandSelectMenuInteraction = {
       ) {
         if (categoryCommands[i * commandsPerPage + (j - commandsPerPage * i)])
           embed.addField(
-            emoji +
-              " " +
+            prefix +
               categoryCommands[i * commandsPerPage + (j - commandsPerPage * i)]
                 .name,
             categoryCommands[i * commandsPerPage + (j - commandsPerPage * i)]

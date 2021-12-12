@@ -13,6 +13,7 @@ const VotePage: NextPage<VotePageProps> = () => {
       <div className="text-center">
         <h1 className="text-5xl">Vote</h1>
         <br />
+        <p>This Page is under construction!</p>
       </div>
     </NavbarProvider>
   );

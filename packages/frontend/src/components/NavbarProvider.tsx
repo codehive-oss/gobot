@@ -3,21 +3,43 @@ import LinkComponent from "./LinkComponent";
 import { MenuIcon } from "@heroicons/react/solid";
 import NavbarButtons from "./Navbar/NavbarButtons";
 import LoginButton from "./LoginButton";
+import { useLogoutUserMutation, useMeQuery } from "../generated/graphql";
+import { withUrql } from "../utils/withUrql";
+import { isServerSide } from "../utils/isServerSide";
+import { useRouter } from "next/router";
 
 interface NavbarComponentProps {}
 
 const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
+  const [, logout] = useLogoutUserMutation();
+  const router = useRouter();
+  const [{ fetching: userDataFetching, data: userData }] = useMeQuery({
+    pause: isServerSide(),
+  });
+
   return (
     <div className="absolute top-0 left-0 h-full w-full">
       <div className="h-auto md:h-full flex flex-col md:flex-row">
         <div className="h-full md:h-auto rounded px-5 py-3 bg-gray-900 text-white">
           <div className="h-full flex flex-row md:flex-col align-middle items-center justify-between gap-y-5">
-            <span>
+            <span className="flex gap-x-3 md:flex-col">
               <LinkComponent className="md:text-xl btn btn-effect" href="/">
                 Home
               </LinkComponent>
-              <LoginButton className="md:text-xl btn btn-effect" />
+              {userDataFetching || !userData?.me ? (
+                <LoginButton className="md:text-xl btn btn-effect" />
+              ) : (
+                <button
+                  onClick={() => {
+                    logout();
+                    router.reload();
+                  }}
+                  className="md:text-xl btn btn-effect"
+                >
+                  Logout
+                </button>
+              )}
             </span>
             <div className="md:hidden">
               <button className="btn" onClick={() => setShowMenu(!showMenu)}>
