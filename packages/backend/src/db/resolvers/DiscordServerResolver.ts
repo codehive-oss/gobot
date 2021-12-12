@@ -87,7 +87,6 @@ export class DiscordServerResolver {
     @Arg("updateServerInput") updateServerInput: UpdateServerInput
   ): Promise<Boolean> {
     try {
-      console.log(updateServerInput);
       await GoServer.update(serverID, updateServerInput);
       return true;
     } catch (err) {
