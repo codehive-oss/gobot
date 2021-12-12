@@ -12,7 +12,7 @@ const ExtenalLinkComponent: React.FC<ExternalLinkComponentProps> = ({
     return (
         <div className={className}>
 
-            <a href={href}>{children}</a>
+            <a href={href} target="_blank">{children}</a>
         </div>
     );
 };
