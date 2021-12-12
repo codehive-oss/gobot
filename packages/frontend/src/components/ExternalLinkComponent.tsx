@@ -1,7 +1,7 @@
 import React from "react";
 
 type ExternalLinkComponentProps = React.HTMLAttributes<HTMLDivElement> & {
-    href: string;
+  href: string;
 };
 
 const ExtenalLinkComponent: React.FC<ExternalLinkComponentProps> = ({

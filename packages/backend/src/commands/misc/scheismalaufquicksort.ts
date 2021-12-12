@@ -1,17 +1,13 @@
-import {Message} from "discord.js";
-import {Command} from "../../utils/commandTypes";
+import { Message } from "discord.js";
+import { Command } from "../../utils/commandTypes";
 
 const cmd: Command = {
-    async execute(msg: Message, _args: string[]) {
-        await msg.reply("Alles Klar")
-    },
-    name: "scheismalaufquicksort",
-    aliases: ["smaqs"],
-    category: "misc",
-    description: "taha bester mann",
+  async execute(msg: Message, _args: string[]) {
+    await msg.reply("Alles Klar");
+  },
+  name: "scheismalaufquicksort",
+  aliases: ["smaqs"],
+  description: "taha bester mann",
 };
 
 module.exports = cmd;
-
-
-

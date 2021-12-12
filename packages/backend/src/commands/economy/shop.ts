@@ -1,11 +1,7 @@
 import { Command } from "../../utils/commandTypes";
-import {
-  Message,
-  // MessageActionRow, MessageButton,
-  MessageEmbed,
-} from "discord.js";
-import { PREFIX } from "../../utils/constants";
+import { Message, MessageEmbed } from "discord.js";
 import { tools } from "../../utils/tools";
+import { GoServer } from "../../db/entities/GoServer";
 
 const cmd: Command = {
   name: "shop",
@@ -13,11 +9,11 @@ const cmd: Command = {
   description: "buy items",
   aliases: ["store"],
   usage: "shop",
-  async execute(msg: Message, _args: string[]) {
+  async execute(msg: Message, _args: string[], server: GoServer) {
     const embed = new MessageEmbed()
       .setColor("#329ea8")
       .setTitle(":shopping_cart: Shop")
-      .setDescription(`Use ${PREFIX}buy [Item] to buy an Item`);
+      .setDescription(`Use ${server.prefix}buy [Item] to buy an Item`);
 
     // const row = new MessageActionRow().addComponents(
     //   new MessageButton()

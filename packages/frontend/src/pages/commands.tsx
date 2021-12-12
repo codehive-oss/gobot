@@ -5,6 +5,7 @@ import CommnadsListComponent from "../components/CommandsList";
 import NavbarProvider from "../components/NavbarProvider";
 import { useGetCategoriesQuery } from "../generated/graphql";
 import Head from "next/head";
+import { withUrql } from "../utils/withUrql";
 
 interface CommandsPageProps {}
 
@@ -58,4 +59,4 @@ const CommandsPage: NextPage<CommandsPageProps> = () => {
   );
 };
 
-export default CommandsPage;
+export default withUrql(CommandsPage);

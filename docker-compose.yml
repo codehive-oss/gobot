@@ -29,7 +29,7 @@ services:
     image: redis:latest
     restart: always
     volumes:
-      - ./packages/redisdata:/var/lib/redis/data
+      - ./packages/redisdata:/data
     expose:
       - 6379
     healthcheck:
