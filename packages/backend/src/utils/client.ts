@@ -1,6 +1,6 @@
 import { Client, Intents, TextChannel } from "discord.js";
 import { handleInteraction, handleMessage } from "./commandHandler";
-import { PREFIX } from "./constants";
+import { DEFAULT_PREFIX } from "./constants";
 import {
   createServers,
   getWelcomeChannel,
@@ -37,7 +37,7 @@ client.on("ready", async () => {
     status: "online",
     activities: [
       {
-        name: `${PREFIX}help`,
+        name: `${DEFAULT_PREFIX}help`,
         type: "LISTENING",
       },
       {

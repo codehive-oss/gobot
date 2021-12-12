@@ -9,7 +9,7 @@ dotenv.config({ path: `.env.${buildMode}` });
 export const __prod__ = buildMode === "production";
 
 export const TOKEN = process.env.TOKEN!;
-export const PREFIX = "go ";
+export const DEFAULT_PREFIX = "go ";
 
 export const DB_NAME = process.env.DB_NAME || "GoBot";
 export const DB_USER = process.env.DB_USER || "postgres";
