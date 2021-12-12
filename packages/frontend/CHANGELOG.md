@@ -3,6 +3,30 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.6.0](https://github.com/SushiWaUmai/GoBot/compare/v0.5.0...v0.6.0) (2021-12-09)
+
+
+### Bug Fixes
+
+* :bug: merged front and backend to one origin ([b493642](https://github.com/SushiWaUmai/GoBot/commit/b493642a3202db2dd40e9a348de27fce4de30f89))
+* :bug: remove credentials ([08680a3](https://github.com/SushiWaUmai/GoBot/commit/08680a3002f61cad1ce085444ff8f35efcb52bc3))
+* :bug: update ports ([4775597](https://github.com/SushiWaUmai/GoBot/commit/4775597f3b440479206919a423f2b9881a546210))
+* **docker:** :bug: update ports ([69e39fb](https://github.com/SushiWaUmai/GoBot/commit/69e39fb2b14082cf50561a93993e9f2bf804f2f6))
+* **docker:** :rocket: update docker files ([3bdd6db](https://github.com/SushiWaUmai/GoBot/commit/3bdd6db39df3b74ebea9a63361e88d7387bc03bd))
+* **frontend:** :bug: update frontend page ([4209737](https://github.com/SushiWaUmai/GoBot/commit/4209737cbb0802670f78b4933825e07db8397b9c))
+* **frontend:** :bug: update to client to HTTPS ([d84275c](https://github.com/SushiWaUmai/GoBot/commit/d84275cab6a3aa2281072fc626b22ce0a78284a0))
+
+
+### Features
+
+* **frontend:** :sparkles: add sharp ([0af1cd3](https://github.com/SushiWaUmai/GoBot/commit/0af1cd3ab30b88401df2d094b2df7bce56711a2f))
+* **nginx:** :boom: add nginx and ssl ([91145ad](https://github.com/SushiWaUmai/GoBot/commit/91145ad5e7d42f4a99c66c07907f37c4f53a92ab))
+
+
+
+
+
+
 # [0.5.0](https://github.com/SushiWaUmai/GoBot/compare/v0.4.0...v0.5.0) (2021-11-28)
 
 

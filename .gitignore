@@ -128,5 +128,6 @@ dist
 
 # Database files
 pgdata/
+redisdata/
 
 ssl/

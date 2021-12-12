@@ -9,9 +9,11 @@ import { CommandResolver } from "../db/resolvers/CommandResolver";
 import { GoUserResolver } from "../db/resolvers/GoUserResolver";
 import { expressLogger, logger } from "./logger";
 import passport from "passport";
-import { COOKIE_NAME, SESSION_SECRET, __prod__ } from "./constants";
-import expressSession from "express-session";
+import { COOKIE_NAME, REDIS_HOST, SESSION_SECRET } from "./constants";
 import { createRouter } from "../routes";
+import expressSession from "express-session";
+import connectRedis from "connect-redis";
+import Redis from "ioredis";
 
 export const createAPI = async () => {
   logger.info("Creating SQL connection...");
@@ -29,15 +31,16 @@ export const createAPI = async () => {
 
   logger.info("Initializing express app...");
   const app = express();
-  
-  if (__prod__) app.set("trust proxy", 1);
+  const RedisStore = connectRedis(expressSession);
+  const redis = new Redis(REDIS_HOST);
+
+  app.enable("trust proxy");
 
   app.use(expressLogger);
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));
   app.use(express.json());
 
-  // TODO: use redis
   app.use(
     expressSession({
       name: COOKIE_NAME,
@@ -45,10 +48,15 @@ export const createAPI = async () => {
       resave: false,
       saveUninitialized: false,
       proxy: true,
+      store: new RedisStore({
+        client: redis,
+        disableTouch: true,
+      }),
       cookie: {
         httpOnly: true,
         secure: true,
         sameSite: "lax",
+        maxAge: 1000 * 60 * 60 * 24 * 14, // 2 weeks
       },
     })
   );
