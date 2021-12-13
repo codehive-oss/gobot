@@ -48,28 +48,35 @@ export const handleMessage = async (message: Message, server: GoServer) => {
     await increaseMessages(message.member.user.id);
   }
 
-  if (content.toLocaleLowerCase().startsWith(server.prefix)) {
-    content = content.slice(server.prefix.length);
-    const args = content.split(" ");
-    const commandName = args[0].toLocaleLowerCase();
-    args.shift();
+  try {
+    if (content.toLocaleLowerCase().startsWith(server.prefix)) {
+      content = content.slice(server.prefix.length);
+      const args = content.split(" ");
+      const commandName = args[0].toLocaleLowerCase();
+      args.shift();
 
-    for (const command of commands) {
-      if (
-        command.name === commandName ||
-        (command.aliases && command.aliases.includes(commandName))
-      ) {
-        if (command.permissions) {
-          if (!hasPermission(message.member!, command.permissions)) {
-            await message.reply("Insufficient Permissions");
-            return;
+      for (const command of commands) {
+        if (
+          command.name === commandName ||
+          (command.aliases && command.aliases.includes(commandName))
+        ) {
+          if (command.permissions) {
+            if (!hasPermission(message.member!, command.permissions)) {
+              await message.reply("Insufficient Permissions");
+              return;
+            }
           }
-        }
 
-        logger.trace(`Executing Command ${command.name} with args [${args}]`);
-        command.execute(message, args, server);
+          logger.trace(`Executing Command ${command.name} with args [${args}]`);
+          command.execute(message, args, server);
+        }
       }
     }
+  } catch (e) {
+    logger.error(e);
+    message.reply(
+      "An error occured while executing that command. Please contact the developer. Or try again later."
+    );
   }
 };
 
