@@ -1,4 +1,10 @@
-import { CacheType, Interaction, Message } from "discord.js";
+import {
+  CacheType,
+  DiscordAPIError,
+  Interaction,
+  Message,
+  TextChannel,
+} from "discord.js";
 import fs from "fs";
 import { logger } from "./logger";
 import { Command, isInteractable } from "./commandTypes";
@@ -73,10 +79,21 @@ export const handleMessage = async (message: Message, server: GoServer) => {
       }
     }
   } catch (e) {
-    logger.error(e);
-    message.reply(
-      "An error occured while executing that command. Please contact the developer. Or try again later."
-    );
+    // logger.error(e);
+    if (
+      message.guild &&
+      message.guild.me &&
+      message.channel.type == "GUILD_TEXT"
+    ) {
+      if (
+        message
+          .guild!.me!.permissionsIn(message.channel as TextChannel)
+          .has("SEND_MESSAGES")
+      )
+        message.reply(
+          `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
+        );
+    }
   }
 };
 
