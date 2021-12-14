@@ -32,7 +32,11 @@ export class Command {
   @Field(() => [String], { nullable: true })
   tags?: string[];
 
-  execute: (msg: Message, args: string[], server: GoServer) => void;
+  execute: (
+    msg: Message,
+    args: string[],
+    server: GoServer
+  ) => void | Promise<void>;
 }
 
 export interface Cooldown {

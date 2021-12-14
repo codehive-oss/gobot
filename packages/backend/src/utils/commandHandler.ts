@@ -68,7 +68,7 @@ export const handleMessage = async (message: Message, server: GoServer) => {
           }
 
           logger.trace(`Executing Command ${command.name} with args [${args}]`);
-          command.execute(message, args, server);
+          await command.execute(message, args, server);
         }
       }
     }
