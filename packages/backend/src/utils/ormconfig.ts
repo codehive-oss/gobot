@@ -5,6 +5,7 @@ import {
   DB_PASSWORD,
   DB_PORT,
   DB_USER,
+  __prod__,
 } from "./constants";
 import { join } from "path";
 import { PinoTypeormLogger } from "./PinoLogger";
@@ -18,7 +19,7 @@ export const typeormOrmConfig: PostgresConnectionOptions = {
   password: DB_PASSWORD,
   database: DB_NAME,
   synchronize: true,
-  logging: true,
+  logging: !__prod__,
   logger: new PinoTypeormLogger(logger),
   entities: [join(__dirname, "..", "db", "entities", "**", "*.{ts,js}")],
   migrations: [join(__dirname, "..", "db", "migrations", "**", "*.{ts,js}")],
