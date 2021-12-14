@@ -10,6 +10,7 @@ import { logger } from "./logger";
 
 import { getReactionRoleMessage } from "../db/entities/ReactionRoleMessage";
 import { mention } from "./mention";
+import { captureRejections } from "events";
 
 export const client = new Client({
   intents: [
@@ -72,40 +73,44 @@ client.on("guildCreate", async (guild) => {
 });
 
 client.on("messageReactionAdd", async (reaction, user) => {
-  if (reaction.message.partial) await reaction.fetch();
-  if (reaction.partial) await reaction.fetch();
-  if (user.bot || !reaction.message.guild) return;
+  try {
+    if (reaction.message.partial) await reaction.fetch();
+    if (reaction.partial) await reaction.fetch();
+    if (user.bot || !reaction.message.guild) return;
 
-  const rmsg = await getReactionRoleMessage(reaction.message.id);
-  if (!rmsg) return;
-  logger.info(reaction.emoji.name);
-  logger.info(rmsg.emoji);
-  if (
-    reaction.message.id == rmsg.messageid &&
-    reaction.emoji.name == rmsg.emoji
-  ) {
-    await reaction.message.guild.members.cache
-      .get(user.id)!
-      .roles.add(rmsg.roleid);
-  }
+    const rmsg = await getReactionRoleMessage(reaction.message.id);
+    if (!rmsg) return;
+    logger.info(reaction.emoji.name);
+    logger.info(rmsg.emoji);
+    if (
+      reaction.message.id == rmsg.messageid &&
+      reaction.emoji.name == rmsg.emoji
+    ) {
+      await reaction.message.guild.members.cache
+        .get(user.id)!
+        .roles.add(rmsg.roleid);
+    }
+  } catch (e) {}
 });
 
 client.on("messageReactionRemove", async (reaction, user) => {
-  if (reaction.message.partial) await reaction.fetch();
-  if (reaction.partial) await reaction.fetch();
-  if (user.bot || !reaction.message.guild) return;
+  try {
+    if (reaction.message.partial) await reaction.fetch();
+    if (reaction.partial) await reaction.fetch();
+    if (user.bot || !reaction.message.guild) return;
 
-  const rmsg = await getReactionRoleMessage(reaction.message.id);
-  if (!rmsg) return;
+    const rmsg = await getReactionRoleMessage(reaction.message.id);
+    if (!rmsg) return;
 
-  if (
-    reaction.message.id == rmsg.messageid &&
-    reaction.emoji.name == rmsg.emoji
-  ) {
-    await reaction.message.guild.members.cache
-      .get(user.id)!
-      .roles.remove(rmsg.roleid);
-  }
+    if (
+      reaction.message.id == rmsg.messageid &&
+      reaction.emoji.name == rmsg.emoji
+    ) {
+      await reaction.message.guild.members.cache
+        .get(user.id)!
+        .roles.remove(rmsg.roleid);
+    }
+  } catch (e) {}
 });
 
 client.on("guildMemberAdd", async (member) => {
