@@ -1,14 +1,14 @@
 import { Client, Intents, TextChannel } from "discord.js";
-import { handleMessage } from "./commandHandler";
-import { DEFAULT_PREFIX } from "./constants";
+import { handleMessage } from "@utils/commandHandler";
+import { DEFAULT_PREFIX } from "@utils/constants";
 import {
   createServers,
   getWelcomeChannel,
   toGoServer,
 } from "@db/entities/GoServer";
-import { logger } from "./logger";
+import { logger } from "@utils/logger";
 import { getReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
-import { mention } from "./mention";
+import { mention } from "@utils/mention";
 
 export const client = new Client({
   intents: [

@@ -1,8 +1,8 @@
 import "reflect-metadata";
 import "module-alias/register";
-import { client } from "@utils/client";
+import { client } from "@core/client";
 import { API_PORT, TOKEN } from "@utils/constants";
-import { createAPI } from "@utils/createAPI";
+import { createAPI } from "@core/createAPI";
 import { logger } from "@utils/logger";
 
 async function main() {

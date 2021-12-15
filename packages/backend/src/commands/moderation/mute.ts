@@ -6,7 +6,7 @@ import {
   messagePerms,
 } from "@utils/GuildPermissions";
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
-import { client } from "@utils/client";
+import { client } from "@core/client";
 
 export const rolename = "gomuted";
 

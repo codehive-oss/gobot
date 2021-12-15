@@ -22,6 +22,7 @@
     "outDir": "./dist",
     "baseUrl": ".",
     "paths": {
+      "@core/*": ["./src/core/*"],
       "@utils/*": ["./src/utils/*"],
       "@commands/*": ["./src/commands/*"],
       "@db/*": ["./src/db/*"],

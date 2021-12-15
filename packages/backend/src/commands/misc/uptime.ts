@@ -1,5 +1,5 @@
 import { Message } from "discord.js";
-import { client } from "@utils/client";
+import { client } from "@core/client";
 import { Command } from "@utils/commandTypes";
 
 const cmd = new Command({

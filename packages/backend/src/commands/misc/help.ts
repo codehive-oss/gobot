@@ -7,7 +7,7 @@ import {
   SelectMenuInteraction,
   TextChannel,
 } from "discord.js";
-import { client } from "@utils/client";
+import { client } from "@core/client";
 import { commands } from "@utils/commandHandler";
 import { Command } from "@utils/commandTypes";
 import { allCategoryData, Categories } from "@utils/categoryTypes";

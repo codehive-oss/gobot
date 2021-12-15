@@ -7,7 +7,7 @@ import {
   SelectMenuInteraction,
 } from "discord.js";
 import { GoUser } from "@db/entities/GoUser";
-import { client } from "@utils/client";
+import { client } from "@core/client";
 import { mention } from "@utils/mention";
 
 const cmd = new Command({

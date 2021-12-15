@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
 import { Command } from "@utils/commandTypes";
-import { client } from "@utils/client";
+import { client } from "@core/client";
 
 const cmd = new Command({
   name: "ping",

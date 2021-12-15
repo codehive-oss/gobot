@@ -15,6 +15,7 @@
     "migrate": "typeorm migration:create -n GobotMigration"
   },
   "_moduleAliases": {
+    "@core": "./dist/core",
     "@utils": "./dist/utils",
     "@commands": "./dist/commands",
     "@db": "./dist/db"
