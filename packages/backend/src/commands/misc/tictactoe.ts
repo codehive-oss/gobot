@@ -6,7 +6,7 @@ const cmd = new Command({
   name: "tictactoe",
   aliases: ["ttt"],
   category: "misc",
-  description: "sends the bots uptime",
+  description: "Challenge someone to a game of tic tac toe",
   async execute(msg: Message, _args: string[]) {
     await simplydjs.tictactoe(msg, {
       credit: false,
