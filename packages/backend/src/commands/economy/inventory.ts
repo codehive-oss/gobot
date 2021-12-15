@@ -37,4 +37,4 @@ const cmd = new Command({
   },
 });
 
-module.exports = cmd;
+export default cmd;

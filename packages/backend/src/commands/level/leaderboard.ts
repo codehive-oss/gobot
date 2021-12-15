@@ -120,4 +120,4 @@ async function getMessageLeaderboard() {
   return embed;
 }
 
-module.exports = cmd;
+export default cmd;

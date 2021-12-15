@@ -71,4 +71,4 @@ const cmd = new CooldownCommand({
   },
 });
 
-module.exports = cmd;
+export default cmd;

@@ -10,4 +10,4 @@ const cmd = new Command({
   description: "taha bester mann",
 });
 
-module.exports = cmd;
+export default cmd;

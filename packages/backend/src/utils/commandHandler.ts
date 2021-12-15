@@ -14,7 +14,7 @@ import { increaseMessages } from "../db/entities/GoUser";
 
 export const commands: Command[] = [];
 
-function addCommandsRecursive(dir: string, folder: string) {
+async function addCommandsRecursive(dir: string, folder: string) {
   //recursion to scan directories inside "commands" too for better structure
   const commandFiles = fs
     .readdirSync(dir)
@@ -25,10 +25,10 @@ function addCommandsRecursive(dir: string, folder: string) {
   for (const file of commandFiles) {
     if (fs.lstatSync(dir + "/" + file.toString()).isDirectory()) {
       logger.info(`Registering category ${file}`);
-      addCommandsRecursive(dir + "/" + file.toString(), file);
+      await addCommandsRecursive(dir + "/" + file.toString(), file);
     }
     if (file.endsWith(".js")) {
-      const command = require(`../commands/${folder}/${file}`) as
+      const command = (await import(`../commands/${folder}/${file}`)).default as
         | Command
         | undefined;
       if (command?.name) {

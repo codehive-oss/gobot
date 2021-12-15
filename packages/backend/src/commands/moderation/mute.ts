@@ -104,4 +104,4 @@ export const muteEmbed = (user: string, reason: string, duration?: string) => {
   return embed;
 };
 
-module.exports = cmd;
+export default cmd;

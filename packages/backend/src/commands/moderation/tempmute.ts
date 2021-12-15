@@ -17,7 +17,7 @@
 //     },
 // };
 //
-// module.exports = cmd;
+// export default cmd;
 //
 //
 //

@@ -31,4 +31,4 @@ const dong = () => {
   return dong + "D " + random + "cm" + (random === 69 ? "\nNOICE" : "");
 };
 
-module.exports = cmd;
+export default cmd;

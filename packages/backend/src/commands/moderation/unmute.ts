@@ -57,4 +57,4 @@ export const unmuteEmbed = (user: string, reason: string) => {
     .addField("Reason", reason);
 };
 
-module.exports = cmd;
+export default cmd;
