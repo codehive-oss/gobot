@@ -1,7 +1,7 @@
-import { Command } from "../../utils/commandTypes";
-import { messagePerms } from "../../utils/GuildPermissions";
+import { Command } from "@utils/commandTypes";
+import { messagePerms } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
-import { createReactionRoleMessage } from "../../db/entities/ReactionRoleMessage";
+import { createReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 
 const cmd = new Command({
   name: "reactionrole",

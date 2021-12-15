@@ -5,7 +5,7 @@ import {
   MessageComponentInteraction,
   SelectMenuInteraction,
 } from "discord.js";
-import { GoServer } from "../db/entities/GoServer";
+import { GoServer } from "@db/entities/GoServer";
 import { Field, ObjectType } from "type-graphql";
 import { Categories } from "./categoryTypes";
 import { GuildPermissions } from "./GuildPermissions";

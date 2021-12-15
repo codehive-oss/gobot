@@ -1,5 +1,5 @@
-import { Command } from "../../utils/commandTypes";
-import { messagePerms } from "../../utils/GuildPermissions";
+import { Command } from "@utils/commandTypes";
+import { messagePerms } from "@utils/GuildPermissions";
 import { TextChannel } from "discord.js";
 
 const cmd = new Command({

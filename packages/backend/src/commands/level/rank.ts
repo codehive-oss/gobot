@@ -1,8 +1,8 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message, MessageEmbed } from "discord.js";
-import { toGoUser } from "../../db/entities/GoUser";
-import { lvlToXp, xpToLvl } from "../../utils/levelCalculator";
-import { progressBar } from "../../utils/progressbar";
+import { toGoUser } from "@db/entities/GoUser";
+import { lvlToXp, xpToLvl } from "@utils/levelCalculator";
+import { progressBar } from "@utils/progressbar";
 
 const cmd = new Command({
   name: "rank",

@@ -1,8 +1,8 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { toGoUser } from "../../db/entities/GoUser";
-import { allItems } from "../../utils/item";
-import { maxwords } from "../../utils/maxwords";
+import { toGoUser } from "@db/entities/GoUser";
+import { allItems } from "@utils/item";
+import { maxwords } from "@utils/maxwords";
 
 const cmd = new Command({
   name: "sell",

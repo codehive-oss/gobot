@@ -1,4 +1,4 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { MessageEmbed } from "discord.js";
 import axios from "axios";
 

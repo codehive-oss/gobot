@@ -4,10 +4,10 @@ import {
   incrementBankBalance,
   payUser,
   toGoUser,
-} from "../../db/entities/GoUser";
-import { CooldownCommand } from "../../utils/commandTypes";
-import { checkRobTarget } from "../../utils/checkRobTarget";
-import { randInt } from "../../utils/random";
+} from "@db/entities/GoUser";
+import { CooldownCommand } from "@utils/commandTypes";
+import { checkRobTarget } from "@utils/checkRobTarget";
+import { randInt } from "@utils/random";
 
 const robRate = 0.05;
 const failRate = 0.75;

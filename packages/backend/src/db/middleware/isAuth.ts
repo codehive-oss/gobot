@@ -1,6 +1,6 @@
-import { MyContext } from "../../utils/types";
+import { MyContext } from "@utils/types";
 import { MiddlewareFn } from "type-graphql";
-import { checkUserAdminGuild } from "../../utils/apiGuildUtils";
+import { checkUserAdminGuild } from "@utils/apiGuildUtils";
 import { GoUser } from "../entities/GoUser";
 
 // TODO: Handle Errors in a better way

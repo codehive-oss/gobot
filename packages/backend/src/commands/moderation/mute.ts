@@ -1,12 +1,12 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import {
   adminPerms,
   hasPermission,
   memberPerms,
   messagePerms,
-} from "../../utils/GuildPermissions";
+} from "@utils/GuildPermissions";
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
-import { client } from "../../utils/client";
+import { client } from "@utils/client";
 
 export const rolename = "gomuted";
 

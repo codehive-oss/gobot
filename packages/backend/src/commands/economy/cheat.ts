@@ -1,6 +1,6 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { incrementHandBalance, toGoUser } from "../../db/entities/GoUser";
+import { incrementHandBalance, toGoUser } from "@db/entities/GoUser";
 
 const cmd = new Command({
   name: "cheat",

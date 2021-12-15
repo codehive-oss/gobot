@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MessageEmbed } from "discord.js";
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import stringSimilarity from "string-similarity";
 
 // Jikan api payload type

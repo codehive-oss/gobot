@@ -1,7 +1,7 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import jimp from "jimp";
-import { logger } from "../../utils/logger";
-import { getTarget } from "../../utils/getTarget";
+import { logger } from "@utils/logger";
+import { getTarget } from "@utils/getTarget";
 
 // start pixel 450 250
 // end pixel 600 400

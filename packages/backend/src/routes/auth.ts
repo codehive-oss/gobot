@@ -1,8 +1,8 @@
 import { Router } from "express";
 import passport from "passport";
 import { Strategy as DiscordStrategy } from "passport-discord";
-import { toGoUser } from "../db/entities/GoUser";
-import { CLIENT_ID, CLIENT_SECRET, FRONTEND_URL } from "../utils/constants";
+import { toGoUser } from "@db/entities/GoUser";
+import { CLIENT_ID, CLIENT_SECRET, FRONTEND_URL } from "@utils/constants";
 
 passport.serializeUser((id, done) => {
   done(null, id);

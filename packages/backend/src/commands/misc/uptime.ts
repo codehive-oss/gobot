@@ -1,6 +1,6 @@
 import { Message } from "discord.js";
-import { client } from "../../utils/client";
-import { Command } from "../../utils/commandTypes";
+import { client } from "@utils/client";
+import { Command } from "@utils/commandTypes";
 
 const cmd = new Command({
   name: "uptime",

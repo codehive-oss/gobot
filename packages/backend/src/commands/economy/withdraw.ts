@@ -1,6 +1,6 @@
-import { toGoUser, withdraw } from "../../db/entities/GoUser";
-import { Command } from "../../utils/commandTypes";
-import { maxwords } from "../../utils/maxwords";
+import { toGoUser, withdraw } from "@db/entities/GoUser";
+import { Command } from "@utils/commandTypes";
+import { maxwords } from "@utils/maxwords";
 
 const cmd = new Command({
   name: "withdraw",

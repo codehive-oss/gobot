@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
-import { allItems } from "../../utils/item";
-import { tools } from "../../utils/tools";
+import { allItems } from "@utils/item";
+import { tools } from "@utils/tools";
 
 // TODO: Clean up this huge mess
 @Entity()

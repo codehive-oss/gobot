@@ -1,6 +1,6 @@
-import { Command } from "../../utils/commandTypes";
-import { randInt } from "../../utils/random";
-import { getTarget } from "../../utils/getTarget";
+import { Command } from "@utils/commandTypes";
+import { randInt } from "@utils/random";
+import { getTarget } from "@utils/getTarget";
 
 const cmd = new Command({
   name: "avatar",

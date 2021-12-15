@@ -1,12 +1,12 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { tools } from "../../utils/tools";
+import { tools } from "@utils/tools";
 import {
   decrementHandBalance,
   giveTool,
   hasTool,
   toGoUser,
-} from "../../db/entities/GoUser";
+} from "@db/entities/GoUser";
 
 const cmd = new Command({
   name: "buy",

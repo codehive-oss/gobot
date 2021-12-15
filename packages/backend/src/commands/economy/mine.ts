@@ -1,7 +1,7 @@
 import {
   CooldownCommand	
-} from "../../utils/commandTypes";
-import { allItems, Item } from "../../utils/item";
+} from "@utils/commandTypes";
+import { allItems, Item } from "@utils/item";
 import { MessageEmbed } from "discord.js";
 import {
   addItem,
@@ -10,8 +10,8 @@ import {
   incrementHandBalance,
   removeTool,
   toGoUser,
-} from "../../db/entities/GoUser";
-import { randInt } from "../../utils/random";
+} from "@db/entities/GoUser";
+import { randInt } from "@utils/random";
 
 
 const pickOne = (arr: Item[]): Item | undefined => {

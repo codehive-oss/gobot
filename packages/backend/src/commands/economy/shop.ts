@@ -1,7 +1,7 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message, MessageEmbed } from "discord.js";
-import { tools } from "../../utils/tools";
-import { GoServer } from "../../db/entities/GoServer";
+import { tools } from "@utils/tools";
+import { GoServer } from "@db/entities/GoServer";
 
 const cmd = new Command({
   name: "shop",

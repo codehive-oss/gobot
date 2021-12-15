@@ -1,4 +1,4 @@
-import { MyContext } from "../../utils/types";
+import { MyContext } from "@utils/types";
 import {
   Arg,
   Ctx,
@@ -13,11 +13,11 @@ import {
 import { GoServer, toGoServer } from "../entities/GoServer";
 import { isAdmin, isAuth } from "../middleware/isAuth";
 import { GoUser } from "../entities/GoUser";
-import { getUserAdminGuild, isGuildAdmin } from "../../utils/apiGuildUtils";
-import { GuildData } from "../../utils/graphqlPayload";
-import { logger } from "../../utils/logger";
+import { getUserAdminGuild, isGuildAdmin } from "@utils/apiGuildUtils";
+import { GuildData } from "@utils/graphqlPayload";
+import { logger } from "@utils/logger";
 import axios from "axios";
-import { DISCORD_API_ENDPOINT } from "../../utils/constants";
+import { DISCORD_API_ENDPOINT } from "@utils/constants";
 
 @ObjectType()
 class GuildDataPayload {

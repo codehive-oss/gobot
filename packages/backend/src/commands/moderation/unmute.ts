@@ -1,7 +1,7 @@
-import { Command } from "../../utils/commandTypes";
-import { memberPerms } from "../../utils/GuildPermissions";
+import { Command } from "@utils/commandTypes";
+import { memberPerms } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
-import { client } from "../../utils/client";
+import { client } from "@utils/client";
 
 const rolename = "gomuted";
 

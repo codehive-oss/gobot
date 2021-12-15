@@ -1,5 +1,5 @@
-import { Command } from "../../utils/commandTypes";
-import { getTarget } from "../../utils/getTarget";
+import { Command } from "@utils/commandTypes";
+import { getTarget } from "@utils/getTarget";
 import { MessageEmbed } from "discord.js";
 
 const cmd = new Command({

@@ -5,9 +5,9 @@ import {
   createServers,
   getWelcomeChannel,
   toGoServer,
-} from "../db/entities/GoServer";
+} from "@db/entities/GoServer";
 import { logger } from "./logger";
-import { getReactionRoleMessage } from "../db/entities/ReactionRoleMessage";
+import { getReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 import { mention } from "./mention";
 
 export const client = new Client({

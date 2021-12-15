@@ -1,6 +1,6 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message, MessageEmbed, User } from "discord.js";
-import { toGoUser } from "../../db/entities/GoUser";
+import { toGoUser } from "@db/entities/GoUser";
 
 const cmd = new Command({
   aliases: ["bal"],

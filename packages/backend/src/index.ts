@@ -1,8 +1,9 @@
 import "reflect-metadata";
-import { client } from "./utils/client";
-import { API_PORT, TOKEN } from "./utils/constants";
-import { createAPI } from "./utils/createAPI";
-import { logger } from "./utils/logger";
+import "module-alias/register";
+import { client } from "@utils/client";
+import { API_PORT, TOKEN } from "@utils/constants";
+import { createAPI } from "@utils/createAPI";
+import { logger } from "@utils/logger";
 
 async function main() {
   const api = await createAPI();

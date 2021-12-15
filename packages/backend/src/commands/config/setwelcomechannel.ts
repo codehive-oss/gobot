@@ -1,7 +1,7 @@
-import { Command } from "../../utils/commandTypes";
-import { messagePerms } from "../../utils/GuildPermissions";
+import { Command } from "@utils/commandTypes";
+import { messagePerms } from "@utils/GuildPermissions";
+import { setWelcomeChannel } from "@db/entities/GoServer";
 import { TextChannel } from "discord.js";
-import { setWelcomeChannel } from "../../db/entities/GoServer";
 
 const cmd = new Command({
   name: "setwelcomechannel",

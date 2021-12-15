@@ -1,6 +1,6 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { randString } from "../../utils/random";
+import { randString } from "@utils/random";
 
 const cmd = new Command({
   name: "nitro",

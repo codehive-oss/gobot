@@ -1,7 +1,7 @@
 import { Router } from "express";
 import { GraphQLSchema } from "graphql";
-import { MyContext } from "../utils/types";
-import { __prod__ } from "../utils/constants";
+import { MyContext } from "@utils/types";
+import { __prod__ } from "@utils/constants";
 import { authRouter } from "./auth";
 import { graphqlHTTP } from "express-graphql";
 import graphqlPlayground from "graphql-playground-middleware-express";

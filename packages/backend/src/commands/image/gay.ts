@@ -1,8 +1,8 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
 import jimp from "jimp";
-import { logger } from "../../utils/logger";
-import { getTarget } from "../../utils/getTarget";
+import { logger } from "@utils/logger";
+import { getTarget } from "@utils/getTarget";
 
 const cmd = new Command({
   name: "gay",

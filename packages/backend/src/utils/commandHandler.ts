@@ -1,16 +1,10 @@
-import {
-  CacheType,
-  DiscordAPIError,
-  Interaction,
-  Message,
-  TextChannel,
-} from "discord.js";
-import fs from "fs";
+import { Message, TextChannel } from "discord.js";
 import { logger } from "./logger";
 import { Command } from "./commandTypes";
-import { hasPermission, messagePerms } from "./GuildPermissions";
-import { GoServer } from "src/db/entities/GoServer";
-import { increaseMessages } from "../db/entities/GoUser";
+import { hasPermission } from "./GuildPermissions";
+import { GoServer } from "@db/entities/GoServer";
+import { increaseMessages } from "@db/entities/GoUser";
+import fs from "fs";
 
 export const commands: Command[] = [];
 
@@ -28,9 +22,8 @@ async function addCommandsRecursive(dir: string, folder: string) {
       await addCommandsRecursive(dir + "/" + file.toString(), file);
     }
     if (file.endsWith(".js")) {
-      const command = (await import(`../commands/${folder}/${file}`)).default as
-        | Command
-        | undefined;
+      const command = (await import(`../commands/${folder}/${file}`))
+        .default as Command | undefined;
       if (command?.name) {
         commands.push(command);
         logger.trace(`Registered ${command.name} command ${dir}/${file}`);

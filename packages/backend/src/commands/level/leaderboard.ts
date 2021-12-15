@@ -1,4 +1,4 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import {
   Message,
   MessageActionRow,
@@ -6,9 +6,9 @@ import {
   MessageSelectMenu,
   SelectMenuInteraction,
 } from "discord.js";
-import { GoUser } from "../../db/entities/GoUser";
-import { client } from "../../utils/client";
-import { mention } from "../../utils/mention";
+import { GoUser } from "@db/entities/GoUser";
+import { client } from "@utils/client";
+import { mention } from "@utils/mention";
 
 const cmd = new Command({
   name: "leaderboard",

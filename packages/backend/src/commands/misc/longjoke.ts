@@ -1,4 +1,4 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import fs from "fs";
 
 const joke = fs.readFileSync("assets/longjoke.txt", "utf8");

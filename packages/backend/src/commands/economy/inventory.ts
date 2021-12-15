@@ -1,7 +1,7 @@
 import { MessageEmbed } from "discord.js";
-import { toGoUser } from "../../db/entities/GoUser";
-import { allItems } from "../../utils/item";
-import { Command } from "../../utils/commandTypes";
+import { toGoUser } from "@db/entities/GoUser";
+import { allItems } from "@utils/item";
+import { Command } from "@utils/commandTypes";
 
 const cmd = new Command({
   name: "inventory",

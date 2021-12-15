@@ -7,14 +7,14 @@ import {
   SelectMenuInteraction,
   TextChannel,
 } from "discord.js";
-import { client } from "../../utils/client";
-import { commands } from "../../utils/commandHandler";
-import { Command } from "../../utils/commandTypes";
-import { allCategoryData, Categories } from "../../utils/categoryTypes";
-import { capitalizeFirstLetter } from "../../utils/capitalize";
-import Pagination from "../../utils/Pagination";
-import { mention } from "../../utils/mention";
-import { GoServer } from "../../db/entities/GoServer";
+import { client } from "@utils/client";
+import { commands } from "@utils/commandHandler";
+import { Command } from "@utils/commandTypes";
+import { allCategoryData, Categories } from "@utils/categoryTypes";
+import { capitalizeFirstLetter } from "@utils/capitalize";
+import Pagination from "@utils/Pagination";
+import { mention } from "@utils/mention";
+import { GoServer } from "@db/entities/GoServer";
 
 const cmd = new Command({
   name: "help",
