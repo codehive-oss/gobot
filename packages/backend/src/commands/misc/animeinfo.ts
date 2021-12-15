@@ -22,7 +22,7 @@ interface JikanPayload {
 
 type AnimeRating = "G" | "PG" | "PG-13" | "R" | "R+" | "Rx";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "animeinfo",
   category: "misc",
   description: "Get information about an anime",
@@ -86,6 +86,6 @@ const cmd: Command = {
       );
     msg.reply({ embeds: [embed] });
   },
-};
+});
 
 module.exports = cmd;

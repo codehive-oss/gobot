@@ -5,7 +5,7 @@ import jimp from "jimp";
 import { logger } from "../../utils/logger";
 import { getTarget } from "../../utils/getTarget";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "invert",
   description: "Inverts the given User",
   usage: "invert <@user>",
@@ -33,6 +33,6 @@ const cmd: Command = {
       });
     });
   },
-};
+});
 
 module.exports = cmd;

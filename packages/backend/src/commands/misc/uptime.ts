@@ -2,7 +2,7 @@ import { Message } from "discord.js";
 import { client } from "../../utils/client";
 import { Command } from "../../utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "uptime",
   category: "misc",
   description: "sends the bots uptime",
@@ -21,6 +21,6 @@ const cmd: Command = {
       );
     }
   },
-};
+});
 
 module.exports = cmd;

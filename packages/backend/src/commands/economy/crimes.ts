@@ -1,10 +1,4 @@
-import {
-  canExecute,
-  Command,
-  Cooldown,
-  getCooldown,
-  setCooldown,
-} from "../../utils/commandTypes";
+import { CooldownCommand } from "../../utils/commandTypes";
 import { Message } from "discord.js";
 import {
   addXp,
@@ -14,7 +8,7 @@ import {
 } from "../../db/entities/GoUser";
 import { randInt } from "../../utils/random";
 
-const cmd: Command & Cooldown = {
+const cmd = new CooldownCommand({
   aliases: [],
   name: "crime",
   category: "economy",
@@ -24,8 +18,8 @@ const cmd: Command & Cooldown = {
   execute: async function (msg: Message, _args: string[]) {
     const user = await toGoUser(msg.author.id);
 
-    if (canExecute(this.name, user.id)) {
-      setCooldown(this.name, user.id, this.cooldown);
+    if (cmd.canExecute(cmd.name, user.id)) {
+      cmd.setCooldown(cmd.name, user.id, cmd.cooldown);
       const rnd = randInt(0, 100);
 
       if (rnd > 70) {
@@ -53,14 +47,14 @@ const cmd: Command & Cooldown = {
       }
     } else {
       msg.reply(
-        `You can't commit a crime for another ${getCooldown(
-          this.name,
+        `You can't commit a crime for another ${cmd.getCooldown(
+          cmd.name,
           user.id,
-          this.cooldown
+          cmd.cooldown
         )} seconds.`
       );
     }
   },
-};
+});
 
 module.exports = cmd;

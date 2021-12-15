@@ -5,7 +5,7 @@ import jimp from "jimp";
 import { logger } from "../../utils/logger";
 import { getTarget } from "../../utils/getTarget";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "pixel",
   description: "Pixelifies the given User",
   usage: "pixel <@user>",
@@ -33,6 +33,6 @@ const cmd: Command = {
       });
     });
   },
-};
+});
 
 module.exports = cmd;

@@ -6,7 +6,7 @@ import { getTarget } from "../../utils/getTarget";
 // start pixel 450 250
 // end pixel 600 400
 
-const cmd: Command = {
+const cmd = new Command({
   name: "hornyjail",
   description: "Horny jail",
   category: "image",
@@ -36,6 +36,6 @@ const cmd: Command = {
       });
     });
   },
-};
+});
 
 module.exports = cmd;

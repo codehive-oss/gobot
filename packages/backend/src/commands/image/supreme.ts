@@ -4,7 +4,7 @@ import Jimp from "jimp";
 import jimp from "jimp";
 import { logger } from "../../utils/logger";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "supreme",
   description: "creates the supreme logo",
   usage: "supreme [text]",
@@ -31,6 +31,6 @@ const cmd: Command = {
       });
     });
   },
-};
+});
 
 module.exports = cmd;

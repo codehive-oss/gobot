@@ -2,7 +2,7 @@ import { Command } from "../../utils/commandTypes";
 import { Message, MessageEmbed, User } from "discord.js";
 import { toGoUser } from "../../db/entities/GoUser";
 
-const cmd: Command = {
+const cmd = new Command({
   aliases: ["bal"],
   name: "balance",
   category: "economy",
@@ -33,6 +33,6 @@ const cmd: Command = {
 
     await msg.reply({ embeds: [embed] });
   },
-};
+});
 
 module.exports = cmd;

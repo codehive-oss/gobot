@@ -1,7 +1,7 @@
 import axios from "axios";
 import { Command } from "../../utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "randomuselessfact",
   description: "Get a random useless fact",
   aliases: ["ruf"],
@@ -12,6 +12,6 @@ const cmd: Command = {
     );
     msg.reply(res.data.text);
   },
-};
+});
 
 module.exports = cmd;

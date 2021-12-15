@@ -1,9 +1,5 @@
 import {
-  canExecute,
-  Command,
-  Cooldown,
-  getCooldown,
-  setCooldown,
+  CooldownCommand	
 } from "../../utils/commandTypes";
 import { allItems, Item } from "../../utils/item";
 import { MessageEmbed } from "discord.js";
@@ -30,7 +26,7 @@ const pickOne = (arr: Item[]): Item | undefined => {
   return undefined;
 };
 
-const cmd: Command & Cooldown = {
+const cmd = new CooldownCommand( {
   name: "mine",
   aliases: ["dig"],
   category: "economy",
@@ -46,8 +42,8 @@ const cmd: Command & Cooldown = {
 
     const dcUser = msg.author;
 
-    if (canExecute(this.name, dcUser.id)) {
-      setCooldown(this.name, dcUser.id, this.cooldown);
+    if (cmd.canExecute(cmd.name, dcUser.id)) {
+      cmd.setCooldown(cmd.name, dcUser.id, cmd.cooldown);
       const user = await toGoUser(dcUser.id);
 
       const item = pickOne(allItems);
@@ -80,14 +76,14 @@ const cmd: Command & Cooldown = {
       }
     } else {
       await msg.reply(
-        `You can't mine for another ${getCooldown(
-          this.name,
+        `You can't mine for another ${cmd.getCooldown(
+          cmd.name,
           dcUser.id,
-          this.cooldown
+          cmd.cooldown
         )} seconds!`
       );
     }
   },
-};
+});
 
 module.exports = cmd;

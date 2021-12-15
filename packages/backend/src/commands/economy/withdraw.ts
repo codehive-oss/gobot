@@ -2,7 +2,7 @@ import { toGoUser, withdraw } from "../../db/entities/GoUser";
 import { Command } from "../../utils/commandTypes";
 import { maxwords } from "../../utils/maxwords";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "withdraw",
   category: "economy",
   description: "Withdraws money from your bank account.",
@@ -43,6 +43,6 @@ const cmd: Command = {
       await msg.reply("You need to specify an amount.");
     }
   },
-};
+});
 
 module.exports = cmd;

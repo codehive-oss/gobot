@@ -2,7 +2,7 @@ import { Command } from "../../utils/commandTypes";
 import { Message } from "discord.js";
 import axios from "axios";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "cat",
   description: "Sends a Picture of a Cat",
   usage: "cat",
@@ -13,6 +13,6 @@ const cmd: Command = {
 
     await msg.reply(link);
   },
-};
+});
 
 module.exports = cmd;

@@ -7,7 +7,7 @@ import {
 } from "discord.js";
 import fs from "fs";
 import { logger } from "./logger";
-import { Command, isInteractable } from "./commandTypes";
+import { Command } from "./commandTypes";
 import { hasPermission, messagePerms } from "./GuildPermissions";
 import { GoServer } from "src/db/entities/GoServer";
 import { increaseMessages } from "../db/entities/GoUser";
@@ -93,21 +93,6 @@ export const handleMessage = async (message: Message, server: GoServer) => {
         message.reply(
           `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
         );
-    }
-  }
-};
-
-export const handleInteraction = async (
-  interaction: Interaction<CacheType>,
-  server: GoServer
-) => {
-  if (interaction.isMessageComponent()) {
-    for (const command of commands) {
-      if (isInteractable(command)) {
-        if (command.name === interaction.customId) {
-          command.handleInteraction(interaction, server);
-        }
-      }
     }
   }
 };

@@ -1,6 +1,6 @@
 import { Command } from "../../utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "pop",
   description: "POP YES",
   aliases: ["bubblewrap"],
@@ -32,6 +32,6 @@ const cmd: Command = {
     }
     msg.reply(reply);
   },
-};
+});
 
 module.exports = cmd;

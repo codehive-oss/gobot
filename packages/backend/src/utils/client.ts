@@ -1,5 +1,5 @@
 import { Client, Intents, TextChannel } from "discord.js";
-import { handleInteraction, handleMessage } from "./commandHandler";
+import { handleMessage } from "./commandHandler";
 import { DEFAULT_PREFIX } from "./constants";
 import {
   createServers,
@@ -55,14 +55,6 @@ client.on("messageCreate", async (message) => {
   }
   const server = await toGoServer(message.guild.id);
   await handleMessage(message, server);
-});
-
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.guild) {
-    return;
-  }
-  const server = await toGoServer(interaction.guild.id);
-  handleInteraction(interaction, server);
 });
 
 client.on("guildCreate", async (guild) => {

@@ -42,7 +42,7 @@ const AnimeCategories = [
 
 const nsfwAnimeCategories = ["waifu", "neko", "trap", "blowjob"];
 
-const cmd: Command = {
+const cmd = new Command({
   name: "anime",
   description: "Sends a random anime picture",
   tags: ["anime"],
@@ -88,6 +88,6 @@ const cmd: Command = {
       embeds: [new MessageEmbed().setImage(data.url).setColor("#ff00ff")],
     });
   },
-};
+});
 
 module.exports = cmd;

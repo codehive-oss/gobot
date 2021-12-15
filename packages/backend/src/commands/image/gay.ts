@@ -4,7 +4,7 @@ import jimp from "jimp";
 import { logger } from "../../utils/logger";
 import { getTarget } from "../../utils/getTarget";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "gay",
   description: "gayifies the given user",
   usage: "gay <@user>",
@@ -37,6 +37,6 @@ const cmd: Command = {
       });
     });
   },
-};
+});
 
 module.exports = cmd;

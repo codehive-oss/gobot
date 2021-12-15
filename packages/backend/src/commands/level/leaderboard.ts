@@ -1,7 +1,4 @@
-import {
-  Command,
-  CommandSelectMenuInteraction,
-} from "../../utils/commandTypes";
+import { Command } from "../../utils/commandTypes";
 import {
   Message,
   MessageActionRow,
@@ -12,10 +9,8 @@ import {
 import { GoUser } from "../../db/entities/GoUser";
 import { client } from "../../utils/client";
 import { mention } from "../../utils/mention";
-import { MissingSubscriptionTopicsError } from "type-graphql";
-import { emit } from "process";
 
-const cmd: Command & CommandSelectMenuInteraction = {
+const cmd = new Command({
   name: "leaderboard",
   category: "level",
   usage: "leaderboard",
@@ -54,30 +49,35 @@ const cmd: Command & CommandSelectMenuInteraction = {
           },
         ])
     );
-    await msg.reply({
+    const menu = await msg.reply({
       content: "Select Which Leaderboard you would like to view",
       components: [row],
     });
+
+    const interactionCollector = menu.createMessageComponentCollector();
+    interactionCollector.on(
+      "collect",
+      async (interaction: SelectMenuInteraction) => {
+        switch (interaction.values[0]) {
+          case "xp":
+            await interaction.reply({
+              content: mention(interaction.user.id),
+              embeds: [await getXpLeaderboard()],
+            });
+            break;
+          case "msg":
+            await interaction.reply({
+              content: mention(interaction.user.id),
+              embeds: [await getMessageLeaderboard()],
+            });
+            break;
+          default:
+            await interaction.reply("Error");
+        }
+      }
+    );
   },
-  handleInteraction: async (interaction: SelectMenuInteraction) => {
-    switch (interaction.values[0]) {
-      case "xp":
-        await interaction.reply({
-          content: mention(interaction.user.id),
-          embeds: [await getXpLeaderboard()],
-        });
-        break;
-      case "msg":
-        await interaction.reply({
-          content: mention(interaction.user.id),
-          embeds: [await getMessageLeaderboard()],
-        });
-        break;
-      default:
-        await interaction.reply("Error");
-    }
-  },
-};
+});
 
 async function getXpLeaderboard() {
   const embed = new MessageEmbed().setTitle("Leaderboard").setColor("BLURPLE");

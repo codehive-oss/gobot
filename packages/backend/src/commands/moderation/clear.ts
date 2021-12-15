@@ -2,7 +2,7 @@ import { Command } from "../../utils/commandTypes";
 import { messagePerms } from "../../utils/GuildPermissions";
 import { TextChannel } from "discord.js";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "clear",
   aliases: ["purge"],
   description: "Deletes messages from the specified channel.",
@@ -21,6 +21,6 @@ const cmd: Command = {
     await (msg.channel as TextChannel).bulkDelete(amount);
     await msg.channel.send(`Cleared ${amount} messages`);
   },
-};
+});
 
 module.exports = cmd;

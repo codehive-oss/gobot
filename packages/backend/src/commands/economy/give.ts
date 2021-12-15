@@ -6,7 +6,7 @@ import {
 } from "../../db/entities/GoUser";
 import { Command } from "../../utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "give",
   description: "Give money to a user.",
   category: "economy",
@@ -61,6 +61,6 @@ const cmd: Command = {
 
     msg.reply(`You gave ${amount}$ to ${dcTarget.username} `);
   },
-};
+});
 
 module.exports = cmd;

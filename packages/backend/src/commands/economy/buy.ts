@@ -8,8 +8,10 @@ import {
   toGoUser,
 } from "../../db/entities/GoUser";
 
-const cmd: Command = {
+const cmd = new Command({
+  name: "buy",
   description: "Buys the specified item",
+  usage: "buy [item]",
   category: "economy",
   async execute(msg: Message, args: string[]) {
     if (args.length < 1) {
@@ -45,8 +47,6 @@ const cmd: Command = {
     await decrementHandBalance(gouser, item.price);
     await msg.reply(`Succesfully bought ${item.name} for ${item.price}`);
   },
-  name: "buy",
-  usage: "buy [item]",
-};
+});
 
 module.exports = cmd;

@@ -3,7 +3,7 @@ import { Message, MessageEmbed } from "discord.js";
 import { tools } from "../../utils/tools";
 import { GoServer } from "../../db/entities/GoServer";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "shop",
   category: "economy",
   description: "buy items",
@@ -15,19 +15,12 @@ const cmd: Command = {
       .setTitle(":shopping_cart: Shop")
       .setDescription(`Use ${server.prefix}buy [Item] to buy an Item`);
 
-    // const row = new MessageActionRow().addComponents(
-    //   new MessageButton()
-    //     .setCustomId("primary")
-    //     .setLabel("Test")
-    //     .setStyle("PRIMARY")
-    // );
-
     for (const tool of tools) {
       embed.addField(tool.name, tool.description + " | " + tool.price + "$");
     }
 
     await msg.reply({ embeds: [embed] });
   },
-};
+});
 
 module.exports = cmd;

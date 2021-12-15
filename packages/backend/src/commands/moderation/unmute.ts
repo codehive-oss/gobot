@@ -5,7 +5,7 @@ import { client } from "../../utils/client";
 
 const rolename = "gomuted";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "unmute",
   description: "unmutes a Member",
   category: "moderation",
@@ -47,7 +47,7 @@ const cmd: Command = {
       embeds: [unmuteEmbed(target.username, reason ? reason : "None")],
     });
   },
-};
+});
 
 export const unmuteEmbed = (user: string, reason: string) => {
   return new MessageEmbed()
