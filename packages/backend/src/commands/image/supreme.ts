@@ -1,6 +1,5 @@
 import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import Jimp from "jimp";
 import jimp from "jimp";
 import { logger } from "@utils/logger";
 
@@ -17,17 +16,18 @@ const cmd = new Command({
       return;
     }
 
-    const image = new Jimp(text.length * 18 + 40, 70, "red");
-    Jimp.loadFont("assets/supreme.fnt").then((font) => {
-      image.print(font, 40, 20, text);
-      image.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
-        if (err) {
-          logger.error(err);
-        }
+    const image = new jimp(text.length * 18 + 40, 70, "red");
+    const font = await jimp.loadFont("assets/supreme.fnt");
 
-        await msg.reply({
-          files: [{ attachment: buffer, name: "supreme.png" }],
-        });
+    image.print(font, 40, 20, text);
+    image.getBuffer(jimp.MIME_PNG, async (err, buffer) => {
+      if (err) {
+        logger.error(err);
+        return;
+      }
+
+      await msg.reply({
+        files: [{ attachment: buffer, name: "supreme.png" }],
       });
     });
   },

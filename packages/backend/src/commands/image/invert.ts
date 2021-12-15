@@ -1,6 +1,5 @@
 import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import Jimp from "jimp";
 import jimp from "jimp";
 import { logger } from "@utils/logger";
 import { getTarget } from "@utils/getTarget";
@@ -18,7 +17,7 @@ const cmd = new Command({
       return;
     }
 
-    const image = await Jimp.read(
+    const image = await jimp.read(
       target!.displayAvatarURL({ format: "png", size: 256 })
     );
     image.invert();
