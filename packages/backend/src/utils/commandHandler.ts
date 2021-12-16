@@ -5,6 +5,7 @@ import { hasPermission } from "./GuildPermissions";
 import { GoServer } from "@db/entities/GoServer";
 import { increaseMessages } from "@db/entities/GoUser";
 import fs from "fs";
+import { __prod__ } from "./constants";
 
 export const commands: Command[] = [];
 
@@ -79,8 +80,8 @@ export const handleMessage = async (message: Message, server: GoServer) => {
       message.channel.type == "GUILD_TEXT"
     ) {
       if (
-        message
-          .guild!.me!.permissionsIn(message.channel as TextChannel)
+        message.guild.me
+          .permissionsIn(message.channel as TextChannel)
           .has("SEND_MESSAGES")
       )
         message.reply(
