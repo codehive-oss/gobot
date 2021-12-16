@@ -2,6 +2,18 @@ import { Command } from "@utils/commandTypes";
 import { MessageEmbed } from "discord.js";
 import axios from "axios";
 
+interface Meme {
+  postLink: string;
+  subreddit: string;
+  title: string;
+  url: string;
+  nsfw: boolean;
+  spoiler: boolean;
+  author: string;
+  ups: number;
+  preview: [string];
+}
+
 const cmd = new Command({
   name: "meme",
   description: "Sends a meme",
@@ -11,23 +23,24 @@ const cmd = new Command({
   execute: async (msg) => {
     const url = "https://meme-api.herokuapp.com/gimme";
 
-    const resp = await axios.get(url);
+    const res = await axios.get(url);
+    const meme: Meme = res.data;
+
+    const embed = new MessageEmbed()
+      .setAuthor(
+        meme.subreddit,
+        "https://blog.lastpass.com/wp-content/uploads/sites/20/2020/04/reddit-logo-2.jpg",
+        `https://www.reddit.com/r/${meme.subreddit}/`
+      )
+      .setColor("GREEN")
+      .setTitle(meme.title)
+      .setURL(meme.postLink)
+      .setDescription("Posted by " + meme.author)
+      .setImage(meme.url)
+      .setFooter(meme.ups + " 👍");
 
     await msg.reply({
-      embeds: [
-        new MessageEmbed()
-          .setAuthor(
-            resp.data.subreddit,
-            "https://blog.lastpass.com/wp-content/uploads/sites/20/2020/04/reddit-logo-2.jpg",
-            `https://www.reddit.com/r/${resp.data.subreddit}/`
-          )
-          .setColor("GREEN")
-          .setTitle(resp.data.title)
-          .setURL(resp.data.postLink)
-          .setDescription("Posted by " + resp.data.author)
-          .setImage(resp.data.url)
-          .setFooter(resp.data.ups + " 👍"),
-      ],
+      embeds: [embed],
     });
   },
 });
