@@ -1,8 +1,6 @@
-import exp from "constants";
 import {
   DMChannel,
   EmojiIdentifierResolvable,
-  Interaction,
   Message,
   MessageButton,
   MessageButtonStyleResolvable,
