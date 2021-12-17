@@ -1,9 +1,9 @@
-import { Command } from "../../utils/commandTypes";
-import { randInt, randomChoice } from "../../utils/random";
+import { Command } from "@utils/commandTypes";
+import { randInt, randomChoice } from "@utils/random";
 import sleep from "sleep-promise";
 import { Message } from "discord.js";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "hack",
   description: "Hacks the specified user",
   usage: "hack [@user]",
@@ -338,6 +338,6 @@ const cmd: Command = {
       )}\nEducation: ${randomChoice(education)}\`\`\``
     );
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

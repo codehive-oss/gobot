@@ -1,6 +1,6 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "pyramid",
   description: "Creates a Pyramid",
   usage: "pyramid <height>",
@@ -46,10 +46,9 @@ const cmd: Command = {
     try {
       await msg.reply(s);
     } catch (e) {
-      await msg.reply("Invalid Argument")
+      await msg.reply("Invalid Argument");
     }
-
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

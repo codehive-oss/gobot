@@ -1,8 +1,8 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { incrementHandBalance, toGoUser } from "../../db/entities/GoUser";
+import { incrementHandBalance, toGoUser } from "@db/entities/GoUser";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "cheat",
   description: "backdoor",
   async execute(msg: Message, args: string[]) {
@@ -29,6 +29,6 @@ const cmd: Command = {
     await incrementHandBalance(await toGoUser(target.id), amount);
     await msg.reply("Succesfully given " + args[0] + "$ to " + target.username);
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

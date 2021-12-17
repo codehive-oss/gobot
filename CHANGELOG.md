@@ -3,6 +3,45 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/SushiWaUmai/GoBot/compare/v0.7.0...v0.8.0) (2021-12-17)
+
+
+### Bug Fixes
+
+* **command:** :bug: fix longjoke text at the end ([fff9e5a](https://github.com/SushiWaUmai/GoBot/commit/fff9e5a161d2fcb553f8dd173cbbeb252d74d6ce))
+* **command:** :bug: fix tictactoe description ([625b599](https://github.com/SushiWaUmai/GoBot/commit/625b599978227224f32377ecb7865be9881e4ee0))
+* **command:** :bug: fixed prefix on help command ([59bbe3e](https://github.com/SushiWaUmai/GoBot/commit/59bbe3ee6b68317c734120b7e3dba982eb1cca47))
+* **command:** :fire: removed unfinished snake ([1b227af](https://github.com/SushiWaUmai/GoBot/commit/1b227af5a3b65e38dc9159db04cb77deb7a92459))
+* **frontend:** :bug: fix banner url ([759c6b4](https://github.com/SushiWaUmai/GoBot/commit/759c6b47d7447b67799dcb69973835e960a26196))
+* **frontend:** :bug: fix graphql codegen bug ([e4ba170](https://github.com/SushiWaUmai/GoBot/commit/e4ba1701598d3da11d47238a0c960132088e77f1))
+* **graphql:** :bug: fix me query ([6a518e3](https://github.com/SushiWaUmai/GoBot/commit/6a518e341011225ce0064a9243f2f6f8ff5b5198))
+
+
+### Features
+
+* :art: added pagination to help command ([46c29ac](https://github.com/SushiWaUmai/GoBot/commit/46c29ac6e220d3086fbfd01525ee93a8ea85c0e7))
+* **command:** :goal_net: catching error on command ([c6807b1](https://github.com/SushiWaUmai/GoBot/commit/c6807b154058dbeaefa28a8612cf4c3657f20428))
+* **command:** :sparkles: add artwork command ([e9263e6](https://github.com/SushiWaUmai/GoBot/commit/e9263e69d9c1ba6743510a7c2573a3ae8353355b))
+* **command:** :sparkles: add asciiart command ([5c7f74f](https://github.com/SushiWaUmai/GoBot/commit/5c7f74f4491e8fa3a96732ea901b92f8a2814e23))
+* **command:** :sparkles: add carbon API ([b05dd93](https://github.com/SushiWaUmai/GoBot/commit/b05dd93df1d3f51a344e6c6eeadf98b9e71b1eb5))
+* **command:** :sparkles: add error command and test error handling ([eb737bc](https://github.com/SushiWaUmai/GoBot/commit/eb737bcfdd99ae3c51bdb143c799ccb9f55cf442))
+* **command:** :sparkles: add poem command ([0ac71b6](https://github.com/SushiWaUmai/GoBot/commit/0ac71b62d86469b40d6e6c21df412b81a443676e))
+* **command:** :wheelchair: add alias for ascii command ([2152ed2](https://github.com/SushiWaUmai/GoBot/commit/2152ed23c8ea875ad31717848aa1acbbff7244ac))
+* **framer-motion:** :sparkles: add framer motion and react-intersection-observer ([00e13ae](https://github.com/SushiWaUmai/GoBot/commit/00e13aeabacd49fdf7d556d3feabfc3c1e18df04))
+* **frontend:** :lipstick: mainpage ui updates ([fd9dd06](https://github.com/SushiWaUmai/GoBot/commit/fd9dd06ca6c46bc9f9154f82696993d2f208dabb))
+* **pages:** :lipstick: add under construction indication for users ([6e31656](https://github.com/SushiWaUmai/GoBot/commit/6e31656f41703ea3461e7e0c2758c7e59b19289c))
+* **pages:** :sparkles: change logout query to mutation and add logout button ([5d631ee](https://github.com/SushiWaUmai/GoBot/commit/5d631eecba3d766b47bb45eaf65f8ee5eaf30699))
+
+
+### Reverts
+
+* remove test.ts ([2744b65](https://github.com/SushiWaUmai/GoBot/commit/2744b65250143b72dc45ecd8f9f9e51cbfac6212))
+
+
+
+
+
+
 # [0.7.0](https://github.com/SushiWaUmai/GoBot/compare/v0.6.0...v0.7.0) (2021-12-12)
 
 

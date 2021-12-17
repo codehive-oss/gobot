@@ -1,11 +1,11 @@
-import { Command } from "../../utils/commandTypes";
-import { memberPerms } from "../../utils/GuildPermissions";
+import { Command } from "@utils/commandTypes";
+import { memberPerms } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
-import { client } from "../../utils/client";
+import { client } from "@core/client";
 
 const rolename = "gomuted";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "unmute",
   description: "unmutes a Member",
   category: "moderation",
@@ -47,7 +47,7 @@ const cmd: Command = {
       embeds: [unmuteEmbed(target.username, reason ? reason : "None")],
     });
   },
-};
+});
 
 export const unmuteEmbed = (user: string, reason: string) => {
   return new MessageEmbed()
@@ -57,4 +57,4 @@ export const unmuteEmbed = (user: string, reason: string) => {
     .addField("Reason", reason);
 };
 
-module.exports = cmd;
+export default cmd;

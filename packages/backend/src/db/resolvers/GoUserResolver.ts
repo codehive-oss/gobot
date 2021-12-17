@@ -1,11 +1,11 @@
-import { logger } from "../../utils/logger";
-import { MyContext } from "../../utils/types";
+import { logger } from "@utils/logger";
+import { MyContext } from "@utils/types";
 import { Ctx, Mutation, Query, Resolver, UseMiddleware } from "type-graphql";
 import axios from "axios";
 import { GoUser } from "../entities/GoUser";
 import { isAuth } from "../middleware/isAuth";
-import { DISCORD_API_ENDPOINT } from "../../utils/constants";
-import { UserData } from "../../utils/graphqlPayload";
+import { DISCORD_API_ENDPOINT } from "@utils/constants";
+import { UserData } from "@utils/graphqlPayload";
 
 @Resolver()
 export class GoUserResolver {

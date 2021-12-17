@@ -1,11 +1,10 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import Jimp from "jimp";
 import jimp from "jimp";
-import { logger } from "../../utils/logger";
-import { getTarget } from "../../utils/getTarget";
+import { logger } from "@utils/logger";
+import { getTarget } from "@utils/getTarget";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "invert",
   description: "Inverts the given User",
   usage: "invert <@user>",
@@ -18,7 +17,7 @@ const cmd: Command = {
       return;
     }
 
-    const image = await Jimp.read(
+    const image = await jimp.read(
       target!.displayAvatarURL({ format: "png", size: 256 })
     );
     image.invert();
@@ -33,6 +32,6 @@ const cmd: Command = {
       });
     });
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

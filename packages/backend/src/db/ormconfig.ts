@@ -6,10 +6,10 @@ import {
   DB_PORT,
   DB_USER,
   __prod__,
-} from "./constants";
+} from "@utils/constants";
 import { join } from "path";
-import { PinoTypeormLogger } from "./PinoLogger";
-import { logger } from "./logger";
+import { PinoTypeormLogger } from "@utils/PinoLogger";
+import { logger } from "@utils/logger";
 
 export const typeormOrmConfig: PostgresConnectionOptions = {
   type: "postgres",

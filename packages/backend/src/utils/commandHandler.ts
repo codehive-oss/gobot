@@ -1,20 +1,15 @@
-import {
-  CacheType,
-  DiscordAPIError,
-  Interaction,
-  Message,
-  TextChannel,
-} from "discord.js";
-import fs from "fs";
+import { Message, TextChannel } from "discord.js";
 import { logger } from "./logger";
-import { Command, isInteractable } from "./commandTypes";
-import { hasPermission, messagePerms } from "./GuildPermissions";
-import { GoServer } from "src/db/entities/GoServer";
-import { increaseMessages } from "../db/entities/GoUser";
+import { Command } from "./commandTypes";
+import { hasPermission } from "./GuildPermissions";
+import { GoServer } from "@db/entities/GoServer";
+import { increaseMessages } from "@db/entities/GoUser";
+import fs from "fs";
+import { __prod__ } from "./constants";
 
 export const commands: Command[] = [];
 
-function addCommandsRecursive(dir: string, folder: string) {
+async function addCommandsRecursive(dir: string, folder: string) {
   //recursion to scan directories inside "commands" too for better structure
   const commandFiles = fs
     .readdirSync(dir)
@@ -25,12 +20,11 @@ function addCommandsRecursive(dir: string, folder: string) {
   for (const file of commandFiles) {
     if (fs.lstatSync(dir + "/" + file.toString()).isDirectory()) {
       logger.info(`Registering category ${file}`);
-      addCommandsRecursive(dir + "/" + file.toString(), file);
+      await addCommandsRecursive(dir + "/" + file.toString(), file);
     }
     if (file.endsWith(".js")) {
-      const command = require(`../commands/${folder}/${file}`) as
-        | Command
-        | undefined;
+      const command = (await import(`../commands/${folder}/${file}`))
+        .default as Command | undefined;
       if (command?.name) {
         commands.push(command);
         logger.trace(`Registered ${command.name} command ${dir}/${file}`);
@@ -86,28 +80,13 @@ export const handleMessage = async (message: Message, server: GoServer) => {
       message.channel.type == "GUILD_TEXT"
     ) {
       if (
-        message
-          .guild!.me!.permissionsIn(message.channel as TextChannel)
+        message.guild.me
+          .permissionsIn(message.channel as TextChannel)
           .has("SEND_MESSAGES")
       )
         message.reply(
           `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
         );
-    }
-  }
-};
-
-export const handleInteraction = async (
-  interaction: Interaction<CacheType>,
-  server: GoServer
-) => {
-  if (interaction.isMessageComponent()) {
-    for (const command of commands) {
-      if (isInteractable(command)) {
-        if (command.name === interaction.customId) {
-          command.handleInteraction(interaction, server);
-        }
-      }
     }
   }
 };

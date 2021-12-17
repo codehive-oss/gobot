@@ -1,11 +1,11 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "error",
   description: "throws an error",
   execute: async () => {
     throw new Error("Testing Error Handing");
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

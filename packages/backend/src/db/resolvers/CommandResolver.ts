@@ -1,7 +1,7 @@
-import { commands } from "../../utils/commandHandler";
+import { commands } from "@utils/commandHandler";
 import { Query, Resolver, Arg } from "type-graphql";
-import { Command } from "../../utils/commandTypes";
-import { Category, getAllCategories } from "../../utils/categoryTypes";
+import { Command } from "@utils/commandTypes";
+import { Category, getAllCategories } from "@utils/categoryTypes";
 
 @Resolver()
 export class CommandResolver {

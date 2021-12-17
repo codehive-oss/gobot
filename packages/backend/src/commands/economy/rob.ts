@@ -4,21 +4,15 @@ import {
   incrementHandBalance,
   payUser,
   toGoUser,
-} from "../../db/entities/GoUser";
-import {
-  canExecute,
-  Command,
-  Cooldown,
-  getCooldown,
-  setCooldown,
-} from "../../utils/commandTypes";
-import { checkRobTarget } from "../../utils/checkRobTarget";
-import { randInt } from "../../utils/random";
+} from "@db/entities/GoUser";
+import { CooldownCommand } from "@utils/commandTypes";
+import { checkRobTarget } from "@utils/checkRobTarget";
+import { randInt } from "@utils/random";
 
 const robRate = 0.1;
 const failRate = 0.5;
 
-const cmd: Command & Cooldown = {
+const cmd = new CooldownCommand({
   name: "rob",
   category: "economy",
   description: "Rob a user (chance of getting caught)",
@@ -26,7 +20,7 @@ const cmd: Command & Cooldown = {
   cooldown: 30,
   execute: async function (msg, _args) {
     const dcUser = msg.author;
-    if (canExecute(this.name, dcUser.id)) {
+    if (cmd.canExecute(cmd.name, dcUser.id)) {
       let dcTarget = msg.mentions.users.first();
 
       const err = checkRobTarget(dcTarget, dcUser);
@@ -43,7 +37,7 @@ const cmd: Command & Cooldown = {
 
       const chance = Math.random();
 
-      setCooldown(this.name, dcUser.id, this.cooldown);
+      cmd.setCooldown(cmd.name, dcUser.id, cmd.cooldown);
 
       // Failure
       if (chance < failRate) {
@@ -67,14 +61,14 @@ const cmd: Command & Cooldown = {
     } else {
       // Cooldown
       await msg.reply(
-        `You can't rob someone for another ${getCooldown(
-          this.name,
+        `You can't rob someone for another ${cmd.getCooldown(
+          cmd.name,
           dcUser.id,
-          this.cooldown
+          cmd.cooldown
         )} seconds`
       );
     }
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

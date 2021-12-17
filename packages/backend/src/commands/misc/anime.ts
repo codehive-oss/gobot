@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MessageEmbed, TextChannel } from "discord.js";
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 
 interface AnimeResponse {
   url: string;
@@ -42,7 +42,7 @@ const AnimeCategories = [
 
 const nsfwAnimeCategories = ["waifu", "neko", "trap", "blowjob"];
 
-const cmd: Command = {
+const cmd = new Command({
   name: "anime",
   description: "Sends a random anime picture",
   tags: ["anime"],
@@ -88,6 +88,6 @@ const cmd: Command = {
       embeds: [new MessageEmbed().setImage(data.url).setColor("#ff00ff")],
     });
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

@@ -1,9 +1,9 @@
 import { MessageEmbed } from "discord.js";
-import { toGoUser } from "../../db/entities/GoUser";
-import { allItems } from "../../utils/item";
-import { Command } from "../../utils/commandTypes";
+import { toGoUser } from "@db/entities/GoUser";
+import { allItems } from "@utils/item";
+import { Command } from "@utils/commandTypes";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "inventory",
   description: "View your inventory.",
   category: "economy",
@@ -35,6 +35,6 @@ const cmd: Command = {
     }
     await msg.reply({ embeds: [embed] });
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

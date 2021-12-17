@@ -1,7 +1,7 @@
-import { Command } from "../../utils/commandTypes";
+import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
 
-const cmd: Command = {
+const cmd = new Command({
   aliases: ["dong"],
   name: "dongsize",
   description: "magnum schlong",
@@ -18,9 +18,9 @@ const cmd: Command = {
       );
     }
   },
-};
+});
 
-function dong(): string {
+const dong = () => {
   let random = Math.round(Math.random() * 100);
   let dong = "8";
   for (let i = 0; i < random; i++) {
@@ -29,6 +29,6 @@ function dong(): string {
 
   // Add a message when the dong is 69cm
   return dong + "D " + random + "cm" + (random === 69 ? "\nNOICE" : "");
-}
+};
 
-module.exports = cmd;
+export default cmd;

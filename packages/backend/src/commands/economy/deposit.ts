@@ -1,8 +1,8 @@
-import { deposit, toGoUser } from "../../db/entities/GoUser";
-import { Command } from "../../utils/commandTypes";
-import { maxwords } from "../../utils/maxwords";
+import { deposit, toGoUser } from "@db/entities/GoUser";
+import { Command } from "@utils/commandTypes";
+import { maxwords } from "@utils/maxwords";
 
-const cmd: Command = {
+const cmd = new Command({
   name: "deposit",
   description: "Deposit money into your bank account.",
   category: "economy",
@@ -45,6 +45,6 @@ const cmd: Command = {
       await msg.reply(`You need to specify an amount of coins to deposit.`);
     }
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;

@@ -1,16 +1,14 @@
 import { Client, Intents, TextChannel } from "discord.js";
-import { handleInteraction, handleMessage } from "./commandHandler";
-import { DEFAULT_PREFIX } from "./constants";
+import { handleMessage } from "@utils/commandHandler";
+import { DEFAULT_PREFIX } from "@utils/constants";
 import {
   createServers,
   getWelcomeChannel,
   toGoServer,
-} from "../db/entities/GoServer";
-import { logger } from "./logger";
-
-import { getReactionRoleMessage } from "../db/entities/ReactionRoleMessage";
-import { mention } from "./mention";
-import { captureRejections } from "events";
+} from "@db/entities/GoServer";
+import { logger } from "@utils/logger";
+import { getReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
+import { mention } from "@utils/mention";
 
 export const client = new Client({
   intents: [
@@ -57,14 +55,6 @@ client.on("messageCreate", async (message) => {
   await handleMessage(message, server);
 });
 
-client.on("interactionCreate", async (interaction) => {
-  if (!interaction.guild) {
-    return;
-  }
-  const server = await toGoServer(interaction.guild.id);
-  handleInteraction(interaction, server);
-});
-
 client.on("guildCreate", async (guild) => {
   await toGoServer(guild.id);
 
@@ -72,6 +62,7 @@ client.on("guildCreate", async (guild) => {
   await owner.user.send("test");
 });
 
+// Move this to the command
 client.on("messageReactionAdd", async (reaction, user) => {
   try {
     if (reaction.message.partial) await reaction.fetch();
@@ -93,6 +84,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   } catch (e) {}
 });
 
+// Move this to the command
 client.on("messageReactionRemove", async (reaction, user) => {
   try {
     if (reaction.message.partial) await reaction.fetch();

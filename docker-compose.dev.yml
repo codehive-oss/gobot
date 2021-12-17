@@ -12,8 +12,8 @@ services:
       - ./packages/backend/.env.development
     volumes:
       - ./packages/backend:/usr/app
+      - ./packages/backend/dist:/usr/app/dist
       - /usr/app/node_modules
-      - /usr/app/dist
     command: yarn dev
   frontend:
     build:

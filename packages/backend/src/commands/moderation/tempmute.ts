@@ -1,5 +1,5 @@
-// import { Command } from "../../utils/commandTypes";
-// import { messagePerms } from "../../utils/GuildPermissions";
+// import { Command } from "@utils/commandTypes";
+// import { messagePerms } from "@utils/GuildPermissions";
 // import {GuildMember, Message, TextChannel} from "discord.js";
 // import {getMutedRole} from "./mute";
 // import {gunzip} from "zlib";
@@ -17,7 +17,7 @@
 //     },
 // };
 //
-// module.exports = cmd;
+// export default cmd;
 //
 //
 //

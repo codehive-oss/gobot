@@ -1,6 +1,6 @@
 import axios from "axios";
 import { APIGuild, PermissionFlagsBits } from "discord-api-types/payloads/v9";
-import { GoUser } from "src/db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { DISCORD_API_ENDPOINT } from "./constants";
 
 export const isGuildAdmin = (guild: APIGuild) => {
