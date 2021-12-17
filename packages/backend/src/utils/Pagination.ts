@@ -20,6 +20,8 @@ export interface ButtonOption {
   >;
 }
 
+// ! Why using classes? and why not a single simple method? and why does it take a channel as a parameter?
+// TODO: Disable Buttons at the start and at the end of the pagination
 class Pagination {
   private message?: Message;
   private readonly channel: TextChannel | DMChannel;
