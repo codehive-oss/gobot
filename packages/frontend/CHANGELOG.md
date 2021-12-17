@@ -3,6 +3,28 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.8.0](https://github.com/SushiWaUmai/GoBot/compare/v0.7.0...v0.8.0) (2021-12-17)
+
+
+### Bug Fixes
+
+* **frontend:** :bug: fix banner url ([759c6b4](https://github.com/SushiWaUmai/GoBot/commit/759c6b47d7447b67799dcb69973835e960a26196))
+* **frontend:** :bug: fix graphql codegen bug ([e4ba170](https://github.com/SushiWaUmai/GoBot/commit/e4ba1701598d3da11d47238a0c960132088e77f1))
+* **graphql:** :bug: fix me query ([6a518e3](https://github.com/SushiWaUmai/GoBot/commit/6a518e341011225ce0064a9243f2f6f8ff5b5198))
+
+
+### Features
+
+* **framer-motion:** :sparkles: add framer motion and react-intersection-observer ([00e13ae](https://github.com/SushiWaUmai/GoBot/commit/00e13aeabacd49fdf7d556d3feabfc3c1e18df04))
+* **frontend:** :lipstick: mainpage ui updates ([fd9dd06](https://github.com/SushiWaUmai/GoBot/commit/fd9dd06ca6c46bc9f9154f82696993d2f208dabb))
+* **pages:** :lipstick: add under construction indication for users ([6e31656](https://github.com/SushiWaUmai/GoBot/commit/6e31656f41703ea3461e7e0c2758c7e59b19289c))
+* **pages:** :sparkles: change logout query to mutation and add logout button ([5d631ee](https://github.com/SushiWaUmai/GoBot/commit/5d631eecba3d766b47bb45eaf65f8ee5eaf30699))
+
+
+
+
+
+
 # [0.7.0](https://github.com/SushiWaUmai/GoBot/compare/v0.6.0...v0.7.0) (2021-12-12)
 
 
