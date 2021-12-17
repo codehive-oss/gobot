@@ -8,6 +8,7 @@ const cmd = new Command({
   name: "asciiart",
   description: "Creates an ascii art from a given string",
   usage: "asciiart <string>",
+  aliases: ["ascii"],
   async execute(message, args) {
     // check if args exist
     if (!args[0]) {
