@@ -11,10 +11,12 @@ import {
   GoServer,
   GuildData,
   Omit,
+  UpdateServerInput,
   useGetGuildDataPaylaodFromIdQuery,
   useUpdateServerMutation,
 } from "../../generated/graphql";
 import { withUrql } from "../../utils/withUrql";
+import { Formik } from "formik";
 
 interface ServerDetailsPageProps {}
 
@@ -31,10 +33,8 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
   const [updateServerStatus, updateServer] = useUpdateServerMutation();
 
   // TODO: Use Formik to handle form
-  const [guildData, setGuildData] =
-    useState<Omit<Omit<GuildData, "id">, "__typename">>();
-  const [goServer, setGoServer] =
-    useState<Omit<Omit<GoServer, "id">, "__typename">>();
+  const [guildData, setGuildData] = useState<Partial<GuildData>>();
+  const [goServer, setGoServer] = useState<Partial<GoServer>>();
 
   useEffect(() => {
     if (!serverID) return;
@@ -47,13 +47,17 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
 
     const updatedGuildData =
       guildQuery.data.getGuildDataPayloadFromID.guildData;
-    delete updatedGuildData.__typename;
     setGuildData(updatedGuildData);
 
     const updatedGoServer = guildQuery.data.getGuildDataPayloadFromID.goServer;
-    delete updatedGoServer.__typename;
     setGoServer(updatedGoServer);
   }, [guildQuery.data]);
+
+  const initialValues: UpdateServerInput = {
+    anime: false,
+    nsfw: false,
+    prefix: "",
+  };
 
   return (
     <NavbarProvider>
@@ -81,46 +85,50 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
             </ClipboardCopy>
           </header>
           <br />
+
           <main>
             {goServer && (
               <>
                 <h3 className="text-xl">Server Settings</h3>
-                <div className="my-3">
-                  <ToogleOption
-                    label="Anime"
-                    enabled={goServer.anime}
-                    setEnabled={(anime) => setGoServer({ ...goServer, anime })}
-                  />
-                  <ToogleOption
-                    label="NSFW"
-                    enabled={goServer.nsfw}
-                    setEnabled={(nsfw) => setGoServer({ ...goServer, nsfw })}
-                  />
-                </div>
+                <Formik
+                  initialValues={
+                    (goServer || initialValues) as UpdateServerInput
+                  }
+                  onSubmit={async (values, { setSubmitting }) => {
+                    if (!serverID) return;
+                    setSubmitting(true);
 
-                {/* Button that saves all options */}
+                    updateServer({
+                      serverID: serverID as string,
+                      serverInput: {
+                        ...values,
+                      },
+                    });
+
+                    setSubmitting(false);
+                  }}
+                >
+                  {({ isSubmitting }) => {
+                    <>
+                      <div className="my-3">
+                        <ToogleOption label="Anime" name="anime" />
+                        <ToogleOption label="NSFW" name="nsfw" />
+                      </div>
+                      <button
+                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                        disabled={isSubmitting || updateServerStatus.fetching}
+                        type="submit"
+                      >
+                        Save
+                      </button>
+                    </>;
+                  }}
+                </Formik>
+
                 <div className="flex justify-between">
                   <div className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
                     <Link href="/dashboard">Back to Dashboard</Link>
                   </div>
-
-                  <button
-                    className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                    disabled={updateServerStatus.fetching}
-                    onClick={() => {
-                      if (!serverID) return;
-
-                      console.log("Server ID is", serverID);
-                      updateServer({
-                        serverID: serverID as string,
-                        serverInput: {
-                          ...goServer,
-                        },
-                      });
-                    }}
-                  >
-                    Save
-                  </button>
                 </div>
               </>
             )}
