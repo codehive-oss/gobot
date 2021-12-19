@@ -22,8 +22,8 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
 
   return (
     <div className="absolute top-0 left-0 h-full w-full">
-      <div className="h-auto md:h-full flex flex-col md:flex-row">
-        <div className="h-full md:h-auto rounded px-5 py-3 bg-gray-900 text-white">
+      <div className="h-auto md:h-full flex flex-col md:flex-row overflow-hidden">
+        <div className="h-full md:h-full rounded px-5 py-3 bg-zinc-900 text-white">
           <div className="h-full flex flex-row md:flex-col align-middle items-center justify-between gap-y-5">
             <span className="flex gap-x-3 md:flex-col">
               <LinkComponent className="md:text-xl btn btn-effect" href="/">
@@ -63,7 +63,7 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
             </div>
           )}
         </div>
-        <div className="flex-grow px-5 md:px-16 py-8">{children}</div>
+        <div className="overflow-y-auto flex-grow px-5 md:px-16 py-8">{children}</div>
       </div>
     </div>
   );
