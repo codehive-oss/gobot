@@ -14,6 +14,8 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
   const [showMenu, setShowMenu] = useState(false);
   const [, logout] = useLogoutUserMutation();
   const router = useRouter();
+
+  // TODO: Use Redux or the Context API to reduce the amount of queries
   const [{ fetching: userDataFetching, data: userData }] = useMeQuery({
     pause: isServerSide(),
   });
