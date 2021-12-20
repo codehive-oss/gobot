@@ -4,7 +4,7 @@ import Image from "next/image";
 import Head from "next/head";
 import Link from "next/link";
 import NavbarProvider from "../../components/NavbarProvider";
-import ToogleOption from "../../components/GuildSettings/ToogleOption";
+import ToogleOption from "../../components/GuildSettings/ToggleOption";
 import { useEffect, useState } from "react";
 import ClipboardCopy from "../../components/ClipboardCopy";
 import {
@@ -16,7 +16,8 @@ import {
   useUpdateServerMutation,
 } from "../../generated/graphql";
 import { withUrql } from "../../utils/withUrql";
-import { Formik } from "formik";
+import { Form, Formik } from "formik";
+import TextOption from "../../components/GuildSettings/TextOption";
 
 interface ServerDetailsPageProps {}
 
@@ -50,6 +51,7 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
     setGuildData(updatedGuildData);
 
     const updatedGoServer = guildQuery.data.getGuildDataPayloadFromID.goServer;
+    delete updatedGoServer.__typename;
     setGoServer(updatedGoServer);
   }, [guildQuery.data]);
 
@@ -96,7 +98,6 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
                   }
                   onSubmit={async (values, { setSubmitting }) => {
                     if (!serverID) return;
-                    setSubmitting(true);
 
                     updateServer({
                       serverID: serverID as string,
@@ -104,25 +105,22 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
                         ...values,
                       },
                     });
-
-                    setSubmitting(false);
                   }}
                 >
-                  {({ isSubmitting }) => {
-                    <>
-                      <div className="my-3">
-                        <ToogleOption label="Anime" name="anime" />
-                        <ToogleOption label="NSFW" name="nsfw" />
-                      </div>
-                      <button
-                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                        disabled={isSubmitting || updateServerStatus.fetching}
-                        type="submit"
-                      >
-                        Save
-                      </button>
-                    </>;
-                  }}
+                  <Form>
+                    <div className="my-3">
+                      <TextOption label="Prefix" name="prefix" />
+                      <ToogleOption label="Anime" name="anime" />
+                      <ToogleOption label="NSFW" name="nsfw" />
+                    </div>
+                    <button
+                      className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded float-right"
+                      disabled={updateServerStatus.fetching}
+                      type="submit"
+                    >
+                      Save
+                    </button>
+                  </Form>
                 </Formik>
 
                 <div className="flex justify-between">
