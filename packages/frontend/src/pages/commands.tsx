@@ -38,14 +38,15 @@ const CommandsPage: NextPage<CommandsPageProps> = () => {
         ) : (
           <div>
             <h2 className="text-2xl">Categories</h2>
-            <div className="flex flex-wrap justify-center">
+            <br />  
+            <div className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-3">
               {categories.data?.getCategories.map((category, i) => (
                 <div
                   key={i}
-                  className="w-1/3 p-2 cursor-pointer"
+                  className="cursor-pointer"
                   onClick={() => setSelectedCategory(category.name)}
                 >
-                  <div className="bg-gray-800 rounded-lg shadow-md p-2">
+                  <div className="bg-zinc-800 hover:bg-slate-800 rounded-lg p-2">
                     <h3 className="text-xl">{category.name}</h3>
                   </div>
                 </div>
