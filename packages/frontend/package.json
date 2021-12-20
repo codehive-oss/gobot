@@ -13,6 +13,7 @@
     "@headlessui/react": "^1.4.2",
     "@heroicons/react": "^1.0.5",
     "@urql/exchange-graphcache": "^4.3.6",
+    "formik": "^2.2.9",
     "framer-motion": "^5.4.5",
     "graphql": "^16.1.0",
     "next": "12.0.3",
@@ -22,7 +23,8 @@
     "react-intersection-observer": "^8.33.0",
     "react-is": "^17.0.2",
     "sharp": "^0.29.3",
-    "urql": "^2.0.6"
+    "urql": "^2.0.6",
+    "yup": "^0.32.11"
   },
   "devDependencies": {
     "@babel/core": "^7.16.0",
