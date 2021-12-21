@@ -124,7 +124,7 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
                 </Formik>
 
                 <div className="flex justify-between">
-                  <div className="bg-gray-500 hover:bg-gray-700 text-white font-bold py-2 px-4 rounded">
+                  <div className="bg-slate-500 hover:bg-slate-700 text-white font-bold py-2 px-4 rounded">
                     <Link href="/dashboard">Back to Dashboard</Link>
                   </div>
                 </div>
