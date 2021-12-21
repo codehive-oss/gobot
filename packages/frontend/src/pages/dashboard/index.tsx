@@ -9,7 +9,7 @@ import { withUrql } from "../../utils/withUrql";
 interface DashboardPageProps {}
 
 const DashboardPage: NextPage<DashboardPageProps> = () => {
-  const guildQuery = useGetUserGuildsQuery()[0];
+  const [guildQuery] = useGetUserGuildsQuery();
 
   return (
     <NavbarProvider>
@@ -26,7 +26,7 @@ const DashboardPage: NextPage<DashboardPageProps> = () => {
       ) : guildQuery.error ? (
         <div className="flex flex-col items-center gap-y-2">
           <p>{guildQuery.error.message}</p>
-          <LoginButton className="bg-gray-800 py-2 px-5 rounded" />
+          <LoginButton className="bg-slate-800 py-2 px-5 rounded" />
         </div>
       ) : (
         <>

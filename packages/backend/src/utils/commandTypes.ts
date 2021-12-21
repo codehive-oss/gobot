@@ -27,6 +27,9 @@ export class Command {
   @Field({ nullable: true })
   category?: Categories;
 
+  @Field(() => [String], { nullable: true })
+  examples?: string[];
+
   permissions?: GuildPermissions;
 
   @Field(() => [String], { nullable: true })
@@ -46,6 +49,7 @@ export class Command {
     category,
     permissions,
     tags,
+    examples,
     execute,
   }: CommandSettings) {
     this.name = name;
@@ -55,6 +59,7 @@ export class Command {
     this.category = category;
     this.permissions = permissions;
     this.tags = tags;
+    this.examples = examples;
     this.execute = execute;
   }
 }
@@ -67,6 +72,7 @@ export interface CommandSettings {
   category?: Categories;
   permissions?: GuildPermissions;
   tags?: string[];
+  examples?: string[];
   execute: (
     msg: Message,
     args: string[],
