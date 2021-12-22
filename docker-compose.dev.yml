@@ -21,7 +21,6 @@ services:
         - BuildMode=development
     volumes:
       - ./packages/frontend:/usr/app
+      - ./packages/frontend/.next:/usr/app/.next
       - /usr/app/node_modules
-      - /usr/app/.next
     command: yarn dev
-    

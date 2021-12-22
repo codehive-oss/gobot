@@ -4,14 +4,14 @@ import { NextPage } from "next";
 import { useRouter } from "next/router";
 import CommandDataComponent from "../../../components/commands/CommandDataComponent";
 import NavbarProvider from "../../../components/NavbarProvider";
-import { withUrql } from "../../../utils/withUrql";
+import { withUrqlClient } from "next-urql";
+import { createUrqlClient } from "../../../utils/createUrqlClient";
 
 interface CommandPageProps {}
 
 const CommandPage: NextPage<CommandPageProps> = () => {
   const router = useRouter();
   const query = router.query;
-  
 
   return (
     <NavbarProvider>
@@ -20,16 +20,14 @@ const CommandPage: NextPage<CommandPageProps> = () => {
           {query.commandName ? query.commandName : "Command"} | GoBot
         </title>
       </Head>
-      {query.category && query.commandName ? (
+      {query.category && query.commandName && (
         <CommandDataComponent
           category={query.category as string}
           commandName={query.commandName as string}
         />
-      ) : (
-        <div>Loading...</div>
       )}
     </NavbarProvider>
   );
 };
 
-export default withUrql(CommandPage, { ssr: true });
+export default withUrqlClient(createUrqlClient, { staleWhileRevalidate: true })(CommandPage);

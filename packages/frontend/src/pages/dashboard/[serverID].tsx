@@ -15,9 +15,10 @@ import {
   useGetGuildDataPaylaodFromIdQuery,
   useUpdateServerMutation,
 } from "../../generated/graphql";
-import { withUrql } from "../../utils/withUrql";
+import { createUrqlClient } from "../../utils/createUrqlClient";
 import { Form, Formik } from "formik";
 import TextOption from "../../components/GuildSettings/TextOption";
+import { withUrqlClient } from "next-urql";
 
 interface ServerDetailsPageProps {}
 
@@ -146,4 +147,6 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
   );
 };
 
-export default withUrql(ServerDetailsPage);
+export default withUrqlClient(createUrqlClient, { ssr: false })(
+  ServerDetailsPage
+);

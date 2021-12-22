@@ -4,7 +4,6 @@ import { MenuIcon } from "@heroicons/react/solid";
 import NavbarButtons from "./Navbar/NavbarButtons";
 import LoginButton from "./LoginButton";
 import { useLogoutUserMutation, useMeQuery } from "../generated/graphql";
-import { withUrql } from "../utils/withUrql";
 import { isServerSide } from "../utils/isServerSide";
 import { useRouter } from "next/router";
 

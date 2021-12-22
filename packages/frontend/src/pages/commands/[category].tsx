@@ -4,7 +4,8 @@ import CommandsListComponent from "../../components/CommandsList";
 import Link from "next/link";
 import Head from "next/head";
 import NavbarProvider from "../../components/NavbarProvider";
-import { withUrql } from "../../utils/withUrql";
+import { createUrqlClient } from "../../utils/createUrqlClient";
+import { withUrqlClient } from "next-urql";
 
 interface CategoryPageProps {}
 
@@ -29,4 +30,4 @@ const CategoryPage: NextPage<CategoryPageProps> = () => {
   );
 };
 
-export default withUrql(CategoryPage, { ssr: true });
+export default withUrqlClient(createUrqlClient, { staleWhileRevalidate: true })(CategoryPage);
