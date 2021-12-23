@@ -1,18 +1,16 @@
 import { NextPage } from "next";
 import Link from "next/link";
-import NavbarProvider from "../../components/NavbarProvider";
 import {
   GetCategoriesDocument,
   useGetCategoriesQuery,
 } from "../../generated/graphql";
 import Head from "next/head";
-import { createUrqlClient } from "../../utils/createUrqlClient";
-import { SSRData, withUrqlClient } from "next-urql";
-import { staticRender } from "../../utils/staticRender";
+import NavbarProvider from "../../components/NavbarProvider";
+import { getUrqlState } from "../../utils/getUrqlState";
 
 interface CommandsPageProps {}
 
-const CommandsPage: React.FC<CommandsPageProps> = () => {
+const CommandsPage: NextPage<CommandsPageProps> = () => {
   const [categories] = useGetCategoriesQuery();
 
   return (
@@ -45,7 +43,14 @@ const CommandsPage: React.FC<CommandsPageProps> = () => {
 };
 
 export const getStaticProps = async () => {
-  return await staticRender({ queries: [GetCategoriesDocument] });
+  const urqlState = await getUrqlState({
+    queries: [{ document: GetCategoriesDocument }],
+  });
+  return {
+    props: {
+      urqlState,
+    },
+  };
 };
 
-export default withUrqlClient(createUrqlClient, { ssr: false })(CommandsPage);
+export default CommandsPage;
