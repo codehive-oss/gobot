@@ -54,3 +54,5 @@ services:
       dockerfile: ./Dockerfile
     expose:
       - 3000
+    depends_on:
+      - backend

@@ -4,7 +4,6 @@ import Head from "next/head";
 import { useGetUserGuildsQuery } from "../../generated/graphql";
 import LoginButton from "../../components/LoginButton";
 import GuildListComponent from "../../components/Dashboard/GuildListComponent";
-import { withUrql } from "../../utils/withUrql";
 
 interface DashboardPageProps {}
 
@@ -39,4 +38,4 @@ const DashboardPage: NextPage<DashboardPageProps> = () => {
   );
 };
 
-export default withUrql(DashboardPage);
+export default DashboardPage;

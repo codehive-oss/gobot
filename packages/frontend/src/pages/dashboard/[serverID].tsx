@@ -15,7 +15,6 @@ import {
   useGetGuildDataPaylaodFromIdQuery,
   useUpdateServerMutation,
 } from "../../generated/graphql";
-import { withUrql } from "../../utils/withUrql";
 import { Form, Formik } from "formik";
 import TextOption from "../../components/GuildSettings/TextOption";
 
@@ -146,4 +145,4 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
   );
 };
 
-export default withUrql(ServerDetailsPage);
+export default ServerDetailsPage;

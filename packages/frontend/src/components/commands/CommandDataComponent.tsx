@@ -28,7 +28,6 @@ const CommandDataComponent: React.FC<CommandDataComponentProps> = ({
           commandQuery.data.getCommandFromName;
         return (
           <div>
-            <h2 className="text-xl">Description</h2>
             <p>{description}</p>
             <br />
 

@@ -1,10 +1,16 @@
-import { NextPage } from "next";
+import { GetStaticPaths, GetStaticProps, NextPage } from "next";
 import { useRouter } from "next/router";
 import CommandsListComponent from "../../components/CommandsList";
 import Link from "next/link";
 import Head from "next/head";
 import NavbarProvider from "../../components/NavbarProvider";
-import { withUrql } from "../../utils/withUrql";
+import { getUrqlState } from "../../utils/getUrqlState";
+import {
+  GetCategoriesQuery,
+  GetCategoriesDocument,
+  GetCategoryCommandsDocument,
+} from "../../generated/graphql";
+import { client } from "../../utils/urqlClient";
 
 interface CategoryPageProps {}
 
@@ -29,4 +35,45 @@ const CategoryPage: NextPage<CategoryPageProps> = () => {
   );
 };
 
-export default withUrql(CategoryPage, { ssr: true });
+export const getStaticProps: GetStaticProps = async ({ params }) => {
+  const urqlState = await getUrqlState({
+    queries: [
+      {
+        document: GetCategoryCommandsDocument,
+        variables: { category: params?.category },
+      },
+    ],
+  });
+  return {
+    props: {
+      urqlState,
+    },
+  };
+};
+
+export const getStaticPaths: GetStaticPaths = async () => {
+  const queryResult = await client
+    .query<GetCategoriesQuery>(GetCategoriesDocument)
+    .toPromise();
+
+  // Check if the query was successful
+  if (!queryResult.data) {
+    return { fallback: false, paths: [] };
+  }
+
+  const categoryNames = queryResult.data.getCategories.map(
+    (category) => category.name
+  );
+  const paths = categoryNames.map((category) => ({
+    params: {
+      category,
+    },
+  }));
+
+  return {
+    paths,
+    fallback: false,
+  };
+};
+
+export default CategoryPage;

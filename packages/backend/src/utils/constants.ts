@@ -19,7 +19,7 @@ export const DB_HOST = process.env.DB_HOST!;
 
 export const REDIS_HOST = process.env.REDIS_HOST!;
 
-export const API_PORT = process.env.API_PORT ? +process.env.API_PORT : 4000;
+export const API_PORT = 4000;
 
 export const CLIENT_ID = process.env.CLIENT_ID!;
 export const CLIENT_SECRET = process.env.CLIENT_SECRET!;
