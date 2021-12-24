@@ -27,7 +27,8 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
-            cp /root/env/.env.production /root/app/gobot/packages/backend/.env.production
+            cp /root/secrets/env/.env.production /root/app/gobot/packages/backend/.env.production
+            cp -r /root/secrets/ssl /root/app/gobot/ssl
             cd /root/app/gobot/
             sudo yarn docker:stop
             sudo yarn docker:build:prod --no-cache
