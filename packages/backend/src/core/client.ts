@@ -1,4 +1,4 @@
-import { Client, Intents, TextChannel } from "discord.js";
+import { Client, Intents, MessageEmbed, TextChannel } from "discord.js";
 import { handleMessage } from "@utils/commandHandler";
 import { DEFAULT_PREFIX } from "@utils/constants";
 import {
@@ -59,10 +59,20 @@ client.on("guildCreate", async (guild) => {
   await toGoServer(guild.id);
 
   const owner = await guild.fetchOwner();
-  await owner.user.send("test");
+
+  const embed = new MessageEmbed()
+    .setTitle("Thank you for using GoBot!")
+    .setDescription(
+      `Hello ${owner.displayName}, thank you for adding me to your server!\n\n` +
+        `I am a bot that helps you manage your server.\n\n` +
+        `To get started, use the command \`${DEFAULT_PREFIX}help\` to see a list of commands.\n\n` +
+        `You can also look for some help on the [GoBot website](https://www.go-bot.xyz) or [GoBot support server](https://discord.gg/GoBot).`
+    ).setFooter("GoBot");
+
+  await owner.user.send({ embeds: [embed] });
 });
 
-// Move this to the command
+// TODO: Move this to the command
 client.on("messageReactionAdd", async (reaction, user) => {
   try {
     if (reaction.message.partial) await reaction.fetch();
@@ -84,7 +94,7 @@ client.on("messageReactionAdd", async (reaction, user) => {
   } catch (e) {}
 });
 
-// Move this to the command
+// TODO: Move this to the command
 client.on("messageReactionRemove", async (reaction, user) => {
   try {
     if (reaction.message.partial) await reaction.fetch();

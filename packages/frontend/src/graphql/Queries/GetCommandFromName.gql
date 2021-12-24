@@ -1,0 +1,11 @@
+query GetCommandFromName($commandName: String!) {
+  getCommandFromName(commandName: $commandName) {
+    name
+    description
+    aliases
+    usage
+    category
+    tags
+    examples
+  }
+}

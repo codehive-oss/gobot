@@ -22,6 +22,7 @@ const cmd = new Command({
   aliases: ["commands"],
   usage: "help <command>",
   category: "misc",
+  examples: ["go help", "go help ping"],
   async execute(msg: Message, args: string[], server: GoServer) {
     if (args.length === 0) {
       const options: MessageSelectOptionData[] = [];

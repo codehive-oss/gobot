@@ -1,12 +1,12 @@
-export function randInt(min: number, max: number) {
+export const randInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min)) + min;
-}
+};
 
-export function randomChoice(arr: any[]) {
+export const randomChoice = <T>(arr: T[]) => {
   return arr[Math.floor(Math.random() * arr.length)];
-}
+};
 
-export function randString(length: number) {
+export const randString = (length: number) => {
   let result = "";
   let characters =
     "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789";
@@ -15,4 +15,4 @@ export function randString(length: number) {
     result += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
   return result;
-}
+};

@@ -5,7 +5,6 @@ import { client } from "@core/client";
 const cmd = new Command({
   name: "ping",
   description: "sends the bots latency",
-  category: "misc",
   execute(message: Message, _args: string[]) {
     message.reply(`\`${client.ws.ping}\`ms`);
   },

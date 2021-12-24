@@ -26,6 +26,7 @@ export type Command = {
   aliases?: Maybe<Array<Scalars['String']>>;
   category?: Maybe<Scalars['String']>;
   description: Scalars['String'];
+  examples?: Maybe<Array<Scalars['String']>>;
   name: Scalars['String'];
   tags?: Maybe<Array<Scalars['String']>>;
   usage?: Maybe<Scalars['String']>;
@@ -69,6 +70,7 @@ export type Query = {
   __typename?: 'Query';
   getCategories: Array<Category>;
   getCategoryCommands: Array<Command>;
+  getCommandFromName: Command;
   getCommands: Array<Command>;
   getGuildDataPayloadFromID: GuildDataPayload;
   getUserGuilds: Array<GuildData>;
@@ -78,6 +80,11 @@ export type Query = {
 
 export type QueryGetCategoryCommandsArgs = {
   category: Scalars['String'];
+};
+
+
+export type QueryGetCommandFromNameArgs = {
+  commandName: Scalars['String'];
 };
 
 
@@ -121,7 +128,14 @@ export type GetCategoryCommandsQueryVariables = Exact<{
 }>;
 
 
-export type GetCategoryCommandsQuery = { __typename?: 'Query', getCategoryCommands: Array<{ __typename?: 'Command', name: string, description: string, aliases?: Array<string> | null | undefined, usage?: string | null | undefined, category?: string | null | undefined }> };
+export type GetCategoryCommandsQuery = { __typename?: 'Query', getCategoryCommands: Array<{ __typename?: 'Command', name: string, description: string }> };
+
+export type GetCommandFromNameQueryVariables = Exact<{
+  commandName: Scalars['String'];
+}>;
+
+
+export type GetCommandFromNameQuery = { __typename?: 'Query', getCommandFromName: { __typename?: 'Command', name: string, description: string, aliases?: Array<string> | null | undefined, usage?: string | null | undefined, category?: string | null | undefined, tags?: Array<string> | null | undefined, examples?: Array<string> | null | undefined } };
 
 export type GetCommandsQueryVariables = Exact<{ [key: string]: never; }>;
 
@@ -181,15 +195,29 @@ export const GetCategoryCommandsDocument = gql`
   getCategoryCommands(category: $category) {
     name
     description
-    aliases
-    usage
-    category
   }
 }
     `;
 
 export function useGetCategoryCommandsQuery(options: Omit<Urql.UseQueryArgs<GetCategoryCommandsQueryVariables>, 'query'> = {}) {
   return Urql.useQuery<GetCategoryCommandsQuery>({ query: GetCategoryCommandsDocument, ...options });
+};
+export const GetCommandFromNameDocument = gql`
+    query GetCommandFromName($commandName: String!) {
+  getCommandFromName(commandName: $commandName) {
+    name
+    description
+    aliases
+    usage
+    category
+    tags
+    examples
+  }
+}
+    `;
+
+export function useGetCommandFromNameQuery(options: Omit<Urql.UseQueryArgs<GetCommandFromNameQueryVariables>, 'query'> = {}) {
+  return Urql.useQuery<GetCommandFromNameQuery>({ query: GetCommandFromNameDocument, ...options });
 };
 export const GetCommandsDocument = gql`
     query GetCommands {

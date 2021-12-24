@@ -9,10 +9,10 @@ interface GuildListComponentProps {
 const GuildListComponent: React.FC<GuildListComponentProps> = ({ guilds }) => {
   return (
     <div>
-      <ul className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3">
+      <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-3">
         {guilds.map((guild) => (
           <Link passHref href={`dashboard/${guild.id}`} key={guild.id}>
-            <li className="btn bg-gray-900 rounded p-8">
+            <li className="btn bg-slate-900 rounded p-8">
               <div className="flex justify-between">
                 <p className="text-2xl">{guild.name}</p>
                 {guild.icon && (

@@ -3,38 +3,13 @@ services:
   nginx:
     ports:
       - "443:443"
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 10
-        window: 10s
-  postgres:
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 10
-        window: 10s
   backend:
     build:
       args:
         - BuildMode=production
     env_file:
       - ./packages/backend/.env.production
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 10
-        window: 10s
   frontend:
     build:
       args:
         - BuildMode=production
-    deploy:
-      restart_policy:
-        condition: on-failure
-        delay: 5s
-        max_attempts: 10
-        window: 10s

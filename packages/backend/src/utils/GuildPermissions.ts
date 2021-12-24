@@ -4,11 +4,11 @@ export type GuildPermissions = {
   perms: bigint[];
 };
 
-export const messagePerms: GuildPermissions = {
+export const manageMessagePermission: GuildPermissions = {
   perms: [Permissions.FLAGS.MANAGE_MESSAGES, Permissions.FLAGS.MANAGE_GUILD],
 };
 
-export const memberPerms: GuildPermissions = {
+export const manageMemberPermission: GuildPermissions = {
   perms: [
     Permissions.FLAGS.MUTE_MEMBERS,
     Permissions.FLAGS.BAN_MEMBERS,
@@ -16,7 +16,7 @@ export const memberPerms: GuildPermissions = {
   ],
 };
 
-export const adminPerms: GuildPermissions = {
+export const adminPermission: GuildPermissions = {
   perms: [Permissions.FLAGS.ADMINISTRATOR],
 };
 

@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/SushiWaUmai/GoBot/compare/v0.8.0...v0.9.0) (2021-12-24)
+
+
+### Bug Fixes
+
+* **command:** :bug: fix config commands ([370d7a8](https://github.com/SushiWaUmai/GoBot/commit/370d7a89bbdcfda0e5949a07c4717876fb00a05c))
+
+
+### Features
+
+* **backend:** :construction: add more commands ([1511250](https://github.com/SushiWaUmai/GoBot/commit/151125075df11cc1828819f7d87642cc8945278a))
+* **backend:** :sparkles: Update owner guild create message ([e78fd7a](https://github.com/SushiWaUmai/GoBot/commit/e78fd7a1c4e40816bd43f2793cda5c4d87f8fc02))
+* **command:** :sparkles: quiz command ([2a2c33b](https://github.com/SushiWaUmai/GoBot/commit/2a2c33b6fbb0dfa9f3dbe9126978818376f93d02))
+* **frontend:** :lipstick: update commands page to nested url ([e8fdde8](https://github.com/SushiWaUmai/GoBot/commit/e8fdde8d4c9573569e81b917b6c6e83782ce3193))
+* **frontend:** :zap: add SSG to command pages ([411b660](https://github.com/SushiWaUmai/GoBot/commit/411b660ea4a91013f42c26da183349e499d331b7))
+
+
+### Performance Improvements
+
+* **command:** :mute: remove api request logs ([efdcfe8](https://github.com/SushiWaUmai/GoBot/commit/efdcfe809acec9d83ca49fbef9b7489026ac29e1))
+* **command:** :zap: resize image for performace ([573a35c](https://github.com/SushiWaUmai/GoBot/commit/573a35c77e1d051afd086decaed70786d6e73bce))
+
+
+
+
+
+
 # [0.8.0](https://github.com/SushiWaUmai/GoBot/compare/v0.7.0...v0.8.0) (2021-12-17)
 
 

@@ -1,12 +1,11 @@
-import {
-  useGetCategoryCommandsQuery,
-} from "../generated/graphql";
+import { useGetCategoryCommandsQuery } from "../generated/graphql";
+import Link from "next/link";
 
 interface CommnadsListComponentProps {
   category: string;
 }
 
-const CommnadsListComponent: React.FC<CommnadsListComponentProps> = ({
+const CommandsListComponent: React.FC<CommnadsListComponentProps> = ({
   category,
 }) => {
   const commands = useGetCategoryCommandsQuery({
@@ -15,13 +14,21 @@ const CommnadsListComponent: React.FC<CommnadsListComponentProps> = ({
 
   return (
     <div>
-      <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+      <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
         {commands.data?.getCategoryCommands.map((command, i) => {
           return (
-            <li className="p-4 bg-gray-900 m-1" key={i}>
-              <h2 className="text-2xl">{command.name}</h2>
-              <p>{command.description}</p>
-            </li>
+            <Link
+              href={`/commands/${category}/${command.name}`}
+              passHref
+              key={command.name}
+            >
+              <a className="p-4 bg-slate-800 hover:bg-slate-600 rounded">
+                <li>
+                  <h2 className="text-2xl">{command.name}</h2>
+                  <p>{command.description}</p>
+                </li>
+              </a>
+            </Link>
           );
         })}
       </ul>
@@ -29,4 +36,4 @@ const CommnadsListComponent: React.FC<CommnadsListComponentProps> = ({
   );
 };
 
-export default CommnadsListComponent;
+export default CommandsListComponent;

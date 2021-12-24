@@ -13,6 +13,8 @@
     "frontend": "yarn workspace @gobot/frontend",
     "docker:logs:dev": "docker-compose -p gobot_dev logs -f",
     "docker:logs:prod": "docker-compose -p gobot_prod logs -f",
+    "docker:build:dev": "docker-compose -p gobot_dev --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml build",
+    "docker:build:prod": "docker-compose -p gobot_prod --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml build",
     "docker:dev": "docker-compose -p gobot_dev --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml up --build",
     "docker:start": "docker-compose -p gobot_prod --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up --build",
     "docker:stop": "docker-compose down"

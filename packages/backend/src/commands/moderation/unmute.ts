@@ -1,5 +1,5 @@
 import { Command } from "@utils/commandTypes";
-import { memberPerms } from "@utils/GuildPermissions";
+import { manageMemberPermission } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
 import { client } from "@core/client";
 
@@ -10,7 +10,7 @@ const cmd = new Command({
   description: "unmutes a Member",
   category: "moderation",
   usage: "unmute [@member] <reason>",
-  permissions: memberPerms,
+  permissions: manageMemberPermission,
   execute: async (msg, args) => {
     const guild = msg.guild;
     if (!guild) return;

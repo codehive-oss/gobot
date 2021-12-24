@@ -1,4 +1,4 @@
-name: Deploy Application on remote server
+name: Deploy Application
 on:
   push:
     branches: [main]
@@ -13,7 +13,7 @@ jobs:
       - name: Deploy with rsync
         uses: burnett01/rsync-deployments@5.1
         with:
-          switches: -avzr
+          switches: -avzr --delete
           path: /
           remote_path: /root/app/gobot
           remote_host: ${{ secrets.GOBOT_SSH_HOST }}
@@ -27,6 +27,8 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
+            cp /root/env/.env.production /root/app/gobot/packages/backend/.env.production
             cd /root/app/gobot/
             sudo yarn docker:stop
+            sudo yarn docker:build:prod --no-cache
             sudo yarn docker:start -d

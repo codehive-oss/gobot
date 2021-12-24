@@ -1,5 +1,5 @@
 import { Command } from "@utils/commandTypes";
-import { messagePerms } from "@utils/GuildPermissions";
+import { manageMessagePermission } from "@utils/GuildPermissions";
 import { setWelcomeChannel } from "@db/entities/GoServer";
 import { TextChannel } from "discord.js";
 
@@ -9,7 +9,7 @@ const cmd = new Command({
   description: "Changes the channel",
   category: "config",
   usage: "setwelcomechannel <channel>",
-  permissions: messagePerms,
+  permissions: manageMessagePermission,
   execute: async (msg, args) => {
     if (!msg.guild) return;
     let channel: TextChannel;
