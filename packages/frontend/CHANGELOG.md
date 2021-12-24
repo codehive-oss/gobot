@@ -3,6 +3,33 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.9.0](https://github.com/SushiWaUmai/GoBot/compare/v0.8.0...v0.9.0) (2021-12-24)
+
+
+### Bug Fixes
+
+* **frontend:** :bug: fix toggle onchange bug ([244ae16](https://github.com/SushiWaUmai/GoBot/commit/244ae1630e60fdcd7c2121f8380ebfd7e1926aa5))
+
+
+### Features
+
+* **backend:** :construction: add more commands ([1511250](https://github.com/SushiWaUmai/GoBot/commit/151125075df11cc1828819f7d87642cc8945278a))
+* **docker:** :construction_worker: update build system ([c56289b](https://github.com/SushiWaUmai/GoBot/commit/c56289ba05cda243d065ae10ae9e394014d15ba5))
+* **frontend:** :lipstick: more responsive commands page ([dc40020](https://github.com/SushiWaUmai/GoBot/commit/dc40020513dcad878229ccf2099b1f1ae157c15c))
+* **frontend:** :lipstick: Update CommandDataComponent ([b46a5af](https://github.com/SushiWaUmai/GoBot/commit/b46a5af34bb339a9d13b01af99680bf6e1236b9c))
+* **frontend:** :lipstick: update commands page to nested url ([e8fdde8](https://github.com/SushiWaUmai/GoBot/commit/e8fdde8d4c9573569e81b917b6c6e83782ce3193))
+* **frontend:** :sparkles: add formik and yup ([991d097](https://github.com/SushiWaUmai/GoBot/commit/991d09775ea88e716f7187f919992e7457a83979))
+* **frontend:** :sparkles: add input field for prefix ([a600cdc](https://github.com/SushiWaUmai/GoBot/commit/a600cdc8aa3fafaf4b6222cccc83f4a8fa70a1ac))
+* **frontend:** :sparkles: ssr and ssg setup ([76297b7](https://github.com/SushiWaUmai/GoBot/commit/76297b769c3a767a00da605c45bb297f122f4e1f))
+* **frontend:** :sparkles: update home page ([b57b67a](https://github.com/SushiWaUmai/GoBot/commit/b57b67a17f8c104596814e369e8274719a97b6d5))
+* **frontend:** :wheelchair: update website icons ([58922a3](https://github.com/SushiWaUmai/GoBot/commit/58922a38060d2e3d9df7715823d64e687d01f11c))
+* **frontend:** :zap: add SSG to command pages ([411b660](https://github.com/SushiWaUmai/GoBot/commit/411b660ea4a91013f42c26da183349e499d331b7))
+
+
+
+
+
+
 # [0.8.0](https://github.com/SushiWaUmai/GoBot/compare/v0.7.0...v0.8.0) (2021-12-17)
 
 
