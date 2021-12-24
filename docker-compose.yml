@@ -9,6 +9,12 @@ services:
     depends_on:
       - backend
       - frontend
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   postgres:
     image: postgres:latest
     restart: always
@@ -25,6 +31,12 @@ services:
       interval: 5s
       timeout: 5s
       retries: 5
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   redis:
     image: redis:latest
     restart: always
@@ -35,6 +47,12 @@ services:
     healthcheck:
       test: ["CMD-SHELL", "redis-cli -h redis ping"]
       interval: 5s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   backend:
     image: gobot/backend
     build:
@@ -47,6 +65,15 @@ services:
         condition: service_healthy
       redis:
         condition: service_healthy
+    healthcheck:
+      test: ["CMD-SHELL", "wget -O /dev/null http://backend:4000/api || exit 1"]
+      interval: 5s
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
   frontend:
     image: gobot/frontend
     build:
@@ -55,4 +82,11 @@ services:
     expose:
       - 3000
     depends_on:
-      - backend
+      backend:
+        condition: service_healthy
+    deploy:
+      restart_policy:
+        condition: on-failure
+        delay: 5s
+        max_attempts: 10
+        window: 10s
