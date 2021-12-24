@@ -32,7 +32,6 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
 
   const [updateServerStatus, updateServer] = useUpdateServerMutation();
 
-  // TODO: Use Formik to handle form
   const [guildData, setGuildData] = useState<Partial<GuildData>>();
   const [goServer, setGoServer] = useState<Partial<GoServer>>();
 
