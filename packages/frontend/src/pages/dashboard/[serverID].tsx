@@ -95,7 +95,7 @@ const ServerDetailsPage: NextPage<ServerDetailsPageProps> = () => {
                   initialValues={
                     (goServer || initialValues) as UpdateServerInput
                   }
-                  onSubmit={async (values, { setSubmitting }) => {
+                  onSubmit={async (values) => {
                     if (!serverID) return;
 
                     updateServer({

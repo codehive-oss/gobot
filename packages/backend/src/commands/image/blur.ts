@@ -12,7 +12,7 @@ const cmd = new Command({
   async execute(msg: Message, _args: string[]) {
     const target = getTarget(msg);
 
-    if (!target!.avatarURL()) {
+    if (!target.avatarURL()) {
       await msg.reply("That User does not have a Profile Picture");
       return;
     }

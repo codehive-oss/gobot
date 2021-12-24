@@ -15,12 +15,12 @@ const cmd = new Command({
   async execute(msg, _args) {
     const target = getTarget(msg);
 
-    if (!target!.avatarURL()) {
+    if (!target.avatarURL()) {
       await msg.reply("That User does not have a Profile Picture");
       return;
     }
 
-    const avatar = await jimp.read(target!.displayAvatarURL({ format: "png" }));
+    const avatar = await jimp.read(target.displayAvatarURL({ format: "png" }));
     const hornyJail = await jimp.read("assets/HornyJail.jpg");
 
     avatar.resize(150, 150);

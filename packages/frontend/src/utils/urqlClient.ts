@@ -5,7 +5,7 @@ import {
   ssrExchange,
   createClient,
 } from "urql";
-import { backendUrl, __prod__ } from "./constants";
+import { urqlBackendUrl, __prod__ } from "./constants";
 import { isServerSide } from "./isServerSide";
 // TODO: Implement cacheExchange with graphcache
 // https://formidable.com/open-source/urql/docs/graphcache/
@@ -13,6 +13,6 @@ import { isServerSide } from "./isServerSide";
 
 export const ssrCache = ssrExchange({ isClient: !isServerSide() });
 export const client = createClient({
-  url: `${backendUrl}/graphql`,
+  url: `${urqlBackendUrl}/graphql`,
   exchanges: [dedupExchange, cacheExchange, ssrCache, fetchExchange],
 });

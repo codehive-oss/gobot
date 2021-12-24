@@ -56,19 +56,8 @@ export const createServers = async (serverids: string[]) => {
   return serversToSave.length;
 };
 
-export const setPrefix = async (server: GoServer, prefix: string) => {
-  server.prefix = prefix;
-  await server.save();
-};
-
-export const setAnime = async (server: GoServer, anime: boolean) => {
-  server.anime = anime;
-  await server.save();
-};
-
-export const setNSFW = async (server: GoServer, nsfw: boolean) => {
-  server.nsfw = nsfw;
-  await server.save();
+export const updateServer = async (server: GoServer) => {
+  await GoServer.update(server.id, server);
 };
 
 export const getWelcomeChannel = async (serverid: string) => {
