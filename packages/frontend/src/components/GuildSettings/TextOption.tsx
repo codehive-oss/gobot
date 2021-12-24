@@ -15,7 +15,7 @@ const TextOption: React.FC<TextOptionProps> = ({ label, name, placeholder }) => 
       <div className="my-2 rounded flex justify-between bg-slate-800 p-4">
         <p>{label}</p>
         <input
-          className="px-5 text-xl rounded bg-zinc-800"
+          className="p-1 text-xl rounded bg-zinc-800"
           placeholder={placeholder}
           autoComplete="off"
           {...field}

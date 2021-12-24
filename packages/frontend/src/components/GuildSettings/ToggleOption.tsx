@@ -8,15 +8,16 @@ interface ToogleOptionProps {
 }
 
 const ToogleOption: React.FC<ToogleOptionProps> = ({ label, name }) => {
-  const [field, meta] = useField<boolean>(name);
+  const [field, meta, helpers] = useField<boolean>(name);
 
   return (
     <>
       <div className="my-2 rounded flex justify-between bg-slate-800 p-4">
         <p>{label}</p>
         <Switch
+          name={name}
           checked={field.value}
-          onChange={field.onChange}
+          onChange={helpers.setValue}
           className={`${
             field.value ? "bg-green-500" : "bg-slate-400"
           } relative inline-flex items-center h-6 rounded-full w-11 flex-shrink-0 border-2 border-transparent cursor-pointer transition-colors ease-in-out duration-200 focus:outline-none focus-visible:ring-2  focus-visible:ring-white focus-visible:ring-opacity-75`}
