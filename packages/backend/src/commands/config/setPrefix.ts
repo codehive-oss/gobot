@@ -3,11 +3,11 @@ import { manageMemberPermission } from "@utils/GuildPermissions";
 import { updateServer } from "@db/entities/GoServer";
 
 export default new Command({
-  name: "setPrefix",
+  name: "setprefix",
   description: "Sets the prefix of the guild",
-  usage: "setPrefix <prefix>",
+  usage: "setprefix <prefix>",
   category: "config",
-  aliases: ["changePrefix"],
+  aliases: ["changeprefix"],
   permissions: manageMemberPermission,
   async execute(message, args, server) {
     if (!args[0]) {

@@ -3,14 +3,14 @@ import { manageMemberPermission } from "@utils/GuildPermissions";
 import { updateServer } from "@db/entities/GoServer";
 
 export default new Command({
-  name: "setAnime",
+  name: "setanime",
   description: "Sets the Anime status of the guild",
-  usage: "setAnime <true/false>",
+  usage: "setanime <true/false>",
   category: "config",
-  aliases: ["changeAnime"],
+  aliases: ["changeanime"],
   permissions: manageMemberPermission,
   async execute(message, args, server) {
-    // set nsfw to true or false, when no args are provided, toggle it
+    // set anime to true or false, when no args are provided, toggle it
     if (!args[0]) {
       server.anime = !server.anime;
     } else if (args[0] === "true") {
