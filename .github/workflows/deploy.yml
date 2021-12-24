@@ -1,4 +1,4 @@
-name: Deploy Application on remote server
+name: Deploy Application
 on:
   push:
     branches: [main]
