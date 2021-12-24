@@ -1,4 +1,4 @@
-[![gobot](https://www.go-bot.xyz/GoBotBannerTransparent.png)](https://www.gobot-xyz/)
+[![gobot](https://www.go-bot.xyz/GoBotBannerTransparent.png)](https://www.go-bot.xyz/)
 
 
 <div align="center">
