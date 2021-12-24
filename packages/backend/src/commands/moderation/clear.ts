@@ -1,5 +1,5 @@
 import { Command } from "@utils/commandTypes";
-import { messagePerms } from "@utils/GuildPermissions";
+import { manageMessagePermission } from "@utils/GuildPermissions";
 import { TextChannel } from "discord.js";
 
 const cmd = new Command({
@@ -8,7 +8,7 @@ const cmd = new Command({
   description: "Deletes messages from the specified channel.",
   category: "moderation",
   usage: "purge [amount]",
-  permissions: messagePerms,
+  permissions: manageMessagePermission,
   execute: async (msg, args) => {
     let amount = parseInt(args[0]);
     if (!amount || Number.isNaN(amount)) {

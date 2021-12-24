@@ -4,7 +4,6 @@ import { Command } from "@utils/commandTypes";
 
 const cmd = new Command({
   name: "uptime",
-  category: "misc",
   description: "sends the bots uptime",
   async execute(msg: Message, _args: string[]) {
     if (client.uptime) {

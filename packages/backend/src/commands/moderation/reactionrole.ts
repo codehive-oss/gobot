@@ -1,5 +1,5 @@
 import { Command } from "@utils/commandTypes";
-import { messagePerms } from "@utils/GuildPermissions";
+import { manageMessagePermission } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
 import { createReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 
@@ -8,7 +8,7 @@ const cmd = new Command({
   description: "Creates a selfrole message.",
   category: "moderation",
   usage: "reactionrole [emoji] [roleid]",
-  permissions: messagePerms,
+  permissions: manageMessagePermission,
   execute: async (msg, args) => {
     if (!msg.guild) return;
     if (args.length == 2) {

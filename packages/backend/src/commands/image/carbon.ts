@@ -7,7 +7,7 @@ export default new Command({
   name: "carbon",
   description: "Creates a image with the carbon.now.sh API from the given text",
   usage: "carbon <text>",
-  category: "misc",
+  category: "image",
   aliases: ["carbonify"],
   async execute(message, args) {
     if (!args.length) {
