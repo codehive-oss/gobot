@@ -36,6 +36,10 @@ export default new Command({
     // resize the avatar to fit the hands
     authorAvatar.resize(hands.bitmap.width, hands.bitmap.height);
     authorAvatar.composite(hands, 0, 0);
+
+    // resize the avatar to fit the hands
+    targetAvatar.resize(hands.bitmap.width / 5, hands.bitmap.width / 5);
+
     // Place the target avatar at the center of the hands
     authorAvatar.composite(
       targetAvatar,
