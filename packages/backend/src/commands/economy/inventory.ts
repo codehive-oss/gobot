@@ -1,5 +1,5 @@
 import { MessageEmbed } from "discord.js";
-import { toGoUser } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { allItems } from "@utils/item";
 import { Command } from "@utils/commandTypes";
 
@@ -21,7 +21,7 @@ const cmd = new Command({
       return;
     }
 
-    const user = await toGoUser(target.id);
+    const user = await GoUser.toGoUser(target.id);
 
     const embed = new MessageEmbed();
     embed.setColor("#528B8B");
@@ -29,6 +29,7 @@ const cmd = new Command({
     if (target?.avatarURL()) {
       embed.setThumbnail(target.avatarURL()!);
     }
+
     for (let i = 0; i < user.items.length; i++) {
       const item = allItems[i];
       embed.addField(item.name, user.items[i].toString());

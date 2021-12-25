@@ -8,7 +8,7 @@ import {
   TextChannel,
 } from "discord.js";
 import { client } from "@core/client";
-import { commands } from "@utils/commandHandler";
+import { commands } from "@core/commandHandler";
 import { Command } from "@utils/commandTypes";
 import { allCategoryData, Categories } from "@utils/categoryTypes";
 import { capitalizeFirstLetter } from "@utils/capitalize";

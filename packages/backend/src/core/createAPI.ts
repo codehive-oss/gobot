@@ -2,8 +2,6 @@ import "reflect-metadata";
 import express from "express";
 import cors from "cors";
 import { buildSchema } from "type-graphql";
-import { createConnection } from "typeorm";
-import { typeormOrmConfig } from "../db/ormconfig";
 import { DiscordServerResolver } from "@db/resolvers/DiscordServerResolver";
 import { CommandResolver } from "@db/resolvers/CommandResolver";
 import { GoUserResolver } from "@db/resolvers/GoUserResolver";
@@ -19,14 +17,10 @@ import { createRouter } from "../routes";
 import expressSession from "express-session";
 import connectRedis from "connect-redis";
 import Redis from "ioredis";
+import { createSQLConnection } from "./createSQLConnection";
 
 export const createAPI = async () => {
-  logger.info("Creating SQL connection...");
-  const conn = await createConnection(typeormOrmConfig);
-  await conn.runMigrations();
-  logger.info(
-    `SQL connection on ${typeormOrmConfig.host}:${typeormOrmConfig.port} connected`
-  );
+  await createSQLConnection();
 
   logger.info("Building graphql schema...");
   const schema = await buildSchema({

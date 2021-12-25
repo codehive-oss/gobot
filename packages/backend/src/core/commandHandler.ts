@@ -1,11 +1,11 @@
 import { Message, TextChannel } from "discord.js";
-import { logger } from "./logger";
-import { Command } from "./commandTypes";
-import { hasPermission } from "./GuildPermissions";
+import { logger } from "../utils/logger";
+import { Command } from "../utils/commandTypes";
+import { hasPermission } from "../utils/GuildPermissions";
 import { GoServer } from "@db/entities/GoServer";
-import { increaseMessages } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import fs from "fs";
-import { __prod__ } from "./constants";
+import { __prod__ } from "../utils/constants";
 
 export const commands: Command[] = [];
 
@@ -45,7 +45,9 @@ export const handleMessage = async (message: Message, server: GoServer) => {
 
   // messages should not increment if they are commands
   if (message.member && !message.content.startsWith(server.prefix)) {
-    await increaseMessages(message.member.user.id);
+    const goUser = await GoUser.toGoUser(message.author.id);
+    goUser.messages++;
+    await goUser.save();
   }
 
   try {

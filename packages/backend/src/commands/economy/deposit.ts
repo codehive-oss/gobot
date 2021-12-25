@@ -1,4 +1,4 @@
-import { deposit, toGoUser } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { Command } from "@utils/commandTypes";
 import { maxwords } from "@utils/maxwords";
 
@@ -9,7 +9,7 @@ const cmd = new Command({
   aliases: ["dep"],
   usage: "deposit <amount|all|max>",
   async execute(msg, args) {
-    const goUser = await toGoUser(msg.author.id);
+    const goUser = await GoUser.toGoUser(msg.author.id);
     if (args[0]) {
       // Check if argument is a number
       let er = /^-?[0-9]+$/;
@@ -23,26 +23,30 @@ const cmd = new Command({
             await msg.reply("You don't have that much money.");
             return;
           }
-          await deposit(goUser, amount);
+          goUser.deposit(amount);
+          goUser.save();
+
           await msg.reply(
-            `You've deposited ${amount} coins into your bank account.`
+            `You've deposited ${amount} GoCoins into your bank account.`
           );
         } else {
-          await msg.reply(`You can't deposit negative coins.`);
+          await msg.reply(`You can't deposit negative GoCoins.`);
         }
       } else {
         // Check if user wants to deposit all their money
         if (maxwords.includes(args[0])) {
-          await deposit(goUser, goUser.handBalance);
+          goUser.deposit(goUser.handBalance);
+          goUser.save();
+
           await msg.reply(
-            `You've deposited all of your coins into your bank account.`
+            `You've deposited all of your GoCoins into your bank account.`
           );
         } else {
           await msg.reply("Invalid argument");
         }
       }
     } else {
-      await msg.reply(`You need to specify an amount of coins to deposit.`);
+      await msg.reply(`You need to specify an amount of GoCoins to deposit.`);
     }
   },
 });

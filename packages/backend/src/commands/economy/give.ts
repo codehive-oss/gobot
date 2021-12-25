@@ -1,9 +1,5 @@
 import { maxwords } from "@utils/maxwords";
-import {
-  decrementHandBalance,
-  incrementHandBalance,
-  toGoUser,
-} from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { Command } from "@utils/commandTypes";
 
 const cmd = new Command({
@@ -30,8 +26,8 @@ const cmd = new Command({
       return;
     }
 
-    const user = await toGoUser(dcUser.id);
-    const target = await toGoUser(dcTarget.id);
+    const user = await GoUser.toGoUser(dcUser.id);
+    const target = await GoUser.toGoUser(dcTarget.id);
 
     let amount: number;
     let er = /^-?[0-9]+$/;
@@ -56,10 +52,13 @@ const cmd = new Command({
       return;
     }
 
-    await decrementHandBalance(user, amount);
-    await incrementHandBalance(target, amount);
+    user.decrementHandBalance(amount);
+    target.incrementHandBalance(amount);
+    user.save();
+    target.save();
+    
 
-    msg.reply(`You gave ${amount}$ to ${dcTarget.username} `);
+    msg.reply(`You gave ${amount} GoCoins to ${dcTarget.username} `);
   },
 });
 

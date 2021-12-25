@@ -1,4 +1,4 @@
-import { commands } from "@utils/commandHandler";
+import { commands } from "@core/commandHandler";
 import { Query, Resolver, Arg } from "type-graphql";
 import { Command } from "@utils/commandTypes";
 import { Category, getAllCategories } from "@utils/categoryTypes";

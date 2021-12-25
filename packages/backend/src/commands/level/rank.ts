@@ -1,6 +1,6 @@
 import { Command } from "@utils/commandTypes";
 import { Message, MessageEmbed } from "discord.js";
-import { toGoUser } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { lvlToXp, xpToLvl } from "@utils/levelCalculator";
 import { progressBar } from "@utils/progressbar";
 
@@ -23,7 +23,7 @@ const cmd = new Command({
     if (target.avatarURL()) {
       embed.setThumbnail(target.avatarURL()!);
     }
-    const user = await toGoUser(target.id);
+    const user = await GoUser.toGoUser(target.id);
 
     const lvl = xpToLvl(user.xp); //user level
     const progress = user.xp - lvlToXp(lvl); //user progress on current level

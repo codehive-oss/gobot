@@ -132,5 +132,13 @@ dist
 # Database files
 pgdata/
 redisdata/
+pgbackup/
+redisbackup/
+data/
 
+# Temp files
+tmp/
+temp/
+
+# Secrets
 ssl/

@@ -1,4 +1,4 @@
-import { toGoUser, withdraw } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { Command } from "@utils/commandTypes";
 import { maxwords } from "@utils/maxwords";
 
@@ -9,7 +9,7 @@ const cmd = new Command({
   usage: "withdraw <amount|all>",
   aliases: ["with", "wd"],
   async execute(msg, args) {
-    const goUser = await toGoUser(msg.author.id);
+    const goUser = await GoUser.toGoUser(msg.author.id);
 
     if (args[0]) {
       // Check if argument is a number
@@ -24,7 +24,9 @@ const cmd = new Command({
             await msg.reply("You don't have that much money.");
             return;
           }
-          await withdraw(goUser, amount);
+          goUser.withdraw(amount);
+          goUser.save();
+
           await msg.reply(`You withdrew ${amount} from your bank account.`);
         } else {
           await msg.reply("You can't withdraw a negative amount.");
@@ -33,7 +35,9 @@ const cmd = new Command({
       } else {
         // Check all money should be withdrawn
         if (maxwords.includes(args[0])) {
-          await withdraw(goUser, goUser.bankBalance);
+          goUser.withdraw(goUser.bankBalance);
+          goUser.save();
+
           await msg.reply(`You withdrew all your money.`);
         } else {
           await msg.reply("Invalid argument");
