@@ -1,4 +1,4 @@
-// TODO: Better implementation with upgrades
+// TODO: Better implementation with upgrades and buttons
 import { Command } from "@utils/commandTypes";
 import { Message, MessageEmbed } from "discord.js";
 import { allTools, calculateUpgradeCost } from "@utils/tools";

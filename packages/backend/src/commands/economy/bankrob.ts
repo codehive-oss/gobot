@@ -55,7 +55,7 @@ const cmd = new CooldownCommand({
       target.save();
       user.save();
       await msg.reply(
-        `You robbed ${dcTarget.username}! You stole ${gain}GoCoins and you earned ${rand}xp`
+        `You robbed ${dcTarget.username}! You stole ${gain} GoCoins and you earned ${rand}xp`
       );
     } else {
       // Cooldown

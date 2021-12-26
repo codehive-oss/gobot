@@ -31,14 +31,16 @@ const cmd = new CooldownCommand({
         goUser.addXp(rand);
 
         goUser.save();
-        await msg.reply(`You won ${win} GoCoins and you earned ${rand}xp :moneybag:`);
+        await msg.reply(
+          `You won ${win} GoCoins and you earned ${rand}xp :moneybag:`
+        );
       } else {
         //jackpot
         goUser.incrementHandBalance(5000);
 
         goUser.save();
         await msg.reply(
-          "You won the Jackpot of 5000$! Congrats :money_with_wings: :money_with_wings: :money_with_wings: "
+          "You won the Jackpot of 5000 GoCoins! Congrats :money_with_wings: :money_with_wings: :money_with_wings:"
         );
       }
     } else {
