@@ -1,7 +1,7 @@
 import { Router } from "express";
 import passport from "passport";
 import { Strategy as DiscordStrategy } from "passport-discord";
-import { toGoUser } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { CLIENT_ID, CLIENT_SECRET, FRONTEND_URL } from "@utils/constants";
 
 passport.serializeUser((id, done) => {
@@ -9,7 +9,7 @@ passport.serializeUser((id, done) => {
 });
 
 passport.deserializeUser(async (id, done) => {
-  const user = await toGoUser(id as string);
+  const user = await GoUser.toGoUser(id as string);
   done(null, user);
 });
 
@@ -20,10 +20,10 @@ passport.use(
     {
       clientID: CLIENT_ID,
       clientSecret: CLIENT_SECRET,
-      scope: ["identify", "guilds"]
+      scope: ["identify", "guilds"],
     },
     async (accessToken, _refreshToken, profile, done) => {
-      const goUser = await toGoUser(profile.id);
+      const goUser = await GoUser.toGoUser(profile.id);
       if (goUser.accessToken !== accessToken) {
         goUser.accessToken = accessToken;
         goUser.save();

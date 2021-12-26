@@ -1,6 +1,6 @@
 import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { toGoUser } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { allItems } from "@utils/item";
 import { maxwords } from "@utils/maxwords";
 
@@ -30,12 +30,12 @@ const cmd = new Command({
       return;
     }
 
-    const gouser = await toGoUser(msg.author.id);
+    const goUser = await GoUser.toGoUser(msg.author.id);
 
     let amount;
     if (args[1]) {
       if (maxwords.includes(args[1].toLowerCase())) {
-        amount = gouser.items[oreIndex];
+        amount = goUser.items[oreIndex];
       } else {
         amount = parseInt(args[1]);
       }
@@ -43,12 +43,12 @@ const cmd = new Command({
       amount = 1;
     }
 
-    if (gouser.items[oreIndex] > amount - 1) {
-      gouser.items[oreIndex] -= amount;
-      gouser.handBalance += ore.price * amount;
-      await gouser.save();
+    if (goUser.items[oreIndex] > amount - 1) {
+      goUser.items[oreIndex] -= amount;
+      goUser.handBalance += ore.price * amount;
+      await goUser.save();
       await msg.reply(
-        `Succesfully sold ${amount} ${ore.name} for ${ore.price * amount}`
+        `Succesfully sold ${amount} ${ore.name} for ${ore.price * amount} GoCoins`
       );
     } else {
       await msg.reply("You don't own that");

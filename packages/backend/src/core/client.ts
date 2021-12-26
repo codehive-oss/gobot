@@ -1,5 +1,5 @@
 import { Client, Intents, MessageEmbed, TextChannel } from "discord.js";
-import { handleMessage } from "@utils/commandHandler";
+import { handleMessage } from "@core/commandHandler";
 import { DEFAULT_PREFIX } from "@utils/constants";
 import {
   createServers,

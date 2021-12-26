@@ -1,10 +1,4 @@
-import {
-  addXp,
-  decrementBankBalance,
-  incrementBankBalance,
-  payUser,
-  toGoUser,
-} from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { CooldownCommand } from "@utils/commandTypes";
 import { checkRobTarget } from "@utils/checkRobTarget";
 import { randInt } from "@utils/random";
@@ -30,8 +24,8 @@ const cmd = new CooldownCommand({
         return;
       }
       dcTarget = dcTarget!;
-      const user = await toGoUser(dcUser.id);
-      const target = await toGoUser(dcTarget.id);
+      const user = await GoUser.toGoUser(dcUser.id);
+      const target = await GoUser.toGoUser(dcTarget.id);
 
       const chance = Math.random();
 
@@ -41,20 +35,27 @@ const cmd = new CooldownCommand({
 
       // Failure
       if (chance < failRate) {
-        const loss = await payUser(user, target, robAmount);
+        const loss = user.payUser(target, robAmount);
+
+        user.save();
+        target.save();
+
         await msg.reply(
-          `You got caught by ${dcTarget.username}! You had to pay them ${loss}$`
+          `You got caught by ${dcTarget.username}! You had to pay them ${loss} GoCoins`
         );
         return;
       }
 
       // Success
-      const gain = await decrementBankBalance(target, robAmount);
-      await incrementBankBalance(user, gain);
+      const gain = target.decrementBankBalance(robAmount);
+      user.incrementBankBalance(gain);
       const rand = randInt(40, 80);
-      await addXp(user, rand);
+      user.addXp(rand);
+
+      target.save();
+      user.save();
       await msg.reply(
-        `You robbed ${dcTarget.username}! They had to pay you ${gain}$ and you earned ${rand}xp`
+        `You robbed ${dcTarget.username}! You stole ${gain} GoCoins and you earned ${rand}xp`
       );
     } else {
       // Cooldown

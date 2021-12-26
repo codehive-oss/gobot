@@ -1,12 +1,7 @@
 import { Command } from "@utils/commandTypes";
 import { Message } from "discord.js";
-import { tools } from "@utils/tools";
-import {
-  decrementHandBalance,
-  giveTool,
-  hasTool,
-  toGoUser,
-} from "@db/entities/GoUser";
+import { allTools, calculateUpgradeCost } from "@utils/tools";
+import { GoUser } from "@db/entities/GoUser";
 
 const cmd = new Command({
   name: "buy",
@@ -18,34 +13,37 @@ const cmd = new Command({
       await msg.reply("Please provide an Item!");
       return;
     }
+
     const itemname = args[0];
-    let item;
+    let selectedTool = allTools.find(
+      (t) => t.name.toLocaleLowerCase() === itemname.toLocaleLowerCase()
+    );
 
-    for (const tool of tools) {
-      if (tool.name.toLocaleLowerCase() === itemname.toLocaleLowerCase()) {
-        item = tool;
-        break;
-      }
-    }
-
-    if (item === undefined) {
+    if (!selectedTool) {
       await msg.reply("Tool not found");
       return;
     }
 
-    const gouser = await toGoUser(msg.author.id);
-    if (gouser.handBalance < item.price) {
+    const goUser = await GoUser.toGoUser(msg.author.id);
+    const price = calculateUpgradeCost(
+      selectedTool.price,
+      goUser.getToolLevel(selectedTool.id)
+    );
+
+    if (goUser.handBalance < price) {
       await msg.reply("You dont have enough money on your hand to buy this!");
       return;
     }
 
-    if (await hasTool(gouser, item.id)) {
-      await msg.reply("You already have that tool");
-      return;
-    }
-    await giveTool(gouser, 0);
-    await decrementHandBalance(gouser, item.price);
-    await msg.reply(`Succesfully bought ${item.name} for ${item.price}`);
+    goUser.upgradeTool(selectedTool.id);
+    goUser.decrementHandBalance(price);
+    goUser.save();
+
+    await msg.reply(
+      `Succesfully bought ${selectedTool.name} level ${goUser.getToolLevel(
+        selectedTool.id
+      )} for ${price} GoCoins`
+    );
   },
 });
 

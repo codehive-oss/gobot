@@ -1,6 +1,6 @@
 import { Command } from "@utils/commandTypes";
 import { Message, MessageEmbed, User } from "discord.js";
-import { toGoUser } from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 
 const cmd = new Command({
   aliases: ["bal"],
@@ -21,15 +21,15 @@ const cmd = new Command({
       }
       dcUser = target;
     }
-    const goUser = await toGoUser(dcUser.id);
+    const goUser = await GoUser.toGoUser(dcUser.id);
     const embed = new MessageEmbed();
     embed.setColor("#ffd700");
     embed.setTitle(`:moneybag: Balance of ${dcUser.username}`);
     if (dcUser?.avatarURL()) {
       embed.setThumbnail(dcUser.avatarURL()!);
     }
-    embed.addField("Hand Balance", goUser.handBalance + "$");
-    embed.addField("Bank Balance", goUser.bankBalance + "$");
+    embed.addField("Hand Balance", `${goUser.handBalance} GoCoins`);
+    embed.addField("Bank Balance", `${goUser.bankBalance} GoCoins`);
 
     await msg.reply({ embeds: [embed] });
   },

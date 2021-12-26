@@ -1,18 +1,9 @@
-import {
-  CooldownCommand	
-} from "@utils/commandTypes";
+import { CooldownCommand } from "@utils/commandTypes";
 import { allItems, Item } from "@utils/item";
 import { MessageEmbed } from "discord.js";
-import {
-  addItem,
-  addXp,
-  hasTool,
-  incrementHandBalance,
-  removeTool,
-  toGoUser,
-} from "@db/entities/GoUser";
+import { GoUser } from "@db/entities/GoUser";
 import { randInt } from "@utils/random";
-
+import { pickaxe } from "@utils/tools";
 
 const pickOne = (arr: Item[]): Item | undefined => {
   const rand = Math.random();
@@ -26,53 +17,49 @@ const pickOne = (arr: Item[]): Item | undefined => {
   return undefined;
 };
 
-const cmd = new CooldownCommand( {
+const cmd = new CooldownCommand({
   name: "mine",
   aliases: ["dig"],
   category: "economy",
   description: "Mine for items",
   cooldown: 30,
   execute: async function (msg, _args, server) {
-    if (!(await hasTool(await toGoUser(msg.author.id), 0))) {
-      await msg.reply(
-        `You dont have a Pickaxe. Visit ${server.prefix}shop to buy one`
-      );
-      return;
-    }
-
     const dcUser = msg.author;
 
     if (cmd.canExecute(cmd.name, dcUser.id)) {
       cmd.setCooldown(cmd.name, dcUser.id, cmd.cooldown);
-      const user = await toGoUser(dcUser.id);
+      const user = await GoUser.toGoUser(dcUser.id);
+
+      if (!user.hasTool(pickaxe.id)) {
+        msg.reply(
+          `You need a pickaxe to mine! Use \`${server.prefix}shop\` to go to shop`
+        );
+        return;
+      }
 
       const item = pickOne(allItems);
 
       const rand = randInt(20, 80);
-      await addXp(user, rand);
+      user.addXp(rand);
 
       if (!item) {
         const money = randInt(300, 500);
-        await incrementHandBalance(user, money);
-        await msg.reply(`You mined ${money} coins and earned ${rand}xp!`);
+        user.incrementHandBalance(money);
+        user.save();
+
+        await msg.reply(`You mined ${money} GoCoins and earned ${rand}xp!`);
       } else {
         const i = allItems.indexOf(item);
-        await addItem(user, i);
+        user.addItem(i);
+        user.save();
 
         const embed = new MessageEmbed()
           .setTitle(item.name)
           .setDescription(item.description)
-          .setColor(0x00ff00)
+          .setColor("GREEN")
           .setFooter(`${dcUser.username} mined a ${item.name}`);
 
         await msg.reply({ embeds: [embed] });
-      }
-
-      if (randInt(0, 50) == 1) {
-        await removeTool(user, 0);
-        await msg.reply(
-          `Too bad! Your Pickaxe broke. Visit ${server.prefix}shop to buy a new one!`
-        );
       }
     } else {
       await msg.reply(
