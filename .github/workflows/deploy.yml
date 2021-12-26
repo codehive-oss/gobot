@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
-            cp /root/app/data/gobotData /root/app/gobot/data
+            cp -r /root/app/data/gobotData /root/app/gobot/data
             cp /root/secrets/env/.env.production /root/app/gobot/packages/backend/.env.production
             cp -r /root/secrets/ssl /root/app/gobot/ssl
             cd /root/app/gobot/
