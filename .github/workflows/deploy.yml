@@ -18,7 +18,7 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
-            cp -r /root/app/gobot/data /root/app/data/gobotData
+            cp -r /root/app/gobot/data /root/app/
       - name: Deploy with rsync
         uses: burnett01/rsync-deployments@5.1
         with:
@@ -36,7 +36,7 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
-            cp -r /root/app/data/gobotData /root/app/gobot
+            cp -r /root/app/data /root/app/gobot
             cp /root/secrets/env/.env.production /root/app/gobot/packages/backend/.env.production
             cp -r /root/secrets/ssl /root/app/gobot/ssl
             cd /root/app/gobot/
