@@ -10,6 +10,15 @@ jobs:
     steps:
       - name: Get files
         uses: actions/checkout@v2
+      - name: Copy Data
+        uses: appleboy/ssh-action@master
+        with:
+          host: ${{ secrets.GOBOT_SSH_HOST }}
+          username: ${{ secrets.GOBOT_SSH_USER }}
+          key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
+          port: ${{ secrets.GOBOT_SSH_PORT }}
+          script: |
+            cp /root/app/gobot/data /root/app/data/gobotData
       - name: Deploy with rsync
         uses: burnett01/rsync-deployments@5.1
         with:
@@ -27,6 +36,7 @@ jobs:
           key: ${{ secrets.GOBOT_SSH_PRIVATE_KEY }}
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
+            cp /root/app/data/gobotData /root/app/gobot/data
             cp /root/secrets/env/.env.production /root/app/gobot/packages/backend/.env.production
             cp -r /root/secrets/ssl /root/app/gobot/ssl
             cd /root/app/gobot/
