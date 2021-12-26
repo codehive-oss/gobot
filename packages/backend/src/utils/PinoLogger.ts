@@ -17,7 +17,7 @@ export class PinoTypeormLogger implements Logger {
   }
 
   logQuery(query: string, parameters?: any[]) {
-    this.logger.info(query, parameters);
+    this.logger.trace(query, parameters);
   }
 
   logQueryError(error: string, query: string, parameters?: any[]) {

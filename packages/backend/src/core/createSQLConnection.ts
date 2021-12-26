@@ -3,14 +3,14 @@ import { GoUser } from "@db/entities/GoUser";
 import { ReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 import { logger } from "@utils/logger";
 import { createConnection } from "typeorm";
-import { typeormOrmConfig } from "../db/ormconfig";
+import ormConfig from "@db/ormconfig";
 
 export const createSQLConnection = async () => {
   logger.info("Creating SQL connection...");
-  const conn = await createConnection(typeormOrmConfig);
+  const conn = await createConnection(ormConfig);
   await conn.runMigrations();
   logger.info(
-    `SQL connection on ${typeormOrmConfig.host}:${typeormOrmConfig.port} connected`
+    `SQL connection on ${ormConfig.host}:${ormConfig.port} connected`
   );
 
   logger.info(`Found ${await GoUser.count()} users in database`);

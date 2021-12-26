@@ -10,4 +10,4 @@ COPY . .
 
 ENV NODE_ENV "$BuildMode"
 
-CMD yarn build && yarn start 
+CMD yarn build && yarn start
