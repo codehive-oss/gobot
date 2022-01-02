@@ -193,7 +193,7 @@ export default new Command({
   name: "quiz",
   description: "Play a quiz",
   usage: "quiz",
-  category: "misc",
+  category: "minigames",
   execute: async (msg: Message, _args: string[]) => {
     // Make the user select a difficulty and category
     const category = await askCategory(msg);
@@ -203,12 +203,12 @@ export default new Command({
     const response = await axios.get<QuizResponseType>(url);
     let quiz = response.data.results;
 
-    // 
+    //
     quiz.forEach((q) => {
       q.correct_answer = unescape(q.correct_answer);
       q.question = unescape(q.question);
       q.incorrect_answers.forEach((i) => (i = unescape(i)));
-    })
+    });
 
     let correctAnswers = 0;
     // Ask the user a question

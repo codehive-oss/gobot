@@ -29,7 +29,7 @@ const cmd = new Command({
       for (let name in allCategoryData) {
         const data = allCategoryData[name as keyof typeof allCategoryData];
         options.push({
-          label: capitalizeFirstLetter(name),
+          label: data.displayName,
           value: name,
           description: data.description,
         });
