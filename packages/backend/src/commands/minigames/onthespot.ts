@@ -85,7 +85,7 @@ export default new Command({
     });
 
     // When the collector stops
-    collector.on("end", async (collected, reason) => {
+    collector.on("end", async (_collected, reason) => {
       // If the collector was stopped because of a timeout
       if (reason === "timeout") {
         // Send a message to the channel
@@ -95,11 +95,11 @@ export default new Command({
             .map((p) => `${p.username} `)
             .join(", ")} did not accept the challenge`
         );
-      }
-      else if (reason === "rejected") {
+      } else if (reason === "rejected") {
+        clearTimeout(timeout);
         return;
-      }
-       else {
+      } else {
+        clearTimeout(timeout);
         // Send a message to the channel
         msg.channel.send(
           `${players
@@ -108,7 +108,7 @@ export default new Command({
         );
 
         // Start the game
-        
+
       }
     });
   },

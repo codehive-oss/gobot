@@ -14,7 +14,7 @@ export interface AnalysisScore {
   interesting: number;
   realistic: number;
   original: number;
-  educational: number;
+  cool: number;
 }
 
 export interface Player {
