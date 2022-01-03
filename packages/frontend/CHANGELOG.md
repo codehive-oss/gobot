@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/SushiWaUmai/GoBot/compare/v0.9.0...v0.10.0) (2022-01-03)
+
+
+### Features
+
+* **backend:** add migration system ([1972c72](https://github.com/SushiWaUmai/GoBot/commit/1972c726c50dd01b956ee0300e189a0176ce34a1))
+
+
+
+
+
+
 # [0.9.0](https://github.com/SushiWaUmai/GoBot/compare/v0.8.0...v0.9.0) (2021-12-24)
 
 

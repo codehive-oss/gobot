@@ -3,6 +3,25 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.10.0](https://github.com/SushiWaUmai/GoBot/compare/v0.9.0...v0.10.0) (2022-01-03)
+
+
+### Features
+
+* **backend:** :sparkles: add pickaxe level system and refactor db configurations ([d503076](https://github.com/SushiWaUmai/GoBot/commit/d5030761501b6137366690bc01257b993c9aca92))
+* **backend:** :sparkles: update lobby architechture ([21fe02a](https://github.com/SushiWaUmai/GoBot/commit/21fe02ad58149fbc81112433103dc2860b480a55))
+* **backend:** add migration system ([1972c72](https://github.com/SushiWaUmai/GoBot/commit/1972c726c50dd01b956ee0300e189a0176ce34a1))
+* **command:** :construction: add on the spot command ([7812449](https://github.com/SushiWaUmai/GoBot/commit/7812449aad08aa537ba518d3b5f3eca3bc5c9063))
+* **command:** :sparkles: add mini games category ([4592673](https://github.com/SushiWaUmai/GoBot/commit/45926734f91bfa3cb1821584e82ec45c42098b60))
+* **command:** :sparkles: implemenent on the spot command ([ff4594b](https://github.com/SushiWaUmai/GoBot/commit/ff4594bd769174fa94f28d604cbe9579690cc5d9))
+* **command:** :sparkles: polish messages ([fab963d](https://github.com/SushiWaUmai/GoBot/commit/fab963d2d5915f8ea0f477e62131425f0e2a6a7a))
+* **command:** :sparkles: update help command ([4ce01ce](https://github.com/SushiWaUmai/GoBot/commit/4ce01ce3f8c564260e8383b5b4842e862682c695))
+
+
+
+
+
+
 # [0.9.0](https://github.com/SushiWaUmai/GoBot/compare/v0.8.0...v0.9.0) (2021-12-24)
 
 
