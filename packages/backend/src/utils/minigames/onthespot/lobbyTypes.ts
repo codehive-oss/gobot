@@ -1,6 +1,7 @@
 export interface Artwork {
   url: string;
   analysis: string;
+  analyzerID: string;
   ratings: PlayerRating[];
 }
 
@@ -16,6 +17,17 @@ export interface AnalysisScore {
   original: number;
   cool: number;
 }
+
+export const getOverallScore = (ratings: AnalysisScore) => {
+  return (
+    (ratings.funny +
+      ratings.interesting +
+      ratings.realistic +
+      ratings.original +
+      ratings.cool) /
+    5
+  );
+};
 
 export interface Player {
   id: string;

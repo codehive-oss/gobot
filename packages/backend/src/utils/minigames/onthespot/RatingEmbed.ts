@@ -82,6 +82,7 @@ export class RatingEmbed {
     // Collect Button interactions
     const interactionCollector = this.msg.createMessageComponentCollector();
     interactionCollector.on("collect", this.reactToInteraction);
+    interactionCollector.on("end", () => {});
   };
 
   reactToInteraction = async (
@@ -98,10 +99,14 @@ export class RatingEmbed {
     if (customId === "+" || customId === "-") {
       this.rating.score[this.currentCategory] += customId === "+" ? 1 : -1;
       // clamp the rating between 1 and 10
-      this.rating.score[this.currentCategory] =
-        Math.max(1, this.rating.score[this.currentCategory]) % 11;
-      this.rating.score[this.currentCategory] =
-        Math.min(10, this.rating.score[this.currentCategory]) % 11;
+      this.rating.score[this.currentCategory] = Math.max(
+        1,
+        this.rating.score[this.currentCategory]
+      );
+      this.rating.score[this.currentCategory] = Math.min(
+        10,
+        this.rating.score[this.currentCategory]
+      );
 
       this.embed.fields.find(
         (f) => f.name.toLowerCase() === this.currentCategory
@@ -112,7 +117,7 @@ export class RatingEmbed {
         embeds: [this.embed],
         components: [this.categoryRow, this.ratingRow],
       });
-      interaction.reply("Updated category");
+      interaction.reply("Rating updated");
       interaction.deleteReply();
     } else if (
       customId === "funny" ||
@@ -139,7 +144,7 @@ export class RatingEmbed {
         embeds: [this.embed],
         components: [this.categoryRow, this.ratingRow],
       });
-      interaction.reply("Updated category");
+      interaction.reply("Category updated");
       interaction.deleteReply();
     }
   };
