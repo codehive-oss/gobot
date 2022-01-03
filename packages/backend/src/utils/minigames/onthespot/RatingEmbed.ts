@@ -6,7 +6,7 @@ import {
   MessageComponentInteraction,
   MessageEmbed,
 } from "discord.js";
-import { Channel } from "./DiscordLobby";
+import { Channel } from "./OTSDiscordLobby";
 import { Player, PlayerRating } from "./lobbyTypes";
 
 export class RatingEmbed {
@@ -17,10 +17,6 @@ export class RatingEmbed {
   currentCategory: "funny" | "interesting" | "realistic" | "original" | "cool";
   player: Player;
   msg: Message<boolean>;
-
-  getRating = (): PlayerRating => {
-    return this.rating;
-  };
 
   public constructor(player: Player) {
     this.embed = new MessageEmbed()
@@ -36,8 +32,8 @@ export class RatingEmbed {
 
     // Create Buttons
     this.ratingRow = new MessageActionRow().addComponents([
-      new MessageButton().setLabel("+").setCustomId("+"),
-      new MessageButton().setLabel("-").setCustomId("-"),
+      new MessageButton().setLabel("+").setCustomId("+").setStyle("PRIMARY"),
+      new MessageButton().setLabel("-").setCustomId("-").setStyle("PRIMARY"),
     ]);
 
     this.categoryRow = new MessageActionRow().addComponents([
@@ -45,10 +41,22 @@ export class RatingEmbed {
         .setLabel("Funny")
         .setCustomId("funny")
         .setStyle("SUCCESS"),
-      new MessageButton().setLabel("Interesting").setCustomId("interesting"),
-      new MessageButton().setLabel("Realistic").setCustomId("realistic"),
-      new MessageButton().setLabel("Original").setCustomId("original"),
-      new MessageButton().setLabel("Cool").setCustomId("cool"),
+      new MessageButton()
+        .setLabel("Interesting")
+        .setCustomId("interesting")
+        .setStyle("PRIMARY"),
+      new MessageButton()
+        .setLabel("Realistic")
+        .setCustomId("realistic")
+        .setStyle("PRIMARY"),
+      new MessageButton()
+        .setLabel("Original")
+        .setCustomId("original")
+        .setStyle("PRIMARY"),
+      new MessageButton()
+        .setLabel("Cool")
+        .setCustomId("cool")
+        .setStyle("PRIMARY"),
     ]);
 
     this.rating = {
@@ -95,14 +103,17 @@ export class RatingEmbed {
       this.rating.score[this.currentCategory] =
         Math.min(10, this.rating.score[this.currentCategory]) % 11;
 
-      this.embed.fields.find((f) => f.name === this.currentCategory)!.value =
-        this.rating.score[this.currentCategory].toString();
+      this.embed.fields.find(
+        (f) => f.name.toLowerCase() === this.currentCategory
+      )!.value = this.rating.score[this.currentCategory].toString();
 
       // update the message
       this.msg.edit({
         embeds: [this.embed],
         components: [this.categoryRow, this.ratingRow],
       });
+      interaction.reply("Updated category");
+      interaction.deleteReply();
     } else if (
       customId === "funny" ||
       customId === "interesting" ||
@@ -111,6 +122,25 @@ export class RatingEmbed {
       customId === "cool"
     ) {
       this.currentCategory = customId;
+
+      // update button styles
+      this.categoryRow.components.forEach((c) => {
+        if (c.type === "BUTTON") {
+          if (c.customId === customId) {
+            c.setStyle("SUCCESS");
+          } else {
+            c.setStyle("PRIMARY");
+          }
+        }
+      });
+
+      // update the message
+      this.msg.edit({
+        embeds: [this.embed],
+        components: [this.categoryRow, this.ratingRow],
+      });
+      interaction.reply("Updated category");
+      interaction.deleteReply();
     }
   };
 }

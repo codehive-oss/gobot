@@ -7,7 +7,7 @@ import {
   TextChannel,
   ThreadChannel,
 } from "discord.js";
-import { Lobby } from "./Lobby";
+import { OTSLobby } from "./OTSLobby";
 import { Player } from "./lobbyTypes";
 import { RatingEmbed } from "./RatingEmbed";
 
@@ -18,7 +18,7 @@ export type Channel =
   | TextChannel
   | ThreadChannel;
 
-export class DiscordLobby extends Lobby {
+export class OTSDiscordLobby extends OTSLobby {
   channel: Channel;
   ratingEmbeds: RatingEmbed[];
 
@@ -27,29 +27,33 @@ export class DiscordLobby extends Lobby {
     explainingTime,
     ratingTime,
     channel,
+    rounds,
   }: {
     players: Player[];
     explainingTime: number;
     ratingTime: number;
+    rounds: number;
     channel: Channel;
   }) {
     super({
       players,
       explainingTime,
       ratingTime,
+      rounds,
     });
 
     this.channel = channel;
     this.ratingEmbeds = [];
   }
 
-  startGame = async () => {
-    await super.startGame();
+  async startGame() {
     // Create an embed that will be sent to the players
     this.channel.send("The game has started!");
-  };
 
-  startExplainingTime = async () => {
+    await super.startGame();
+  }
+
+  async startExplainingTime() {
     await super.startExplainingTime();
     // send artwork
     const embed = new MessageEmbed()
@@ -58,7 +62,8 @@ export class DiscordLobby extends Lobby {
         `It is now ${this.players[this.currentPlayer].name}'s turn!`
       )
       .setFooter(`Round ${this.currentRound + 1}`)
-      .setImage(this.artworks[this.currentArtwork].url);
+      .setImage(this.artworks[this.currentArtwork].url)
+      .setURL(this.artworks[this.currentArtwork].url);
 
     this.channel.send({ embeds: [embed] });
 
@@ -74,20 +79,28 @@ export class DiscordLobby extends Lobby {
       // update analysis
       this.artworks[this.currentArtwork].analysis = m.content;
     });
-  };
+  }
 
-  startRatingTime = async () => {
+  async startRatingTime() {
     for (let i = 0; i < this.players.length; i++) {
+      // check if player is current player
+      if (this.players[i].id === this.players[this.currentPlayer].id) continue;
+
       const embed = new RatingEmbed(this.players[i]);
       await embed.sendRatingEmbed(this.channel);
       this.ratingEmbeds.push(embed);
     }
 
     super.startRatingTime();
-  };
+  }
 
-  endTurn = () => {
+  endTurn() {
     super.endTurn();
+
+    // save the artwork ratings
+    this.artworks[this.currentArtwork].ratings = this.ratingEmbeds.map(
+      (embed) => embed.rating
+    );
 
     // create an embed that shows the average rating of the analysis
     const embed = new MessageEmbed()
@@ -102,15 +115,14 @@ export class DiscordLobby extends Lobby {
 
     // delete embeds
     this.ratingEmbeds = [];
-  };
+  }
 
-  getAverageRating = (
+  getAverageRating(
     category: "funny" | "interesting" | "realistic" | "original" | "cool"
-  ) => {
-    let total = 0;
-    for (let i = 0; i < this.artworks.length; i++) {
-      total += this.artworks[i].ratings[this.currentPlayer].score[category];
-    }
-    return total / this.artworks.length;
-  };
+  ) {
+    const total = this.ratingEmbeds
+      .map((embed) => embed.rating.score[category])
+      .reduce((a, b) => a + b, 0);
+    return total / this.ratingEmbeds.length;
+  }
 }

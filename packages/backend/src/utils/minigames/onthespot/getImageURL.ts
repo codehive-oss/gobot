@@ -1,6 +1,5 @@
 import axios from "axios";
 
-const getPhoto = async () => "https://picsum.photos/750";
 const getCursedImage = async () => {
   const res = await axios.get("https://cursedimg.herokuapp.com/api");
   const { image }: { image: string } = res.data;
@@ -17,7 +16,7 @@ const getRandomCat = async () => {
   return file;
 };
 
-const getImageURLs = [getPhoto, getCursedImage, getRandomDog, getRandomCat];
+const getImageURLs = [getCursedImage, getRandomDog, getRandomCat];
 
 export const getImageURL = async () => {
   const index = Math.floor(Math.random() * getImageURLs.length);
