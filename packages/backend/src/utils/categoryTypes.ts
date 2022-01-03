@@ -7,21 +7,43 @@ export const allCategories = [
   "image",
   "moderation",
   "config",
+  "minigames",
 ] as const;
 export type Categories = typeof allCategories[number];
 
 export interface CategoryData {
+  displayName: string;
   description: string;
 }
 
 export const allCategoryData: Record<Categories, CategoryData> = {
-  economy: { description: "Economy based commands" },
-  misc: { description: "Miscellanious Commands" },
-  level: { description: "Level Commands" },
-  image: { description: "Image Manupulation Commands" },
-  moderation: { description: "Moderation Commands" },
+  economy: {
+    displayName: "Economy",
+    description: "Use these commands to manage your in-game economy",
+  },
+  misc: {
+    displayName: "Miscellanious",
+    description: "Random fun commands to explore!",
+  },
+  level: {
+    displayName: "Rank and Level",
+    description: "Level Commands",
+  },
+  image: {
+    displayName: "Image Manipulation",
+    description: "Manipulate Images including the avatar of your friends",
+  },
+  moderation: {
+    displayName: "Moderation",
+    description: "Manage your server with our moderation commands",
+  },
   config: {
+    displayName: "Configuration",
     description: "Commands Used for Configuring GoBot for your server",
+  },
+  minigames: {
+    displayName: "Mini Games",
+    description: "Mini Games for real gamers",
   },
 };
 
@@ -29,6 +51,9 @@ export const allCategoryData: Record<Categories, CategoryData> = {
 export class Category implements CategoryData {
   @Field(() => String)
   name: Categories;
+
+  @Field(() => String)
+  displayName: string;
 
   @Field(() => String)
   description: string;
