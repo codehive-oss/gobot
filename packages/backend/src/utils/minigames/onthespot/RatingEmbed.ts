@@ -82,7 +82,6 @@ export class RatingEmbed {
     // Collect Button interactions
     const interactionCollector = this.msg.createMessageComponentCollector();
     interactionCollector.on("collect", this.reactToInteraction);
-    interactionCollector.on("end", () => {});
   };
 
   reactToInteraction = async (
@@ -117,8 +116,7 @@ export class RatingEmbed {
         embeds: [this.embed],
         components: [this.categoryRow, this.ratingRow],
       });
-      interaction.reply("Rating updated");
-      interaction.deleteReply();
+      interaction.deferUpdate();
     } else if (
       customId === "funny" ||
       customId === "interesting" ||
@@ -144,8 +142,7 @@ export class RatingEmbed {
         embeds: [this.embed],
         components: [this.categoryRow, this.ratingRow],
       });
-      interaction.reply("Category updated");
-      interaction.deleteReply();
+      interaction.deferUpdate();
     }
   };
 }
