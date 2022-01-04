@@ -53,7 +53,7 @@ export class OTSDiscordLobby extends OTSLobby {
       .setColor("#66ff33")
       .setDescription(
         "This is a game where you have to explain the artwork to the other players.\n" +
-          "You have to rate the artwork on a scale of 1-10.\n" +
+          "You have to rate the analysis of the artwork on a scale of 1-10.\n" +
           "The ratings will be averaged and the winner will be the player with the highest average rating.\n"
       )
       .addField("Players", this.players.map((p) => p.name).join(", "));
