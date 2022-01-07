@@ -4,6 +4,9 @@ export class GobotMigration1641544082271 implements MigrationInterface {
     name = 'GobotMigration1641544082271'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        // delete contents of old table
+        await queryRunner.query(`DELETE FROM "reaction_role_message"`);
+        
         await queryRunner.query(`ALTER TABLE "reaction_role_message" DROP CONSTRAINT "PK_50c0551c0efe9dbec242eb2fda2"`);
         await queryRunner.query(`ALTER TABLE "reaction_role_message" DROP COLUMN "messageid"`);
         await queryRunner.query(`ALTER TABLE "reaction_role_message" DROP COLUMN "roleid"`);

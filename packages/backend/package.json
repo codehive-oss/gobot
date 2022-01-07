@@ -13,7 +13,8 @@
     "dev": "nodemon --exec yarn build:start",
     "dev:ts-node": "nodemon --exec yarn start:ts-node",
     "typeorm": "node -r ts-node/register -r tsconfig-paths/register -r module-alias/register ./node_modules/typeorm/cli.js",
-    "migrate": "yarn typeorm -f ./src/db/ormconfig.ts migration:generate -n GobotMigration"
+    "migration:gen": "yarn typeorm -f ./src/db/ormconfig.ts migration:generate -n GobotMigration",
+    "migration:run": "yarn typeorm -f ./src/db/ormconfig.ts migration:run"
   },
   "_moduleAliases": {
     "@core": "./dist/core",
