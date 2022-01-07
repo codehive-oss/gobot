@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import figlet from "figlet";
 import { logger } from "@utils/logger";
 

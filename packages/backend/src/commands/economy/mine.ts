@@ -1,4 +1,4 @@
-import { CooldownCommand } from "@utils/commandTypes";
+import { CooldownCommand } from "@utils/commandTypes/CooldownCommand";
 import { allItems, Item } from "@utils/item";
 import { MessageEmbed } from "discord.js";
 import { GoUser } from "@db/entities/GoUser";

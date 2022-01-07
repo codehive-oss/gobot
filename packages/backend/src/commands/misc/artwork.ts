@@ -5,7 +5,7 @@
 // https://api.artic.edu/api/v1/artworks?query[term][is_public_domain]=true&fields=title,image_id,artist_display&limit=1&page=${pageNum}
 // https://www.artic.edu/iiif/2/${image_id}/full/843,/0/default.jpg
 
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { MessageEmbed } from "discord.js";
 import axios from "axios";
 

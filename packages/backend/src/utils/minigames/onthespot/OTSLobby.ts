@@ -19,8 +19,7 @@ export class OTSLobby {
 
   getScore(playerID: string) {
     let sum = 0;
-    for (const a in this.artworks) {
-      const artwork = this.artworks[a];
+    for (const artwork of this.artworks) {
       if (artwork.analyzerID === playerID) {
         sum += artwork.ratings.reduce(
           (acc, cur) => acc + getOverallScore(cur.score),
@@ -33,8 +32,7 @@ export class OTSLobby {
 
   get winner() {
     const sums = new Map<string, number>();
-    for (const a in this.artworks) {
-      const artwork = this.artworks[a];
+    for (const artwork of this.artworks) {
       const sum = sums.get(artwork.analyzerID) || 0;
       sums.set(
         artwork.analyzerID,

@@ -1,8 +1,7 @@
 import { commands } from "@core/commandHandler";
 import { Query, Resolver, Arg } from "type-graphql";
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { Category, getAllCategories } from "@utils/categoryTypes";
-import { capitalizeFirstLetter } from "@utils/capitalize";
 
 @Resolver()
 export class CommandResolver {

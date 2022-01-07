@@ -1,4 +1,4 @@
-// import { Command } from "@utils/commandTypes";
+// import { Command } from "@utils/commandTypes/Command";
 // import { messagePerms } from "@utils/GuildPermissions";
 // import {GuildMember, Message, TextChannel} from "discord.js";
 // import {getMutedRole} from "./mute";

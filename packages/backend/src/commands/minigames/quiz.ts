@@ -1,6 +1,6 @@
 // Using quiz api https://opentdb.com/api_config.php
 // https://opentdb.com/api_category.php
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import {
   Message,
   MessageEmbed,

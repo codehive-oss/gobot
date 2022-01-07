@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { getTarget } from "@utils/getTarget";
 
 const cmd = new Command({

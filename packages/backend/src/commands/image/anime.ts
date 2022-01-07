@@ -1,6 +1,6 @@
 import axios from "axios";
 import { MessageEmbed, TextChannel } from "discord.js";
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 
 interface AnimeResponse {
   url: string;

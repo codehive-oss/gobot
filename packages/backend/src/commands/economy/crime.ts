@@ -1,4 +1,4 @@
-import { CooldownCommand } from "@utils/commandTypes";
+import { CooldownCommand } from "@utils/commandTypes/CooldownCommand";
 import { Message } from "discord.js";
 import { GoUser } from "@db/entities/GoUser";
 import { randInt } from "@utils/random";

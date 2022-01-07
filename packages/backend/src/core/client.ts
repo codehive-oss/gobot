@@ -1,5 +1,5 @@
 import { Client, Intents, MessageEmbed, TextChannel } from "discord.js";
-import { handleMessage } from "@core/commandHandler";
+import { handleMessage, handleReactionAdd, handleReactionRemove } from "@core/commandHandler";
 import { DEFAULT_PREFIX } from "@utils/constants";
 import {
   createServers,
@@ -7,7 +7,6 @@ import {
   toGoServer,
 } from "@db/entities/GoServer";
 import { logger } from "@utils/logger";
-import { getReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 import { mention } from "@utils/mention";
 
 export const client = new Client({
@@ -20,8 +19,8 @@ export const client = new Client({
   ],
 });
 
-client.on("error", logger.error);
-client.on("warn", logger.warn);
+client.on("error", (e) => logger.error(e.message));
+client.on("warn", (w) => logger.warn(w));
 
 client.on("ready", async () => {
   // save all servers the bot is on
@@ -67,51 +66,29 @@ client.on("guildCreate", async (guild) => {
         `I am a bot that helps you manage your server.\n\n` +
         `To get started, use the command \`${DEFAULT_PREFIX}help\` to see a list of commands.\n\n` +
         `You can also look for some help on the [GoBot website](https://www.go-bot.xyz) or [GoBot support server](https://discord.gg/GoBot).`
-    ).setFooter("GoBot");
+    )
+    .setFooter("GoBot");
 
   await owner.user.send({ embeds: [embed] });
 });
 
-// TODO: Move this to the command
 client.on("messageReactionAdd", async (reaction, user) => {
   try {
-    if (reaction.message.partial) await reaction.fetch();
-    if (reaction.partial) await reaction.fetch();
-    if (user.bot || !reaction.message.guild) return;
+    if (reaction.message.partial || reaction.partial || user.partial) await reaction.fetch();
+    if (reaction.partial || user.partial) return;
 
-    const rmsg = await getReactionRoleMessage(reaction.message.id);
-    if (!rmsg) return;
-    logger.info(reaction.emoji.name);
-    logger.info(rmsg.emoji);
-    if (
-      reaction.message.id == rmsg.messageid &&
-      reaction.emoji.name == rmsg.emoji
-    ) {
-      await reaction.message.guild.members.cache
-        .get(user.id)!
-        .roles.add(rmsg.roleid);
-    }
+    handleReactionAdd(reaction, user);
+
   } catch (e) {}
 });
 
-// TODO: Move this to the command
 client.on("messageReactionRemove", async (reaction, user) => {
   try {
-    if (reaction.message.partial) await reaction.fetch();
-    if (reaction.partial) await reaction.fetch();
-    if (user.bot || !reaction.message.guild) return;
+    if (reaction.message.partial || reaction.partial || user.partial) await reaction.fetch();
+    if (reaction.partial || user.partial) return;
 
-    const rmsg = await getReactionRoleMessage(reaction.message.id);
-    if (!rmsg) return;
+    handleReactionRemove(reaction, user);
 
-    if (
-      reaction.message.id == rmsg.messageid &&
-      reaction.emoji.name == rmsg.emoji
-    ) {
-      await reaction.message.guild.members.cache
-        .get(user.id)!
-        .roles.remove(rmsg.roleid);
-    }
   } catch (e) {}
 });
 

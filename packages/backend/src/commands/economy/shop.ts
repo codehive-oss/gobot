@@ -1,5 +1,5 @@
 // TODO: Better implementation with upgrades and buttons
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { Message, MessageEmbed } from "discord.js";
 import { allTools, calculateUpgradeCost } from "@utils/tools";
 import { GoServer } from "@db/entities/GoServer";

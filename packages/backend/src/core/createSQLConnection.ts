@@ -7,8 +7,7 @@ import ormConfig from "@db/ormconfig";
 
 export const createSQLConnection = async () => {
   logger.info("Creating SQL connection...");
-  const conn = await createConnection(ormConfig);
-  await conn.runMigrations();
+  await createConnection(ormConfig);
   logger.info(
     `SQL connection on ${ormConfig.host}:${ormConfig.port} connected`
   );

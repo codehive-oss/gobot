@@ -1,5 +1,5 @@
 import { GoUser } from "@db/entities/GoUser";
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { maxwords } from "@utils/maxwords";
 
 const cmd = new Command({
