@@ -3,8 +3,10 @@ import { ReactionCommand } from "@utils/commandTypes/ReactionCommand";
 import { manageMessagePermission } from "@utils/GuildPermissions";
 import { logger } from "@utils/logger";
 import {
+  ButtonInteraction,
   Message,
   MessageActionRow,
+  MessageButton,
   MessageEmbed,
   MessageSelectMenu,
   MessageSelectOptionData,
@@ -65,14 +67,68 @@ const askForEmoji = async (msg: Message) => {
 
   const messageCollector = msg.channel.createMessageCollector({ max: 1 });
 
-  return new Promise<string>((resolve) => {
+  return new Promise<{ id: string; content: string }>((resolve) => {
     messageCollector.on("collect", async (message) => {
       if (!msg.guild) {
         return;
       }
-      const emoji = message.content;
-      resolve(emoji);
+
+      // TODO: make it work with unicode emojis
+      const hasEmoteRegex = /<a?:.+:\d+>/gm;
+      const emoteIDRegex = /<a?:(.+:\d+)>/gm;
+
+      const emoteMatch = message.content.match(hasEmoteRegex);
+
+      if (!emoteMatch) {
+        message.channel.send("Message does not contain an emoji");
+        return;
+      }
+
+      const emoteID = emoteIDRegex.exec(emoteMatch[0])?.[1];
+
+      if (!emoteID) {
+        message.channel.send("Invalid emoji");
+        return;
+      }
+
+      try {
+        await message.react(message.content);
+      } catch {
+        msg.reply("This Emoji is not supported.");
+        return;
+      }
+
+      resolve({
+        id: emoteID,
+        content: message.content,
+      });
     });
+  });
+};
+
+const askForMoreRoles = async (msg: Message): Promise<boolean> => {
+  const row = new MessageActionRow().addComponents([
+    new MessageButton().setCustomId("yes").setLabel("Yes").setStyle("SUCCESS"),
+    new MessageButton().setCustomId("no").setLabel("No").setStyle("DANGER"),
+  ]);
+
+  const menu = await msg.reply({
+    content: "Do you want to add more roles?",
+    components: [row],
+  });
+
+  const interactionCollector = menu.createMessageComponentCollector({ max: 1 });
+
+  return new Promise<boolean>((resolve) => {
+    interactionCollector.on(
+      "collect",
+      async (interaction: ButtonInteraction) => {
+        if (!msg.guild) return;
+
+        interaction.deferUpdate();
+        resolve(interaction.customId === "yes");
+      }
+    );
   });
 };
 
@@ -87,56 +143,82 @@ const cmd = new ReactionCommand({
       msg.reply("This command can only be used in a server!");
       return;
     }
-    const roleID = await askForRole(msg);
-    if (!roleID) return;
 
-    const emojiID = await askForEmoji(msg);
-    if (!emojiID) return;
+    let askMore = true;
+
+    const roles: { role: string; emoji: { id: string; content: string } }[] =
+      [];
+
+    while (askMore) {
+      const roleID = await askForRole(msg);
+
+      // Check if role is already in the list
+      if (roles.find((r) => r.role === roleID)) {
+        msg.reply("This role is already in the list");
+        continue;
+      }
+
+      if (roleID) {
+        const emojiID = await askForEmoji(msg);
+
+        if (emojiID) {
+          roles.push({
+            role: roleID,
+            emoji: emojiID,
+          });
+        }
+      }
+
+      askMore = await askForMoreRoles(msg);
+    }
 
     let embed = new MessageEmbed()
-      .setTitle("React with " + emojiID)
+      .setTitle("Reaction Role")
       .setDescription(
-        "Press " +
-          emojiID +
-          " to get the " +
-          `<@&${roleID}>` +
-          " role or to remove it"
-      );
+        "React with the emoji you want to use to get the role you want."
+      )
+      .setColor("#0099ff");
+
+    roles.forEach((role) => {
+      embed.addField(role.emoji.content, `React with ${role.emoji.content} to get the <@&${role.role}> role.`);
+    });
 
     let message = await msg.channel.send({ embeds: [embed] });
 
-    try {
-      await message.react(emojiID);
-    } catch {
-      msg.reply("This Emoji is not supported.");
-      message.delete();
-      return;
-    }
+    roles.forEach((role) => {
+      message.react(role.emoji.content);
+    });
 
-    logger.debug(message.id)
-    await ReactionRoleMessage.createReactionRoleMessage(
-      message.id,
-      roleID,
-      emojiID
+    const reactionRoles = ReactionRoleMessage.create(
+      roles.map((role) => {
+        return {
+          roleID: role.role,
+          emojiID: role.emoji.id,
+          messageID: message.id,
+        };
+      })
     );
+
+    ReactionRoleMessage.save(reactionRoles);
   },
   reactionAdd: async (reaction, user) => {
     if (user.bot || !reaction.message.guild) return;
-    
+
+    logger.debug(JSON.stringify(reaction.emoji));
     const rmsg = await ReactionRoleMessage.getReactionRoleMessage(
       reaction.message.id
     );
-    if (!rmsg) return;
-    logger.info(reaction.emoji.name);
-    logger.info(rmsg.emojiID);
-    if (
-      reaction.message.id === rmsg.messageID &&
-      reaction.emoji.id === rmsg.emojiID
-    ) {
-      await reaction.message.guild.members.cache
-        .get(user.id)!
-        .roles.add(rmsg.roleID);
-    }
+
+    // check if there is a match
+    const match = rmsg.find((role) => {
+      return reaction.emoji.identifier === role.emojiID;
+    });
+
+    if (!match) return;
+
+    await reaction.message.guild.members.cache
+      .get(user.id)!
+      .roles.add(match.roleID);
   },
   reactionRemove: async (reaction, user) => {
     if (user.bot || !reaction.message.guild) return;
@@ -144,16 +226,17 @@ const cmd = new ReactionCommand({
     const rmsg = await ReactionRoleMessage.getReactionRoleMessage(
       reaction.message.id
     );
-    if (!rmsg) return;
 
-    if (
-      reaction.message.id === rmsg.messageID &&
-      reaction.emoji.id === rmsg.emojiID
-    ) {
-      await reaction.message.guild.members.cache
-        .get(user.id)!
-        .roles.remove(rmsg.roleID);
-    }
+    // check if there is a match
+    const match = rmsg.find((role) => {
+      return reaction.emoji.identifier === role.emojiID;
+    });
+
+    if (!match) return;
+
+    await reaction.message.guild.members.cache
+      .get(user.id)!
+      .roles.remove(match.roleID);
   },
 });
 
