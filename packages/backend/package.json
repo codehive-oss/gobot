@@ -22,6 +22,7 @@
     "@db": "./dist/db"
   },
   "dependencies": {
+    "@types/systeminformation": "^3.54.1",
     "axios": "^0.24.0",
     "connect-redis": "^6.0.0",
     "cors": "^2.8.5",
@@ -46,6 +47,7 @@
     "simply-djs": "^2.2.0",
     "sleep-promise": "^9.1.0",
     "string-similarity": "^4.0.4",
+    "systeminformation": "^5.9.18",
     "type-graphql": "^1.1.1",
     "typeorm": "^0.2.38",
     "uuid": "^8.3.2"
