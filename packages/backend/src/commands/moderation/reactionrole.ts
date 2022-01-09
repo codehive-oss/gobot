@@ -67,27 +67,9 @@ const askForEmoji = async (msg: Message) => {
 
   const messageCollector = msg.channel.createMessageCollector({ max: 1 });
 
-  return new Promise<{ id: string; content: string }>((resolve) => {
+  return new Promise<string>((resolve) => {
     messageCollector.on("collect", async (message) => {
       if (!msg.guild) {
-        return;
-      }
-
-      // TODO: make it work with unicode emojis
-      const hasEmoteRegex = /<a?:.+:\d+>/gm;
-      const emoteIDRegex = /<a?:(.+:\d+)>/gm;
-
-      const emoteMatch = message.content.match(hasEmoteRegex);
-
-      if (!emoteMatch) {
-        message.channel.send("Message does not contain an emoji");
-        return;
-      }
-
-      const emoteID = emoteIDRegex.exec(emoteMatch[0])?.[1];
-
-      if (!emoteID) {
-        message.channel.send("Invalid emoji");
         return;
       }
 
@@ -98,10 +80,7 @@ const askForEmoji = async (msg: Message) => {
         return;
       }
 
-      resolve({
-        id: emoteID,
-        content: message.content,
-      });
+      resolve(message.content);
     });
   });
 };
@@ -146,25 +125,25 @@ const cmd = new ReactionCommand({
 
     let askMore = true;
 
-    const roles: { role: string; emoji: { id: string; content: string } }[] =
-      [];
+    const roles: { roleID: string; emoji: string }[] = [];
 
     while (askMore) {
       const roleID = await askForRole(msg);
 
       // Check if role is already in the list
-      if (roles.find((r) => r.role === roleID)) {
+      if (roles.find((r) => r.roleID === roleID)) {
         msg.reply("This role is already in the list");
         continue;
       }
 
       if (roleID) {
-        const emojiID = await askForEmoji(msg);
+        const emoji = await askForEmoji(msg);
 
-        if (emojiID) {
+        // Add role to the list if emoji is valid
+        if (emoji) {
           roles.push({
-            role: roleID,
-            emoji: emojiID,
+            roleID,
+            emoji,
           });
         }
       }
@@ -180,20 +159,24 @@ const cmd = new ReactionCommand({
       .setColor("#0099ff");
 
     roles.forEach((role) => {
-      embed.addField(role.emoji.content, `React with ${role.emoji.content} to get the <@&${role.role}> role.`);
+      embed.addField(
+        role.emoji,
+        `React with ${role.emoji} to get the <@&${role.roleID}> role.`
+      );
     });
 
     let message = await msg.channel.send({ embeds: [embed] });
 
     roles.forEach((role) => {
-      message.react(role.emoji.content);
+      message.react(role.emoji);
     });
 
     const reactionRoles = ReactionRoleMessage.create(
       roles.map((role) => {
+        logger.debug(role.emoji);
         return {
-          roleID: role.role,
-          emojiID: role.emoji.id,
+          roleID: role.roleID,
+          emoji: role.emoji,
           messageID: message.id,
         };
       })
@@ -204,14 +187,13 @@ const cmd = new ReactionCommand({
   reactionAdd: async (reaction, user) => {
     if (user.bot || !reaction.message.guild) return;
 
-    logger.debug(JSON.stringify(reaction.emoji));
     const rmsg = await ReactionRoleMessage.getReactionRoleMessage(
       reaction.message.id
     );
 
     // check if there is a match
     const match = rmsg.find((role) => {
-      return reaction.emoji.identifier === role.emojiID;
+      return reaction.emoji.toString() === role.emoji;
     });
 
     if (!match) return;
@@ -229,7 +211,7 @@ const cmd = new ReactionCommand({
 
     // check if there is a match
     const match = rmsg.find((role) => {
-      return reaction.emoji.identifier === role.emojiID;
+      return reaction.emoji.toString() === role.emoji;
     });
 
     if (!match) return;

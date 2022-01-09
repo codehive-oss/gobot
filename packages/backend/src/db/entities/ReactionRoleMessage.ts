@@ -12,7 +12,7 @@ export class ReactionRoleMessage extends BaseEntity {
   roleID: string;
 
   @Column()
-  emojiID: string;
+  emoji: string;
 
   static getReactionRoleMessage = async (messageID: string) => {
     return await ReactionRoleMessage.find({

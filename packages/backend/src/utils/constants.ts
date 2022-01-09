@@ -30,4 +30,4 @@ export const COOKIE_NAME = process.env.COOKIE_NAME || "GoBot";
 export const FRONTEND_URL =
   process.env.FRONTEND_URL || "https://localhost:8443";
 
-export const DISCORD_API_ENDPOINT = "https://discord.com/api/v9";
+export const DISCORD_API_ENDPOINT = "https://discord.com/api";

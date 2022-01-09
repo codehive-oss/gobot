@@ -53,7 +53,9 @@ export class DiscordServerResolver {
     const profile = await axios.get(
       `${DISCORD_API_ENDPOINT}/users/@me/guilds`,
       {
-        headers: { Authorization: `Bearer ${goUser.accessToken}` },
+        headers: {
+          Authorization: `Bearer ${goUser.accessToken}`,
+        },
       }
     );
 
