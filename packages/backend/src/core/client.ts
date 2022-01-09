@@ -62,8 +62,6 @@ client.on("messageCreate", async (message) => {
 });
 
 client.on("messageDelete", async (message) => {
-  logger.debug("Message Deleted");
-
   // find all reaction messages with the same message id
   const reactionRoleMessages = await ReactionRoleMessage.find({
     where: { messageID: message.id },
@@ -76,8 +74,6 @@ client.on("messageDelete", async (message) => {
 });
 
 client.on("messageDeleteBulk", async (messages) => {
-  logger.debug("Message Bulk Deleted");
-
   // find all reaction messages with the same message id
   const reactionRoleMessages = await ReactionRoleMessage.find({
     where: { messageID: messages.map((m) => m.id) },  

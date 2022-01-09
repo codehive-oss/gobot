@@ -1,35 +1,31 @@
 import { ReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 import { ReactionCommand } from "@utils/commandTypes/ReactionCommand";
 import { manageMessagePermission } from "@utils/GuildPermissions";
-import { logger } from "@utils/logger";
 import {
   ButtonInteraction,
+  Collection,
   Message,
   MessageActionRow,
   MessageButton,
   MessageEmbed,
   MessageSelectMenu,
   MessageSelectOptionData,
+  Role,
   SelectMenuInteraction,
 } from "discord.js";
 
-export const askForRole = async (msg: Message) => {
-  if (msg.guild!.roles.cache.size === 0) {
-    msg.channel.send("No roles found in this server.");
-    return;
-  }
-
-  const options: MessageSelectOptionData[] = msg
-    .guild!.roles.cache.filter((role) => {
-      return !role.permissions.has("MANAGE_ROLES");
-    })
-    .map((role) => {
-      return {
-        label: role.name,
-        value: role.id,
-        emoji: role.unicodeEmoji,
-      } as MessageSelectOptionData;
-    });
+export const askForRole = async (
+  msg: Message,
+  availableRoles: Collection<string, Role>,
+  messagesToDelete: Message[]
+) => {
+  const options: MessageSelectOptionData[] = availableRoles.map((role) => {
+    return {
+      label: role.name,
+      value: role.id,
+      emoji: role.unicodeEmoji,
+    } as MessageSelectOptionData;
+  });
 
   const row = new MessageActionRow().addComponents([
     new MessageSelectMenu().addOptions(options).setCustomId("role"),
@@ -39,6 +35,7 @@ export const askForRole = async (msg: Message) => {
     content: "Select a role to add",
     components: [row],
   });
+  messagesToDelete.push(menu);
 
   const interactionCollector = menu.createMessageComponentCollector({ max: 1 });
 
@@ -48,11 +45,17 @@ export const askForRole = async (msg: Message) => {
       async (interaction: SelectMenuInteraction) => {
         if (!msg.guild) return;
 
-        const roleID = msg.guild.roles.cache.get(interaction.values[0]);
-
+        const roleID = availableRoles.get(interaction.values[0]);
         if (!roleID) return;
 
-        interaction.deferUpdate();
+        interaction.update({
+          content: `You selected ${
+            availableRoles.get(interaction.values[0])?.name
+          }`,
+          components: [],
+        });
+
+        availableRoles.delete(interaction.values[0]);
 
         resolve(roleID.id);
       }
@@ -60,10 +63,11 @@ export const askForRole = async (msg: Message) => {
   });
 };
 
-const askForEmoji = async (msg: Message) => {
-  await msg.reply({
+const askForEmoji = async (msg: Message, messagesToDelete: Message[]) => {
+  const reply = await msg.reply({
     content: "Type the emoji you wanna use",
   });
+  messagesToDelete.push(reply);
 
   const messageCollector = msg.channel.createMessageCollector({ max: 1 });
 
@@ -72,6 +76,7 @@ const askForEmoji = async (msg: Message) => {
       if (!msg.guild) {
         return;
       }
+      messagesToDelete.push(message);
 
       try {
         await message.react(message.content);
@@ -85,7 +90,10 @@ const askForEmoji = async (msg: Message) => {
   });
 };
 
-const askForMoreRoles = async (msg: Message): Promise<boolean> => {
+const askForMoreRoles = async (
+  msg: Message,
+  messagesToDelete: Message[]
+): Promise<boolean> => {
   const row = new MessageActionRow().addComponents([
     new MessageButton().setCustomId("yes").setLabel("Yes").setStyle("SUCCESS"),
     new MessageButton().setCustomId("no").setLabel("No").setStyle("DANGER"),
@@ -95,6 +103,7 @@ const askForMoreRoles = async (msg: Message): Promise<boolean> => {
     content: "Do you want to add more roles?",
     components: [row],
   });
+  messagesToDelete.push(menu);
 
   const interactionCollector = menu.createMessageComponentCollector({ max: 1 });
 
@@ -104,7 +113,11 @@ const askForMoreRoles = async (msg: Message): Promise<boolean> => {
       async (interaction: ButtonInteraction) => {
         if (!msg.guild) return;
 
-        interaction.deferUpdate();
+        interaction.update({
+          content: `Do you want to add more roles? ${interaction.customId}`,
+          components: [],
+        });
+
         resolve(interaction.customId === "yes");
       }
     );
@@ -114,6 +127,7 @@ const askForMoreRoles = async (msg: Message): Promise<boolean> => {
 const cmd = new ReactionCommand({
   name: "reactionrole",
   description: "Creates a selfrole message.",
+  aliases: ["selfrole"],
   category: "moderation",
   usage: "reactionrole",
   permissions: manageMessagePermission,
@@ -125,40 +139,51 @@ const cmd = new ReactionCommand({
 
     let askMore = true;
 
-    const roles: { roleID: string; emoji: string }[] = [];
+    const availableRoles = msg.guild.roles.cache.filter(
+      (role) => !role.permissions.has("MANAGE_ROLES")
+    );
+
+    // remove the @everyone role
+    availableRoles.delete(msg.guild.id);
+
+    if (availableRoles.size === 0) {
+      msg.channel.send("No roles found in this server.");
+      return;
+    }
+
+    const selectedRoles: { roleID: string; emoji: string }[] = [];
+    const messagesToDelete: Message[] = [msg];
 
     while (askMore) {
-      const roleID = await askForRole(msg);
-
-      // Check if role is already in the list
-      if (roles.find((r) => r.roleID === roleID)) {
-        msg.reply("This role is already in the list");
-        continue;
-      }
+      const roleID = await askForRole(msg, availableRoles, messagesToDelete);
 
       if (roleID) {
-        const emoji = await askForEmoji(msg);
+        const emoji = await askForEmoji(msg, messagesToDelete);
 
         // Add role to the list if emoji is valid
         if (emoji) {
-          roles.push({
+          selectedRoles.push({
             roleID,
             emoji,
           });
         }
       }
 
-      askMore = await askForMoreRoles(msg);
+      if (availableRoles.size === 0) {
+        askMore = false;
+      } else {
+        askMore = await askForMoreRoles(msg, messagesToDelete);
+      }
     }
 
     let embed = new MessageEmbed()
-      .setTitle("Reaction Role")
+      .setTitle("Self Roles")
       .setDescription(
         "React with the emoji you want to use to get the role you want."
       )
       .setColor("#0099ff");
 
-    roles.forEach((role) => {
+    selectedRoles.forEach((role) => {
       embed.addField(
         role.emoji,
         `React with ${role.emoji} to get the <@&${role.roleID}> role.`
@@ -167,13 +192,12 @@ const cmd = new ReactionCommand({
 
     let message = await msg.channel.send({ embeds: [embed] });
 
-    roles.forEach((role) => {
+    selectedRoles.forEach((role) => {
       message.react(role.emoji);
     });
 
     const reactionRoles = ReactionRoleMessage.create(
-      roles.map((role) => {
-        logger.debug(role.emoji);
+      selectedRoles.map((role) => {
         return {
           roleID: role.roleID,
           emoji: role.emoji,
@@ -183,6 +207,10 @@ const cmd = new ReactionCommand({
     );
 
     ReactionRoleMessage.save(reactionRoles);
+
+    messagesToDelete.forEach(async (message) => {
+      message.delete();
+    });
   },
   reactionAdd: async (reaction, user) => {
     if (user.bot || !reaction.message.guild) return;
