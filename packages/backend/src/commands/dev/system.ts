@@ -11,9 +11,10 @@ si.getStaticData().then((info) => {
   systemInfo = info;
 });
 
-const cmd: Command = {
+const cmd = new Command({
   name: "system",
   description: "Displays information about the System the Bot is running on",
+  category: "misc",
   aliases: ["env"],
   execute: async (msg) => {
     const { distro, platform, release } = systemInfo.os;
@@ -46,6 +47,6 @@ const cmd: Command = {
 
     await msg.reply({ embeds: [embed] });
   },
-};
+});
 
-module.exports = cmd;
+export default cmd;
