@@ -13,13 +13,19 @@ const cmd = new Command({
     // convert first argument to number
     const amount = parseInt(args[0]);
     if (isNaN(amount)) {
-      await msg.reply("Please provide a valid number");
+      msg.reply("Please provide a valid number");
       return;
     }
 
     // check if number is positive
     if (amount <= 0) {
-      await msg.reply("Please provide a valid number");
+      msg.reply("Please provide a valid number");
+      return;
+    }
+
+    // check if number is not too big
+    if (amount > 5000) {
+      msg.reply("Please provide a number less than 5000");
       return;
     }
 
@@ -32,7 +38,7 @@ const cmd = new Command({
     }
     await channel.bulkDelete(remainder);
     
-    await channel.send(`Cleared ${amount} messages`);
+    channel.send(`Cleared ${amount} messages`);
   },
 });
 
