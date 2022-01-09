@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { randomChoice } from "@utils/random";
 import axios from "axios";
 import { MessageEmbed, TextChannel } from "discord.js";

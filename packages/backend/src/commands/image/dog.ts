@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import axios from "axios";
 
 const DogAPIEndpoint = "https://dog.ceo/api/breeds/image/random";

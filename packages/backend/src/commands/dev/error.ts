@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 
 const cmd = new Command({
   name: "error",

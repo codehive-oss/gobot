@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { randInt, randomChoice } from "@utils/random";
 import sleep from "sleep-promise";
 import { Message } from "discord.js";

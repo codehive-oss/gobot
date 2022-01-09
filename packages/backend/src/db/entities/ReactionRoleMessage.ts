@@ -1,23 +1,22 @@
-import {BaseEntity, Column, Entity, PrimaryColumn} from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 
 @Entity()
 export class ReactionRoleMessage extends BaseEntity {
-    @PrimaryColumn()
-    messageid: string;
+  @PrimaryGeneratedColumn()
+  id: number;
 
-    @Column()
-    roleid: string;
+  @Column()
+  messageID: string;
 
-    @Column()
-    emoji: string;
-}
+  @Column()
+  roleID: string;
 
-export const getReactionRoleMessage = async (messageid: string) => {
-    return await ReactionRoleMessage.findOne({where: {messageid: messageid}})
-}
+  @Column()
+  emoji: string;
 
-export const createReactionRoleMessage = async (messageid: string, roleid: string, emoji: string) => {
-    const msg = await ReactionRoleMessage.create({messageid: messageid, roleid: roleid, emoji: emoji})
-    await msg.save()
-    return msg
+  static getReactionRoleMessage = async (messageID: string) => {
+    return await ReactionRoleMessage.find({
+      where: { messageID: messageID },
+    });
+  };
 }

@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { manageMessagePermission } from "@utils/GuildPermissions";
 import { setWelcomeChannel } from "@db/entities/GoServer";
 import { TextChannel } from "discord.js";

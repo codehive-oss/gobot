@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { MessageActionRow, MessageButton, MessageEmbed } from "discord.js";
 import { OTSDiscordLobby } from "@utils/minigames/onthespot/OTSDiscordLobby";
 import { Player } from "@utils/minigames/onthespot/lobbyTypes";

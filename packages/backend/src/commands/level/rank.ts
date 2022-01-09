@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { Message, MessageEmbed } from "discord.js";
 import { GoUser } from "@db/entities/GoUser";
 import { lvlToXp, xpToLvl } from "@utils/levelCalculator";

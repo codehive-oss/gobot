@@ -87,7 +87,7 @@ export const askDifficulty = async (msg: Message) => {
 
   return new Promise<string>((resolve, _reject) => {
     interactionCollector.on("collect", (interaction: SelectMenuInteraction) => {
-      const difficulty = interaction.values[0] as string;
+      const difficulty = interaction.values[0];
       row.components.forEach((c) => c.setDisabled(true));
       interaction.update({
         content: `You selected ${difficulty}`,

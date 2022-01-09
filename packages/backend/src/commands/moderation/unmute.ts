@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { manageMemberPermission } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
 import { client } from "@core/client";

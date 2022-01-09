@@ -18,7 +18,7 @@ export default {
   username: DB_USER,
   password: DB_PASSWORD,
   database: DB_NAME,
-  synchronize: !__prod__,
+  synchronize: false,
   logging: true,
   logger: new PinoTypeormLogger(logger),
   entities: [join(__dirname, "..", "db", "entities", "**", "*.{ts,js}")],

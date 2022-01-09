@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import {
   adminPermission,
   hasPermission,
@@ -8,7 +8,7 @@ import {
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
 import { client } from "@core/client";
 
-export const rolename = "gomuted";
+export const rolename = "Muted";
 
 const cmd = new Command({
   name: "mute",
