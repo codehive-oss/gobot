@@ -15,6 +15,6 @@ Under the [`packages/backend`](packages/backend) directory create a `.env.develo
 
 Run
 ```
-yarn docker:dev
+yarn dev
 ```
 to start developing with docker-compose.
