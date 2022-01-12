@@ -22,7 +22,6 @@
     "@db": "./dist/db"
   },
   "dependencies": {
-    "@types/systeminformation": "^3.54.1",
     "axios": "^0.24.0",
     "connect-redis": "^6.0.0",
     "cors": "^2.8.5",

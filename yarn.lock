@@ -2639,13 +2639,6 @@
   resolved "https://registry.yarnpkg.com/@types/string-similarity/-/string-similarity-4.0.0.tgz#8cc03d5d1baad2b74530fe6c7d849d5768d391ad"
   integrity sha512-dMS4S07fbtY1AILG/RhuwmptmzK1Ql8scmAebOTJ/8iBtK/KI17NwGwKzu1uipjj8Kk+3mfPxum56kKZE93mzQ==
 
-"@types/systeminformation@^3.54.1":
-  version "3.54.1"
-  resolved "https://registry.yarnpkg.com/@types/systeminformation/-/systeminformation-3.54.1.tgz#bbc1b9e4ae2e60d45f75906029c6fb5436e1c5cb"
-  integrity sha512-vvisj2mdWygyc0jk/5XtSVq9gtxCmF3nrGwv8wVway8pwNRhtPji/MU9dc1L0F6rl0F/NFIHa4ScRU7wmNaHmg==
-  dependencies:
-    systeminformation "*"
-
 "@types/uuid@^8.3.3":
   version "8.3.3"
   resolved "https://registry.yarnpkg.com/@types/uuid/-/uuid-8.3.3.tgz#c6a60686d953dbd1b1d45e66f4ecdbd5d471b4d0"
@@ -10490,7 +10483,7 @@ sync-fetch@0.3.1, sync-fetch@^0.3.1:
     buffer "^5.7.0"
     node-fetch "^2.6.1"
 
-systeminformation@*, systeminformation@^5.9.18:
+systeminformation@^5.9.18:
   version "5.9.18"
   resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.9.18.tgz#8163b24fe557a347190eae8f7b60eb879e5d29af"
   integrity sha512-htL3Vj9xTfJu/wVaeSRI1PRmMstmfQupwde6/rq+aNw4ZWZMpTIESbj+G1Q88+5hms3XFfaHZ3lH6DmrCgGS5g==
