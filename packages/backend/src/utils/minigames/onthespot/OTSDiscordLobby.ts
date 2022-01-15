@@ -1,22 +1,11 @@
 import {
-  DMChannel,
   Message,
   MessageEmbed,
-  NewsChannel,
-  PartialDMChannel,
-  TextChannel,
-  ThreadChannel,
 } from "discord.js";
 import { OTSLobby } from "./OTSLobby";
 import { Player } from "./lobbyTypes";
 import { RatingEmbed } from "./RatingEmbed";
-
-export type Channel =
-  | DMChannel
-  | PartialDMChannel
-  | NewsChannel
-  | TextChannel
-  | ThreadChannel;
+import { Channel } from "@utils/types";
 
 export class OTSDiscordLobby extends OTSLobby {
   channel: Channel;

@@ -1,9 +1,9 @@
 import { Command } from "@utils/commandTypes/Command";
 import {
-  adminPermission,
+  ADMIN,
   hasPermission,
-  manageMemberPermission,
-  manageMessagePermission,
+  MANAGE_MEMBERS,
+  MANAGE_MESSAGE,
 } from "@utils/GuildPermissions";
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
 import { client } from "@core/client";
@@ -15,7 +15,7 @@ const cmd = new Command({
   description: "Mutes a Member",
   category: "moderation",
   usage: "mute [@member] <reason>",
-  permissions: manageMemberPermission,
+  permissions: MANAGE_MEMBERS,
   execute: async (msg, args) => {
     const guild = msg.guild;
     if (!guild) return;
@@ -37,9 +37,9 @@ const cmd = new Command({
       target.id == msg.author.id ||
       hasPermission(
         targetMember!,
-        manageMemberPermission,
-        manageMessagePermission,
-        adminPermission
+        MANAGE_MEMBERS,
+        MANAGE_MESSAGE,
+        ADMIN
       )
     ) {
       await msg.reply("You cannot mute a Moderator!");

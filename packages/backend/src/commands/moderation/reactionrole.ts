@@ -1,12 +1,14 @@
 import { ReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
 import { ReactionCommand } from "@utils/commandTypes/ReactionCommand";
-import { manageMessagePermission } from "@utils/GuildPermissions";
+import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
+import { collectMessage } from "@utils/interaction/collectMessage";
 import {
   ButtonInteraction,
   Collection,
   Message,
   MessageActionRow,
   MessageButton,
+  MessageComponentInteraction,
   MessageEmbed,
   MessageSelectMenu,
   MessageSelectOptionData,
@@ -16,8 +18,7 @@ import {
 
 export const askForRole = async (
   msg: Message,
-  availableRoles: Collection<string, Role>,
-  messagesToDelete: Message[]
+  availableRoles: Collection<string, Role>
 ) => {
   const options: MessageSelectOptionData[] = availableRoles.map((role) => {
     return {
@@ -35,9 +36,15 @@ export const askForRole = async (
     content: "Select a role to add",
     components: [row],
   });
-  messagesToDelete.push(menu);
 
-  const interactionCollector = menu.createMessageComponentCollector({ max: 1 });
+  const filter = (messageInteraction: MessageComponentInteraction) => {
+    return messageInteraction.user.id === msg.author.id;
+  };
+
+  const interactionCollector = menu.createMessageComponentCollector({
+    filter,
+    max: 1,
+  });
 
   return new Promise<string>((resolve) => {
     interactionCollector.on(
@@ -63,37 +70,32 @@ export const askForRole = async (
   });
 };
 
-const askForEmoji = async (msg: Message, messagesToDelete: Message[]) => {
-  const reply = await msg.reply({
+const askForEmoji = async (msg: Message) => {
+  await msg.reply({
     content: "Type the emoji you wanna use",
   });
-  messagesToDelete.push(reply);
 
-  const messageCollector = msg.channel.createMessageCollector({ max: 1 });
-
-  return new Promise<string>((resolve) => {
-    messageCollector.on("collect", async (message) => {
-      if (!msg.guild) {
-        return;
-      }
-      messagesToDelete.push(message);
-
-      try {
-        await message.react(message.content);
-      } catch {
-        msg.reply("This Emoji is not supported.");
-        return;
-      }
-
-      resolve(message.content);
-    });
+  const message = await collectMessage({
+    channel: msg.channel,
+    author: msg.author,
+    max: 1,
   });
+
+  if (!msg.guild) {
+    return;
+  }
+
+  try {
+    await message.react(message.content);
+  } catch {
+    msg.reply("This Emoji is not supported.");
+    return;
+  }
+
+  return message.content;
 };
 
-const askForMoreRoles = async (
-  msg: Message,
-  messagesToDelete: Message[]
-): Promise<boolean> => {
+const askForMoreRoles = async (msg: Message): Promise<boolean> => {
   const row = new MessageActionRow().addComponents([
     new MessageButton().setCustomId("yes").setLabel("Yes").setStyle("SUCCESS"),
     new MessageButton().setCustomId("no").setLabel("No").setStyle("DANGER"),
@@ -103,9 +105,14 @@ const askForMoreRoles = async (
     content: "Do you want to add more roles?",
     components: [row],
   });
-  messagesToDelete.push(menu);
 
-  const interactionCollector = menu.createMessageComponentCollector({ max: 1 });
+  const filter = (messageInteraction: MessageComponentInteraction) => {
+    return messageInteraction.user.id === msg.author.id;
+  };
+  const interactionCollector = menu.createMessageComponentCollector({
+    filter,
+    max: 1,
+  });
 
   return new Promise<boolean>((resolve) => {
     interactionCollector.on(
@@ -130,7 +137,7 @@ const cmd = new ReactionCommand({
   aliases: ["selfrole"],
   category: "moderation",
   usage: "reactionrole",
-  permissions: manageMessagePermission,
+  permissions: MANAGE_MESSAGE,
   async execute(msg) {
     if (!msg.guild) {
       msg.reply("This command can only be used in a server!");
@@ -152,13 +159,12 @@ const cmd = new ReactionCommand({
     }
 
     const selectedRoles: { roleID: string; emoji: string }[] = [];
-    const messagesToDelete: Message[] = [msg];
 
     while (askMore) {
-      const roleID = await askForRole(msg, availableRoles, messagesToDelete);
+      const roleID = await askForRole(msg, availableRoles);
 
       if (roleID) {
-        const emoji = await askForEmoji(msg, messagesToDelete);
+        const emoji = await askForEmoji(msg);
 
         // Add role to the list if emoji is valid
         if (emoji) {
@@ -172,7 +178,7 @@ const cmd = new ReactionCommand({
       if (availableRoles.size === 0) {
         askMore = false;
       } else {
-        askMore = await askForMoreRoles(msg, messagesToDelete);
+        askMore = await askForMoreRoles(msg);
       }
     }
 
@@ -207,10 +213,6 @@ const cmd = new ReactionCommand({
     );
 
     ReactionRoleMessage.save(reactionRoles);
-
-    messagesToDelete.forEach(async (message) => {
-      message.delete();
-    });
   },
   reactionAdd: async (reaction, user) => {
     if (user.bot || !reaction.message.guild) return;
