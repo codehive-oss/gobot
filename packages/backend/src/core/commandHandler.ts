@@ -42,6 +42,12 @@ export const handleMessage = async (message: Message, server: GoServer) => {
   if (message.webhookId) {
     return;
   }
+
+  // Do not respond to bots
+  if (message.author.bot) {
+    return;
+  }
+  
   let content = message.content;
 
   // messages should not increment if they are commands
@@ -101,7 +107,7 @@ export const handleReactionAdd = async (
 ) => {
   for (const command of commands) {
     // check if Command is of type ReactionCommand
-    if(command instanceof ReactionCommand) {  
+    if (command instanceof ReactionCommand) {
       command.reactionAdd(reaction, user);
     }
   }
@@ -111,9 +117,9 @@ export const handleReactionRemove = async (
   reaction: MessageReaction,
   user: User
 ) => {
-    for (const command of commands) {
+  for (const command of commands) {
     // check if Command is of type ReactionCommand
-    if(command instanceof ReactionCommand) {  
+    if (command instanceof ReactionCommand) {
       command.reactionRemove(reaction, user);
     }
   }
