@@ -51,7 +51,10 @@ const cmd = new Command({
 
 export const unmuteEmbed = (user: string, reason: string) => {
   return new MessageEmbed()
-    .setAuthor(client.user!.username, client.user!.displayAvatarURL())
+    .setAuthor({
+      name: client.user!.username,
+      iconURL: client.user!.displayAvatarURL(),
+    })
     .setColor("BLUE")
     .setTitle(`${user} has been unmuted`)
     .addField("Reason", reason);

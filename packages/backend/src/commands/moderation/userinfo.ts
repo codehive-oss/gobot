@@ -7,23 +7,22 @@ const cmd = new Command({
   description: "Sends Information about a User",
   usage: "userinfo <@user>",
   category: "misc",
-  execute: async (msg, args) => {
+  execute: async (msg, _args) => {
     const target = getTarget(msg);
     const targetmember = msg.guild!.members.cache.find(
       (user) => user.id == target.id
     );
-    const embed = new MessageEmbed();
-
-    embed.setColor("BLUE");
-    embed.setAuthor(
-      msg.author.username,
-      msg.author.displayAvatarURL({ dynamic: true })
-    );
-    embed.setThumbnail(target.displayAvatarURL({ dynamic: true }));
-    embed.setTitle("Userinfo: " + target.tag);
-    embed.addField("id", target.id);
-    embed.addField("Bot", String(target.bot));
-    embed.addField("Created At", target.createdAt.toDateString());
+    const embed = new MessageEmbed()
+      .setColor("BLUE")
+      .setAuthor({
+        name: msg.author.username,
+        iconURL: msg.author.displayAvatarURL({ dynamic: true }),
+      })
+      .setThumbnail(target.displayAvatarURL({ dynamic: true }))
+      .setTitle("Userinfo: " + target.tag)
+      .addField("id", target.id)
+      .addField("Bot", String(target.bot))
+      .addField("Created At", target.createdAt.toDateString());
 
     if (targetmember) {
       embed.addField(

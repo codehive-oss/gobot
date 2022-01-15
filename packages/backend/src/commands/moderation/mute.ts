@@ -8,7 +8,7 @@ import {
 import { Guild, MessageEmbed, TextChannel } from "discord.js";
 import { client } from "@core/client";
 
-export const rolename = "Muted";
+export const rolename = "muted";
 
 const cmd = new Command({
   name: "mute",
@@ -35,7 +35,12 @@ const cmd = new Command({
 
     if (
       target.id == msg.author.id ||
-      hasPermission(targetMember!, manageMemberPermission, manageMessagePermission, adminPermission)
+      hasPermission(
+        targetMember!,
+        manageMemberPermission,
+        manageMessagePermission,
+        adminPermission
+      )
     ) {
       await msg.reply("You cannot mute a Moderator!");
       return;
@@ -48,7 +53,7 @@ const cmd = new Command({
 
     let mutedRole;
 
-    if (!(await roleExists(guild))) {
+    if (!roleExists(guild)) {
       mutedRole = await createMutedRole(guild);
     } else {
       mutedRole = guild.roles.cache.find((r) => r.name == rolename);
@@ -69,14 +74,14 @@ const cmd = new Command({
 });
 
 export async function getMutedRole(guild: Guild) {
-  if (await roleExists(guild)) {
+  if (roleExists(guild)) {
     return guild.roles.cache.find((role) => role.name == rolename);
   } else {
     return await createMutedRole(guild);
   }
 }
 
-export async function roleExists(guild: Guild) {
+export function roleExists(guild: Guild) {
   return guild.roles.cache.some((r) => r.name == rolename);
 }
 
@@ -93,7 +98,10 @@ export async function createMutedRole(guild: Guild) {
 
 export const muteEmbed = (user: string, reason: string, duration?: string) => {
   const embed = new MessageEmbed()
-    .setAuthor(client.user!.username, client.user!.displayAvatarURL())
+    .setAuthor({
+      name: client.user!.username,
+      iconURL: client.user!.displayAvatarURL(),
+    })
     .setColor("BLUE")
     .setTitle(`${user} has been muted`)
     .addField("Reason", reason);
