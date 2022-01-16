@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { logger } from "@utils/logger";
 import { MessageEmbed } from "discord.js";
 import si from "systeminformation";
@@ -34,7 +34,8 @@ const cmd = new Command({
         "https://cdn.discordapp.com/attachments/816028632269979668/878984391936847882/LINUX-LOGO.png"
       )
       .addFields(
-        { name: "OS", value: `${distro} ${release}` },
+        { name: "Kernel", value: `${platform}` },
+        { name: "Distro", value :`${distro} ${release}` },
         { name: "CPU", value: `x${cores} ${cpuManufacturer} ${brand}` },
         { name: "RAM", value: `${~~(totalRam / 1024 / 1024 / 1024)}GB` },
         { name: "Motherboard", value: `${moboManufacturer} ${model}` },

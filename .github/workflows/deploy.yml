@@ -40,6 +40,6 @@ jobs:
             cp /root/secrets/env/.env.production /root/app/gobot/packages/backend/.env.production
             cp -r /root/secrets/ssl /root/app/gobot/ssl
             cd /root/app/gobot/
-            sudo yarn docker:stop:prod
-            sudo yarn docker:build:prod --no-cache
-            sudo yarn docker:start -d
+            sudo yarn stop:prod
+            sudo yarn build:prod --no-cache
+            sudo yarn start -d
