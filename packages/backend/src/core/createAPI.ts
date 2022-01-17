@@ -5,7 +5,7 @@ import { buildSchema } from "type-graphql";
 import { DiscordServerResolver } from "@db/resolvers/DiscordServerResolver";
 import { CommandResolver } from "@db/resolvers/CommandResolver";
 import { GoUserResolver } from "@db/resolvers/GoUserResolver";
-import { expressLogger, logger } from "@utils/logger";
+import { logger } from "@utils/logger";
 import passport from "passport";
 import {
   COOKIE_NAME,
@@ -34,8 +34,6 @@ export const createAPI = async () => {
   const redis = new Redis(REDIS_HOST);
 
   app.enable("trust proxy");
-
-  if (!__prod__) app.use(expressLogger);
 
   app.use(cors());
   app.use(express.urlencoded({ extended: true }));

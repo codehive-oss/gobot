@@ -1,5 +1,5 @@
 import { Command } from "@utils/commandTypes/Command";
-import { manageMemberPermission } from "@utils/GuildPermissions";
+import { MANAGE_MEMBERS } from "@utils/GuildPermissions";
 import { updateServer } from "@db/entities/GoServer";
 
 export default new Command({
@@ -8,7 +8,7 @@ export default new Command({
   usage: "setprefix <prefix>",
   category: "config",
   aliases: ["changeprefix"],
-  permissions: manageMemberPermission,
+  permissions: MANAGE_MEMBERS,
   async execute(message, args, server) {
     if (!args[0]) {
       message.reply(

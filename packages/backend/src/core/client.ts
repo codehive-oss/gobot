@@ -12,7 +12,9 @@ import {
 } from "@db/entities/GoServer";
 import { logger } from "@utils/logger";
 import { mention } from "@utils/mention";
-import { ReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
+import { ReactionRoleMessage } from "@db/entities/moderation/ReactionRoleMessage";
+import { checkTempPenalties } from "@utils/moderation/penalty";
+
 
 export const client = new Client({
   intents: [
@@ -51,6 +53,13 @@ client.on("ready", async () => {
       },
     ],
   });
+
+  // check for temp penalties
+  const checkPenalties = async () => {
+    await checkTempPenalties();
+    setTimeout(checkPenalties, 1000 * 60); // check again in 1 minute
+  }
+  checkPenalties();
 });
 
 client.on("messageCreate", async (message) => {

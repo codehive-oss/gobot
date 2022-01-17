@@ -1,32 +1,54 @@
-// import { Command } from "@utils/commandTypes/Command";
-// import { messagePerms } from "@utils/GuildPermissions";
-// import {GuildMember, Message, TextChannel} from "discord.js";
-// import {getMutedRole} from "./mute";
-// import {gunzip} from "zlib";
-//
-//
-// const cmd: Command = {
-//     name: "clear",
-//     aliases: ["purge"],
-//     description: "Deletes messages from the specified channel.",
-//     category: "moderation",
-//     usage: "purge [amount]",
-//     permissions: messagePerms,
-//     execute: async (msg, args) => {
-//
-//     },
-// };
-//
-// export default cmd;
-//
-//
-//
-//
-//
-// async function timeout(seconds: number, muteUser: GuildMember, message: Message) {
-//     setTimeout(async () => {
-//         await muteUser.roles.remove(await getMutedRole(message.guild), `Temporary mute expired.`);
-//         await message.reply("This mute has expired!")
-//
-//     }, seconds * 1000); // time in ms
-// }
+import { Command } from "@utils/commandTypes/Command";
+import {
+  convertTimeToDate,
+  convertTimeToMilliseconds,
+} from "@utils/convertTime";
+import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
+import { logger } from "@utils/logger";
+import {
+  penaltyDMEmbed,
+  penaltyGuildEmbed,
+  tempMuteMember,
+} from "@utils/moderation/penalty";
+
+export default new Command({
+  name: "tempmute",
+  description: "Temporarily mute a user",
+  usage: "tempmute <user> <time> <reason>",
+  aliases: ["tmute"],
+  category: "moderation",
+  permissions: MANAGE_MESSAGE,
+  execute: async (msg, args) => {
+    const member = msg.mentions?.members?.first();
+    if (!member) {
+      msg.reply("Please mention a user");
+      return;
+    }
+
+    const [, timeArg, reasonArg] = args;
+    const reason = reasonArg || "No reason provided";
+
+    if (!timeArg) {
+      msg.reply("Please provide a time");
+      return;
+    }
+
+    const expiresAt = convertTimeToDate(timeArg);
+    if (!expiresAt) {
+      msg.reply("Please provide a valid time");
+      return;
+    }
+
+    await tempMuteMember(member, reason, expiresAt);
+
+    const embed = penaltyGuildEmbed("Mute", member, reason, timeArg);
+    msg.channel.send({ embeds: [embed] });
+
+    if (msg.guild) {
+      const dmEmbed = penaltyDMEmbed("Mute", reason, msg.guild, timeArg);
+      await member.send({
+        embeds: [dmEmbed],
+      });
+    }
+  },
+});
