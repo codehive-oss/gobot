@@ -2,8 +2,12 @@ import { Command } from "@utils/commandTypes/Command";
 import { MANAGE_MEMBERS } from "@utils/GuildPermissions";
 import { MessageEmbed } from "discord.js";
 import { client } from "@core/client";
-
-const rolename = "gomuted";
+import {
+  isMuted,
+  MUTE_ROLE_NAME,
+  penaltyEmbed,
+  unmuteMember,
+} from "@utils/moderation/penalty";
 
 const cmd = new Command({
   name: "unmute",
@@ -12,52 +16,26 @@ const cmd = new Command({
   usage: "unmute [@member] <reason>",
   permissions: MANAGE_MEMBERS,
   execute: async (msg, args) => {
-    const guild = msg.guild;
-    if (!guild) return;
-
-    const target = msg.mentions.users.first();
+    const target = msg.mentions.members?.first();
 
     if (!target) {
       await msg.reply("Please provide a valid member");
       return;
     }
-
-    const targetMember = guild.members.cache.find(
-      (u) => u.id == msg.mentions.users.first()!.id
-    );
-
-    if (!targetMember) return;
-
-    if (!targetMember.roles.cache.find((r) => r.name == rolename)) {
+    
+    if (!isMuted(target)) {
       await msg.reply("That member isn't muted");
       return;
     }
 
-    await targetMember.roles.remove(
-      guild.roles.cache.find((r) => r.name == rolename)!
-    );
+    const reason = args.slice(1).join(" ") || "None";
+    await unmuteMember(target, reason);
 
-    let reason = "";
-    if (args.length > 1) {
-      for (let i = 1; i < args.length; i++) {
-        reason += args[i];
-      }
-    }
+    const embed = penaltyEmbed("Unmute", target, reason);
     await msg.reply({
-      embeds: [unmuteEmbed(target.username, reason ? reason : "None")],
+      embeds: [embed],
     });
   },
 });
-
-export const unmuteEmbed = (user: string, reason: string) => {
-  return new MessageEmbed()
-    .setAuthor({
-      name: client.user!.username,
-      iconURL: client.user!.displayAvatarURL(),
-    })
-    .setColor("BLUE")
-    .setTitle(`${user} has been unmuted`)
-    .addField("Reason", reason);
-};
 
 export default cmd;

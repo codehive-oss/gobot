@@ -1,12 +1,21 @@
-import { Message, User } from "discord.js";
+import { Message } from "discord.js";
 
-export function getTarget(msg: Message): User {
-  let target;
-  if (msg.mentions.users.first()) {
-    target = msg.mentions.users.first();
-  } else {
+export const getTargetUser = (msg: Message) => {
+  let target = msg.mentions.users.first();
+
+  if (!target) {
     target = msg.author;
   }
 
-  return target!;
-}
+  return target;
+};
+
+export const getTargetMember = (msg: Message) => {
+  let target = msg.mentions.members?.first();
+
+  if (!target) {
+    target = msg.member || undefined;
+  }
+
+  return target;
+};

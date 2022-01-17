@@ -1,5 +1,5 @@
 import { Command } from "@utils/commandTypes/Command";
-import { getTarget } from "@utils/getTarget";
+import { getTargetUser } from "@utils/getTarget";
 import { logger } from "@utils/logger";
 import jimp from "jimp";
 
@@ -11,7 +11,7 @@ export default new Command({
   category: "image",
   execute: async (msg) => {
     const author = msg.author;
-    const target = getTarget(msg);
+    const target = getTargetUser(msg);
 
     if (!author.avatarURL()) {
       await msg.reply("You do not have a Profile Picture");

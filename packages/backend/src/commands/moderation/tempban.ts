@@ -1,17 +1,17 @@
 import { Command } from "@utils/commandTypes/Command";
-import { convertTimeToDate } from "@utils/convertTime";
+import { convertTimeToMilliseconds } from "@utils/convertTime";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
-import { penaltyEmbed, tempMuteMember } from "@utils/moderation/penalty";
+import { penaltyEmbed, tempBanMember } from "@utils/moderation/penalty";
 
 export default new Command({
-  name: "tempmute",
-  description: "Temporarily mute a user",
-  usage: "tempmute <user> <reason> <time>",
-  aliases: ["tmute"],
+  name: "tempban",
+  description: "Temporarily ban a user",
+  usage: "tempban <user> <reason> <time>",
+  aliases: ["tban"],
   category: "moderation",
   permissions: MANAGE_MESSAGE,
   execute: async (msg, args) => {
-    const member = msg.mentions?.members?.first();
+    const member = msg.mentions.members?.first();
     if (!member) {
       msg.reply("Please mention a user");
       return;
@@ -27,16 +27,17 @@ export default new Command({
       return;
     }
 
-    const expiresAt = convertTimeToDate(timeArg);
+    const milliseconds = convertTimeToMilliseconds(timeArg);
 
-    if (!expiresAt) {
+    if (!milliseconds) {
       msg.reply("Please provide a valid time format");
       return;
     }
 
-    await tempMuteMember(member, reason, expiresAt);
+    await tempBanMember(member, reason, milliseconds);
 
-    const embed = penaltyEmbed("Mute", member, reason, timeArg);
+    const embed = penaltyEmbed("Ban", member, reason, timeArg);
+
     msg.channel.send({ embeds: [embed] });
   },
 });

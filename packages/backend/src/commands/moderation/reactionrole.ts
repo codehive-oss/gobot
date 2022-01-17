@@ -1,6 +1,7 @@
-import { ReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
+import { ReactionRoleMessage } from "@db/entities/moderation/ReactionRoleMessage";
 import { ReactionCommand } from "@utils/commandTypes/ReactionCommand";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
+import { askTextChannel } from "@utils/interaction/ask";
 import { collectMessage } from "@utils/interaction/collectMessage";
 import {
   ButtonInteraction,
@@ -154,7 +155,13 @@ const cmd = new ReactionCommand({
     availableRoles.delete(msg.guild.id);
 
     if (availableRoles.size === 0) {
-      msg.channel.send("No roles found in this server.");
+      msg.reply("No roles found in this server.");
+      return;
+    }
+
+    const channel = await askTextChannel("Select a channel to send the message", msg);
+    if(!channel) {
+      msg.reply("Invalid channel");
       return;
     }
 
@@ -196,7 +203,7 @@ const cmd = new ReactionCommand({
       );
     });
 
-    let message = await msg.channel.send({ embeds: [embed] });
+    let message = await channel.send({ embeds: [embed] });
 
     selectedRoles.forEach((role) => {
       message.react(role.emoji);
