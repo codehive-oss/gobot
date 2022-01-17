@@ -25,7 +25,7 @@
     "frontend": "yarn workspace @gobot/frontend",
     "docker:migration:gen": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up backend",
     "docker:migration:run": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.run-migration.yml up backend",
-    "docker:backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up postgres -d && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot_postgres_1 psql -U postgres -d Gobot && yarn docker:stop",
+    "docker:backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot_postgres_1 psql -U postgres -d Gobot && yarn docker:stop",
     "docker:logs:dev": "docker-compose -p gobot_dev logs -f",
     "docker:logs:prod": "docker-compose -p gobot_prod logs -f",
     "docker:build:dev": "docker-compose -p gobot_dev --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml build",

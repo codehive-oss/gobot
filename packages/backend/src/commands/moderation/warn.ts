@@ -1,6 +1,10 @@
 import { Command } from "@utils/commandTypes/Command";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
-import { penaltyEmbed, warnMember } from "@utils/moderation/penalty";
+import {
+  penaltyDMEmbed,
+  penaltyGuildEmbed,
+  warnMember,
+} from "@utils/moderation/penalty";
 
 export default new Command({
   name: "warn",
@@ -15,21 +19,20 @@ export default new Command({
       msg.reply("Please mention a user");
       return;
     }
+    const reason = args.slice(1).join(" ") || "No reason provided";
 
-    const [, reason] = args;
-    if (!reason) {
-      msg.reply("Please provide a reason");
-      return;
-    }
-
-    let embed;
+    let guildEmbed;
+    let dmEmbed;
     if (await warnMember(member, reason)) {
       // member has been muted
-      embed = penaltyEmbed("Mute", member, reason, "1 hour");
+      guildEmbed = penaltyGuildEmbed("Mute", member, reason, "1h");
+      if (msg.guild) dmEmbed = penaltyDMEmbed("Mute", reason, msg.guild, "1h");
     } else {
-      embed = penaltyEmbed("Warn", member, reason);
+      guildEmbed = penaltyGuildEmbed("Warn", member, reason);
+      if (msg.guild) dmEmbed = penaltyDMEmbed("Warn", reason, msg.guild);
     }
 
-    msg.channel.send({ embeds: [embed] });
+    msg.channel.send({ embeds: [guildEmbed] });
+    if(dmEmbed) member.send({ embeds: [dmEmbed] });
   },
 });

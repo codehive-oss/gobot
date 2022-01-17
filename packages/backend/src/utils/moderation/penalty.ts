@@ -1,6 +1,13 @@
 import { client } from "@core/client";
 import { TempPenalty } from "@db/entities/moderation/TempPenalty";
-import { Guild, GuildMember, MessageEmbed, TextChannel, User } from "discord.js";
+import {
+  Guild,
+  GuildMember,
+  MessageEmbed,
+  TextChannel,
+  User,
+} from "discord.js";
+import { LessThan } from "typeorm";
 
 export const MUTE_ROLE_NAME = "muted";
 
@@ -50,7 +57,7 @@ export const tempMuteMember = async (
   await muteMember(member, reason);
 
   await TempPenalty.create({
-    expiresAt: expiresAt,
+    expiresAt,
     guildID: member.guild.id,
     reason: reason,
     userID: member.id,
@@ -101,9 +108,13 @@ export const tempBanMember = async (
 
 export const checkTempPenalties = async () => {
   const now = new Date();
+
   const tempPenalties = await TempPenalty.find({
-    where: { expiresAt: { lt: now } },
+    where: {
+      expiresAt: LessThan(now),
+    },
   });
+
   for (const penalty of tempPenalties) {
     const guild = await client.guilds.fetch(penalty.guildID);
     const member = await guild.members.fetch(penalty.userID);
@@ -111,21 +122,15 @@ export const checkTempPenalties = async () => {
     switch (penalty.type) {
       case "Mute":
         await unmuteMember(member, `Temp mute expired`);
-        await dm.send(
-          `Your mute has expired. You can now send messages in ${guild.name}`
-        );
-        break;
-      case "Warning":
-        await dm.send(
-          `Your warning on ${guild.name} has expired. Please contact a moderator if you think this is in error.`
-        );
+        const embed = penaltyDMEmbed("Unmute", "Mute expired", guild);
+        await dm.send({ embeds: [embed] });
         break;
     }
     await penalty.remove();
   }
 };
 
-export const penaltyEmbed = (
+export const penaltyGuildEmbed = (
   penaltyType: "Ban" | "Warn" | "Mute" | "Unmute" | "Unban",
   user: GuildMember,
   reason: string,
@@ -165,5 +170,43 @@ export const penaltyEmbed = (
   if (duration) {
     embed.addField("Duration", duration);
   }
+  return embed;
+};
+
+export const penaltyDMEmbed = (
+  penaltyType: "Ban" | "Warn" | "Mute" | "Unmute" | "Unban",
+  reason: string,
+  guild: Guild,
+  duration?: string
+) => {
+  const embed = new MessageEmbed().addField("Reason", reason);
+
+  switch (penaltyType) {
+    case "Ban":
+      embed.setTitle(`You have been banned from ${guild.name}`);
+      embed.setColor("#ff0000"); // red
+      break;
+    case "Warn":
+      embed.setTitle(`You have been warned in ${guild.name}`);
+      embed.setColor("#ffd700"); // yellow
+      break;
+    case "Mute":
+      embed.setTitle(`You have been muted in ${guild.name}`);
+      embed.setColor("#800080"); // purple
+      break;
+    case "Unmute":
+      embed.setTitle(`You have been unmuted in ${guild.name}`);
+      embed.setColor("#008000"); // green
+      break;
+    case "Unban":
+      embed.setTitle(`You have been unbanned from ${guild.name}`);
+      embed.setColor("#0000ff"); // blue
+      break;
+  }
+
+  if (duration) {
+    embed.addField("Duration", duration);
+  }
+
   return embed;
 };

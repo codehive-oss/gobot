@@ -5,9 +5,11 @@ import { client } from "@core/client";
 import {
   isMuted,
   MUTE_ROLE_NAME,
-  penaltyEmbed,
+  penaltyDMEmbed,
+  penaltyGuildEmbed,
   unmuteMember,
 } from "@utils/moderation/penalty";
+import { TempPenalty } from "@db/entities/moderation/TempPenalty";
 
 const cmd = new Command({
   name: "unmute",
@@ -22,7 +24,7 @@ const cmd = new Command({
       await msg.reply("Please provide a valid member");
       return;
     }
-    
+
     if (!isMuted(target)) {
       await msg.reply("That member isn't muted");
       return;
@@ -31,10 +33,27 @@ const cmd = new Command({
     const reason = args.slice(1).join(" ") || "None";
     await unmuteMember(target, reason);
 
-    const embed = penaltyEmbed("Unmute", target, reason);
+    // remove temporary mutes
+    const penalty = await TempPenalty.findOne({
+      where: {
+        userID: target.id,
+        guildID: msg.guild?.id,
+        type: "Mute",
+      },
+    });
+    penalty?.remove();
+
+    const embed = penaltyGuildEmbed("Unmute", target, reason);
     await msg.reply({
       embeds: [embed],
     });
+
+    if (msg.guild) {
+      const dmEmbed = penaltyDMEmbed("Unmute", reason, msg.guild);
+      await target.send({
+        embeds: [dmEmbed],
+      });
+    }
   },
 });
 

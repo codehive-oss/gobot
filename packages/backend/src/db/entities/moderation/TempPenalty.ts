@@ -14,7 +14,7 @@ export class TempPenalty extends BaseEntity {
   @Column()
   reason: string;
 
-  @Column()
+  @Column({ type: "timestamptz" })
   expiresAt: Date;
 
   @Column()

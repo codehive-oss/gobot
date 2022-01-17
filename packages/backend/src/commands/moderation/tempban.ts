@@ -1,12 +1,12 @@
 import { Command } from "@utils/commandTypes/Command";
 import { convertTimeToMilliseconds } from "@utils/convertTime";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
-import { penaltyEmbed, tempBanMember } from "@utils/moderation/penalty";
+import { penaltyDMEmbed, penaltyGuildEmbed, tempBanMember } from "@utils/moderation/penalty";
 
 export default new Command({
   name: "tempban",
   description: "Temporarily ban a user",
-  usage: "tempban <user> <reason> <time>",
+  usage: "tempban <user> <time> <reason>",
   aliases: ["tban"],
   category: "moderation",
   permissions: MANAGE_MESSAGE,
@@ -17,10 +17,8 @@ export default new Command({
       return;
     }
 
-    const [, reason, timeArg] = args;
-    if (!reason) {
-      msg.reply("Please provide a reason");
-    }
+    const [, timeArg, reasonArg] = args;
+    const reason = reasonArg || "No reason provided";
 
     if (!timeArg) {
       msg.reply("Please provide a time");
@@ -36,8 +34,15 @@ export default new Command({
 
     await tempBanMember(member, reason, milliseconds);
 
-    const embed = penaltyEmbed("Ban", member, reason, timeArg);
+    const embed = penaltyGuildEmbed("Ban", member, reason, timeArg);
 
     msg.channel.send({ embeds: [embed] });
+    
+    if (msg.guild) {
+      const dmEmbed = penaltyDMEmbed("Ban", reason, msg.guild, timeArg);
+      await member.send({
+        embeds: [dmEmbed],
+      });
+    }
   },
 });

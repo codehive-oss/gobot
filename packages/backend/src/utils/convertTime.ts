@@ -1,7 +1,8 @@
 export const convertTimeToDate = (timeArg: string) => {
   const milliseconds = convertTimeToMilliseconds(timeArg);
-  if (!milliseconds) return;
-  return new Date(Date.now() + milliseconds);
+  if (!milliseconds) return undefined;
+  var date = new Date(new Date().getTime() + milliseconds);
+  return date;
 };
 
 export const convertTimeToMilliseconds = (timeArg: string) => {
@@ -18,7 +19,13 @@ export const convertTimeToMilliseconds = (timeArg: string) => {
 
   const [, amount, unit] = timeMatch;
   const time =
-    parseInt(amount) * (unit === "D" ? 86400 : unit === "H" ? 3600 : 60) * 1000;
+    parseInt(amount) *
+    (unit.toLowerCase() === "d"
+      ? 86400
+      : unit.toLowerCase() === "h"
+      ? 3600
+      : 60) *
+    1000;
 
   return time;
 };

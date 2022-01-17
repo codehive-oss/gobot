@@ -5,9 +5,12 @@ import {
   MANAGE_MEMBERS,
   MANAGE_MESSAGE,
 } from "@utils/GuildPermissions";
-import { MessageEmbed } from "discord.js";
-import { client } from "@core/client";
-import { isMuted, penaltyEmbed, muteMember } from "@utils/moderation/penalty";
+import {
+  isMuted,
+  penaltyGuildEmbed,
+  muteMember,
+  penaltyDMEmbed,
+} from "@utils/moderation/penalty";
 
 const cmd = new Command({
   name: "mute",
@@ -40,10 +43,17 @@ const cmd = new Command({
 
     await muteMember(target, reason);
 
-    const embed = penaltyEmbed("Mute", target, reason);
-    await msg.reply({
-      embeds: [embed],
+    const guildEmbed = penaltyGuildEmbed("Mute", target, reason);
+    await msg.channel.send({
+      embeds: [guildEmbed],
     });
+
+    if (msg.guild) {
+      const dmEmbed = penaltyDMEmbed("Mute", reason, msg.guild);
+      await target.send({
+        embeds: [dmEmbed],
+      });
+    }
   },
 });
 

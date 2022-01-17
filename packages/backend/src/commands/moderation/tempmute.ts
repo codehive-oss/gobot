@@ -1,12 +1,20 @@
 import { Command } from "@utils/commandTypes/Command";
-import { convertTimeToDate } from "@utils/convertTime";
+import {
+  convertTimeToDate,
+  convertTimeToMilliseconds,
+} from "@utils/convertTime";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
-import { penaltyEmbed, tempMuteMember } from "@utils/moderation/penalty";
+import { logger } from "@utils/logger";
+import {
+  penaltyDMEmbed,
+  penaltyGuildEmbed,
+  tempMuteMember,
+} from "@utils/moderation/penalty";
 
 export default new Command({
   name: "tempmute",
   description: "Temporarily mute a user",
-  usage: "tempmute <user> <reason> <time>",
+  usage: "tempmute <user> <time> <reason>",
   aliases: ["tmute"],
   category: "moderation",
   permissions: MANAGE_MESSAGE,
@@ -17,10 +25,8 @@ export default new Command({
       return;
     }
 
-    const [, reason, timeArg] = args;
-    if (!reason) {
-      msg.reply("Please provide a reason");
-    }
+    const [, timeArg, reasonArg] = args;
+    const reason = reasonArg || "No reason provided";
 
     if (!timeArg) {
       msg.reply("Please provide a time");
@@ -28,15 +34,21 @@ export default new Command({
     }
 
     const expiresAt = convertTimeToDate(timeArg);
-
     if (!expiresAt) {
-      msg.reply("Please provide a valid time format");
+      msg.reply("Please provide a valid time");
       return;
     }
 
     await tempMuteMember(member, reason, expiresAt);
 
-    const embed = penaltyEmbed("Mute", member, reason, timeArg);
+    const embed = penaltyGuildEmbed("Mute", member, reason, timeArg);
     msg.channel.send({ embeds: [embed] });
+
+    if (msg.guild) {
+      const dmEmbed = penaltyDMEmbed("Mute", reason, msg.guild, timeArg);
+      await member.send({
+        embeds: [dmEmbed],
+      });
+    }
   },
 });
