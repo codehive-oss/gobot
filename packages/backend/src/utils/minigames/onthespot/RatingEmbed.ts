@@ -1,3 +1,4 @@
+import { Channel } from "@utils/types";
 import {
   CacheType,
   Message,
@@ -6,7 +7,6 @@ import {
   MessageComponentInteraction,
   MessageEmbed,
 } from "discord.js";
-import { Channel } from "./OTSDiscordLobby";
 import { Player, PlayerRating } from "./lobbyTypes";
 
 export class RatingEmbed {

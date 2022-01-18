@@ -1,14 +1,13 @@
 import { GoServer } from "@db/entities/GoServer";
 import { GoUser } from "@db/entities/GoUser";
-import { ReactionRoleMessage } from "@db/entities/ReactionRoleMessage";
+import { ReactionRoleMessage } from "@db/entities/moderation/ReactionRoleMessage";
 import { logger } from "@utils/logger";
 import { createConnection } from "typeorm";
 import ormConfig from "@db/ormconfig";
 
 export const createSQLConnection = async () => {
   logger.info("Creating SQL connection...");
-  const conn = await createConnection(ormConfig);
-  await conn.runMigrations();
+  await createConnection(ormConfig);
   logger.info(
     `SQL connection on ${ormConfig.host}:${ormConfig.port} connected`
   );

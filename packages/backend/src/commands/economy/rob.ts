@@ -1,5 +1,5 @@
 import { GoUser } from "@db/entities/GoUser";
-import { CooldownCommand } from "@utils/commandTypes";
+import { CooldownCommand } from "@utils/commandTypes/CooldownCommand";
 import { checkRobTarget } from "@utils/checkRobTarget";
 import { randInt } from "@utils/random";
 

@@ -1,8 +1,8 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { Message } from "discord.js";
 import jimp from "jimp";
 import { logger } from "@utils/logger";
-import { getTarget } from "@utils/getTarget";
+import { getTargetUser } from "@utils/getTarget";
 
 const cmd = new Command({
   name: "blur",
@@ -10,7 +10,7 @@ const cmd = new Command({
   usage: "blur <@user>",
   category: "image",
   async execute(msg: Message, _args: string[]) {
-    const target = getTarget(msg);
+    const target = getTargetUser(msg);
 
     if (!target.avatarURL()) {
       await msg.reply("That User does not have a Profile Picture");

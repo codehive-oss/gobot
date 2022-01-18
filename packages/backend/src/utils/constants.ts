@@ -1,12 +1,14 @@
 import dotenv from "dotenv";
 
-export const buildMode = (process.env.NODE_ENV || "development") as
+export const BUILD_MODE = (process.env.NODE_ENV || "development") as
   | "development"
   | "production";
 
-dotenv.config({ path: `.env.${buildMode}` });
+dotenv.config({ path: `.env.${BUILD_MODE}` });
 
-export const __prod__ = buildMode === "production";
+export const __prod__ = BUILD_MODE === "production";
+
+export const PACKAGE_VERSION = process.env.npm_package_version; 
 
 export const TOKEN = process.env.TOKEN!;
 export const DEFAULT_PREFIX = "go ";
@@ -30,4 +32,4 @@ export const COOKIE_NAME = process.env.COOKIE_NAME || "GoBot";
 export const FRONTEND_URL =
   process.env.FRONTEND_URL || "https://localhost:8443";
 
-export const DISCORD_API_ENDPOINT = "https://discord.com/api/v9";
+export const DISCORD_API_ENDPOINT = "https://discord.com/api";

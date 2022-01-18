@@ -21,11 +21,17 @@ export class PinoTypeormLogger implements Logger {
   }
 
   logQueryError(error: string, query: string, parameters?: any[]) {
-    this.logger.error(error, { query, parameters });
+    this.logger.error(
+      error,
+      `Error while query: ${query} with parameters [${parameters}]`
+    );
   }
 
   logQuerySlow(time: number, query: string, parameters?: any[]) {
-    this.logger.info(`${time}ms`, { query, parameters });
+    this.logger.warn(
+      `${time}ms`,
+      `Slow query: ${query} with parameters [${parameters}]`
+    );
   }
 
   logSchemaBuild(message: string) {

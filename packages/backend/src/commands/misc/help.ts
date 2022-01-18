@@ -9,9 +9,8 @@ import {
 } from "discord.js";
 import { client } from "@core/client";
 import { commands } from "@core/commandHandler";
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { allCategoryData, Categories } from "@utils/categoryTypes";
-import { capitalizeFirstLetter } from "@utils/capitalize";
 import Pagination from "@utils/Pagination";
 import { mention } from "@utils/mention";
 import { GoServer } from "@db/entities/GoServer";

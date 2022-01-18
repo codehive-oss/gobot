@@ -1,4 +1,4 @@
-import { Command } from "@utils/commandTypes";
+import { Command } from "@utils/commandTypes/Command";
 import { randomChoice } from "@utils/random";
 import axios from "axios";
 import { MessageEmbed, TextChannel } from "discord.js";
@@ -13,7 +13,7 @@ interface Rule34APIPost {
 
 interface Rule34APIResponse {
   count: number;
-  posts: [Rule34APIPost];
+  posts: Rule34APIPost[];
 }
 
 export default new Command({
@@ -41,6 +41,11 @@ export default new Command({
       `${rule34APIEndpoint}?tags=${code}&limit=${limit}`
     );
     const data: Rule34APIResponse = resp.data;
+
+    if(data.posts.length <= 0) {
+      msg.reply("No results found!");
+      return;
+    }
 
     const link = randomChoice(data.posts).file_url;
 

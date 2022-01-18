@@ -1,5 +1,5 @@
-import { Command } from "@utils/commandTypes";
-import { manageMemberPermission } from "@utils/GuildPermissions";
+import { Command } from "@utils/commandTypes/Command";
+import { MANAGE_MEMBERS } from "@utils/GuildPermissions";
 import { updateServer } from "@db/entities/GoServer";
 
 export default new Command({
@@ -8,7 +8,7 @@ export default new Command({
   usage: "setanime <true/false>",
   category: "config",
   aliases: ["changeanime"],
-  permissions: manageMemberPermission,
+  permissions: MANAGE_MEMBERS,
   async execute(message, args, server) {
     // set anime to true or false, when no args are provided, toggle it
     if (!args[0]) {

@@ -10483,6 +10483,12 @@ sync-fetch@0.3.1, sync-fetch@^0.3.1:
     buffer "^5.7.0"
     node-fetch "^2.6.1"
 
+systeminformation@^5.10.2:
+  version "5.10.2"
+  resolved "https://registry.yarnpkg.com/systeminformation/-/systeminformation-5.10.2.tgz#b9c587c7a1d46794d62d6bbf561304e3ffd79e3f"
+  integrity sha512-rRmapeaSL6pw3v4KdoBcKSFLvu4QbQAho6UcQG34CLI/vZ6hOepFisAXBMB1hSgFvyXcsyZ8tIkXoNsLCJDUJA==
+
+
 table@^6.0.9:
   version "6.7.5"
   resolved "https://registry.yarnpkg.com/table/-/table-6.7.5.tgz#f04478c351ef3d8c7904f0e8be90a1b62417d238"

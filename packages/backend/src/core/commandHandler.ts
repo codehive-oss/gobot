@@ -1,11 +1,12 @@
-import { Message, TextChannel } from "discord.js";
+import { Message, MessageReaction, TextChannel, User } from "discord.js";
 import { logger } from "../utils/logger";
-import { Command } from "../utils/commandTypes";
+import { Command } from "../utils/commandTypes/Command";
 import { hasPermission } from "../utils/GuildPermissions";
 import { GoServer } from "@db/entities/GoServer";
 import { GoUser } from "@db/entities/GoUser";
 import fs from "fs";
 import { __prod__ } from "../utils/constants";
+import { ReactionCommand } from "@utils/commandTypes/ReactionCommand";
 
 export const commands: Command[] = [];
 
@@ -41,6 +42,12 @@ export const handleMessage = async (message: Message, server: GoServer) => {
   if (message.webhookId) {
     return;
   }
+
+  // Do not respond to bots
+  if (message.author.bot) {
+    return;
+  }
+  
   let content = message.content;
 
   // messages should not increment if they are commands
@@ -90,6 +97,30 @@ export const handleMessage = async (message: Message, server: GoServer) => {
         message.reply(
           `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
         );
+    }
+  }
+};
+
+export const handleReactionAdd = async (
+  reaction: MessageReaction,
+  user: User
+) => {
+  for (const command of commands) {
+    // check if Command is of type ReactionCommand
+    if (command instanceof ReactionCommand) {
+      command.reactionAdd(reaction, user);
+    }
+  }
+};
+
+export const handleReactionRemove = async (
+  reaction: MessageReaction,
+  user: User
+) => {
+  for (const command of commands) {
+    // check if Command is of type ReactionCommand
+    if (command instanceof ReactionCommand) {
+      command.reactionRemove(reaction, user);
     }
   }
 };
