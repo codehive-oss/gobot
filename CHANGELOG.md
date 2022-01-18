@@ -3,6 +3,38 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.11.0](https://github.com/SushiWaUmai/GoBot/compare/v0.10.0...v0.11.0) (2022-01-18)
+
+
+### Bug Fixes
+
+* **backend:** :bug: minor bug fixes ([37ddf7e](https://github.com/SushiWaUmai/GoBot/commit/37ddf7e0483e09ad0f536b297d0791fc19abc1f6))
+* **command:** :bug: add maximum messages for clearing messages ([5bf5196](https://github.com/SushiWaUmai/GoBot/commit/5bf519670aafa6cc9004982c5f3dfeeb713c92c3))
+* **command:** :bug: bot should only response to member and not to other bots ([84c9169](https://github.com/SushiWaUmai/GoBot/commit/84c916994a4f7d10bb5403d0982e467d9b4bf51c))
+* **command:** :bug: bug fixes in moderation commands ([1ea2d85](https://github.com/SushiWaUmai/GoBot/commit/1ea2d85d2f1e8ab7a44a439a45e874fd77996314))
+* **command:** :bug: fix r34 command ([f5e13f3](https://github.com/SushiWaUmai/GoBot/commit/f5e13f32467186cb7962d6face8e24cd9100e3a6))
+* **command:** :children_crossing: reactionrole command cleans options up after running ([dbaceca](https://github.com/SushiWaUmai/GoBot/commit/dbaceca8ea82c1259d48d6788324276b4b82da14))
+* **command:** :children_crossing: update reaction role to use unicode emojis ([4674f68](https://github.com/SushiWaUmai/GoBot/commit/4674f682da7f9a0ed04d1a99a7dfbed03d16e863))
+* **command:** :wheelchair: easier controls when rating and better image generation ([8d5cf63](https://github.com/SushiWaUmai/GoBot/commit/8d5cf63c260701c537214a409b25547d0b7d305a))
+
+
+### Features
+
+* :sparkles: added morse commands ([eeafbbf](https://github.com/SushiWaUmai/GoBot/commit/eeafbbfaa701229906aa0eed3e6903ba1d58b398))
+* :sparkles: added system command ([d9d3255](https://github.com/SushiWaUmai/GoBot/commit/d9d325500eeda343ed964758bf8f1d6fbdf85133))
+* **command:** :children_crossing: add more roles to single message ([b262c77](https://github.com/SushiWaUmai/GoBot/commit/b262c77979e71f75fb02a9e537ea49a6ebe61349))
+* **command:** :children_crossing: improve reaction role ux ([7eec0c8](https://github.com/SushiWaUmai/GoBot/commit/7eec0c8851c469958f5e5baaa04b78dc5255e8f2))
+* **command:** :children_crossing: update clear command to delete more than limit ([3d74e2e](https://github.com/SushiWaUmai/GoBot/commit/3d74e2e6b67db15c3678696ef934ff1f777fefd4))
+* **command:** :poop: addm more moderation commands ([c20c06c](https://github.com/SushiWaUmai/GoBot/commit/c20c06c1c1f1a1adf885c00a01d12f9dc23e00e3))
+* **command:** :sparkles: add announce command ([6da7cd4](https://github.com/SushiWaUmai/GoBot/commit/6da7cd4d41595e162821ede4e429bd60953768cc))
+* **command:** :sparkles: add clear links command ([cfa9b6c](https://github.com/SushiWaUmai/GoBot/commit/cfa9b6c52421bafc8823a2d32cf73979dd780610))
+* **command:** :sparkles: add version command ([9360127](https://github.com/SushiWaUmai/GoBot/commit/9360127f93b41b2a1231af2b8ac65d9fb7c450fe))
+
+
+
+
+
+
 # [0.10.0](https://github.com/SushiWaUmai/GoBot/compare/v0.9.0...v0.10.0) (2022-01-03)
 
 
