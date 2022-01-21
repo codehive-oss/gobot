@@ -1,8 +1,8 @@
 import { Message, MessageReaction, TextChannel, User } from "discord.js";
 import { logger } from "../utils/logger";
 import { Command } from "../utils/commandTypes/Command";
-import { hasPermission } from "../utils/GuildPermissions";
-import { GoServer } from "@db/entities/GoServer";
+import { ADMIN, hasPermission } from "../utils/GuildPermissions";
+import { GoServer, toGoServer } from "@db/entities/GoServer";
 import { GoUser } from "@db/entities/GoUser";
 import fs from "fs";
 import { __prod__ } from "../utils/constants";
@@ -38,16 +38,13 @@ async function addCommandsRecursive(dir: string, folder: string) {
 
 addCommandsRecursive("./dist/commands", "");
 
-export const handleMessage = async (message: Message, server: GoServer) => {
-  if (message.webhookId) {
+export const handleMessage = async (message: Message) => {
+  if (!message.guild || message.webhookId || message.author.bot) {
     return;
   }
 
-  // Do not respond to bots
-  if (message.author.bot) {
-    return;
-  }
-  
+  const server = await toGoServer(message.guild.id);
+
   let content = message.content;
 
   // messages should not increment if they are commands
@@ -57,46 +54,55 @@ export const handleMessage = async (message: Message, server: GoServer) => {
     await goUser.save();
   }
 
-  try {
-    if (content.toLocaleLowerCase().startsWith(server.prefix)) {
-      content = content.slice(server.prefix.length);
-      const args = content.split(" ");
-      const commandName = args[0].toLocaleLowerCase();
-      args.shift();
-
-      for (const command of commands) {
-        if (
-          command.name === commandName ||
-          (command.aliases && command.aliases.includes(commandName))
-        ) {
-          if (command.permissions) {
-            if (!hasPermission(message.member!, command.permissions)) {
-              await message.reply("Insufficient Permissions");
-              return;
-            }
-          }
-
-          logger.trace(`Executing Command ${command.name} with args [${args}]`);
-          await command.execute(message, args, server);
-          return;
-        }
-      }
+  if (content.toLocaleLowerCase().startsWith(server.prefix)) {
+    if (message.guild.me && !hasPermission(message.guild.me, ADMIN)) {
+      message.channel.send(
+        "I need the `ADMINISTRATOR` permission to run commands."
+      );
+      return;
     }
-  } catch (e) {
-    logger.error(e);
-    if (
-      message.guild &&
-      message.guild.me &&
-      message.channel.type == "GUILD_TEXT"
-    ) {
+
+    content = content.slice(server.prefix.length);
+    const args = content.split(" ");
+    const commandName = args[0].toLocaleLowerCase();
+    args.shift();
+
+    for (const command of commands) {
       if (
-        message.guild.me
-          .permissionsIn(message.channel as TextChannel)
-          .has("SEND_MESSAGES")
-      )
-        message.reply(
-          `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
-        );
+        command.name === commandName ||
+        (command.aliases && command.aliases.includes(commandName))
+      ) {
+        if (command.permissions) {
+          if (!hasPermission(message.member!, command.permissions)) {
+            await message.reply("Insufficient Permissions");
+            return;
+          }
+        }
+
+        logger.trace(`Executing Command ${command.name} with args [${args}]`);
+
+        try {
+          await command.execute(message, args, server);
+        } catch (e) {
+          logger.error(e);
+          if (
+            message.guild &&
+            message.guild.me &&
+            message.channel.type == "GUILD_TEXT"
+          ) {
+            if (
+              message.guild.me
+                .permissionsIn(message.channel as TextChannel)
+                .has("SEND_MESSAGES")
+            )
+              message.reply(
+                `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
+              );
+          }
+        }
+
+        return;
+      }
     }
   }
 };
@@ -108,7 +114,7 @@ export const handleReactionAdd = async (
   for (const command of commands) {
     // check if Command is of type ReactionCommand
     if (command instanceof ReactionCommand) {
-      command.reactionAdd(reaction, user);
+      await command.reactionAdd(reaction, user);
     }
   }
 };
@@ -120,7 +126,7 @@ export const handleReactionRemove = async (
   for (const command of commands) {
     // check if Command is of type ReactionCommand
     if (command instanceof ReactionCommand) {
-      command.reactionRemove(reaction, user);
+      await command.reactionRemove(reaction, user);
     }
   }
 };

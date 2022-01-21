@@ -15,7 +15,6 @@ import { mention } from "@utils/mention";
 import { ReactionRoleMessage } from "@db/entities/moderation/ReactionRoleMessage";
 import { checkTempPenalties } from "@utils/moderation/penalty";
 
-
 export const client = new Client({
   intents: [
     Intents.FLAGS.GUILD_MEMBERS,
@@ -58,16 +57,12 @@ client.on("ready", async () => {
   const checkPenalties = async () => {
     await checkTempPenalties();
     setTimeout(checkPenalties, 1000 * 60); // check again in 1 minute
-  }
+  };
   checkPenalties();
 });
 
 client.on("messageCreate", async (message) => {
-  if (!message.guild) {
-    return;
-  }
-  const server = await toGoServer(message.guild.id);
-  await handleMessage(message, server);
+  await handleMessage(message);
 });
 
 client.on("messageDelete", async (message) => {
@@ -85,7 +80,7 @@ client.on("messageDelete", async (message) => {
 client.on("messageDeleteBulk", async (messages) => {
   // find all reaction messages with the same message id
   const reactionRoleMessages = await ReactionRoleMessage.find({
-    where: { messageID: messages.map((m) => m.id) },  
+    where: { messageID: messages.map((m) => m.id) },
   });
 
   if (reactionRoleMessages.length > 0) {
@@ -112,23 +107,25 @@ client.on("guildCreate", async (guild) => {
   await owner.user.send({ embeds: [embed] });
 });
 
+// TODO: Better Permssion Error handling
 client.on("messageReactionAdd", async (reaction, user) => {
   try {
     if (reaction.message.partial || reaction.partial || user.partial)
       await reaction.fetch();
-    if (reaction.partial || user.partial) return;
+    if (reaction.partial || user.partial || user.bot) return;
 
-    handleReactionAdd(reaction, user);
+    await handleReactionAdd(reaction, user);
   } catch (e) {}
 });
 
+// TODO: Better Permssion Error handling
 client.on("messageReactionRemove", async (reaction, user) => {
   try {
     if (reaction.message.partial || reaction.partial || user.partial)
       await reaction.fetch();
     if (reaction.partial || user.partial) return;
 
-    handleReactionRemove(reaction, user);
+    await handleReactionRemove(reaction, user);
   } catch (e) {}
 });
 

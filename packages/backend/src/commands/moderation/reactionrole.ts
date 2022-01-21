@@ -159,9 +159,11 @@ const cmd = new ReactionCommand({
       return;
     }
 
-    const channel = await askTextChannel("Select a channel to send the message", msg);
-    if(!channel) {
-      msg.reply("Invalid channel");
+    const channel = await askTextChannel(
+      "Select a channel to send the message",
+      msg
+    );
+    if (!channel) {
       return;
     }
 
@@ -192,7 +194,7 @@ const cmd = new ReactionCommand({
     let embed = new MessageEmbed()
       .setTitle("Self Roles")
       .setDescription(
-        "React with the emoji you want to use to get the role you want."
+        "React with the emoji you to get the role you want."
       )
       .setColor("#0099ff");
 
