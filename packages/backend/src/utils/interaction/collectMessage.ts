@@ -5,14 +5,14 @@ export const collectMessage = ({
   channel,
   author,
   max,
-  time
+  time,
 }: CollectMessageInput): Promise<Message> => {
   // collect messages
   const filter = (message: Message) => {
     return message.author.id === author.id;
   };
 
-  const collector = channel.createMessageCollector({ filter, time, max});
+  const collector = channel.createMessageCollector({ filter, time, max });
 
   return new Promise<Message>((resolve) => {
     collector.on("collect", async (message) => {

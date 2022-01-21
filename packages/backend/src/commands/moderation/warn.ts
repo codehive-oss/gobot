@@ -33,6 +33,6 @@ export default new Command({
     }
 
     msg.channel.send({ embeds: [guildEmbed] });
-    if(dmEmbed) member.send({ embeds: [dmEmbed] });
+    if (dmEmbed) member.send({ embeds: [dmEmbed] });
   },
 });

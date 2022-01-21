@@ -40,7 +40,7 @@ const cmd = new Command({
           .setPlaceholder("Category")
           .addOptions(options)
       );
-      
+
       const menu = await msg.reply({
         content: "Select a Category to see help for",
         components: [row],

@@ -7,7 +7,11 @@ interface TextOptionProps {
   placeholder?: string;
 }
 
-const TextOption: React.FC<TextOptionProps> = ({ label, name, placeholder }) => {
+const TextOption: React.FC<TextOptionProps> = ({
+  label,
+  name,
+  placeholder,
+}) => {
   const [field, meta] = useField<string>(name);
 
   return (

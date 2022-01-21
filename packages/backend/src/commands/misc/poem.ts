@@ -14,11 +14,11 @@ interface Poem {
 
 const linesOnPage = 10;
 
-const getPoemPart = (body: string[], index: number) : string => {
+const getPoemPart = (body: string[], index: number): string => {
   const start = index * linesOnPage;
   const end = start + linesOnPage;
   return body.slice(start, end).join("\n");
-}
+};
 
 export default new Command({
   name: "poem",
@@ -32,7 +32,7 @@ export default new Command({
     const pageNum = Math.ceil(poem.linecount / linesOnPage);
 
     const embds = [];
-    for(let i = 0; i < pageNum; i++) {
+    for (let i = 0; i < pageNum; i++) {
       const poemPart = getPoemPart(poem.lines, i);
       const embd = new MessageEmbed()
         .setTitle(poem.title)

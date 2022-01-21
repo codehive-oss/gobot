@@ -1,7 +1,4 @@
-import {
-  Message,
-  MessageEmbed,
-} from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import { OTSLobby } from "./OTSLobby";
 import { Player } from "./lobbyTypes";
 import { RatingEmbed } from "./RatingEmbed";

@@ -7,7 +7,7 @@
 
 @layer base {
   html {
-    @apply h-full w-full bg-black text-white;  
+    @apply h-full w-full bg-black text-white;
   }
 }
 

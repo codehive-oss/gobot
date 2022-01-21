@@ -38,7 +38,7 @@ const App = ({ Component, pageProps }: AppProps) => {
         />
         <meta name="msapplication-TileColor" content="#da532c" />
         <meta name="theme-color" content="#ffffff" />
-        
+
         <meta
           name="description"
           content="GoBot is a multipurpose bot for your discord server"

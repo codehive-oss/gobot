@@ -77,7 +77,7 @@ export default new Command({
 
       // Check if the player has already accepted the challenge
       if (playerReady[players.indexOf(interaction.user)]) return;
-      
+
       // Check if the interaction is an accept button
       if (interaction.component.customId !== "accept") {
         // Send a message to the channel

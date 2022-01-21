@@ -193,9 +193,7 @@ const cmd = new ReactionCommand({
 
     let embed = new MessageEmbed()
       .setTitle("Self Roles")
-      .setDescription(
-        "React with the emoji you to get the role you want."
-      )
+      .setDescription("React with the emoji you to get the role you want.")
       .setColor("#0099ff");
 
     selectedRoles.forEach((role) => {

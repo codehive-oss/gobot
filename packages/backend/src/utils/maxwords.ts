@@ -1,1 +1,1 @@
-export const maxwords = ["max", "all"]
+export const maxwords = ["max", "all"];

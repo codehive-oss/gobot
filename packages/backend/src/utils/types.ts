@@ -1,4 +1,10 @@
-import { DMChannel, PartialDMChannel, NewsChannel, TextChannel, ThreadChannel } from "discord.js";
+import {
+  DMChannel,
+  PartialDMChannel,
+  NewsChannel,
+  TextChannel,
+  ThreadChannel,
+} from "discord.js";
 import { IncomingMessage, ServerResponse } from "http";
 
 export type MyContext = {

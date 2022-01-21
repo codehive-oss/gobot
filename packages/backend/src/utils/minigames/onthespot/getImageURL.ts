@@ -7,9 +7,9 @@ const getCursedImage = async () => {
 };
 const getMemeImage = async () => {
   const res = await axios.get("https://meme-api.herokuapp.com/gimme");
-  const { url }: {url: string} = res.data;
+  const { url }: { url: string } = res.data;
   return url;
-}
+};
 const getRandomDog = async () => {
   const res = await axios.get("https://dog.ceo/api/breeds/image/random");
   const { message }: { message: string } = res.data;
@@ -21,7 +21,13 @@ const getRandomCat = async () => {
   return file;
 };
 
-const getImageURLs = [getCursedImage, getCursedImage, getMemeImage, getRandomDog, getRandomCat];
+const getImageURLs = [
+  getCursedImage,
+  getCursedImage,
+  getMemeImage,
+  getRandomDog,
+  getRandomCat,
+];
 
 export const getImageURL = async () => {
   const index = Math.floor(Math.random() * getImageURLs.length);

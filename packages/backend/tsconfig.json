@@ -25,7 +25,7 @@
       "@core/*": ["./src/core/*"],
       "@utils/*": ["./src/utils/*"],
       "@commands/*": ["./src/commands/*"],
-      "@db/*": ["./src/db/*"],
+      "@db/*": ["./src/db/*"]
     }
   },
   "exclude": ["node_modules"],

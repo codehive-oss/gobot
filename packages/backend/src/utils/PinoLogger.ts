@@ -9,7 +9,7 @@ export class PinoTypeormLogger implements Logger {
   }
 
   log(level: "log" | "info" | "warn" | "error", message: any, data?: any) {
-    if(level === "log") {
+    if (level === "log") {
       this.logger.debug(message);
       return;
     }

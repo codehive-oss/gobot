@@ -14,7 +14,6 @@ export const getUrqlState = async ({
   queries,
   mutations,
 }: GetUrqlStateOptions) => {
-
   const graphqlPromises = [];
   if (queries) {
     for (const query of queries) {

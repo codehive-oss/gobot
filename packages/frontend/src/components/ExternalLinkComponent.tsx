@@ -5,16 +5,17 @@ type ExternalLinkComponentProps = React.HTMLAttributes<HTMLDivElement> & {
 };
 
 const ExtenalLinkComponent: React.FC<ExternalLinkComponentProps> = ({
-   children,
-   href,
-   className,
-    }) => {
-    return (
-        <div className={className}>
-
-            <a href={href} target="_blank" rel="noreferrer">{children}</a>
-        </div>
-    );
+  children,
+  href,
+  className,
+}) => {
+  return (
+    <div className={className}>
+      <a href={href} target="_blank" rel="noreferrer">
+        {children}
+      </a>
+    </div>
+  );
 };
 
 export default ExtenalLinkComponent;

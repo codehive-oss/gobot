@@ -14,7 +14,7 @@ const cmd = new Command({
 
     const encoded = encodeMorse(args.join(" "));
 
-    if(!encoded) {
+    if (!encoded) {
       msg.reply("Invalid morse input");
       return;
     }

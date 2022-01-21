@@ -12,8 +12,8 @@ export default new Command({
       .setColor("#0099ff")
       .setTitle("GoBot Version")
       .addField("Version", "`" + version + "`")
-      .addField("Build", "`" + BUILD_MODE + "`")
+      .addField("Build", "`" + BUILD_MODE + "`");
 
-    msg.channel.send({embeds: [embed]});
+    msg.channel.send({ embeds: [embed] });
   },
 });
