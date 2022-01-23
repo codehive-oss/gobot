@@ -93,9 +93,9 @@ services:
       dockerfile: ./Dockerfile
     expose:
       - 3000
-    # depends_on:
-    #   backend:
-    #     condition: service_healthy
+    depends_on:
+      backend:
+        condition: service_healthy
     deploy:
       restart_policy:
         condition: on-failure
