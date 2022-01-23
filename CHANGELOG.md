@@ -3,6 +3,24 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/SushiWaUmai/GoBot/compare/v0.11.0...v0.12.0) (2022-01-23)
+
+
+### Bug Fixes
+
+* :bug: add permission check ([4b6415c](https://github.com/SushiWaUmai/GoBot/commit/4b6415c6614d0a33d48063c249ce7180c4cc0608))
+* :bug: fix clear command ([8f90e5e](https://github.com/SushiWaUmai/GoBot/commit/8f90e5e11f57eefd2a43b64ac3943341a239b9fe))
+* **frontend:** :bug: add health check to backend ([2ce12b1](https://github.com/SushiWaUmai/GoBot/commit/2ce12b10c8b7e96dbc02511edaba806c4139a025))
+
+
+### Features
+
+* :sparkles: add prettier cli ([910983a](https://github.com/SushiWaUmai/GoBot/commit/910983a2084ceec843fdecc4ed873dd0833a2843))
+
+
+
+
+
 # [0.11.0](https://github.com/SushiWaUmai/GoBot/compare/v0.10.0...v0.11.0) (2022-01-18)
 
 

@@ -3,6 +3,18 @@
 All notable changes to this project will be documented in this file.
 See [Conventional Commits](https://conventionalcommits.org) for commit guidelines.
 
+# [0.12.0](https://github.com/SushiWaUmai/GoBot/compare/v0.11.0...v0.12.0) (2022-01-23)
+
+
+### Features
+
+* :sparkles: add prettier cli ([910983a](https://github.com/SushiWaUmai/GoBot/commit/910983a2084ceec843fdecc4ed873dd0833a2843))
+
+
+
+
+
+
 # [0.11.0](https://github.com/SushiWaUmai/GoBot/compare/v0.10.0...v0.11.0) (2022-01-18)
 
 **Note:** Version bump only for package @gobot/frontend
