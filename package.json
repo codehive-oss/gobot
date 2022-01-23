@@ -19,7 +19,7 @@
     ]
   },
   "scripts": {
-    "release": "lerna version --conventional-commits",
+    "release": "lerna version --conventional-commits -y",
     "diff": "lerna diff",
     "backend": "yarn workspace @gobot/backend",
     "frontend": "yarn workspace @gobot/frontend",
