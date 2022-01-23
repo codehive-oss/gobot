@@ -18,7 +18,7 @@ export default new Command({
     }
 
     msg.guild?.members.ban(user);
-    
+
     const embed = penaltyGuildEmbed("Ban", user, reason);
 
     msg.channel.send({ embeds: [embed] });

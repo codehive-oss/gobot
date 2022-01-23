@@ -18,5 +18,5 @@ export default new Command({
     const data: DogAPIResponse = resp.data;
 
     await msg.reply(data.message);
-  }
+  },
 });

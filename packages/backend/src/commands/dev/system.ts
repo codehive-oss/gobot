@@ -35,7 +35,7 @@ const cmd = new Command({
       )
       .addFields(
         { name: "Kernel", value: `${platform}` },
-        { name: "Distro", value :`${distro} ${release}` },
+        { name: "Distro", value: `${distro} ${release}` },
         { name: "CPU", value: `x${cores} ${cpuManufacturer} ${brand}` },
         { name: "RAM", value: `${~~(totalRam / 1024 / 1024 / 1024)}GB` },
         { name: "Motherboard", value: `${moboManufacturer} ${model}` },

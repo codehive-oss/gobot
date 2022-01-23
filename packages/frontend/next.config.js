@@ -4,12 +4,12 @@ module.exports = {
   images: {
     domains: ["cdn.discordapp.com"],
   },
-  webpackDevMiddleware: config => {
+  webpackDevMiddleware: (config) => {
     config.watchOptions = {
       poll: 1000,
       aggregateTimeout: 300,
-    }
+    };
 
-    return config
+    return config;
   },
 };

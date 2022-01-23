@@ -56,7 +56,6 @@ const cmd = new Command({
     target.incrementHandBalance(amount);
     user.save();
     target.save();
-    
 
     msg.reply(`You gave ${amount} GoCoins to ${dcTarget.username} `);
   },

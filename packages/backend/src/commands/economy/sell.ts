@@ -48,7 +48,9 @@ const cmd = new Command({
       goUser.handBalance += ore.price * amount;
       await goUser.save();
       await msg.reply(
-        `Succesfully sold ${amount} ${ore.name} for ${ore.price * amount} GoCoins`
+        `Succesfully sold ${amount} ${ore.name} for ${
+          ore.price * amount
+        } GoCoins`
       );
     } else {
       await msg.reply("You don't own that");

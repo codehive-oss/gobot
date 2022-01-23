@@ -8,7 +8,7 @@ dotenv.config({ path: `.env.${BUILD_MODE}` });
 
 export const __prod__ = BUILD_MODE === "production";
 
-export const PACKAGE_VERSION = process.env.npm_package_version; 
+export const PACKAGE_VERSION = process.env.npm_package_version;
 
 export const TOKEN = process.env.TOKEN!;
 export const DEFAULT_PREFIX = "go ";

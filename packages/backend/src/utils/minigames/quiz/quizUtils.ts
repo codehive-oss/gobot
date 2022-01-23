@@ -1,5 +1,13 @@
 import axios from "axios";
-import { Message, MessageSelectOptionData, MessageActionRow, MessageSelectMenu, SelectMenuInteraction, MessageButton, MessageEmbed } from "discord.js";
+import {
+  Message,
+  MessageSelectOptionData,
+  MessageActionRow,
+  MessageSelectMenu,
+  SelectMenuInteraction,
+  MessageButton,
+  MessageEmbed,
+} from "discord.js";
 import { CategoryResponseType, Quiz } from "./quizTypes";
 
 export const unescape = (str: string) => {
@@ -98,7 +106,10 @@ export const askDifficulty = async (msg: Message) => {
   });
 };
 
-export const askQuestion = async (msg: Message, quiz: Quiz): Promise<boolean> => {
+export const askQuestion = async (
+  msg: Message,
+  quiz: Quiz
+): Promise<boolean> => {
   const options: MessageButton[] = [];
   for (let answer of quiz.incorrect_answers) {
     options.push(

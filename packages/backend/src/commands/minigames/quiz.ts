@@ -1,14 +1,16 @@
 // Using quiz api https://opentdb.com/api_config.php
 // https://opentdb.com/api_category.php
 import { Command } from "@utils/commandTypes/Command";
-import {
-  Message,
-  MessageEmbed,
-} from "discord.js";
+import { Message, MessageEmbed } from "discord.js";
 import axios from "axios";
 import { QuizResponseType } from "@utils/minigames/quiz/quizTypes";
-import { askCategory, askDifficulty, askQuestion, quizAmount, unescape } from "@utils/minigames/quiz/quizUtils";
-
+import {
+  askCategory,
+  askDifficulty,
+  askQuestion,
+  quizAmount,
+  unescape,
+} from "@utils/minigames/quiz/quizUtils";
 
 export default new Command({
   name: "quiz",

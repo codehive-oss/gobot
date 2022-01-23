@@ -62,7 +62,9 @@ const NavbarProvider: React.FC<NavbarComponentProps> = ({ children }) => {
             </div>
           )}
         </div>
-        <div className="overflow-y-auto flex-grow px-5 md:px-16 py-8">{children}</div>
+        <div className="overflow-y-auto flex-grow px-5 md:px-16 py-8">
+          {children}
+        </div>
       </div>
     </div>
   );

@@ -42,7 +42,7 @@ export default new Command({
     );
     const data: Rule34APIResponse = resp.data;
 
-    if(data.posts.length <= 0) {
+    if (data.posts.length <= 0) {
       msg.reply("No results found!");
       return;
     }

@@ -13,7 +13,7 @@ const cmd = new Command({
     }
 
     const decoded = decodeMorse(args.join(" "));
-    
+
     if (!decoded) {
       msg.reply("Invalid morse code");
       return;

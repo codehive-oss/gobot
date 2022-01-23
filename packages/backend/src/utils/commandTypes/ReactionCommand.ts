@@ -20,7 +20,7 @@ export class ReactionCommand extends Command {
     tags,
     execute,
     reactionAdd,
-    reactionRemove
+    reactionRemove,
   }: ReactionCommandSettings) {
     super({
       name,

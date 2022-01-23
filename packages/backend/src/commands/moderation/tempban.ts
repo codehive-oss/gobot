@@ -1,7 +1,11 @@
 import { Command } from "@utils/commandTypes/Command";
 import { convertTimeToMilliseconds } from "@utils/convertTime";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
-import { penaltyDMEmbed, penaltyGuildEmbed, tempBanMember } from "@utils/moderation/penalty";
+import {
+  penaltyDMEmbed,
+  penaltyGuildEmbed,
+  tempBanMember,
+} from "@utils/moderation/penalty";
 
 export default new Command({
   name: "tempban",
@@ -37,7 +41,7 @@ export default new Command({
     const embed = penaltyGuildEmbed("Ban", member, reason, timeArg);
 
     msg.channel.send({ embeds: [embed] });
-    
+
     if (msg.guild) {
       const dmEmbed = penaltyDMEmbed("Ban", reason, msg.guild, timeArg);
       await member.send({

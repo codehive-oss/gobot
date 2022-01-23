@@ -2,7 +2,6 @@ import { Command } from "@utils/commandTypes/Command";
 import figlet from "figlet";
 import { logger } from "@utils/logger";
 
-
 // creates an ascii art from a given string
 const cmd = new Command({
   name: "asciiart",
@@ -30,8 +29,7 @@ const cmd = new Command({
         if (err) reject(err);
         resolve(res!);
       });
-    }
-    );
+    });
 
     // send the ascii art
     message.channel.send("```" + ascii + "```");

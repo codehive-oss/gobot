@@ -19,13 +19,13 @@
     ]
   },
   "scripts": {
-    "release": "lerna version --conventional-commits -y",
+    "release": "lerna version --conventional-commits",
     "diff": "lerna diff",
     "backend": "yarn workspace @gobot/backend",
     "frontend": "yarn workspace @gobot/frontend",
     "migration:gen": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up backend && yarn stop",
     "migration:run": "docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.run-migration.yml up backend && yarn stop",
-    "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot_postgres_1 psql -U postgres -d Gobot && yarn stop",
+    "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot-postgres_1 psql -U postgres -d Gobot && yarn stop",
     "logs:dev": "docker-compose -p gobot_dev logs -f",
     "logs:prod": "docker-compose -p gobot_prod logs -f",
     "build:dev": "docker-compose -p gobot_dev --env-file ./packages/backend/.env.development -f docker-compose.yml -f docker-compose.dev.yml build",
@@ -34,9 +34,12 @@
     "start": "docker-compose -p gobot_prod --env-file ./packages/backend/.env.production -f docker-compose.yml -f docker-compose.prod.yml up --build",
     "stop": "docker-compose down",
     "stop:dev": "docker-compose -p gobot_dev --env-file ./packages/backend/.env.development down",
-    "stop:prod": "docker-compose -p gobot_prod --env-file ./packages/backend/.env.production down"
+    "stop:prod": "docker-compose -p gobot_prod --env-file ./packages/backend/.env.production down",
+    "format:write": "prettier --write {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
+    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}"
   },
   "devDependencies": {
-    "lerna": "^4.0.0"
+    "lerna": "^4.0.0",
+    "prettier": "2.5.1"
   }
 }

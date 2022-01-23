@@ -1,5 +1,6 @@
 import { Command } from "@utils/commandTypes/Command";
 import { MANAGE_MESSAGE } from "@utils/GuildPermissions";
+import { logger } from "@utils/logger";
 import { TextChannel } from "discord.js";
 
 const cmd = new Command({
@@ -29,16 +30,33 @@ const cmd = new Command({
       return;
     }
 
-    // get the channel
-    const channel = msg.channel as TextChannel;
-    const iterations = Math.floor(amount / 100);
-    const remainder = amount % 100;
-    for (let i = 0; i < iterations; i++) {
-      await channel.bulkDelete(100);
+    if (!(msg.channel instanceof TextChannel)) {
+      msg.reply("This command can only be used in text channels.");
+      return;
     }
-    await channel.bulkDelete(remainder);
-    
-    channel.send(`Cleared ${amount} messages`);
+
+    let messagesToDelete = amount;
+
+    let old = false;
+    while (messagesToDelete > 0) {
+      const collected = await msg.channel.messages.fetch();
+      if (collected.size <= 0) break;
+      if (old) {
+        for (let msg of collected.values()) {
+          await msg.delete();
+          messagesToDelete--;
+        }
+      } else {
+        let deleted = await msg.channel.bulkDelete(
+          Math.min(100, messagesToDelete),
+          true
+        );
+        if (deleted.size < collected.size) old = true;
+        messagesToDelete -= deleted.size;
+      }
+    }
+
+    msg.channel.send(`Cleared ${amount - messagesToDelete} messages`);
   },
 });
 
