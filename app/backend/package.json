@@ -14,7 +14,8 @@
     "dev:ts-node": "nodemon --exec yarn start:ts-node",
     "typeorm": "node -r ts-node/register -r tsconfig-paths/register -r module-alias/register ./node_modules/typeorm/cli.js",
     "migration:gen": "yarn typeorm -f ./src/db/ormconfig.ts migration:generate -n GobotMigration",
-    "migration:run": "yarn typeorm -f ./src/db/ormconfig.ts migration:run"
+    "migration:run": "yarn typeorm -f ./src/db/ormconfig.ts migration:run",
+    "heathcheck": "wget -O /dev/null http://localhost/api || exit 1"
   },
   "_moduleAliases": {
     "@core": "./dist/core",

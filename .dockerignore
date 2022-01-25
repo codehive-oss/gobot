@@ -1,7 +1,12 @@
 docker-compose.env
 docker-compose.yml
 Dockerfile
-node_modules
 test
 .vscode
 .git
+
+**/node_modules
+**/build
+**/dist
+**/.next
+**/out

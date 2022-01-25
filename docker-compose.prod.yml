@@ -3,13 +3,9 @@ services:
   nginx:
     ports:
       - "443:443"
-  backend:
+  app:
     build:
       args:
         - BuildMode=production
     env_file:
-      - ./packages/backend/.env.production
-  frontend:
-    build:
-      args:
-        - BuildMode=production
+      - ./.env.production
