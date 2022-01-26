@@ -11,10 +11,9 @@ services:
     env_file:
       - ./app/backend/.env.development
     volumes:
-      - ./app/backend:/usr/app
-      - ./app/backend/dist:/usr/app/dist
-      - ./usr/app/node_modules
-      - ./app/frontend:/usr/app
-      - ./app/frontend/.next:/usr/app/.next
-    # command: yarn turbo run dev
+      - ./app/backend:/usr/app/app/backend
+      - ./app/backend/dist:/usr/app/app/backend/dist
+      - ./app/frontend:/usr/app/app/frontend
+      - ./app/frontend/.next:/usr/app/app/frontend/.next
+    command: yarn turbo run dev
     

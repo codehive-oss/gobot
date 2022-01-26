@@ -47,7 +47,7 @@
       "frontend#deploy": {
         "dependsOn": [
           "backend#deploy",
-          "backned#health-check"
+          "backend#healthcheck"
         ]
       }
     }

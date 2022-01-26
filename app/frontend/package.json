@@ -7,7 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "gen": "graphql-codegen"
+    "gen": "graphql-codegen",
+    "deploy": "yarn build && yarn start"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",
