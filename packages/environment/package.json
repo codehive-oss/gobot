@@ -1,6 +1,10 @@
 {
   "name": "@gobot/environment",
-  "version": "0.0.1",
-  "main": "index.js",
-  "license": "MIT"
+  "version": "0.0.0",
+  "type": "module",
+  "exports": "./dist/index.js",
+  "license": "MIT",
+  "engines": {
+    "node": "^12.20.0 || ^14.13.1 || >=16.0.0"
+  }
 }

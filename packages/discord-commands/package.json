@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "license": "MIT",
   "scripts": {},
-  "dependencies": {},
+  "dependencies": {
+    "@gobot/discord-commands": "*",
+    "@gobot/environment": "*"
+  },
   "devDependencies": {
     "@gobot/tsconfig": "*",
     "@types/node": "^17.0.12",
