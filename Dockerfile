@@ -1,5 +1,7 @@
 FROM node:alpine
 
+RUN apk add --no-cache curl
+
 ARG BuildMode
 
 WORKDIR /usr/app/
