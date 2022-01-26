@@ -22,11 +22,6 @@
   "turbo": {
     "baseBranch": "origin/main",
     "pipeline": {
-      "build": {
-        "dependsOn": [
-          "^build"
-        ]
-      },
       "test": {
         "dependsOn": [
           "^build"
@@ -39,23 +34,27 @@
       "dev": {
         "cache": false
       },
-      "deploy": {
-        "dependsOn": [
-          "build"
-        ],
-        "outputs": []
-      },
       "healthcheck": {
         "dependsOn": [
           "build"
         ],
         "outputs": []
       },
-      "@gobot/frontend#deploy": {
+      "build": {
         "dependsOn": [
-          "@gobot/backend#deploy",
+          "^build"
+        ]
+      },
+      "@gobot/frontend#build": {
+        "dependsOn": [
           "@gobot/backend#healthcheck"
         ]
+      },
+      "start": {
+        "dependsOn": [
+          "build"
+        ],
+        "outputs": []
       }
     }
   },

@@ -1,8 +1,7 @@
 attempt_counter=0
 max_attempts=10
-interval=60
 
-until $(curl --output /dev/null --silent --head --fail https://localhost/api/); do
+until $(curl --output /dev/null --silent --head --fail http://app:4000/api); do
     if [ ${attempt_counter} -eq ${max_attempts} ];then
       echo "Max attempts reached"
       exit 1
@@ -10,5 +9,6 @@ until $(curl --output /dev/null --silent --head --fail https://localhost/api/); 
 
     printf '.'
     attempt_counter=$(($attempt_counter+1))
-    sleep ${interval}
+    # echo "Healthcheck failed on attempt ${attempt_counter}/${max_attempts}"
+    sleep 10
 done

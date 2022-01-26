@@ -17,4 +17,4 @@ COPY ./app ./app
 COPY .env."$BuildMode" .env
 ENV NODE_ENV "$BuildMode"
 
-CMD yarn turbo run deploy
+CMD yarn turbo run start
