@@ -1,0 +1,4 @@
+{
+  "extends": "@gobot/tsconfig/node.json",
+  "include": ["./src/**/*.ts"]
+}

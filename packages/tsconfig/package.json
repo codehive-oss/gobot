@@ -1,0 +1,10 @@
+{
+  "name": "@gobot/tsconfig",
+  "version": "0.0.0",
+  "license": "MIT",
+  "files": [
+    "base.json",
+    "nextjs.json",
+    "node.json"
+  ]
+}
