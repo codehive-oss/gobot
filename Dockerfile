@@ -7,12 +7,12 @@ ARG BuildMode
 WORKDIR /usr/app/
 
 COPY package.json yarn.lock ./
-COPY app/backend/package.json ./app/backend/
-COPY app/frontend/package.json ./app/frontend/
+COPY apps/backend/package.json ./apps/backend/
+COPY apps/frontend/package.json ./apps/frontend/
 
 RUN yarn install
 
-COPY ./app ./app
+COPY ./apps ./apps
 
 COPY .env."$BuildMode" .env
 ENV NODE_ENV "$BuildMode"

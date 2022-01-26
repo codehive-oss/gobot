@@ -8,4 +8,4 @@ services:
       args:
         - BuildMode=production
     env_file:
-      - ./.env.production
+      - .env.production
