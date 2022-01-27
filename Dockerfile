@@ -6,6 +6,8 @@ ARG BuildMode
 
 WORKDIR /usr/app/
 
+# TODO: use turbo prune --docker
+# https://turborepo.org/docs/reference/command-line-reference#turbo-prune---scopetarget
 COPY package.json yarn.lock ./
 
 COPY apps/backend/package.json ./apps/backend/

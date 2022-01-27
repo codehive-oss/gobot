@@ -3,6 +3,7 @@
   "version": "0.12.0",
   "private": true,
   "scripts": {
+    "clean": "rimraf .next && rimraf .turbo && rimraf node_modules",
     "dev": "next dev",
     "build": "next build",
     "start": "next start",

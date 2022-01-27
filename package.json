@@ -10,16 +10,16 @@
   "turbo": {
     "baseBranch": "origin/main",
     "pipeline": {
+      "lint": {
+        "outputs": []
+      },
+      "clean": {
+        "cache": false
+      },
       "test": {
         "dependsOn": [
           "^build"
         ],
-        "outputs": [
-          "dist/**",
-          ".next/**"
-        ]
-      },
-      "lint": {
         "outputs": []
       },
       "dev": {
@@ -28,15 +28,13 @@
         ],
         "cache": false
       },
-      "healthcheck": {
-        "dependsOn": [
-          "start"
-        ],
-        "outputs": []
-      },
       "build": {
         "dependsOn": [
           "^build"
+        ],
+        "outputs": [
+          "dist/**",
+          ".next/**"
         ]
       },
       "@gobot/frontend#build": {
@@ -47,6 +45,12 @@
       "start": {
         "dependsOn": [
           "build"
+        ],
+        "outputs": []
+      },
+      "healthcheck": {
+        "dependsOn": [
+          "start"
         ],
         "outputs": []
       }

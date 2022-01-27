@@ -15,4 +15,4 @@ services:
       - ./apps/backend/dist:/usr/app/apps/backend/dist
       - ./apps/frontend:/usr/app/apps/frontend
       - ./apps/frontend/.next:/usr/app/apps/frontend/.next
-    command: yarn turbo run dev --no-cache --parallel --continue
+    command: yarn turbo run dev --include-dependencies

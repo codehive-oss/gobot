@@ -35,6 +35,7 @@ async function addCommandsRecursive(dir: string, folder: string) {
   }
 }
 
+logger.debug(__dirname);
 addCommandsRecursive("./dist/commands", "");
 
 export const handleMessage = async (message: Message) => {
