@@ -1,6 +1,15 @@
 {
   "name": "@gobot/logger",
   "version": "0.0.0",
-  "main": "index.js",
-  "license": "MIT"
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -w"
+  },
+  "dependencies": {
+    "@gobot/environment": "*",
+    "typeorm": "^0.2.41"
+  }
 }

@@ -1,9 +1,9 @@
-import { GoServer } from "@db/entities/GoServer";
-import { GoUser } from "@db/entities/GoUser";
-import { ReactionRoleMessage } from "@db/entities/moderation/ReactionRoleMessage";
-import { logger } from "@utils/logger";
+import { GoServer } from "../entities/GoServer";
+import { GoUser } from "../entities/GoUser";
+import { ReactionRoleMessage } from "../entities/moderation/ReactionRoleMessage";
+import { logger } from "@gobot/logger";
 import { createConnection } from "typeorm";
-import ormConfig from "@db/ormconfig";
+import ormConfig from "../ormconfig";
 
 export const createSQLConnection = async () => {
   logger.info("Creating SQL connection...");

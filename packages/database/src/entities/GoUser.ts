@@ -1,6 +1,6 @@
 import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
-import { allItems } from "@utils/item";
-import { allTools } from "@utils/tools";
+import { allItems } from "../utils/item";
+import { allTools } from "../utils/tools";
 
 @Entity()
 export class GoUser extends BaseEntity {

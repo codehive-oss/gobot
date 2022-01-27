@@ -3,7 +3,20 @@
   "version": "0.0.0",
   "main": "dist/index.js",
   "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -w",
+    "migration:gen": "typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
+    "migration:run": "typeorm -f ./src/ormconfig.ts migration:run"
+  },
   "dependencies": {
-    "@gobot/environment": "*"
+    "@gobot/environment": "*",
+    "@gobot/logger": "*",
+    "type-graphql": "^1.1.1",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@gobot/tsconfig": "*"
   }
 }

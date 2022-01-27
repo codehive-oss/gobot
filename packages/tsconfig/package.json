@@ -2,6 +2,10 @@
   "name": "@gobot/tsconfig",
   "version": "0.0.0",
   "license": "MIT",
+  "scripts": {
+    "build": "echo no need to build here!",
+    "dev": "echo no need to dev here!"
+  },
   "files": [
     "base.json",
     "esm.json",

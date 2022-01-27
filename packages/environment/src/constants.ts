@@ -1,11 +1,6 @@
-// import { findSync } from "find-up";
-import dotenv from "dotenv";
-
 export const BUILD_MODE = (process.env.NODE_ENV || "development") as
   | "development"
   | "production";
-
-dotenv.config({ path: `.env.${BUILD_MODE}` });
 
 export const __prod__ = BUILD_MODE === "production";
 

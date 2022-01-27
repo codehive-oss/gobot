@@ -1,0 +1,15 @@
+{
+  "name": "@gobot/api",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -w"
+  },
+  "dependencies": {
+    "@gobot/database": "*",
+    "express-graphql": "^0.12.0"
+  }
+}

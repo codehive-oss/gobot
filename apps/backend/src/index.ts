@@ -1,9 +1,8 @@
 import "reflect-metadata";
-import "module-alias/register";
-import { client } from "@core/client";
-import { API_PORT, TOKEN } from "@utils/constants";
-import { createAPI } from "@core/createAPI";
-import { logger } from "@utils/logger";
+import { client } from "@gobot/discord";
+import { API_PORT, TOKEN } from "@gobot/environment";
+import { createAPI } from "@gobot/api";
+import { logger } from "@gobot/logger";
 
 async function main() {
   const api = await createAPI();

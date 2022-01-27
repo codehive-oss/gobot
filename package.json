@@ -45,6 +45,15 @@
           "^build"
         ]
       },
+      "@gobot/backend#build": {
+        "dependsOn": [
+          "@gobot/api#build",
+          "@gobot/database#build",
+          "@gobot/discord#build",
+          "@gobot/environment#build",
+          "@gobot/logger#build"
+        ]
+      },
       "@gobot/frontend#build": {
         "dependsOn": [
           "@gobot/backend#healthcheck"

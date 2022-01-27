@@ -20,13 +20,7 @@
     "experimentalDecorators": true,
     "resolveJsonModule": true,
     "outDir": "./dist",
-    "baseUrl": ".",
-    "paths": {
-      "@core/*": ["./src/core/*"],
-      "@utils/*": ["./src/utils/*"],
-      "@commands/*": ["./src/commands/*"],
-      "@db/*": ["./src/db/*"]
-    }
+    "baseUrl": "."
   },
   "exclude": ["node_modules"],
   "include": ["./src/**/*.ts"]
