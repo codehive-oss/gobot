@@ -6,7 +6,8 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "watch": "tsc -w"
+    "watch": "yarn build -w",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
     "@gobot/database": "*",
@@ -15,6 +16,8 @@
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "*"
+    "@gobot/tsconfig": "*",
+    "@types/uuid": "^8.3.3",
+    "@types/figlet": "^1.5.4"
   }
 }

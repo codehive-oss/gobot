@@ -3,8 +3,9 @@
   "version": "0.0.0",
   "license": "MIT",
   "scripts": {
-    "build": "echo no need to build here!",
-    "dev": "echo no need to dev here!"
+    "build": "echo No need to build here!",
+    "dev": "echo No need to dev here!",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "files": [
     "base.json",

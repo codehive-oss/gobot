@@ -6,9 +6,10 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "tsc -w",
+    "dev": "yarn build -w",
     "migration:gen": "typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
-    "migration:run": "typeorm -f ./src/ormconfig.ts migration:run"
+    "migration:run": "typeorm -f ./src/ormconfig.ts migration:run",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
     "@gobot/environment": "*",

@@ -6,9 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "tsc -w"
-  },
-  "devDependencies": {
-    "@types/dotenv": "^8.2.0"
+    "dev": "yarn build -w",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   }
 }

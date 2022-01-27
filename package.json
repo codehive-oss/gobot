@@ -3,22 +3,10 @@
   "version": "0.1.1",
   "license": "MIT",
   "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "apps/*"
-    ],
-    "nohoist": [
-      "**/ts-node",
-      "**/ts-node/**",
-      "**/tsconfig-paths",
-      "**/tsconfig-paths/**",
-      "**/module-alias",
-      "**/module-alias/**",
-      "**/typeorm",
-      "**/typeorm/**"
-    ]
-  },
+  "workspaces": [
+    "packages/*",
+    "apps/*"
+  ],
   "turbo": {
     "baseBranch": "origin/main",
     "pipeline": {
@@ -26,12 +14,18 @@
         "dependsOn": [
           "^build"
         ],
-        "outputs": []
+        "outputs": [
+          "dist/**",
+          ".next/**"
+        ]
       },
       "lint": {
         "outputs": []
       },
       "dev": {
+        "dependsOn": [
+          "^build"
+        ],
         "cache": false
       },
       "healthcheck": {
@@ -43,15 +37,6 @@
       "build": {
         "dependsOn": [
           "^build"
-        ]
-      },
-      "@gobot/backend#build": {
-        "dependsOn": [
-          "@gobot/api#build",
-          "@gobot/database#build",
-          "@gobot/discord#build",
-          "@gobot/environment#build",
-          "@gobot/logger#build"
         ]
       },
       "@gobot/frontend#build": {
