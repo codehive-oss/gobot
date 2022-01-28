@@ -20,12 +20,12 @@ export default {
   synchronize: false,
   logging: true,
   logger: new PinoTypeormLogger(logger),
-  entities: [join(__dirname, "..", "db", "entities", "**", "*.{ts,js}")],
-  migrations: [join(__dirname, "..", "db", "migrations", "**", "*.{ts,js}")],
-  subscribers: [join(__dirname, "..", "db", "subscribers", "**", "*.{ts,js}")],
+  entities: [join(__dirname, "entities", "**", "*.{ts,js}")],
+  migrations: [join(__dirname, "migrations", "**", "*.{ts,js}")],
+  subscribers: [join(__dirname, "subscribers", "**", "*.{ts,js}")],
   cli: {
-    entitiesDir: join(__dirname, "..", "db", "entities"),
-    migrationsDir: join(__dirname, "..", "db", "migrations"),
-    subscribersDir: join(__dirname, "..", "db", "subscribers"),
+    entitiesDir: join(__dirname, "entities"),
+    migrationsDir: join(__dirname, "migrations"),
+    subscribersDir: join(__dirname, "subscribers"),
   },
 } as PostgresConnectionOptions;

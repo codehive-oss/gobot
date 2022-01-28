@@ -24,7 +24,7 @@
       },
       "dev": {
         "dependsOn": [
-          "^build"
+          "build"
         ],
         "cache": false
       },
@@ -35,7 +35,8 @@
         "outputs": [
           "dist/**",
           ".next/**"
-        ]
+        ],
+        "cache": false
       },
       "@gobot/frontend#build": {
         "dependsOn": [
@@ -74,7 +75,8 @@
     "stop:dev": "docker-compose -p gobot_dev --env-file .env.development down",
     "stop:prod": "docker-compose -p gobot_prod --env-file .env.production down",
     "format:write": "prettier --write {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
-    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}"
+    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
+    "graph": "turbo run build --scope=\"@gobot/api\" --scope=\"@gobot/database\" --scope=\"@gobot/discord\" --scope=\"@gobot/environement\" --scope=\"@gobot/logger\" --no-cache --graph"
   },
   "devDependencies": {
     "lerna": "^4.0.0",

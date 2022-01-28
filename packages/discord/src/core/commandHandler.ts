@@ -35,8 +35,7 @@ async function addCommandsRecursive(dir: string, folder: string) {
   }
 }
 
-logger.debug(__dirname);
-addCommandsRecursive("./dist/commands", "");
+addCommandsRecursive(`${__dirname}/../commands`, "");
 
 export const handleMessage = async (message: Message) => {
   if (!message.guild || message.webhookId || message.author.bot) {

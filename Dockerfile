@@ -28,4 +28,4 @@ COPY ./packages ./packages
 COPY .env."$BuildMode" .env
 ENV NODE_ENV "$BuildMode"
 
-CMD yarn turbo run start
+CMD yarn turbo run build start
