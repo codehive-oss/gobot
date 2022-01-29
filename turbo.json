@@ -1,0 +1,34 @@
+{
+  "baseBranch": "origin/main",
+  "pipeline": {
+    "lint": {
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "dev": {
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"],
+      "cache": false
+    },
+    "@gobot/frontend#build": {
+      "dependsOn": ["@gobot/backend#healthcheck"]
+    },
+    "start": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "healthcheck": {
+      "dependsOn": ["start"],
+      "outputs": []
+    }
+  }
+}
