@@ -28,6 +28,14 @@
     },
     "healthcheck": {
       "outputs": []
+    },
+    "migration:gen": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "migration:run": {
+      "dependsOn": ["^build"],
+      "outputs": []
     }
   }
 }

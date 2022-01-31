@@ -9,4 +9,4 @@ services:
       - ./apps/backend/src/db/migrations:/usr/app/apps/backend/src/db/migrations
     env_file:
       - .env.production
-    command: "yarn backend migration:gen"
+    command: "yarn turbo run migration:gen"
