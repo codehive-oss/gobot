@@ -15,5 +15,10 @@ services:
       - ./apps/backend/dist:/usr/app/apps/backend/dist
       - ./apps/frontend:/usr/app/apps/frontend
       - ./apps/frontend/.next:/usr/app/apps/frontend/.next
+      - ./packages/api/dist:/usr/app/packages/api/dist
+      - ./packages/database/dist:/usr/app/packages/database/dist
+      - ./packages/discord/dist:/usr/app/packages/discord/dist
+      - ./packages/environment/dist:/usr/app/packages/environment/dist
+      - ./packages/logger/dist:/usr/app/packages/logger/dist
     command: yarn turbo run dev
  

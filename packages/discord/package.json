@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "watch": "yarn build -w",
+    "watch": "yarn build -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
