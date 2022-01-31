@@ -8,7 +8,8 @@
     "clean": "rimraf node_modules && rimraf dist && rimraf .turbo",
     "build": "tsc -b",
     "deploy": "node dist/index.js",
-    "dev": "nodemon --exec `yarn build && yarn deploy`",
+    "build:start": "yarn build && yarn deploy",
+    "dev": "nodemon --exec yarn build:start",
     "healthcheck": "./scripts/healthcheck.sh"
   },
   "dependencies": {
