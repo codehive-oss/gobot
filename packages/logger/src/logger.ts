@@ -22,4 +22,4 @@ export const logger = pino(
   prettifier
 );
 
-export const expressLogger = expressPinoLogger(logger);
+export const expressLogger = expressPinoLogger({ logger });

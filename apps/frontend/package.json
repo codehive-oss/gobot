@@ -5,11 +5,9 @@
   "scripts": {
     "clean": "rimraf .next && rimraf .turbo && rimraf node_modules",
     "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
     "lint": "next lint",
     "gen": "graphql-codegen",
-    "deploy": "yarn build && yarn start"
+    "deploy": "next build && next start"
   },
   "dependencies": {
     "@headlessui/react": "^1.4.2",

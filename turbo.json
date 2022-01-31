@@ -12,22 +12,21 @@
       "outputs": []
     },
     "dev": {
+      "dependsOn": ["^build"],
       "cache": false
     },
     "build": {
       "dependsOn": ["^build"],
-      "outputs": ["dist/**", ".next/**"],
-      "cache": false
+      "outputs": ["dist/**", ".next/**"]
     },
-    "@gobot/frontend#build": {
-      "dependsOn": ["@gobot/backend#healthcheck"]
+    "@gobot/frontend#deploy": {
+      "dependsOn": ["^build", "@gobot/backend#healthcheck"]
     },
-    "start": {
+    "deploy": {
       "dependsOn": ["build"],
       "outputs": []
     },
     "healthcheck": {
-      "dependsOn": ["start"],
       "outputs": []
     }
   }

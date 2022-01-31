@@ -25,7 +25,7 @@ RUN yarn install
 COPY ./apps ./apps
 COPY ./packages ./packages
 
-COPY .env."$BuildMode" .env
+COPY turbo.json turbo.json
 ENV NODE_ENV "$BuildMode"
 
-CMD yarn turbo run build start
+CMD yarn turbo run deploy

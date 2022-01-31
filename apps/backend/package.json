@@ -7,9 +7,8 @@
   "scripts": {
     "clean": "rimraf node_modules && rimraf dist && rimraf .turbo",
     "build": "tsc -b",
-    "start": "node dist/index.js",
-    "deploy": "yarn build && yarn start",
-    "dev": "nodemon --exec yarn deploy",
+    "deploy": "node dist/index.js",
+    "dev": "nodemon --exec `yarn build && yarn deploy`",
     "healthcheck": "./scripts/healthcheck.sh"
   },
   "dependencies": {
@@ -49,6 +48,7 @@
   "devDependencies": {
     "@gobot/tsconfig": "*",
     "@types/node": "^16.11.7",
+    "nodemon": "^2.0.15",
     "rimraf": "^3.0.2",
     "typescript": "^4.5.5"
   },

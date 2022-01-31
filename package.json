@@ -20,18 +20,15 @@
     "build:dev": "docker-compose -p gobot_dev --env-file .env.development -f docker-compose.yml -f docker-compose.dev.yml build",
     "build:prod": "docker-compose -p gobot_prod --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml build",
     "dev": "docker-compose -p gobot_dev --env-file .env.development -f docker-compose.yml -f docker-compose.dev.yml up --build",
-    "start": "docker-compose -p gobot_prod --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up --build",
+    "deploy": "docker-compose -p gobot_prod --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up --build",
     "stop": "docker-compose down",
     "stop:dev": "docker-compose -p gobot_dev --env-file .env.development down",
     "stop:prod": "docker-compose -p gobot_prod --env-file .env.production down",
     "format:write": "prettier --write {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
-    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
-    "turbo:build": "turbo run build start",
-    "turbo:dev": "nodemon --exec yarn turbo:build"
+    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}"
   },
   "devDependencies": {
     "lerna": "^4.0.0",
-    "nodemon": "^2.0.15",
     "prettier": "2.5.1",
     "turbo": "^1.0.28"
   },
