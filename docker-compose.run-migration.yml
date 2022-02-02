@@ -9,4 +9,4 @@ services:
       - ./apps/backend/src/db/migrations:/usr/app/apps/backend/src/db/migrations
     env_file:
       - .env.production
-    command: "yarn turbo run migration:run"
+    command: "pnpm turbo run migration:run"

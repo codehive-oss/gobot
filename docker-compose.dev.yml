@@ -20,5 +20,5 @@ services:
       - ./packages/discord/dist:/usr/app/packages/discord/dist
       - ./packages/environment/dist:/usr/app/packages/environment/dist
       - ./packages/logger/dist:/usr/app/packages/logger/dist
-    command: yarn turbo run dev
+    command: pnpm turbo run dev
  

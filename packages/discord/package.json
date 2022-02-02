@@ -6,19 +6,32 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "watch": "yarn build -w --preserveWatchOutput",
+    "watch": "pnpm build -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
-    "@gobot/database": "*",
-    "@gobot/environment": "*",
-    "type-graphql": "^1.1.1",
+    "@gobot/database": "workspace:*",
+    "@gobot/environment": "workspace:*",
+    "@gobot/logger": "workspace:*",
     "graphql": "15.3.0",
+    "remove": "^0.1.5",
+    "type-graphql": "1.1.1",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "*",
+    "@gobot/tsconfig": "workspace:*",
+    "@types/figlet": "^1.5.4",
     "@types/uuid": "^8.3.3",
-    "@types/figlet": "^1.5.4"
+    "axios": "^0.24.0",
+    "class-validator": "^0.13.2",
+    "discord.js": "^13.3.1",
+    "discord.js-minesweeper": "^1.0.6",
+    "jimp": "^0.16.1",
+    "simply-djs": "^2.2.0",
+    "sleep-promise": "^9.1.0",
+    "systeminformation": "^5.10.2"
+  },
+  "peerDependencies": {
+    "class-validator": "^0.13.2"
   }
 }
