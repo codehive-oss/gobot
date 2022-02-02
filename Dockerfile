@@ -2,6 +2,7 @@ FROM node:alpine
 
 RUN apk add --no-cache curl
 RUN apk add --no-cache git
+RUN apk add --no-cache bash
 
 RUN npm i -g pnpm
 

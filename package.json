@@ -7,9 +7,9 @@
     "clean": "turbo run clean && rimraf node_modules",
     "release": "lerna version --conventional-commits -y",
     "diff": "lerna diff",
-    "migration:gen": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up --build app && pnpm stop",
-    "migration:run": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.run-migration.yml up --build app && pnpm stop",
-    "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot-postgres_1 psql -U postgres -d Gobot && pnpm stop",
+    "migration:gen": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up --build app && pnpm run stop",
+    "migration:run": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.run-migration.yml up --build app && pnpm run stop",
+    "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot-postgres_1 psql -U postgres -d Gobot && pnpm run stop",
     "logs:dev": "docker-compose -p gobot_dev logs -f",
     "logs:prod": "docker-compose -p gobot_prod logs -f",
     "build:dev": "docker-compose -p gobot_dev --env-file .env.development -f docker-compose.yml -f docker-compose.dev.yml build",
@@ -20,9 +20,12 @@
     "stop:dev": "docker-compose -p gobot_dev --env-file .env.development down",
     "stop:prod": "docker-compose -p gobot_prod --env-file .env.production down",
     "format:write": "prettier --write {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
-    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}"
+    "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
+    "turbo:dev": "env-cmd -f .env.development turbo run dev",
+    "turbo:prod": "env-cmd -f .env.production turbo run deploy"
   },
   "devDependencies": {
+    "env-cmd": "^10.1.0",
     "lerna": "^4.0.0",
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",

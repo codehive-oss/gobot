@@ -8,8 +8,8 @@
     "clean": "rimraf node_modules && rimraf dist && rimraf .turbo",
     "build": "tsc -b",
     "deploy": "node dist/index.js",
-    "build:start": "pnpm build && pnpm deploy",
-    "dev": "nodemon --exec pnpm build:start",
+    "build:start": "pnpm run build && pnpm run deploy",
+    "dev": "nodemon --exec pnpm run build:start",
     "healthcheck": "./scripts/healthcheck.sh"
   },
   "dependencies": {

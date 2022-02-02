@@ -6,10 +6,11 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "pnpm build -w --preserveWatchOutput",
+    "dev": "tsc -b -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "workspace:*"
+    "@gobot/tsconfig": "workspace:*",
+    "typescript": "^4.5.5"
   }
 }

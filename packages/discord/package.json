@@ -6,7 +6,7 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "watch": "pnpm build -w --preserveWatchOutput",
+    "watch": "tsc -b -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
