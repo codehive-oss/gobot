@@ -2,6 +2,7 @@
   "name": "@gobot/tsconfig",
   "version": "0.0.0",
   "license": "MIT",
+  "private": true,
   "scripts": {
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },

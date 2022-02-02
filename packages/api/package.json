@@ -26,5 +26,8 @@
   },
   "devDependencies": {
     "typescript": "^4.5.5"
+  },
+  "peerDependencies": {
+    "class-validator": "^0.13.2"
   }
 }
