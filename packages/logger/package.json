@@ -6,14 +6,15 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "yarn build -w --preserveWatchOutput",
+    "dev": "pnpm build -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
-    "@gobot/environment": "*",
+    "@gobot/environment": "workspace:*",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
+    "@gobot/tsconfig": "workspace:*",
     "@types/express-pino-logger": "^4.0.3"
   }
 }

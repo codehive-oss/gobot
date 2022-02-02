@@ -6,20 +6,24 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "yarn build -w --preserveWatchOutput",
+    "dev": "pnpm build -w --preserveWatchOutput",
     "typeorm": "node -r ts-node/register -r tsconfig-paths/register ../../node_modules/typeorm/cli.js",
-    "migration:gen": "yarn typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
-    "migration:run": "yarn typeorm -f ./src/ormconfig.ts migration:run",
+    "migration:gen": "pnpm typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
+    "migration:run": "pnpm typeorm -f ./src/ormconfig.ts migration:run",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
   },
   "dependencies": {
-    "@gobot/environment": "*",
-    "@gobot/logger": "*",
-    "type-graphql": "^1.1.1",
+    "@gobot/environment": "workspace:*",
+    "@gobot/logger": "workspace:*",
     "graphql": "15.3.0",
+    "type-graphql": "^1.1.1",
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "*"
+    "@gobot/tsconfig": "workspace:*",
+    "class-validator": "^0.13.2"
+  },
+  "peerDependencies": {
+    "class-validator": "^0.13.2"
   }
 }

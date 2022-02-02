@@ -6,7 +6,10 @@
   "private": true,
   "scripts": {
     "build": "tsc -b",
-    "dev": "yarn build -w --preserveWatchOutput",
+    "dev": "pnpm build -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+  },
+  "devDependencies": {
+    "@gobot/tsconfig": "workspace:*"
   }
 }

@@ -3,19 +3,13 @@
   "version": "0.1.1",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "scripts": {
     "clean": "turbo run clean && rimraf node_modules",
     "release": "lerna version --conventional-commits -y",
     "diff": "lerna diff",
-    "backend": "yarn workspace @gobot/backend",
-    "frontend": "yarn workspace @gobot/frontend",
-    "migration:gen": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up --build app && yarn stop",
-    "migration:run": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.run-migration.yml up --build app && yarn stop",
-    "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot-postgres_1 psql -U postgres -d Gobot && yarn stop",
+    "migration:gen": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up --build app && pnpm stop",
+    "migration:run": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.run-migration.yml up --build app && pnpm stop",
+    "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot-postgres_1 psql -U postgres -d Gobot && pnpm stop",
     "logs:dev": "docker-compose -p gobot_dev logs -f",
     "logs:prod": "docker-compose -p gobot_prod logs -f",
     "build:dev": "docker-compose -p gobot_dev --env-file .env.development -f docker-compose.yml -f docker-compose.dev.yml build",
@@ -34,5 +28,5 @@
     "rimraf": "^3.0.2",
     "turbo": "^1.0.28"
   },
-  "packageManager": "yarn@1.22.17"
+  "packageManager": "pnpm@6.29.1"
 }

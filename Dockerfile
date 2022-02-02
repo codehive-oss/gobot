@@ -1,6 +1,9 @@
 FROM node:alpine
 
 RUN apk add --no-cache curl
+RUN apk add --no-cache git
+
+RUN npm i -g pnpm
 
 ARG BuildMode
 
@@ -8,7 +11,7 @@ WORKDIR /usr/app/
 
 # TODO: use turbo prune --docker
 # https://turborepo.org/docs/reference/command-line-reference#turbo-prune---scopetarget
-COPY package.json yarn.lock ./
+COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 
 COPY apps/backend/package.json ./apps/backend/
 COPY apps/frontend/package.json ./apps/frontend/
@@ -20,12 +23,10 @@ COPY packages/environment/package.json ./packages/environment/
 COPY packages/logger/package.json ./packages/logger/
 COPY packages/tsconfig/package.json ./packages/tsconfig/
 
-RUN yarn install
+RUN pnpm install
 
-COPY ./apps ./apps
-COPY ./packages ./packages
+COPY . .
 
-COPY turbo.json turbo.json
 ENV NODE_ENV "$BuildMode"
 
-CMD yarn turbo run deploy
+CMD pnpm turbo run deploy
