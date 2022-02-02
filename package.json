@@ -3,10 +3,6 @@
   "version": "0.1.1",
   "license": "MIT",
   "private": true,
-  "workspaces": [
-    "packages/*",
-    "apps/*"
-  ],
   "scripts": {
     "clean": "turbo run clean && rimraf node_modules",
     "release": "lerna version --conventional-commits -y",
@@ -33,6 +29,5 @@
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "turbo": "^1.0.28"
-  },
-  "packageManager": "yarn@1.22.17"
+  }
 }
