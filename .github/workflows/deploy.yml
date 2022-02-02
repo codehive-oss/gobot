@@ -43,4 +43,4 @@ jobs:
             sudo yarn stop:prod
             sudo yarn migration:run
             sudo yarn build:prod --no-cache
-            sudo yarn start -d
+            sudo yarn deploy -d

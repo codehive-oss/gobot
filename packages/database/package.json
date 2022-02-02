@@ -1,0 +1,25 @@
+{
+  "name": "@gobot/database",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "yarn build -w --preserveWatchOutput",
+    "typeorm": "node -r ts-node/register -r tsconfig-paths/register ../../node_modules/typeorm/cli.js",
+    "migration:gen": "yarn typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
+    "migration:run": "yarn typeorm -f ./src/ormconfig.ts migration:run",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+  },
+  "dependencies": {
+    "@gobot/environment": "*",
+    "@gobot/logger": "*",
+    "type-graphql": "^1.1.1",
+    "graphql": "15.3.0",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@gobot/tsconfig": "*"
+  }
+}

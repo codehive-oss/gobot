@@ -1,0 +1,12 @@
+{
+  "name": "@gobot/environment",
+  "version": "0.0.0",
+  "main": "dist/index",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "yarn build -w --preserveWatchOutput",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+  }
+}

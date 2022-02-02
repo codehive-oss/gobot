@@ -1,0 +1,9 @@
+{
+  "extends": "@gobot/tsconfig/node.json",
+  "compilerOptions": {
+    "declaration": true,
+    "baseUrl": ".",
+    "outDir": "./dist"
+  },
+  "include": ["./src/**/*.ts"]
+}

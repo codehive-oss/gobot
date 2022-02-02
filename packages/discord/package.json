@@ -1,0 +1,24 @@
+{
+  "name": "@gobot/discord",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "watch": "yarn build -w --preserveWatchOutput",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+  },
+  "dependencies": {
+    "@gobot/database": "*",
+    "@gobot/environment": "*",
+    "type-graphql": "^1.1.1",
+    "graphql": "15.3.0",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@gobot/tsconfig": "*",
+    "@types/uuid": "^8.3.3",
+    "@types/figlet": "^1.5.4"
+  }
+}
