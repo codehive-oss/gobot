@@ -22,10 +22,14 @@
     "format:write": "prettier --write {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
     "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
     "turbo:dev": "env-cmd -f .env.development turbo run dev",
-    "turbo:prod": "env-cmd -f .env.production turbo run deploy"
+    "turbo:prod": "env-cmd -f .env.production turbo run deploy",
+    "prepare": "husky install"
   },
   "devDependencies": {
+    "@commitlint/cli": "^16.1.0",
+    "@commitlint/config-conventional": "^16.0.0",
     "env-cmd": "^10.1.0",
+    "husky": "^7.0.4",
     "lerna": "^4.0.0",
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
