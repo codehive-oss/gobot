@@ -10,7 +10,8 @@
     "typeorm": "node -r ts-node/register -r tsconfig-paths/register ../../node_modules/typeorm/cli.js",
     "migration:gen": "pnpm run typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
     "migration:run": "pnpm run typeorm -f ./src/ormconfig.ts migration:run",
-    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "lint": "eslint ./src/**/*.ts --fix"
   },
   "dependencies": {
     "@gobot/environment": "workspace:*",
@@ -20,7 +21,7 @@
     "typeorm": "^0.2.41"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "workspace:*",
+    "@gobot/config": "workspace:*",
     "class-validator": "^0.13.2"
   },
   "peerDependencies": {

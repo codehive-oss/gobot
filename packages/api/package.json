@@ -7,7 +7,8 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b -w --preserveWatchOutput",
-    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "lint": "eslint ./src/**/*.ts --fix"
   },
   "dependencies": {
     "@gobot/database": "workspace:*",
@@ -16,7 +17,7 @@
     "@gobot/logger": "workspace:*"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "workspace:*",
+    "@gobot/config": "workspace:*",
     "@types/connect-redis": "^0.0.17",
     "@types/cors": "^2.8.12",
     "@types/express": "^4.17.13",
