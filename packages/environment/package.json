@@ -7,10 +7,12 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b -w --preserveWatchOutput",
-    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist"
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "lint": "eslint ./src/**/*.ts --fix"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "workspace:*",
+    "@gobot/config": "workspace:*",
+    "lint-staged": "^12.3.3",
     "typescript": "^4.5.5"
   }
 }
