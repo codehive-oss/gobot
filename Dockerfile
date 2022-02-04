@@ -1,32 +1,43 @@
-FROM node:alpine
 
+FROM node:alpine AS builder
+
+RUN apk update
+
+WORKDIR /usr/app/
+
+RUN npm i -g pnpm
+RUN pnpm i -g turbo
+
+COPY . .
+RUN turbo prune --docker
+
+
+FROM node:alpine AS installer
+
+RUN apk update
+
+WORKDIR /usr/app/
+RUN npm i -g pnpm
+
+COPY --from=builder /usr/app/out/json/ .
+COPY pnpm-lock.yaml pnpm-lock.yaml
+
+RUN pnpm install
+
+FROM node:alpine AS runner
+
+RUN apk update
 RUN apk add --no-cache curl
 RUN apk add --no-cache git
 RUN apk add --no-cache bash
-
-RUN npm i -g pnpm
 
 ARG BuildMode
 
 WORKDIR /usr/app/
 
-# TODO: use turbo prune --docker
-# https://turborepo.org/docs/reference/command-line-reference#turbo-prune---scopetarget
-COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
-
-COPY apps/backend/package.json ./apps/backend/
-COPY apps/frontend/package.json ./apps/frontend/
-
-COPY packages/api/package.json ./packages/api/
-COPY packages/database/package.json ./packages/database/
-COPY packages/discord/package.json ./packages/discord/
-COPY packages/environment/package.json ./packages/environment/
-COPY packages/logger/package.json ./packages/logger/
-COPY packages/config/package.json ./packages/config/
-
-RUN pnpm install
-
-COPY . .
+COPY --from=installer /usr/app/ .
+COPY --from=builder /usr/app/out/full/ .
+COPY .gitignore .gitignore
 
 ENV NODE_ENV "$BuildMode"
 
