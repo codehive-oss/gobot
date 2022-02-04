@@ -30,8 +30,8 @@ passport.use(
       }
 
       done(null, profile.id);
-    }
-  )
+    },
+  ),
 );
 
 authRouter.get("/", passport.authenticate("discord"));
@@ -43,5 +43,5 @@ authRouter.get(
   }),
   (_req, res) => {
     res.redirect(`${FRONTEND_URL}/dashboard`);
-  }
+  },
 );

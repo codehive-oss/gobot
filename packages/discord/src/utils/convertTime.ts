@@ -1,7 +1,7 @@
 export const convertTimeToDate = (timeArg: string) => {
   const milliseconds = convertTimeToMilliseconds(timeArg);
   if (!milliseconds) return undefined;
-  var date = new Date(new Date().getTime() + milliseconds);
+  const date = new Date(new Date().getTime() + milliseconds);
   return date;
 };
 

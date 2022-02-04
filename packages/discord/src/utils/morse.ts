@@ -42,7 +42,7 @@ export function encodeMorse(string: string): string {
   const strippedString = string.toLowerCase().replace(/[^a-z0-9\s]/g, "");
   const characterArray = strippedString.split("");
   const morseCharacters = characterArray.map(
-    (a: string) => (MORSE_CODE_TABLE as any)[a]
+    (a: string) => (MORSE_CODE_TABLE as any)[a],
   );
   return morseCharacters.join(" ").replace("/ / /", "/");
 }
@@ -51,13 +51,13 @@ export function decodeMorse(string: string): string {
   const strippedString = string.replace(/[a-zA-Z0-9]/g, "");
   const characterArray = strippedString.split(" ");
   const morseCharacters = characterArray.map(
-    (a: string) => (objectFlip(MORSE_CODE_TABLE) as any)[a]
+    (a: string) => (objectFlip(MORSE_CODE_TABLE) as any)[a],
   );
   return morseCharacters.join("");
 }
 
 const objectFlip = <T extends { [key: string]: string }>(
-  obj: T
+  obj: T,
 ): { [key: string]: string } => {
   //swaps keys and values in a json object
   const ret: { [key: string]: string } = {};

@@ -1,11 +1,7 @@
 import { Command } from "./Command";
 import { convertTimeToMilliseconds } from "./convertTime";
 import { MANAGE_MESSAGE } from "./GuildPermissions";
-import {
-  penaltyDMEmbed,
-  penaltyGuildEmbed,
-  tempBanMember,
-} from "./penalty";
+import { penaltyDMEmbed, penaltyGuildEmbed, tempBanMember } from "./penalty";
 
 export default new Command({
   name: "tempban",

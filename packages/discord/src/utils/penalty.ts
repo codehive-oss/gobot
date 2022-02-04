@@ -1,11 +1,6 @@
 import { client } from "../core/client";
 import { TempPenalty } from "@gobot/database";
-import {
-  Guild,
-  GuildMember,
-  MessageEmbed,
-  TextChannel,
-} from "discord.js";
+import { Guild, GuildMember, MessageEmbed, TextChannel } from "discord.js";
 import { LessThan } from "typeorm";
 
 export const MUTE_ROLE_NAME = "muted";
@@ -51,7 +46,7 @@ export const unmuteMember = async (member: GuildMember, reason: string) => {
 export const tempMuteMember = async (
   member: GuildMember,
   reason: string,
-  expiresAt: Date
+  expiresAt: Date,
 ) => {
   await muteMember(member, reason);
 
@@ -79,7 +74,7 @@ export const warnMember = async (member: GuildMember, reason: string) => {
     await tempMuteMember(
       member,
       reason,
-      new Date(Date.now() + WARN_TEMP_MUTE_PERSISTENCE_TIME)
+      new Date(Date.now() + WARN_TEMP_MUTE_PERSISTENCE_TIME),
     );
     return true;
   }
@@ -98,7 +93,7 @@ export const warnMember = async (member: GuildMember, reason: string) => {
 export const tempBanMember = async (
   member: GuildMember,
   reason: string,
-  milliseconds: number
+  milliseconds: number,
 ) => {
   // convert milliseconds to days
   const days = milliseconds / (1000 * 60 * 60 * 24);
@@ -121,8 +116,9 @@ export const checkTempPenalties = async () => {
     switch (penalty.type) {
       case "Mute":
         await unmuteMember(member, `Temp mute expired`);
-        const embed = penaltyDMEmbed("Unmute", "Mute expired", guild);
-        await dm.send({ embeds: [embed] });
+        await dm.send({
+          embeds: [penaltyDMEmbed("Unmute", "Mute expired", guild)],
+        });
         break;
     }
     await penalty.remove();
@@ -133,7 +129,7 @@ export const penaltyGuildEmbed = (
   penaltyType: "Ban" | "Warn" | "Mute" | "Unmute" | "Unban",
   user: GuildMember,
   reason: string,
-  duration?: string
+  duration?: string,
 ) => {
   const username = user.user.username;
   const embed = new MessageEmbed()
@@ -176,7 +172,7 @@ export const penaltyDMEmbed = (
   penaltyType: "Ban" | "Warn" | "Mute" | "Unmute" | "Unban",
   reason: string,
   guild: Guild,
-  duration?: string
+  duration?: string,
 ) => {
   const embed = new MessageEmbed().addField("Reason", reason);
 

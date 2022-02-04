@@ -5,7 +5,7 @@ export type ReactionCommandSettings = CommandSettings & {
   reactionAdd: (reaction: MessageReaction, user: User) => void | Promise<void>;
   reactionRemove: (
     reaction: MessageReaction,
-    user: User
+    user: User,
   ) => void | Promise<void>;
 };
 
@@ -39,6 +39,6 @@ export class ReactionCommand extends Command {
   reactionAdd: (reaction: MessageReaction, user: User) => void | Promise<void>;
   reactionRemove: (
     reaction: MessageReaction,
-    user: User
+    user: User,
   ) => void | Promise<void>;
 }

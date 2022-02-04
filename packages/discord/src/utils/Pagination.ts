@@ -40,7 +40,7 @@ class Pagination {
     channel: TextChannel | DMChannel,
     pages: MessageEmbed[],
     private readonly timeout?: number,
-    private readonly options?: ButtonOption[]
+    private readonly options?: ButtonOption[],
   ) {
     if (options && options.length > 5) {
       throw new TypeError("You have passed more than 5 buttons as options");
@@ -129,7 +129,7 @@ class Pagination {
           components: [],
         });
       },
-      this.timeout ? this.timeout : 60000
+      this.timeout ? this.timeout : 60000,
     );
     interactionCollector.on("collect", async (interaction) => {
       const { customId } = interaction;

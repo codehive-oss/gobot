@@ -24,8 +24,8 @@ export function hasPermission(
   user: GuildMember,
   ...permissions: GuildPermissions[]
 ): boolean {
-  for (let permission of permissions) {
-    for (let perm of permission.perms) {
+  for (const permission of permissions) {
+    for (const perm of permission.perms) {
       if (user.permissions.has(perm)) {
         return true;
       }

@@ -29,7 +29,7 @@ export const createRouter = (schema: GraphQLSchema): Router => {
         schema,
         context,
       };
-    })
+    }),
   );
 
   router.use("/auth", authRouter);

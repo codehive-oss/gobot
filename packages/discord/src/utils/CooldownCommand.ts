@@ -32,7 +32,7 @@ export class CooldownCommand extends Command {
   setCooldown = (
     commandName: string,
     userID: string,
-    cooldown: number
+    cooldown: number,
   ): void => {
     cooldownMap.set(commandName + userID, new Date());
     setTimeout(() => cooldownMap.delete(commandName + userID), cooldown * 1000);
@@ -45,13 +45,13 @@ export class CooldownCommand extends Command {
   getCooldown = (
     commandName: string,
     userID: string,
-    cooldown: number
+    cooldown: number,
   ): number => {
     return Math.ceil(cooldown - this.getTimePassed(commandName, userID));
   };
 
   getTimePassed = (commandName: string, userID: string): number => {
-    var lastUsed = cooldownMap.get(commandName + userID);
+    const lastUsed = cooldownMap.get(commandName + userID);
 
     if (!lastUsed) return -1;
 

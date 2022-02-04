@@ -26,7 +26,7 @@ export class GoServer extends BaseEntity {
 }
 
 export const getServer = async (
-  serverid: string
+  serverid: string,
 ): Promise<GoServer | undefined> => {
   return await GoServer.findOne({ where: { id: serverid } });
 };
@@ -48,7 +48,7 @@ export const toGoServer = async (serverid: string) => {
 export const createServers = async (serverids: string[]) => {
   const servers = await GoServer.find({ where: { id: serverids } });
   const serversToCreate = serverids.filter(
-    (id) => !servers.some((s) => s.id === id)
+    (id) => !servers.some((s) => s.id === id),
   );
   const serversToSave = GoServer.create(serversToCreate.map((id) => ({ id })));
   await GoServer.save(serversToSave);
@@ -68,7 +68,7 @@ export const getWelcomeChannel = async (serverid: string) => {
 
 export const setWelcomeChannel = async (
   serverid: string,
-  channelid: string
+  channelid: string,
 ) => {
   const server = await GoServer.findOne({ where: { id: serverid } });
   if (!server) return;

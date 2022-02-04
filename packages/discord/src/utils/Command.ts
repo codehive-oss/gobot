@@ -32,7 +32,7 @@ export class Command {
   execute: (
     msg: Message,
     args: string[],
-    server: GoServer
+    server: GoServer,
   ) => void | Promise<void>;
 
   constructor({
@@ -70,6 +70,6 @@ export interface CommandSettings {
   execute: (
     msg: Message,
     args: string[],
-    server: GoServer
+    server: GoServer,
   ) => void | Promise<void>;
 }

@@ -12,7 +12,7 @@ const cmd = new CooldownCommand({
   category: "economy",
   usage: "bankrob <@user>",
   cooldown: 120,
-  execute: async function (msg, _args) {
+  execute: async function (msg) {
     const dcUser = msg.author;
     if (cmd.canExecute(cmd.name, dcUser.id)) {
       let dcTarget = msg.mentions.users.first();
@@ -41,7 +41,7 @@ const cmd = new CooldownCommand({
         target.save();
 
         await msg.reply(
-          `You got caught by ${dcTarget.username}! You had to pay them ${loss} GoCoins`
+          `You got caught by ${dcTarget.username}! You had to pay them ${loss} GoCoins`,
         );
         return;
       }
@@ -55,7 +55,7 @@ const cmd = new CooldownCommand({
       target.save();
       user.save();
       await msg.reply(
-        `You robbed ${dcTarget.username}! You stole ${gain} GoCoins and you earned ${rand}xp`
+        `You robbed ${dcTarget.username}! You stole ${gain} GoCoins and you earned ${rand}xp`,
       );
     } else {
       // Cooldown
@@ -63,8 +63,8 @@ const cmd = new CooldownCommand({
         `You can't rob someone for another ${cmd.getCooldown(
           cmd.name,
           dcUser.id,
-          cmd.cooldown
-        )} seconds`
+          cmd.cooldown,
+        )} seconds`,
       );
     }
   },

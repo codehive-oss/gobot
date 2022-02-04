@@ -2,15 +2,10 @@ import "reflect-metadata";
 import express from "express";
 import cors from "cors";
 import { buildSchema } from "type-graphql";
-import { createSQLConnection } from "@gobot/database"
+import { createSQLConnection } from "@gobot/database";
 import { logger } from "@gobot/logger";
 import passport from "passport";
-import {
-  COOKIE_NAME,
-  REDIS_HOST,
-  SESSION_SECRET,
-  __prod__,
-} from "@gobot/environment";
+import { COOKIE_NAME, REDIS_HOST, SESSION_SECRET } from "@gobot/environment";
 import { createRouter } from "../routes";
 import expressSession from "express-session";
 import connectRedis from "connect-redis";
@@ -56,7 +51,7 @@ export const createAPI = async () => {
         sameSite: "lax",
         maxAge: 1000 * 60 * 60 * 24 * 14, // 2 weeks
       },
-    })
+    }),
   );
 
   app.use(passport.initialize());

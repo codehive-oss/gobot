@@ -2,7 +2,6 @@ import { logger } from "@gobot/logger";
 import { Command } from "../utils/Command";
 import { ReactionCommand } from "../utils/ReactionCommand";
 import fs from "fs";
-import { __prod__ } from "@gobot/environment";
 import { GoUser, toGoServer } from "@gobot/database";
 import { ADMIN, hasPermission } from "../utils/GuildPermissions";
 import { Message, MessageReaction, User, TextChannel } from "discord.js";
@@ -15,7 +14,7 @@ async function addCommandsRecursive(dir: string, folder: string) {
     .readdirSync(dir)
     .filter(
       (file) =>
-        file.endsWith(".js") || fs.lstatSync(dir + "/" + file).isDirectory()
+        file.endsWith(".js") || fs.lstatSync(dir + "/" + file).isDirectory(),
     ); // only files that end with .js or folders
   for (const file of commandFiles) {
     if (fs.lstatSync(dir + "/" + file.toString()).isDirectory()) {
@@ -56,7 +55,7 @@ export const handleMessage = async (message: Message) => {
   if (content.toLocaleLowerCase().startsWith(server.prefix)) {
     if (message.guild.me && !hasPermission(message.guild.me, ADMIN)) {
       message.channel.send(
-        "I need the `ADMINISTRATOR` permission to run commands."
+        "I need the `ADMINISTRATOR` permission to run commands.",
       );
       return;
     }
@@ -95,7 +94,7 @@ export const handleMessage = async (message: Message) => {
                 .has("SEND_MESSAGES")
             )
               message.reply(
-                `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`
+                `An error occured while executing that command. Please contact the developer. Or try again later. Error: ${e.message}`,
               );
           }
         }
@@ -108,7 +107,7 @@ export const handleMessage = async (message: Message) => {
 
 export const handleReactionAdd = async (
   reaction: MessageReaction,
-  user: User
+  user: User,
 ) => {
   for (const command of commands) {
     // check if Command is of type ReactionCommand
@@ -120,7 +119,7 @@ export const handleReactionAdd = async (
 
 export const handleReactionRemove = async (
   reaction: MessageReaction,
-  user: User
+  user: User,
 ) => {
   for (const command of commands) {
     // check if Command is of type ReactionCommand

@@ -29,7 +29,7 @@ client.on("warn", (w) => logger.warn(w));
 client.on("ready", async () => {
   // save all servers the bot is on
   const serversCreated = await createServers(
-    client.guilds.cache.map((g) => g.id)
+    client.guilds.cache.map((g) => g.id),
   );
   logger.info(`${serversCreated} servers added.`);
 
@@ -96,9 +96,9 @@ client.on("guildCreate", async (guild) => {
       `Hello ${owner.displayName}, thank you for adding me to your server!\n\n` +
         `I am a bot that helps you manage your server.\n\n` +
         `To get started, use the command \`${DEFAULT_PREFIX}help\` to see a list of commands.\n\n` +
-        `You can also look for some help on the [GoBot website](https://www.go-bot.xyz) or [GoBot support server](https://discord.gg/GoBot).`
+        `You can also look for some help on the [GoBot website](https://www.go-bot.xyz) or [GoBot support server](https://discord.gg/GoBot).`,
     )
-    .setFooter("GoBot");
+    .setFooter({ text: "GoBot" });
 
   await owner.user.send({ embeds: [embed] });
 });
@@ -111,7 +111,9 @@ client.on("messageReactionAdd", async (reaction, user) => {
     if (reaction.partial || user.partial || user.bot) return;
 
     await handleReactionAdd(reaction, user);
-  } catch (e) {}
+  } catch (e) {
+    logger.error(e);
+  }
 });
 
 // TODO: Better Permssion Error handling
@@ -122,13 +124,15 @@ client.on("messageReactionRemove", async (reaction, user) => {
     if (reaction.partial || user.partial) return;
 
     await handleReactionRemove(reaction, user);
-  } catch (e) {}
+  } catch (e) {
+    logger.error(e);
+  }
 });
 
 client.on("guildMemberAdd", async (member) => {
   const channelid = await getWelcomeChannel(member.guild.id);
   const channel = member.guild.channels.cache.find(
-    (value) => value.id == channelid
+    (value) => value.id == channelid,
   ) as TextChannel;
   if (channel) {
     await channel.send(`${mention(member.id)} joined the Server!`);

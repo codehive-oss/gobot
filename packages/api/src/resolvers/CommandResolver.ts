@@ -11,14 +11,13 @@ export class CommandResolver {
   @Query(() => [Command])
   async getCategoryCommands(
     @Arg("category")
-    category: string
+    category: string,
   ) {
     return commands.filter((cmd) => cmd.category === category);
   }
 
   @Query(() => [Category])
   async getCategories() {
-    // TODO: Add proper names for categories
     return getAllCategories();
   }
 

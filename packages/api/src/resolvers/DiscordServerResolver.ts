@@ -55,7 +55,7 @@ export class DiscordServerResolver {
         headers: {
           Authorization: `Bearer ${goUser.accessToken}`,
         },
-      }
+      },
     );
 
     // Filters all guilds where the user has the administrator permission and returns them
@@ -67,7 +67,7 @@ export class DiscordServerResolver {
   @UseMiddleware(isAuth)
   async getGuildDataPayloadFromID(
     @Ctx() { req }: MyContext,
-    @Arg("serverID") serverID: string
+    @Arg("serverID") serverID: string,
   ): Promise<GuildDataPayload> {
     const goUser = req.user as GoUser;
     const guildData = await getUserAdminGuild(serverID, goUser);
@@ -85,8 +85,8 @@ export class DiscordServerResolver {
   @UseMiddleware(isAuth, isAdmin)
   async updateServer(
     @Arg("serverID") serverID: string,
-    @Arg("updateServerInput") updateServerInput: UpdateServerInput
-  ): Promise<Boolean> {
+    @Arg("updateServerInput") updateServerInput: UpdateServerInput,
+  ): Promise<boolean> {
     try {
       await GoServer.update(serverID, updateServerInput);
       return true;

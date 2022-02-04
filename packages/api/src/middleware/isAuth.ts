@@ -14,7 +14,7 @@ export const isAuth: MiddlewareFn<MyContext> = ({ context: { req } }, next) => {
 
 export const isAdmin: MiddlewareFn<MyContext> = async (
   { context: { req }, args: { serverID } },
-  next
+  next,
 ) => {
   const goUser = req.user as GoUser;
   const isAdmin = await checkUserAdminGuild(serverID, goUser);

@@ -26,8 +26,8 @@ const cmd = new Command({
         `${tool.name} level ${goUser.getToolLevel(index) + 1}`,
         `${tool.description} | Price: ${calculateUpgradeCost(
           tool.price,
-          goUser.getToolLevel(index)
-        )} GoCoins`
+          goUser.getToolLevel(index),
+        )} GoCoins`,
       );
     });
 

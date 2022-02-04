@@ -62,7 +62,7 @@ export const getStaticPaths: GetStaticPaths = async () => {
   }
 
   const categoryNames = queryResult.data.getCategories.map(
-    (category) => category.name
+    (category) => category.name,
   );
   const paths = categoryNames.map((category) => ({
     params: {

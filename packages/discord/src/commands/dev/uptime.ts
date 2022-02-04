@@ -5,12 +5,12 @@ import { Command } from "../../utils/Command";
 export function getFormattedUptime(): string {
   if (client.uptime) {
     let totalSeconds = client.uptime / 1000;
-    let days = Math.floor(totalSeconds / 86400);
+    const days = Math.floor(totalSeconds / 86400);
     totalSeconds %= 86400;
-    let hours = Math.floor(totalSeconds / 3600);
+    const hours = Math.floor(totalSeconds / 3600);
     totalSeconds %= 3600;
-    let minutes = Math.floor(totalSeconds / 60);
-    let seconds = Math.floor(totalSeconds % 60);
+    const minutes = Math.floor(totalSeconds / 60);
+    const seconds = Math.floor(totalSeconds % 60);
 
     return `${days} days, ${hours} hours, ${minutes} minutes and ${seconds} seconds`;
   }
@@ -20,7 +20,7 @@ export function getFormattedUptime(): string {
 const cmd = new Command({
   name: "uptime",
   description: "sends the bots uptime",
-  async execute(msg: Message, _args: string[]) {
+  async execute(msg: Message) {
     await msg.reply(getFormattedUptime());
   },
 });
