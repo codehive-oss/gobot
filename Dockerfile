@@ -22,7 +22,7 @@ COPY packages/database/package.json ./packages/database/
 COPY packages/discord/package.json ./packages/discord/
 COPY packages/environment/package.json ./packages/environment/
 COPY packages/logger/package.json ./packages/logger/
-COPY packages/tsconfig/package.json ./packages/tsconfig/
+COPY packages/config/package.json ./packages/config/
 
 RUN pnpm install
 

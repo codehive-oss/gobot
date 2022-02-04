@@ -47,7 +47,7 @@
     "uuid": "^8.3.2"
   },
   "devDependencies": {
-    "@gobot/tsconfig": "*",
+    "@gobot/config": "*",
     "@types/node": "^16.11.7",
     "class-validator": "^0.13.2",
     "nodemon": "^2.0.15",

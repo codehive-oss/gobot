@@ -1,5 +1,5 @@
 {
-  "extends": "@gobot/tsconfig/node.json",
+  "extends": "@gobot/config/ts/node.json",
   "compilerOptions": {
     "declaration": true,
     "baseUrl": ".",
