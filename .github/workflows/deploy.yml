@@ -42,5 +42,5 @@ jobs:
             cd /root/app/gobot/
             sudo pnpm stop:prod
             sudo pnpm migration:run
-            sudo pnpm build:prod --no-cache
-            sudo pnpm deploy -d
+            sudo pnpm build:prod
+            sudo pnpm deploy
