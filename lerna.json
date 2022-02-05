@@ -4,6 +4,5 @@
     "apps/*"
   ],
   "version": "0.12.0",
-  "npmClient": "pnpm", 
-  "useWorkspaces": true
+  "npmClient": "pnpm"
 }
