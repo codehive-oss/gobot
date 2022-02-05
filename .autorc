@@ -1,0 +1,14 @@
+{
+  "plugins": [
+    "git-tag",
+    "all-contributors",
+    "conventional-commits",
+    "first-time-contributor",
+    "released"
+  ],
+  "owner": "GobotNetwork",
+  "repo": "GoBot",
+  "name": "Eugene Matsumura",
+  "email": "eugene.mat.em@gmail.com",
+  "onlyPublishWithReleaseLabel": true
+}

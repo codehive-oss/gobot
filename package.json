@@ -3,10 +3,10 @@
   "version": "0.1.1",
   "license": "MIT",
   "private": true,
+  "repository": "https://github.com/GoBotNetwork/GoBot.git",
   "scripts": {
     "clean": "turbo run clean && rimraf node_modules",
-    "release": "lerna version --conventional-commits -y",
-    "diff": "lerna diff",
+    "release": "auto shipit",
     "migration:gen": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.gen-migration.yml up --build app && pnpm run stop",
     "migration:run": "docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.run-migration.yml up --build app && pnpm run stop",
     "backup:load": "gzip -dkf ./tmp/backup.sql.gz && docker-compose --env-file .env.production -f docker-compose.yml -f docker-compose.prod.yml up -d postgres && echo Database is starting up... && sleep 10 &&  cat ./tmp/backup.sql | docker exec -i gobot-postgres_1 psql -U postgres -d Gobot && pnpm run stop",
@@ -28,11 +28,16 @@
     "prepare": "husky install"
   },
   "devDependencies": {
+    "@auto-it/all-contributors": "^10.32.6",
+    "@auto-it/conventional-commits": "^10.32.6",
+    "@auto-it/first-time-contributor": "^10.32.6",
+    "@auto-it/git-tag": "^10.32.6",
+    "@auto-it/released": "^10.32.6",
     "@commitlint/cli": "^16.1.0",
     "@commitlint/config-conventional": "^16.0.0",
+    "auto": "^10.32.6",
     "env-cmd": "^10.1.0",
     "husky": "^7.0.4",
-    "lerna": "^4.0.0",
     "prettier": "2.5.1",
     "rimraf": "^3.0.2",
     "turbo": "^1.1.2"
