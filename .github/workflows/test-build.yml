@@ -26,6 +26,7 @@ jobs:
       - name: Install pnpm modules
         uses: pnpm/action-setup@v2.0.1
         with:
+          version: latest
           run_install: true
 
       - name: Lint & Build & Unit Test
