@@ -37,7 +37,7 @@ jobs:
           port: ${{ secrets.GOBOT_SSH_PORT }}
           script: |
             cp -r /root/app/data /root/app/gobot
-            cp /root/secrets/env/.env.production /root/app/gobot/packages/backend/.env.production
+            cp /root/secrets/env/.env.production /root/app/gobot/.env.production
             cp -r /root/secrets/ssl /root/app/gobot/ssl
             cd /root/app/gobot/
             sudo pnpm stop:prod
