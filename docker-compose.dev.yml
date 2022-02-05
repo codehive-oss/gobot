@@ -4,23 +4,14 @@ services:
     ports:
       - "8443:443"
       - "8080:80"
-  backend:
+  app:
     build:
       args:
         - BuildMode=development
     env_file:
-      - ./packages/backend/.env.development
+      - .env.development
     volumes:
-      - ./packages/backend:/usr/app
-      - ./packages/backend/dist:/usr/app/dist
-      - /usr/app/node_modules
-    command: yarn dev
-  frontend:
-    build:
-      args:
-        - BuildMode=development
-    volumes:
-      - ./packages/frontend:/usr/app
-      - ./packages/frontend/.next:/usr/app/.next
-      - /usr/app/node_modules
-    command: yarn dev
+      - ./apps:/usr/app/apps
+      - ./packages:/usr/app/packages
+    command: pnpm turbo run dev
+ 

@@ -8,13 +8,13 @@
 A multipurpose discord bot
 
 ### Prerequisites
-- yarn
+- pnpm
 - docker
 ### Setup
 Under the [`packages/backend`](packages/backend) directory create a `.env.development` and a `.env.production` to fill out the fields shown in the [`.env.sample`](packages/backend/.env.sample) file.
 
 Run
 ```
-yarn dev
+pnpm dev
 ```
 to start developing with docker-compose.

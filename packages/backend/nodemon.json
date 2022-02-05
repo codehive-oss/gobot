@@ -1,5 +1,0 @@
-{
-  "ignore": ["./dist"],
-  "ext": "js, ts, jsx, tsx",
-  "legacyWatch": true
-}

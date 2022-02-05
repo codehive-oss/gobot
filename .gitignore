@@ -97,9 +97,6 @@ dist
 # https://nextjs.org/blog/next-9-1#public-directory-support
 # public
 
-#prettier config
-.prettierrc
-
 # vuepress build output
 .vuepress/dist
 
@@ -142,3 +139,6 @@ temp/
 
 # Secrets
 ssl/
+
+# turbo repo
+.turbo

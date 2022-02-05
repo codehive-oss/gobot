@@ -1,0 +1,21 @@
+{
+  "name": "@gobot/logger",
+  "version": "0.0.0",
+  "main": "dist/index.js",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w --preserveWatchOutput",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "lint": "eslint ./src/**/*.ts --fix"
+  },
+  "dependencies": {
+    "@gobot/environment": "workspace:*",
+    "typeorm": "^0.2.41"
+  },
+  "devDependencies": {
+    "@gobot/config": "workspace:*",
+    "@types/express-pino-logger": "^4.0.3"
+  }
+}

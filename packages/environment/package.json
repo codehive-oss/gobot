@@ -1,0 +1,18 @@
+{
+  "name": "@gobot/environment",
+  "version": "0.0.0",
+  "main": "dist/index",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "build": "tsc -b",
+    "dev": "tsc -b -w --preserveWatchOutput",
+    "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
+    "lint": "eslint ./src/**/*.ts --fix"
+  },
+  "devDependencies": {
+    "@gobot/config": "workspace:*",
+    "lint-staged": "^12.3.3",
+    "typescript": "^4.5.5"
+  }
+}

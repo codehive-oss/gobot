@@ -1,0 +1,41 @@
+{
+  "baseBranch": "origin/main",
+  "pipeline": {
+    "lint": {
+      "outputs": []
+    },
+    "clean": {
+      "cache": false
+    },
+    "test": {
+      "dependsOn": ["build"],
+      "outputs": []
+    },
+    "dev": {
+      "dependsOn": ["^build"],
+      "cache": false
+    },
+    "build": {
+      "dependsOn": ["^build"],
+      "outputs": ["dist/**", ".next/**"]
+    },
+    "@gobot/frontend#deploy": {
+      "dependsOn": ["lint", "build", "test", "@gobot/backend#healthcheck"]
+    },
+    "deploy": {
+      "dependsOn": ["lint", "build", "test"],
+      "outputs": []
+    },
+    "healthcheck": {
+      "outputs": []
+    },
+    "migration:gen": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    },
+    "migration:run": {
+      "dependsOn": ["^build"],
+      "outputs": []
+    }
+  }
+}

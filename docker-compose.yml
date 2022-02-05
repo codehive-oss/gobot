@@ -7,14 +7,14 @@ services:
       - "./nginx/nginx.conf:/etc/nginx/nginx.conf"
       - "./ssl:/etc/nginx/ssl"
     depends_on:
-      - backend
-      - frontend
+      - app 
     deploy:
       restart_policy:
         condition: on-failure
         max_attempts: 10
   postgres:
     image: postgres:latest
+    user: $DOCKER_USER
     restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -35,6 +35,7 @@ services:
         max_attempts: 10
   pgbackup:
     image: prodrigestivill/postgres-backup-local
+    user: $DOCKER_USER
     restart: always
     volumes:
       - ./data/backups/pgbackup:/backups
@@ -55,6 +56,7 @@ services:
       - HEALTHCHECK_PORT=81
   redis:
     image: redis:latest
+    user: $DOCKER_USER
     restart: always
     volumes:
       - ./data/clusters/redisdata:/data
@@ -67,35 +69,15 @@ services:
       restart_policy:
         condition: on-failure
         max_attempts: 10
-  backend:
-    image: gobot/backend
-    build:
-      context: ./packages/backend
-      dockerfile: ./Dockerfile
-    expose:
-      - 4000
-    depends_on:
-      postgres:
-        condition: service_healthy
-      redis:
-        condition: service_healthy
-    healthcheck:
-      test: ["CMD-SHELL", "wget -O /dev/null http://backend:4000/api || exit 1"]
-      interval: 5s
-    deploy:
-      restart_policy:
-        condition: on-failure
-        max_attempts: 10
-  frontend:
-    image: gobot/frontend
-    build:
-      context: ./packages/frontend
-      dockerfile: ./Dockerfile
+  app:
+    image: gobot
+    build: .
     expose:
       - 3000
+      - 4000
     depends_on:
-      backend:
-        condition: service_healthy
+      - postgres
+      - redis
     deploy:
       restart_policy:
         condition: on-failure
