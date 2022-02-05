@@ -1,0 +1,29 @@
+name: Test Build
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    name: build and test
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest]
+    
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Setup Node.js environment
+        uses: actions/setup-node@v2
+        with:
+          cache: pnpm
+          cache-dependency-path: pnpm-lock.yaml
+          node-version: 17
+          
+      - name: Lint & Build & Unit Test
+        run: pnpm turbo run lint build test
