@@ -15,7 +15,7 @@ const CommandsListComponent: React.FC<CommnadsListComponentProps> = ({
   return (
     <div>
       <ul className="grid grid-flow-row grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-2">
-        {commands.data?.getCategoryCommands.map((command, i) => {
+        {commands.data?.getCategoryCommands.map((command) => {
           return (
             <Link
               href={`/commands/${category}/${command.name}`}

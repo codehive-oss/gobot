@@ -1,5 +1,5 @@
-import { Command } from "./Command";
-import { encodeMorse } from "./morse";
+import { Command } from "../../utils/Command";
+import { encodeMorse } from "../../utils/morse";
 
 const cmd = new Command({
   name: "morse-encode",

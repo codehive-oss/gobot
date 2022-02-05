@@ -229,7 +229,7 @@ export const LogoutUserDocument = gql`
 
 export function useLogoutUserMutation() {
   return Urql.useMutation<LogoutUserMutation, LogoutUserMutationVariables>(
-    LogoutUserDocument
+    LogoutUserDocument,
   );
 }
 export const UpdateServerDocument = gql`
@@ -240,7 +240,7 @@ export const UpdateServerDocument = gql`
 
 export function useUpdateServerMutation() {
   return Urql.useMutation<UpdateServerMutation, UpdateServerMutationVariables>(
-    UpdateServerDocument
+    UpdateServerDocument,
   );
 }
 export const GetCategoriesDocument = gql`
@@ -253,7 +253,7 @@ export const GetCategoriesDocument = gql`
 `;
 
 export function useGetCategoriesQuery(
-  options: Omit<Urql.UseQueryArgs<GetCategoriesQueryVariables>, "query"> = {}
+  options: Omit<Urql.UseQueryArgs<GetCategoriesQueryVariables>, "query"> = {},
 ) {
   return Urql.useQuery<GetCategoriesQuery>({
     query: GetCategoriesDocument,
@@ -273,7 +273,7 @@ export function useGetCategoryCommandsQuery(
   options: Omit<
     Urql.UseQueryArgs<GetCategoryCommandsQueryVariables>,
     "query"
-  > = {}
+  > = {},
 ) {
   return Urql.useQuery<GetCategoryCommandsQuery>({
     query: GetCategoryCommandsDocument,
@@ -298,7 +298,7 @@ export function useGetCommandFromNameQuery(
   options: Omit<
     Urql.UseQueryArgs<GetCommandFromNameQueryVariables>,
     "query"
-  > = {}
+  > = {},
 ) {
   return Urql.useQuery<GetCommandFromNameQuery>({
     query: GetCommandFromNameDocument,
@@ -318,7 +318,7 @@ export const GetCommandsDocument = gql`
 `;
 
 export function useGetCommandsQuery(
-  options: Omit<Urql.UseQueryArgs<GetCommandsQueryVariables>, "query"> = {}
+  options: Omit<Urql.UseQueryArgs<GetCommandsQueryVariables>, "query"> = {},
 ) {
   return Urql.useQuery<GetCommandsQuery>({
     query: GetCommandsDocument,
@@ -345,7 +345,7 @@ export function useGetGuildDataPaylaodFromIdQuery(
   options: Omit<
     Urql.UseQueryArgs<GetGuildDataPaylaodFromIdQueryVariables>,
     "query"
-  > = {}
+  > = {},
 ) {
   return Urql.useQuery<GetGuildDataPaylaodFromIdQuery>({
     query: GetGuildDataPaylaodFromIdDocument,
@@ -363,7 +363,7 @@ export const GetUserGuildsDocument = gql`
 `;
 
 export function useGetUserGuildsQuery(
-  options: Omit<Urql.UseQueryArgs<GetUserGuildsQueryVariables>, "query"> = {}
+  options: Omit<Urql.UseQueryArgs<GetUserGuildsQueryVariables>, "query"> = {},
 ) {
   return Urql.useQuery<GetUserGuildsQuery>({
     query: GetUserGuildsDocument,
@@ -381,7 +381,7 @@ export const MeDocument = gql`
 `;
 
 export function useMeQuery(
-  options: Omit<Urql.UseQueryArgs<MeQueryVariables>, "query"> = {}
+  options: Omit<Urql.UseQueryArgs<MeQueryVariables>, "query"> = {},
 ) {
   return Urql.useQuery<MeQuery>({ query: MeDocument, ...options });
 }

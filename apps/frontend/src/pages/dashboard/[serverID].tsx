@@ -10,7 +10,6 @@ import ClipboardCopy from "../../components/ClipboardCopy";
 import {
   GoServer,
   GuildData,
-  Omit,
   UpdateServerInput,
   useGetGuildDataPaylaodFromIdQuery,
   useUpdateServerMutation,

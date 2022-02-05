@@ -71,7 +71,6 @@ services:
         max_attempts: 10
   app:
     image: gobot
-    user: $DOCKER_USER
     build: .
     expose:
       - 3000

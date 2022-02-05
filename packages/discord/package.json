@@ -8,7 +8,8 @@
     "build": "tsc -b",
     "watch": "tsc -b -w --preserveWatchOutput",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
-    "lint": "eslint ./src/**/*.ts --fix"
+    "lint": "eslint ./src/**/*.ts --fix",
+    "test": "jest"
   },
   "dependencies": {
     "@gobot/database": "workspace:*",
@@ -22,11 +23,13 @@
   "devDependencies": {
     "@gobot/config": "workspace:*",
     "@types/figlet": "^1.5.4",
+    "@types/jest": "^27.4.0",
     "@types/uuid": "^8.3.3",
     "axios": "^0.24.0",
     "class-validator": "^0.13.2",
     "discord.js": "^13.3.1",
     "discord.js-minesweeper": "^1.0.6",
+    "jest": "^27.5.0",
     "jimp": "^0.16.1",
     "simply-djs": "^2.2.0",
     "sleep-promise": "^9.1.0",

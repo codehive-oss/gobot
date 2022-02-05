@@ -1,0 +1,33 @@
+name: Test Build
+
+on:
+  push:
+    branches: ["main", "dev"]
+  pull_request:
+    types: [opened, synchronize]
+
+jobs:
+  build:
+    name: build and test
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Check out code
+        uses: actions/checkout@v2
+
+      - name: Cache pnpm modules
+        uses: actions/cache@v2
+        with:
+          path: ~/.pnpm-store
+          key: ${{ runner.os }}-${{ hashFiles('**/pnpm-lock.yaml') }}
+          restore-keys: |
+            ${{ runner.os }}-
+
+      - name: Install pnpm modules
+        uses: pnpm/action-setup@v2.0.1
+        with:
+          version: latest
+          run_install: true
+
+      - name: Lint & Build & Unit Test
+        run: pnpm turbo run lint build test

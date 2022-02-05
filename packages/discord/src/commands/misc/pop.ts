@@ -1,3 +1,4 @@
+import { createPopMessage } from "../../utils/createPopMessage";
 import { Command } from "../../utils/Command";
 
 const cmd = new Command({
@@ -23,13 +24,7 @@ const cmd = new Command({
       return;
     }
 
-    var reply = "";
-    for (let i = 0; i < y; i++) {
-      for (let j = 0; j < x; j++) {
-        reply += "||POP||";
-      }
-      reply += "\n";
-    }
+    const reply = createPopMessage(x, y);
     msg.reply(reply);
   },
 });
