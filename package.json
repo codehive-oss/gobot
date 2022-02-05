@@ -24,6 +24,7 @@
     "format:check": "prettier --check {app,packages}/**/*.{ts,js,json,yml,yaml,md,css,scss,html,ejs,jsx,tsx}",
     "turbo:dev": "env-cmd -f .env.development turbo run dev",
     "turbo:prod": "env-cmd -f .env.production turbo run deploy",
+    "turbo:test": "env-cmd -f .env.test turbo run test",
     "prepare": "husky install"
   },
   "devDependencies": {

@@ -19,21 +19,21 @@ export const getUrqlState = async ({
     for (const query of queries) {
       if (query) {
         graphqlPromises.push(
-          client.query(query.document, query.variables).toPromise()
+          client.query(query.document, query.variables).toPromise(),
         );
       }
     }
-
-    if (mutations) {
-      for (const mutation of mutations) {
-        graphqlPromises.push(
-          client.mutation(mutation.document, mutation.variables).toPromise()
-        );
-      }
-    }
-
-    await Promise.all(graphqlPromises);
-
-    return ssrCache.extractData();
   }
+
+  if (mutations) {
+    for (const mutation of mutations) {
+      graphqlPromises.push(
+        client.mutation(mutation.document, mutation.variables).toPromise(),
+      );
+    }
+  }
+
+  await Promise.all(graphqlPromises);
+
+  return ssrCache.extractData();
 };

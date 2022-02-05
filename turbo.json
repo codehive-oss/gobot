@@ -8,7 +8,7 @@
       "cache": false
     },
     "test": {
-      "dependsOn": ["^build"],
+      "dependsOn": ["build"],
       "outputs": []
     },
     "dev": {
@@ -20,10 +20,10 @@
       "outputs": ["dist/**", ".next/**"]
     },
     "@gobot/frontend#deploy": {
-      "dependsOn": ["^build", "@gobot/backend#healthcheck"]
+      "dependsOn": ["lint", "build", "test", "@gobot/backend#healthcheck"]
     },
     "deploy": {
-      "dependsOn": ["build"],
+      "dependsOn": ["lint", "build", "test"],
       "outputs": []
     },
     "healthcheck": {
