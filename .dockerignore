@@ -10,6 +10,8 @@ node_modules
 **/.next
 **/out
 
+/data
+
 LICENSE
 lerna.json
 README.md

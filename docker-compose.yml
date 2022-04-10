@@ -14,7 +14,6 @@ services:
         max_attempts: 10
   postgres:
     image: postgres:latest
-    user: $DOCKER_USER
     restart: always
     environment:
       POSTGRES_DB: ${DB_NAME}
@@ -35,7 +34,6 @@ services:
         max_attempts: 10
   pgbackup:
     image: prodrigestivill/postgres-backup-local
-    user: $DOCKER_USER
     restart: always
     volumes:
       - ./data/backups/pgbackup:/backups
@@ -56,7 +54,6 @@ services:
       - HEALTHCHECK_PORT=81
   redis:
     image: redis:latest
-    user: $DOCKER_USER
     restart: always
     volumes:
       - ./data/clusters/redisdata:/data
