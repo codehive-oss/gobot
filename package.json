@@ -25,6 +25,7 @@
     "turbo:dev": "env-cmd -f .env.development turbo run dev",
     "turbo:prod": "env-cmd -f .env.production turbo run deploy",
     "turbo:test": "env-cmd -f .env.test turbo run test",
+    "turbo:lint": "turbo run lint",
     "prepare": "husky install"
   },
   "devDependencies": {
