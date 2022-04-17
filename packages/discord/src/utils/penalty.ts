@@ -2,6 +2,7 @@ import { client } from "../core/client";
 import { TempPenalty } from "@gobot/database";
 import { Guild, GuildMember, MessageEmbed, TextChannel } from "discord.js";
 import { LessThan } from "typeorm";
+import { logger } from "@gobot/logger";
 
 export const MUTE_ROLE_NAME = "muted";
 
@@ -109,19 +110,23 @@ export const checkTempPenalties = async () => {
     },
   });
 
-  for (const penalty of tempPenalties) {
-    const guild = await client.guilds.fetch(penalty.guildID);
-    const member = await guild.members.fetch(penalty.userID);
-    const dm = await member.createDM();
-    switch (penalty.type) {
-      case "Mute":
-        await unmuteMember(member, `Temp mute expired`);
-        await dm.send({
-          embeds: [penaltyDMEmbed("Unmute", "Mute expired", guild)],
-        });
-        break;
+  try {
+    for (const penalty of tempPenalties) {
+      const guild = await client.guilds.fetch(penalty.guildID);
+      const member = await guild.members.fetch(penalty.userID);
+      const dm = await member.createDM();
+      switch (penalty.type) {
+        case "Mute":
+          await unmuteMember(member, `Temp mute expired`);
+          await dm.send({
+            embeds: [penaltyDMEmbed("Unmute", "Mute expired", guild)],
+          });
+          break;
+      }
+      await penalty.remove();
     }
-    await penalty.remove();
+  } catch (e) {
+    logger.error("Error while checking temp penalties", e);
   }
 };
 
