@@ -7,9 +7,9 @@
   "scripts": {
     "build": "tsc -b",
     "dev": "tsc -b -w --preserveWatchOutput",
-    "typeorm": "node -r ts-node/register -r tsconfig-paths/register ../../node_modules/typeorm/cli.js",
-    "migration:gen": "pnpm run typeorm -f ./src/ormconfig.ts migration:generate -n GobotMigration",
-    "migration:run": "pnpm run typeorm -f ./src/ormconfig.ts migration:run",
+    "typeorm": "node -r ts-node/register -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
+    "migration:gen": "pnpm run typeorm \"--\" -f ./src/ormconfig.ts migration:generate -n GobotMigration",
+    "migration:run": "pnpm run typeorm \"--\" -f ./src/ormconfig.ts migration:run",
     "clean": "rimraf .turbo && rimraf node_modules && rimraf dist",
     "lint": "eslint ./src/**/*.ts --fix"
   },

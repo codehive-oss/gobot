@@ -53,7 +53,8 @@ client.on("ready", async () => {
     // check for temp penalties
     const checkPenalties = async () => {
       await checkTempPenalties();
-      setTimeout(checkPenalties, 1000 * 60); // check again in 1 minute
+      await new Promise((resolve) => setTimeout(resolve, 1000 * 60 * 5)); // 5 minutes
+      checkPenalties();
     };
     checkPenalties();
   } catch (e) {
