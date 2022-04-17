@@ -49,12 +49,16 @@ client.on("ready", async () => {
     ],
   });
 
-  // check for temp penalties
-  const checkPenalties = async () => {
-    await checkTempPenalties();
-    setTimeout(checkPenalties, 1000 * 60); // check again in 1 minute
-  };
-  checkPenalties();
+  try {
+    // check for temp penalties
+    const checkPenalties = async () => {
+      await checkTempPenalties();
+      setTimeout(checkPenalties, 1000 * 60); // check again in 1 minute
+    };
+    checkPenalties();
+  } catch (e) {
+    logger.error(e);
+  }
 });
 
 client.on("messageCreate", async (message) => {
