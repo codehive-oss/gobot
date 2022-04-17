@@ -71,7 +71,10 @@ export const handleMessage = async (message: Message) => {
         (command.aliases && command.aliases.includes(commandName))
       ) {
         if (command.permissions) {
-          if (!hasPermission(message.member!, command.permissions)) {
+          if (
+            message.member &&
+            !hasPermission(message.member, command.permissions)
+          ) {
             await message.reply("Insufficient Permissions");
             return;
           }
